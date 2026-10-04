@@ -14,14 +14,14 @@ const unlock=()=>{try{if(fs.readFileSync(LOCK,'utf8')===String(process.pid))fs.r
 const reap=()=>{try{execFileSync('pkill',['-9','-f',`user-data-dir=${tmp}/prof`])}catch(e){}};
 process.on('exit',()=>{reap();unlock();try{fs.rmSync(tmp,{recursive:true,force:true})}catch(e){}});for(const sig of ['SIGINT','SIGTERM'])process.on(sig,()=>{unlock();process.exit(130)});
 const tmp=fs.mkdtempSync('/tmp/play-');
-fs.copyFileSync(path.join(root,'index.html'),path.join(tmp,'built.html'));
+execFileSync('python3',[path.join(root,'build.py'),'--out',path.join(tmp,'built.html')]); // own build: safe when several chapters are tested at once
 const html=fs.readFileSync(path.join(tmp,'built.html'),'utf8');
-const driver=fs.readFileSync(path.join(root,'tests/'+(process.argv[3]||'tapcheck')+'.js'),'utf8');
-const walk='';
-fs.writeFileSync(path.join(tmp,'play.html'),html.replace('</body></html>',`<script>${driver}\ntry{localStorage.clear()}catch(e){}\nsetTimeout(()=>__play(),900);</script>\n</body></html>`));
+const driver=fs.readFileSync(path.join(root,'tests/driver.js'),'utf8');
+const walk=fs.readFileSync(path.join(root,'tests/walk',(process.argv[3]||ch)+'.js'),'utf8');
+fs.writeFileSync(path.join(tmp,'play.html'),html.replace('</body></html>',`<script>${driver}\ntry{localStorage.clear()}catch(e){}\nsetTimeout(()=>__play(${walk}),900);</script>\n</body></html>`));
 const port=9300+Math.floor(Math.random()*500);
 const chrome=spawn('flatpak',['run',`--filesystem=${tmp}`,'com.google.Chrome','--headless=new','--disable-gpu','--hide-scrollbars',`--remote-debugging-port=${port}`,
- '--window-size=420,860',`--user-data-dir=${tmp}/prof`,'--autoplay-policy=no-user-gesture-required',`file://${tmp}/play.html`],{stdio:'ignore'});
+ '--window-size=420,860',`--user-data-dir=${tmp}/prof`,'--autoplay-policy=no-user-gesture-required',`file://${tmp}/play.html?ch=${ch}`],{stdio:'ignore'});
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 let ws;for(let i=0;i<60&&!ws;i++){try{const l=await (await fetch(`http://127.0.0.1:${port}/json/list`)).json();const pg=l.find(t=>t.type==='page');if(pg)ws=pg.webSocketDebuggerUrl}catch(e){}if(!ws)await sleep(500)}
 if(!ws){console.error('chrome did not start');chrome.kill();process.exit(2)}
