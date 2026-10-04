@@ -41,6 +41,7 @@ h1 .lamp{display:inline-block;width:.42em;height:.42em;border-radius:50%;backgro
 
 .screen{position:relative;border-radius:14px;overflow:hidden;background:var(--glass);line-height:0;border:3px solid #7F867D;box-shadow:inset 0 0 0 3px var(--glass),0 2px 0 #A9AEA4}
 canvas{display:block;width:100%;height:auto;image-rendering:pixelated;image-rendering:crisp-edges;max-width:100%}
+.zone{transition:opacity .6s;}.zone.dim{opacity:0}
 .zone{position:absolute;left:8px;top:8px;line-height:1.2;font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;color:var(--glass-ink);background:rgba(15,20,26,.72);border:1px solid var(--glass-edge);padding:3px 7px;border-radius:4px;pointer-events:none;transition:opacity .4s}
 .fade{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;transition:opacity .22s}
 .fade.on{opacity:1}

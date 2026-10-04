@@ -35,7 +35,7 @@
  {talk:'gureumNR',wrong:true},
  {check:()=>state.f.secret,msg:'구름 shared his secret'},
  {talk:'chanBox'},
- {talk:'hariBox',shotSay:{text:'향기가',name:'13-peach-letter'}},
+ {talk:'hariBox',shotSay:{text:'달콤한 냄새',name:'13-peach-letter'}},
  {check:()=>state.f.letter&&state.items.includes('복숭아 편지'),msg:'the peach letter'},
  {walkTo:['hall',4,7],then:'13b-follower'},
  {talk:'jung',shotSay:{text:'매점 이모다',name:'14-old-spelling'}},

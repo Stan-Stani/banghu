@@ -1,3 +1,4 @@
+/* GENERATED from walk-engine/engine.js (89a6c92) — do not edit here; edit walk-engine and run its sync.sh. */
 /* =====================================================================
    Engine: tiles, movement, zones, dialogue, spaced review, speech, saving.
    ===================================================================== */
@@ -21,9 +22,14 @@ function nextDue(){const t=C.WORDS.filter(has).map(w=>lv(w).due).filter(d=>d>now
 function fmtWait(ms){const m=Math.ceil(ms/60e3);return m<60?`${m}분`:m<1440?`${Math.round(m/60)}시간`:`${Math.round(m/1440)}일`}
 
 /* ---------- settings ---------- */
+/* Per-game settings come from src/game.js (`var GAME={…}`), so one engine serves 성실호, 형제 and 방과 후. */
+const G=typeof GAME!=='undefined'?GAME:{};
+const KEY=k=>(G.prefix||'walk')+'-'+k;
+const TERM=Object.assign({name:'복습 노트',empty:'아직 노트가 비어 있어요.',idle:'지금은 복습할 단어가 없어요.',next:'다음 복습',due:n=>`복습할 단어가 ${n}개 있어요.`,end:'복습 끝! 다음에 또 봐요.'},G.term||{});
+const LOGNAME=G.log||LOGNAME;
 const store={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
-let soundOn=store.get('banghu-sound')!=='0';
-let readOn=store.get('banghu-read')==='1';
+let soundOn=store.get(KEY('sound'))!=='0';
+let readOn=store.get(KEY('read'))==='1';
 
 /* ---------- sound ---------- */
 let AC=null;
@@ -242,15 +248,18 @@ function portraitGrid(L,face,open){
 function drawPortrait(cv,L,face,open){
  const c=cv.getContext('2d');c.clearRect(0,0,48,48);
  if(L.art){ // custom sprite: its own down frame, enlarged
-  const rows=(L.art.down||[]),h=rows.length,w=rows[0]?.length||16,k=Math.max(1,Math.floor(Math.min(44/w,44/h)));
-  rows.forEach((r,y)=>[...r].forEach((ch,x)=>{const col=L.art.pal[ch];if(col&&ch!=='.'){c.fillStyle=col;c.fillRect(24-w*k/2+x*k|0,46-h*k+y*k,k,k)}}));return}
+  // custom sprite: a bust — scale it to fill the width and show the top (head and shoulders), cut at the frame's bottom
+  const all=(L.art.down||[]),w=all[0]?.length||16,k=Math.max(1,Math.floor(48/w)),rows=all.slice(0,Math.min(all.length,Math.ceil(48/k)));
+  const top=Math.max(0,48-rows.length*k);
+  rows.forEach((r,y)=>[...r].forEach((ch,x)=>{const col=L.art.pal[ch];if(col&&ch!=='.'){c.fillStyle=col;c.fillRect(24-w*k/2+x*k|0,top+y*k,k,k)}}));return}
  const g=portraitGrid(L,face,open);
  for(let y=0;y<48;y++)for(let x=0;x<48;x++)if(g[y][x]){c.fillStyle=g[y][x];c.fillRect(x,y,1,1)}
 }
 function lookFor(who){ // speaker name → look: an NPC of this chapter with that name
  if(!who||who==='…')return null;
- for(const n of Object.values(C.NPC||{}))if(n.name===who&&n.look)return n.look;
- if(C.FOLLOW&&C.FOLLOW.name===who)return C.FOLLOW.look;
+ const ok=L=>L&&(L.art||(L.skin&&L.hair&&L.shirt))?L:null;  // humans and custom sprites get a portrait; simple robots (kind:'andy') don't
+ for(const n of Object.values(C.NPC||{}))if(n.name===who&&ok(n.look))return n.look;
+ if(C.FOLLOW&&C.FOLLOW.name===who)return ok(C.FOLLOW.look);
  return null;
 }
 function faceFor(s,text){ // expression for a line: explicit face, else a guess from the punctuation
@@ -262,7 +271,7 @@ function faceFor(s,text){ // expression for a line: explicit face, else a guess 
 }
 let portraitAnim=null;
 function setPortrait(s,text){
- clearInterval(portraitAnim);const cv=$('face'),L=lookFor(s.who||dlg.name);
+ clearInterval(portraitAnim);const cv=$('face');if(!cv)return;const L=lookFor(s.who||dlg.name);
  $('dlg').classList.toggle('hasface',!!L);if(!L){cv.hidden=true;return}
  cv.hidden=false;const face=faceFor(s,text);let open=false;drawPortrait(cv,L,face,false);
  portraitAnim=setInterval(()=>{if(!typing||typing.finished){clearInterval(portraitAnim);drawPortrait(cv,L,face,false);return}
@@ -314,9 +323,9 @@ function status(n){
 /* ---------- player, movement, zones ---------- */
 const D={up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]};
 const OPP={up:'down',down:'up',left:'right',right:'left'};
-const CREW_LOOK={hair:'#2A2F4A',skin:'#F1C9A5',shirt:'#F4F2EA',pants:'#2B3A5C',belt:'#9B2D30'};  // default player: a student in uniform
+const CREW_LOOK=G.player||{hair:'#2A2F4A',skin:'#F1C9A5',shirt:'#F4F2EA',pants:'#2B3A5C',belt:'#9B2D30'};  // the game's default player look
 /* 나 꾸미기: the player's own look (hair style/colour, skin, lashes/lips) over the school uniform; saved once for every chapter */
-const ME_KEY='banghu-me';let me=null;try{me=JSON.parse(store.get(ME_KEY)||'null')}catch(e){}
+const ME_KEY=KEY('me');let me=null;try{me=JSON.parse(store.get(ME_KEY)||'null')}catch(e){}
 const myLook=(base=CREW_LOOK)=>me?{...base,...me}:base;   // a chapter's PLAYER object = the uniform; the player's choices = hair, skin, face
 const player={x:0,y:0,dir:'down',moving:false,t:0,fx:0,fy:0,step:0,look:myLook()};
 let held=null,warping=false,lockMsgAt=0;
@@ -326,7 +335,8 @@ const npcAt=(x,y)=>live().find(n=>{const [a,b]=npcPos(n);return a===x&&b===y});
 const warpAt=(x,y)=>Z.warps&&Z.warps[x+','+y];
 const walkable=(x,y)=>{const c=at(x,y);return c!=null&&!!(Z.legend[c]||{}).walk};
 const blocked=(x,y)=>!walkable(x,y)||!!npcAt(x,y);
-const panelOpen=()=>!$('mePanel').hidden||!$('startPanel').hidden||!$('panel').hidden||!$('chPanel').hidden||!$('talkPanel').hidden||!$('tapPanel').hidden;
+const CREATOR=!!document.getElementById('mePanel');  // 나 꾸미기 only where the page has the panel
+const panelOpen=()=>(CREATOR&&!$('mePanel').hidden)||!$('startPanel').hidden||!$('panel').hidden||!$('chPanel').hidden||!$('talkPanel').hidden||!$('tapPanel').hidden;
 
 function tryMove(){
  if(player.moving||!held||dlg||panelOpen()||warping)return;
@@ -358,7 +368,7 @@ function loadZone(id,x,y,dir){
 let roomName='';
 function showRoom(force){
  let nm=Z.name;(Z.rooms||[]).forEach(([a,b,c,d,n])=>{if(player.x>=a&&player.x<=c&&player.y>=b&&player.y<=d)nm=n});
- if(nm!==roomName||force){roomName=nm;$('zone').textContent=nm}
+ if(nm!==roomName||force){roomName=nm;const z=$('zone');z.textContent=nm;z.classList.remove('dim');clearTimeout(showRoom.t);showRoom.t=setTimeout(()=>z.classList.add('dim'),2500)}  // fades so it never hides a ! marker
 }
 function update(dt,t){
  if(player.moving){player.t+=dt/(170*(Z.slow||1)); /* Z.slow > 1 = heavy gravity */if(player.t>=1){player.t=0;player.moving=false;if(!arrive())tryMove()}}
@@ -417,7 +427,7 @@ function show(s){
  if(s.listen)s=prepListen(s);
  $('who').textContent=s.who||dlg.name;
  $('choices').hidden=true;$('choices').innerHTML='';$('build').hidden=true;$('more').hidden=true;
- const text=s.say||s.ask||(s.build?'단어를 순서대로 골라요.':'');
+ const text=s.say||s.ask||'';  // a word-order question needs no instruction: the tiles explain themselves
  if(!s.build)logTalk(s.who||dlg.name,text);
  typeText(text,()=>{if(s.ask)renderChoices(s);else if(s.build)renderBuild(s);else $('more').hidden=false});
  setPortrait(s,text);
@@ -467,7 +477,7 @@ function typeText(text,done){
 function showGloss(k){const d=C.DICT[k];if(d){noteTap([[k,d]]);popGloss([[k,d]])}}
 function showWord(w){const rows=lexLookup(w);noteTap(rows);popGloss(rows)}
 /* ---------- 찾아본 말: every tap that finds a definition — how many times, and when last (all chapters, one list) ---------- */
-const TAPS_KEY='banghu-taps';let taps={},tapSort='t';
+const TAPS_KEY=KEY('taps');let taps={},tapSort='t';
 try{taps=JSON.parse(store.get(TAPS_KEY)||'{}')||{}}catch(e){taps={}}
 function noteTap(rows){const [h,d]=rows[0]||[];if(!h)return;const r=taps[h]||(taps[h]={n:0,t:0});r.n++;r.t=Date.now();r.k=d.k;r.e=d.e;store.set(TAPS_KEY,JSON.stringify(taps))}
 function ago(t){const m=Math.floor((Date.now()-t)/60000);if(m<1)return '방금';if(m<60)return m+'분 전';const h=Math.floor(m/60);if(h<24)return h+'시간 전';const d=Math.floor(h/24);return d===1?'어제':d+'일 전'}
@@ -508,13 +518,18 @@ function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;
 function renderChoices(s){
  const box=$('choices');box.hidden=false;
  const order=shuffle(s.opts.map((_,i)=>i));
- box.innerHTML=order.map(i=>`<button class="choice" data-i="${i}">${s.opts[i][0]}</button>`).join('');
- box.querySelectorAll('.choice').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();choose(s,+b.dataset.i)}));
- sel=0;markSel();
+ box.innerHTML=order.map(i=>`<button class="choice" data-i="${i}">${String(s.opts[i][0]).replace(/[가-힣]+/g,w=>`<span class="cw">${w}</span>`)}</button>`).join('');
+ let pressT=null,defined=false;  // long-press a word on a choice = its definition (doesn't answer)
+ box.querySelectorAll('.choice').forEach(b=>{
+  b.addEventListener('pointerdown',e=>{const w=e.target.closest('.cw');defined=false;clearTimeout(pressT);if(w)pressT=setTimeout(()=>{defined=true;showWord(w.textContent)},450)});
+  for(const t of ['pointerup','pointerleave','pointercancel'])b.addEventListener(t,()=>clearTimeout(pressT));
+  b.addEventListener('click',e=>{e.stopPropagation();if(defined){defined=false;return}choose(s,+b.dataset.i)})});
+ sel=-1;choicesAt=performance.now();markSel();  // nothing selected: A can't answer by accident
 }
 function markSel(){const bs=choosing()?choiceBtns():tileBtns();bs.forEach((b,i)=>b.classList.toggle('sel',i===sel));bs[sel]?.focus({preventScroll:true});bs[sel]?.scrollIntoView({block:'nearest'})}
-function moveSel(d){const n=(choosing()?choiceBtns():tileBtns()).length;if(!n)return;sel=(sel+d+n)%n;markSel();sfx('move')}
-function confirmSel(){const b=(choosing()?choiceBtns():tileBtns())[sel];if(b)b.click()}
+function moveSel(d){const n=(choosing()?choiceBtns():tileBtns()).length;if(!n)return;sel=sel<0?(d>0?0:n-1):(sel+d+n)%n;markSel();sfx('move')}
+let choicesAt=0;
+function confirmSel(){if(sel<0||performance.now()-choicesAt<350)return;const b=(choosing()?choiceBtns():tileBtns())[sel];if(b)b.click()}
 
 function renderBuild(s){
  s.got=0;$('build').hidden=false;
@@ -522,7 +537,7 @@ function renderBuild(s){
  const order=shuffle(s.build.map((_,i)=>i));
  $('tiles').innerHTML=order.map(i=>`<button class="tile" data-i="${i}">${s.build[i]}</button>`).join('');
  $('tiles').querySelectorAll('.tile').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();pickTile(s,b)}));
- sel=0;markSel();
+ sel=-1;choicesAt=performance.now();markSel();
 }
 function pickTile(s,b){
  const i=+b.dataset.i;
@@ -534,21 +549,23 @@ function pickTile(s,b){
   const line=s.build.join(' ');sfx('ok');
   if(s.review||dlg.review)gradeStep(s);
   dlg.next='advance';$('build').hidden=true;
-  show({who:s.who,say:'맞아요! '+line+'.'});
+  if(s.who==='나'){toast(okWord(s));show({who:'나',say:line+'.'})}else show({who:s.who,say:okWord(s)+' '+line+'.'});  // your own line: it's yours, praise is a toast
   if(readOn)speak(line);
- }else{sel=0;markSel()}
+ }else{sel=-1;markSel()}
 }
 /* Each rule is explained once per player, then only the toasts speak. */
-let explained={};try{explained=JSON.parse(localStorage.getItem('banghu-explained')||'{}')}catch(e){}
-function firstTime(k){if(explained[k])return false;explained[k]=1;try{localStorage.setItem('banghu-explained',JSON.stringify(explained))}catch(e){}return true}
+let explained={};try{explained=JSON.parse(localStorage.getItem(KEY('explained'))||'{}')}catch(e){}
+function firstTime(k){if(explained[k])return false;explained[k]=1;try{localStorage.setItem(KEY('explained'),JSON.stringify(explained))}catch(e){}return true}
 function gradeStep(s){
  if(!s.w)return;
  const before=lv(s.w).b,b=grade(s.w,!s.missed);
  updateHud();
  if(s.missed)setTimeout(()=>toast(`"${s.w}" 다시 연습해요`),250);
  if(!s.missed&&b>=3&&before<3){setTimeout(()=>{toast('★ '+s.w+' 완벽!');sfx('star')},250)}
- if(s.missed?firstTime('reviewMiss'):firstTime('reviewLevel'))dlg.steps.splice(dlg.i+1,0,{who:'단어 일지',say:s.missed?`"${s.w}" 다시 연습해요. 곧 또 나와요.`:`"${s.w}" 기억 레벨 ${b}/5.`+(b>=3?' ★':'')});
+ if(s.missed?firstTime('reviewMiss'):firstTime('reviewLevel'))dlg.steps.splice(dlg.i+1,0,{who:LOGNAME,say:s.missed?`"${s.w}" 다시 연습해요. 곧 또 나와요.`:`"${s.w}" 기억 레벨 ${b}/5.`+(b>=3?' ★':'')});
 }
+/* praise after a right answer: a step's own `ok`, else 맞아! from a friend who speaks 반말 (NPC banmal:1), else 맞아요! */
+const okWord=s=>s.ok||(dlg.npc&&dlg.npc.banmal?'맞아!':'맞아요!');
 function choose(s,i){
  const o=s.opts[i];
  if(o[1]){
@@ -556,10 +573,10 @@ function choose(s,i){
   if(s.review||dlg.review)gradeStep(s);
   dlg.next='advance';
   const line=s.ask.includes('___')?s.ask.replace('___',o[0]):o[0];
-  show({who:s.who,say:'맞아요! '+(s.listenOnly?`"${o[0]}"`:line)});
+  if(s.who==='나'&&!s.listenOnly){toast(okWord(s));show({who:'나',say:line})}else show({who:s.who==='나'?dlg.name:s.who,say:okWord(s)+' '+(s.listenOnly?`"${o[0]}"`:line)});
  }else{
   sfx('no');s.missed=true;if(s.w)dlg.missed.add(s.w);
-  dlg.next=s;show({who:s.who,say:o[2]||'다시 해 봐요.'});
+  dlg.next=s;show({who:s.who==='나'?'…':s.who,say:o[2]||'다시 해 봐요.'});  // after your own line, the hint is narration
  }
 }
 function advance(){
@@ -575,10 +592,10 @@ function advance(){
 function closeDialog(){
  dlg=null;clearInterval(typing?.id);$('dlg').hidden=true;hideGloss();if(TTS)try{speechSynthesis.cancel()}catch(e){}
  updateQuest();
- if(pending){const c=pending;pending=null;setTimeout(()=>{if(!dlg)openDialog('단어 일지',c)},400)}
+ if(pending){const c=pending;pending=null;setTimeout(()=>{if(!dlg)openDialog(LOGNAME,c)},400)}
 }
 function cancel(){
- if(!$('mePanel').hidden){if(me)closeMe(false);return}  // first time: you must pick (no B)
+ if(CREATOR&&!$('mePanel').hidden){if(me)closeMe(false);return}  // first time: you must pick (no B)
  if(!$('startPanel').hidden){$('startPanel').hidden=true;return}
  if(!$('tapPanel').hidden){closeTaps();return}
  if(!$('talkPanel').hidden){if(!$('gloss').hidden)hideGloss();else closeTalk();return}
@@ -601,12 +618,12 @@ function reviewFor(words){ // pick a question for the weakest of these words
 }
 function terminal(){
  const due=dueWords();
- if(!state.badges.length)return [{who:'복습 노트',say:'아직 노트가 비어 있어요.'}];
- if(!due.length){const n=nextDue();return [{who:'복습 노트',say:'지금은 복습할 단어가 없어요.'+(n?` 다음 복습: ${fmtWait(n-now())} 후.`:'')}]}
+ if(!state.badges.length)return [{who:TERM.name,say:TERM.empty}];
+ if(!due.length){const n=nextDue();return [{who:TERM.name,say:TERM.idle+(n?` ${TERM.next}: ${fmtWait(n-now())} 후.`:'')}]}
  const pick=shuffle(due.slice()).slice(0,4);
- const steps=[{who:'복습 노트',say:`복습할 단어가 ${due.length}개 있어요.`}];
+ const steps=[{who:TERM.name,say:TERM.due(due.length)}];
  pick.forEach(w=>steps.push(reviewFor([w])));
- steps.push({who:'복습 노트',say:'복습 끝! 다음에 또 봐요.'});
+ steps.push({who:TERM.name,say:TERM.end});
  return steps;
 }
 function facing(){
@@ -625,6 +642,7 @@ function facing(){
  return null;
 }
 function interact(){
+ if(!$('gloss').hidden){hideGloss();return}  // A closes the definition first, without advancing
  if(panelOpen())return;
  if(choosing()||building()){confirmSel();return}
  if(dlg){advance();return}
@@ -641,7 +659,7 @@ function interact(){
   openDialog(n.name,steps,{npc:n,review:isReview});return;
  }
  if(F.pet){openDialog(C.FOLLOW.name,C.FOLLOW.talk());return}
- if(F.term){openDialog('복습 노트',terminal(),{review:true});return}
+ if(F.term){openDialog(TERM.name,terminal(),{review:true});return}
  if(F.spot){openDialog('…',says(F.spot))}
 }
 
@@ -653,14 +671,14 @@ function award(words){
  save();updateHud();sfx('badge');
  toast('일지에 추가: '+nw.join(', '));
  const note=perfect.length===nw.length
-  ?{who:'단어 일지',say:`한 번도 안 틀렸어요! "${nw.join('", "')}" 기억 레벨 2/5.`}
-  :{who:'단어 일지',say:`일지에 적었어요. 틀린 단어는 곧 다시 나와요. 머리 위 ? 를 찾아요.`};
+  ?{who:LOGNAME,say:`한 번도 안 틀렸어요! "${nw.join('", "')}" 기억 레벨 2/5.`}
+  :{who:LOGNAME,say:`일지에 적었어요. 틀린 단어는 곧 다시 나와요. 머리 위 ? 를 찾아요.`};
  if(firstTime(perfect.length===nw.length?'awardPerfect':'awardMissed'))dlg.steps.splice(dlg.i+1,0,note);
- if(state.badges.length>=C.WORDS.length&&!state.f.allWords){state.f.allWords=1;save();pending=says([`단어 ${C.WORDS.length}개를 다 모았어요!`,'이제 신호 단말기에서 복습하면 ★가 생겨요.'])}
+ if(state.badges.length>=C.WORDS.length&&!state.f.allWords){state.f.allWords=1;save();pending=says([`단어 ${C.WORDS.length}개를 다 모았어요!`,`이제 ${TERM.name}에서 복습하면 ★가 생겨요.`])}
 }
 function finish(){
  $('fade').classList.add('on');sfx('star');
- setTimeout(()=>{$('fade').classList.remove('on');openDialog('단어 일지',says(C.DONE))},900);
+ setTimeout(()=>{$('fade').classList.remove('on');openDialog(LOGNAME,says(C.DONE))},900);
 }
 let toastT;function toast(t){const el=$('toast');el.textContent=t;el.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>el.hidden=true,2400)}
 
@@ -728,7 +746,7 @@ function drawMePreview(){
  const L={...CREW_LOOK,...meDraft};drawPortrait($('meFace'),L,'happy',false);
  const c=$('meWalk').getContext('2d');c.clearRect(0,0,16,24);const rows=humanArt(L,'down',0),pal=humanPal(L);
  rows.forEach((r,y)=>[...r].forEach((ch,x)=>{const col=pal[ch];if(col&&ch!=='.'){c.fillStyle=col;c.fillRect(x,y,1,1)}}));
- for(const b of $('meOpts').querySelectorAll('[data-k]'))b.classList.toggle('on',String(meDraft[b.dataset.k])===b.dataset.v);
+ for(const b of $('meOpts').querySelectorAll('[data-k]'))b.classList.toggle('on',b.dataset.t?!!meDraft[b.dataset.k]&&meDraft[b.dataset.k]!=='0':String(meDraft[b.dataset.k])===b.dataset.v);
 }
 function openMe(done){
  meDraft={style:'short',hair:'#1E1B22',skin:'#F1C9A5',lashes:0,lips:0,...(me||{})};meDone=done||null;
@@ -736,7 +754,7 @@ function openMe(done){
  $('meOpts').innerHTML=`<div class="mrow"><span>머리 모양</span><div>${ME_OPTS.style.map(([v,l])=>sw('style',v,l)).join('')}</div></div>
   <div class="mrow"><span>머리 색</span><div>${ME_OPTS.hair.map((v,i)=>sw('hair',v,'머리 색 '+(i+1),1)).join('')}</div></div>
   <div class="mrow"><span>피부</span><div>${ME_OPTS.skin.map((v,i)=>sw('skin',v,'피부 '+(i+1),1)).join('')}</div></div>
-  <div class="mrow"><span>얼굴</span><div>${sw('lashes','1','속눈썹')}${sw('lashes','0','없음')}${sw('lips','#C25B6A','립')}${sw('lips','0','없음')}</div></div>`;
+  <div class="mrow"><span>얼굴</span><div><button class="mo" data-k="lashes" data-v="1" data-t="1">속눈썹</button><button class="mo" data-k="lips" data-v="#C25B6A" data-t="1">립</button></div></div>`;
  drawMePreview();$('mePanel').hidden=false;
 }
 function closeMe(keep){
@@ -744,10 +762,11 @@ function closeMe(keep){
   store.set(ME_KEY,JSON.stringify(me));if(typeof C.PLAYER!=='function')player.look=myLook(C.PLAYER||CREW_LOOK);toast('반가워요! 👋')}
  $('mePanel').hidden=true;const d=meDone;meDone=null;if(d)d();
 }
-$('meOpts').addEventListener('click',e=>{const b=e.target.closest('[data-k]');if(!b)return;meDraft[b.dataset.k]=b.dataset.v;drawMePreview()});
-$('meRandom').addEventListener('click',()=>{const pick=a=>a[Math.random()*a.length|0];meDraft={style:pick(ME_OPTS.style)[0],hair:pick(ME_OPTS.hair),skin:pick(ME_OPTS.skin),lashes:pick(['1','0']),lips:pick(['#C25B6A','0'])};drawMePreview()});
-$('meOk').addEventListener('click',()=>closeMe(true));
-$('meBtn').addEventListener('click',()=>openMe());
+if(CREATOR)$('meOpts').addEventListener('click',e=>{const b=e.target.closest('[data-k]');if(!b)return;const k=b.dataset.k,on=meDraft[k]&&meDraft[k]!=='0';
+ meDraft[k]=b.dataset.t?(on?'0':b.dataset.v):b.dataset.v;drawMePreview()});  // data-t = an on/off toggle
+if(CREATOR)$('meRandom').addEventListener('click',()=>{const pick=a=>a[Math.random()*a.length|0];meDraft={style:pick(ME_OPTS.style)[0],hair:pick(ME_OPTS.hair),skin:pick(ME_OPTS.skin),lashes:pick(['1','0']),lips:pick(['#C25B6A','0'])};drawMePreview()});
+if(CREATOR)$('meOk').addEventListener('click',()=>closeMe(true));
+if(CREATOR)$('meBtn').addEventListener('click',()=>openMe());
 /* START: everything that isn't the game itself (logs, dictionary, chapters, reading aloud, sound) */
 function toggleStart(){const P=$('startPanel');if(P.hidden&&panelOpen())return;P.hidden=!P.hidden;hideGloss()}
 $('startBtn').addEventListener('click',toggleStart);$('startClose').addEventListener('click',()=>$('startPanel').hidden=true);
@@ -757,10 +776,10 @@ $('tapBtn').addEventListener('click',openTaps);$('tapClose').addEventListener('c
 $('tapSortT').addEventListener('click',()=>{tapSort='t';openTaps()});$('tapSortN').addEventListener('click',()=>{tapSort='n';openTaps()});
 $('tapPanel').addEventListener('click',e=>{if(e.target.id==='tapPanel'){closeTaps();return}const p=e.target.closest('.tp');if(p){const en=p.querySelector('.tpe');en.hidden=!en.hidden}});$('talkClose').addEventListener('click',closeTalk);
 $('talkPanel').addEventListener('click',e=>{if(e.target.id==='talkPanel'){closeTalk();return}const gl=e.target.closest('.gl');if(gl){showGloss(gl.dataset.k);return}const w=e.target.closest('.w');if(w)showWord(w.textContent)});
-$('sndBtn').addEventListener('click',()=>{soundOn=!soundOn;store.set('banghu-sound',soundOn?'1':'0');updateSound();sfx('ok')});
+$('sndBtn').addEventListener('click',()=>{soundOn=!soundOn;store.set(KEY('sound'),soundOn?'1':'0');updateSound();sfx('ok')});
 $('readBtn').addEventListener('click',()=>{
  if(!canSpeak()){toast('이 기기에는 한국어 음성이 없어요.');return}
- readOn=!readOn;store.set('banghu-read',readOn?'1':'0');updateRead();toast(readOn?'대사를 소리 내서 읽어요.':'읽기를 껐어요.');if(readOn&&dlg)speak(dlg.cur.say||dlg.cur.ask||'');
+ readOn=!readOn;store.set(KEY('read'),readOn?'1':'0');updateRead();toast(readOn?'대사를 소리 내서 읽어요.':'읽기를 껐어요.');if(readOn&&dlg)speak(dlg.cur.say||dlg.cur.ask||'');
 });
 $('closePanel').addEventListener('click',()=>$('panel').hidden=true);
 $('panel').addEventListener('click',e=>{if(e.target.id==='panel')$('panel').hidden=true});
@@ -792,12 +811,12 @@ function boot(id){
  player.look=typeof C.PLAYER==='function'?myLook():myLook(C.PLAYER||CREW_LOOK);  // PLAYER as a function = a disguise, drawn at render time // a chapter may put the player in someone else's shoes (5장: Terence)
  if(dlg){dlg=null;clearInterval(typing?.id);$('dlg').hidden=true}
  pending=null;held=null;warping=false;$('panel').hidden=true;$('chPanel').hidden=true;$('toast').hidden=true;logSel=null;
- store.set('banghu-chapter',CH.id);
+ store.set(KEY('chapter'),CH.id);
  loadState();loadTalk();
  loadZone(state.zone,state.x,state.y,state.dir);
  $('chName').textContent=CH.n;
  updateHud();updateQuest();
- if(!state.seenIntro){state.seenIntro=true;save();const intro=()=>setTimeout(()=>openDialog(CH.introWho||'방과 후',C.INTRO),300);if(me)intro();else openMe(intro)}  // first time ever: make your character first
+ if(!state.seenIntro){state.seenIntro=true;save();const intro=()=>setTimeout(()=>openDialog(CH.introWho||G.title||'이야기',C.INTRO),300);if(me||!CREATOR)intro();else openMe(intro)}  // first time ever: make your character first
 }
 function chapterProgress(c){try{const s=JSON.parse(store.get(c.save)||'null');return s?{got:(s.badges||[]).length,done:!!(s.f&&s.f.done)}:{got:0,done:false}}catch(e){return {got:0,done:false}}}
 function openChapters(){
@@ -814,7 +833,7 @@ $('chClose').addEventListener('click',()=>$('chPanel').hidden=true);
 function start(){
  if(TTS){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
  updateSound();updateRead();
- const want=new URLSearchParams(location.search).get('ch')||store.get('banghu-chapter');
+ const want=new URLSearchParams(location.search).get('ch')||store.get(KEY('chapter'));
  boot(CHAPTERS.some(c=>c.id===want)?want:CHAPTERS[0].id); // first visit starts at chapter 1; after that, the last chapter played
  requestAnimationFrame(loop);
 }
