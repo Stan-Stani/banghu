@@ -1,0 +1,237 @@
+word	pos	cat	english
+-(으)ㄴ데/-는데	grammar	gram	"background or contrast; trailing ""but..."""
+-아/어서	grammar	gram	because; and then
+-아/어 주다	grammar	gram	do something for someone
+야	interj	word	hey!
+-아/어 보다	grammar	gram	try doing
+-(스)ㅂ니다	grammar	gram	formal polite ending
+-(으)시-	grammar	gram	honorific infix
+-다고	grammar	gram	"quoting (""that ...""); 재밌다구 = casual"
+-지	grammar	gram	right?, of course (assumption)
+-(으)니까	grammar	gram	because, since
+-네	grammar	gram	realization ending
+-지 말다	grammar	gram	don't (negative command)
+남친	noun	word	boyfriend
+미안	interj	word	sorry
+시절	noun	word	days, period (of life)
+중학생	noun	word	middle schooler
+-(으)ㄹ래	grammar	gram	want to / will you? (casual)
+-(이)랑	grammar	gram	with, and (casual)
+-다니까	grammar	gram	I'm telling you
+-아/어도 되다	grammar	gram	it's okay to
+-요	grammar	gram	polite ending
+말(을) 걸다	expr	word	to talk to, strike up a conversation
+뭔가	adv	word	somehow, something
+설레다	verb	word	to flutter (with excitement)
+평범하다	adj	word	to be ordinary
+학원	noun	word	cram school, academy
+-(으)ㄴ 것 같다	grammar	gram	seems like
+-(으)ㄴ걸	grammar	gram	"softened explanation (""you know..."")"
+-(으)ㄹ 수 있다	grammar	gram	can, be able to
+-(으)ㄹ걸	grammar	gram	probably (guess)
+-(으)ㅁ	grammar	gram	note-style ending (narration)
+-(이)라고	grammar	gram	"quoting a noun (""that it's..."")"
+-(이)라면	grammar	gram	if it is
+-(이)야말로	grammar	gram	precisely, of all (emphasis)
+-같이	grammar	gram	like (N같이)
+-구먼/-구만	grammar	gram	realization ending (casual)
+-기 힘들다	grammar	gram	hard to (do)
+-기도 하다	grammar	gram	also do
+-나 보다	grammar	gram	seems that
+-다가	grammar	gram	while doing, then
+-다면	grammar	gram	if (hypothetical)
+-던데	grammar	gram	I noticed that... (recollection)
+-부터	grammar	gram	from, since
+-아/어 버리다	grammar	gram	end up doing (completely)
+-아/어도 좋다	grammar	gram	it's fine to
+-아/어야겠다	grammar	gram	I guess I'd better
+-었어야지	grammar	gram	should have
+-자니까	grammar	gram	I said let's (insisting)
+-죠	grammar	gram	"confirming ending (""right?"") (polite)"
+-한테	grammar	gram	to (a person)
+경례	interj	word	Salute!/Bow! (class command)
+교내	noun	word	on campus, within the school
+그러고 보니	expr	word	come to think of it
+그새	adv	word	in that short time
+꺄	interj	word	kyaa! (squeal)
+내 말이	expr	word	that's what I'm saying, exactly
+너네	noun	word	you guys
+다들	noun	word	everyone
+다정하다	adj	word	to be affectionate
+대	noun	word	versus (4 대 4)
+대학생	noun	word	college student
+동갑	noun	word	same age
+등수	noun	word	rank, placing
+또래	noun	word	peer (same age)
+말씀하다	verb	word	to say, speak
+모고	noun	word	mock exam
+문자하다	verb	word	to text
+벌금	noun	word	fine, penalty
+삥 뜯기다	expr	word	to get shaken down for money
+소개시키다	verb	word	to introduce (someone)
+심지어	adv	word	even, on top of that
+쓰다듬다	verb	word	to pat, stroke
+알려주다	verb	word	to let know, inform
+어쨌든	adv	word	anyway
+언제든지	adv	word	anytime
+에이	interj	word	aw, come on
+여태	adv	word	until now
+연애	noun	word	dating, romance
+웬일	noun	word	what's going on (surprise)
+으이구	interj	word	ugh, good grief
+이	adj	word	this
+이만	adv	word	now, at this point (to leave)
+이제껏	adv	word	until now
+자랑스럽다	adj	word	to be proud
+쟤	noun	word	that kid (over there)
+정신(이) 팔리다	expr	word	to be distracted
+좋아요	noun	word	"a ""like"" (social media)"
+죄송하다	adj	word	to be sorry
+중간고사	noun	word	midterm exam
+지우개	noun	word	eraser
+차렷	interj	word	Attention! (class command)
+친해지다	verb	word	to become close
+패싸움	noun	word	gang fight
+하도	adv	word	so much, so often
+하필	adv	word	of all times/things
+허언증	noun	word	compulsive lying
+-도	grammar	gram	also, too; even
+-(으)ㄴ/는/ㄹ 것 같다	grammar	gram	seems like …; I think …
+-다니까/-(이)라니까	grammar	gram	I told you …! (insisting)
+-(으)ㄹ까(요)	grammar	gram	shall I …? / could …?
+말을 걸다	expr	word	to talk to, strike up a conversation
+우르르	adv	word	in a crowd, all at once
+화장실	noun	word	restroom
+-(으)ㄴ가 보다	grammar	gram	I guess …; it seems …
+-(으)ㄹ	grammar	gram	future/potential modifier (나갈 타이밍)
+-(으)ㄹ지도 모르다	grammar	gram	might …
+-(으)려면	grammar	gram	if you want to …
+-(으)면서	grammar	gram	while; even though
+-(이)나	grammar	gram	or something; just (casual suggestion)
+-고 자시고	grammar	gram	… or whatever (dismissive)
+-기는커녕	grammar	gram	far from …; let alone
+-나	grammar	gram	… ? (rhetorical / self-question)
+-는?	grammar	gram	what about …?
+-더라	grammar	gram	I noticed that … (retrospective)
+-아/어라	grammar	gram	do …! (casual command)
+-아/어지다	grammar	gram	become …
+-자는 거	grammar	gram	the idea was to … (quoted suggestion)
+거기서 거기	expr	word	all the same, no different
+곡	noun	word	counter for songs
+그나저나	adv	word	anyway, by the way
+긴장을 풀다	expr	word	to relax, ease nerves
+남자애	noun	word	boy, guy
+말도 안 되다	expr	word	to be absurd, no way
+번호를 따다	expr	word	to get someone's number
+볼 일	expr	word	business, reason to see
+부탁드리다	verb	word	to ask a favor (humble)
+손	noun	word	hand
+아직도	adv	word	still
+얘	noun	word	this kid/person
+연락처	noun	word	contact info
+이왕	adv	word	since (it's happened) anyway
+재촉하다	verb	word	to rush, press (someone)
+지긋이	adv	word	steadily, gently (gaze)
+챙기다	verb	word	to look after; to pack
+흔하다	adj	word	to be common
+-는/(으)ㄴ 거야	grammar	gram	it's that ~ (explaining/asking)
+-(으)ㄴ/는/(으)ㄹ 것 같다	grammar	gram	seems like ~, I think ~
+여보세요	expr	word	hello? (phone)
+-구나	grammar	gram	oh, ~! (realization)
+-밖에	grammar	gram	nothing but (+ negative)
+슬쩍	adv	word	lightly, slyly
+으	interj	word	ugh
+톡	noun	word	chat message (KakaoTalk)
+-(으)ㄹ 거야	grammar	gram	will ~; probably ~
+-(으)ㄹ 줄 알다	grammar	gram	assume that ~ (줄 알았다)
+-(으)러	grammar	gram	in order to (go) ~
+-(으)면 안 되다	grammar	gram	must not ~; can't you ~? (request)
+-겠지만	grammar	gram	though (I) probably ~
+-기다	grammar	gram	it's a deal: ~
+-기만 해도	grammar	gram	just ~ing is enough
+-는 거 아니야	grammar	gram	isn't it that ~?
+-는걸	grammar	gram	but ~ (mild protest)
+-더니	grammar	gram	(I saw) ~, and yet
+-라도	grammar	gram	even (if it's)
+-아/어하다	grammar	gram	(show) feeling ~ (adj → verb)
+-았/었더니	grammar	gram	when I did ~, (result)
+가끔씩	adv	word	now and then
+감동	noun	word	being moved/touched
+공동	noun	word	joint, shared
+그렇다고	adv	word	even so, that doesn't mean
+까이다	verb	word	get rejected/dumped
+끼어들다	verb	word	butt in, interrupt
+날라리	noun	word	delinquent, party kid
+노래방	noun	word	karaoke room
+눈치	noun	word	social awareness, reading the room
+다행이다	adj	word	be a relief
+댓글	noun	word	comment (online)
+되게	adv	word	really, very
+두근두근하다	verb	word	be all aflutter
+떠들어대다	verb	word	keep making noise, prattle on
+로맨틱하다	adj	word	romantic
+마음에 들다	expr	word	like, be to one's liking
+만년	noun	word	perpetual (forever the same)
+멋대로	adv	word	as one pleases, selfishly
+모의시험	noun	word	mock exam
+바래다주다	verb	word	walk/see someone home
+복숭아	noun	word	peach
+빨개지다	verb	word	turn red
+수학	noun	word	math
+시비 걸다	expr	word	pick a fight
+아이디	noun	word	user ID
+애초	noun	word	the very beginning
+어떻게든	adv	word	somehow, one way or another
+엥	interj	word	huh?
+영화관	noun	word	movie theater
+왕자님	noun	word	prince
+운명	noun	word	fate, destiny
+인소	noun	word	web romance novel
+재수 없다	expr	word	obnoxious; unlucky
+제출하다	verb	word	submit
+주	noun	word	week
+짱	noun	word	the best
+하	interj	word	ha!
+허	interj	word	huh?! (indignant)
+환상	noun	word	fantasy, illusion
+대학	noun	word	university, college
+-(이)란/-단	grammar	gram	contracted -다고 하는/-이라고 하는
+-는 것 같다	grammar	gram	it seems that...
+-(으)ㄹ 때(까지)	grammar	gram	when; until
+-(으)려나	grammar	gram	I wonder if (it will)...
+-게 하다	grammar	gram	make/let someone do
+-냐	grammar	gram	casual/blunt question ending
+N만	grammar	gram	only N
+상담	noun	word	consultation, counseling
+-(으)ㄴ 적이 없다	grammar	gram	have never done
+-(으)ㄴ가?	grammar	gram	is it that...? (wondering)
+-(으)ㄹ 텐데	grammar	gram	it must be..., but
+-ㄴ단 말이야	grammar	gram	I'm saying that...
+-는데도	grammar	gram	even though
+-더만	grammar	gram	I saw that... (recollection)
+-아/어 대다	grammar	gram	keep on doing (excessively)
+N 같이	grammar	gram	like N
+N(이)나	grammar	gram	or; N or something
+N부터	grammar	gram	from N
+간이 크다	expr	word	to be bold, have guts
+구라	noun	word	lie, BS
+꼬시다	verb	word	to hit on, seduce, win over
+너무하다	adj	word	to be too much, unfair
+동반	noun	word	accompanying, together with
+몸부림	noun	word	struggling, writhing
+무지	adv	word	very, extremely
+뭐든	adv	word	anything (at all)
+범생	noun	word	goody-goody, model student
+부모님	noun	word	parents
+뽀뽀하다	verb	word	to kiss (a peck)
+상위	noun	word	top ranks, upper level
+서울권	noun	word	Seoul-area (universities)
+쓸데없다	adj	word	to be useless, pointless
+아시다시피	expr	word	as you know
+엮이다	verb	word	to get tangled up with, associated with
+욕먹다	verb	word	to get criticized, get bad-mouthed
+절박하다	adj	word	to be desperate
+평가	noun	word	evaluation, assessment test
+합격률	noun	word	pass rate, acceptance rate
+해대다	verb	word	to do (something) a lot, go on doing
+회로	noun	word	circuit

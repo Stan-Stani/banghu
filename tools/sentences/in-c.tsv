@@ -1,0 +1,287 @@
+word	pos	cat	period	english	korean_def
+보다	verb	word	1	to see; look	눈으로 알아요.
+응	interj	word	1	yeah, uh-huh	
+아	interj	word	1	ah, oh	놀라거나 알았을 때 내는 소리.
+-자	grammar	gram	1	let's	
+우리	noun	word	1	we, our	나를 포함한 사람들.
+말하다	verb	word	1	to speak	입으로 이야기해요.
+이것	noun	word	1	this	가까이 있는 이 물건.
+-아/어 보다	grammar	gram	1	try doing	
+좋아하다	verb	word	1	to like	마음에 들어서 자주 찾아요.
+-(스)ㅂ니다	grammar	gram	1	formal polite ending	
+-겠-	grammar	gram	1	"guess/intention (""will, must be"")"	
+-지	grammar	gram	1	right?, of course (assumption)	
+나오다	verb	word	1	to come out	안에서 밖으로 와요.
+없다	adj	word	1	to not exist, lack	있지 않아요.
+-(으)ㄹ게	grammar	gram	1	I'll (promise/intention)	
+-네	grammar	gram	1	realization ending	
+-지 않다	grammar	gram	1	"negation (""not"")"	
+그냥	adv	word	1	just, simply	다른 것 없이 그대로.
+남친	noun	word	1	boyfriend	
+네	interj	word	1	four (before units); yes	넷. 개, 명 앞에서 써요. · 예
+당하다	verb	word	1	to suffer, undergo	나쁜 일을 받아요.
+먼저	adv	word	1	first	다른 것보다 앞서요.
+미안	interj	word	1	sorry	
+애	noun	word	1	kid, child	'아이'의 줄임말.
+저	interj	word	1	I (humble); that	나를 낮춰 부르는 말 · 저것.
+지금	noun	word	1	now	바로 이때.
+-(으)ㄹ래	grammar	gram	1	want to / will you? (casual)	
+-거든	grammar	gram	1	you see, because (explaining)	
+-아/어도 되다	grammar	gram	1	it's okay to	
+-지만	grammar	gram	1	but	
+같이	adv	word	1	together	함께.
+놀다	verb	word	1	to play	재미있게 시간을 보내요.
+다음	noun	word	1	next	이것 바로 뒤.
+많다	adj	word	1	many; much	수나 양이 커요.
+무섭다	adj	word	1	scary	겁이 나요.
+반	noun	word	1	half	둘로 나눈 하나예요.
+설레다	verb	word	1	to flutter (with excitement)	
+얘기하다	verb	word	1	to talk	'이야기하다'의 줄임말.
+오다	verb	word	1	to come	이쪽으로 움직여 와요.
+이번	noun	word	1	this time	바로 이 차례.
+평범하다	adj	word	1	to be ordinary	
+학원	noun	word	1	cram school, academy	
+-(는) 거나 다름없다	grammar	gram	1	is no different from	
+-(으)ㄴ걸	grammar	gram	1	"softened explanation (""you know..."")"	
+-(으)ㄹ 일 있어?	grammar	gram	1	is there any reason to...? (rhetorical)	
+-(으)ㅁ	grammar	gram	1	note-style ending (narration)	
+-(이)라도	grammar	gram	1	even if it's, at least	
+-(이)야말로	grammar	gram	1	precisely, of all (emphasis)	
+-고 있다	grammar	gram	1	be -ing	
+-기 힘들다	grammar	gram	1	hard to (do)	
+-끼리	grammar	gram	1	among (ourselves)	
+-다가	grammar	gram	1	while doing, then	
+-다잖아	grammar	gram	1	they said, you know	
+-부터	grammar	gram	1	from, since	
+-아/어 있다	grammar	gram	1	resulting state	
+-아/어야겠다	grammar	gram	1	I guess I'd better	
+-자고	grammar	gram	1	"quoting a suggestion (""let's"")"	
+-죠	grammar	gram	1	"confirming ending (""right?"") (polite)"	
+가까이	adv	word	1	near, close by	멀지 않은 곳, 옆에서.
+거리	noun	word	1	distance; street	두 곳 사이가 먼 정도. · 길
+걷다	verb	word	1	to walk	발로 한 걸음씩 가요.
+계속	noun	word	1	continuously	멈추지 않고.
+공부	noun	word	1	study	배우고 익히는 것.
+구석	noun	word	1	corner	방의 모서리 안쪽.
+그러고 보니	expr	word	1	come to think of it	
+그야	adv	word	1	well, of course (that's because)	
+꼭	adv	word	1	surely, be sure to	반드시. 잊지 말고.
+나도 모르게	expr	word	1	without realizing, unconsciously	
+내주다	verb	word	1	to pay for, hand over	
+다니다	verb	word	1	to go around, travel	자주 왔다 갔다 해요.
+다시	adv	word	1	again	한 번 더.
+당연히	adv	word	1	of course	물론. 그런 게 맞게.
+대박	noun	word	1	awesome; jackpot	
+데리고 가다	verb	word	1	to take (someone) along	
+들어가다	verb	word	1	to go in	밖에서 안으로 가요.
+따돌림	noun	word	1	being ostracized, bullying	
+또래	noun	word	1	peer (same age)	
+많이	adv	word	1	a lot	수나 양이 크게요.
+망하다	verb	word	1	to be ruined	일이 잘못되어 끝나요.
+머리	noun	word	1	head	목 위의 부분이에요.
+모고	noun	word	1	mock exam	
+모의고사	noun	word	1	mock exam	
+밀어붙이다	verb	word	1	to push against	세게 밀어서 한쪽에 붙게 해요.
+반장	noun	word	1	class president	
+벌금	noun	word	1	fine, penalty	
+보내다	verb	word	1	to send	다른 곳으로 가게 해요.
+부럽다	adj	word	1	envious	남이 가진 것을 나도 갖고 싶어요.
+비다	verb	word	1	to be empty	안에 아무것도 없어요.
+사귀다	verb	word	1	to date; befriend	친구나 애인으로 만나요.
+생각하다	verb	word	1	to think	머리로 그렇다고 여겨요.
+소개시키다	verb	word	1	to introduce (someone)	
+손목	noun	word	1	wrist	손과 팔 사이.
+시작하다	verb	word	1	to start	처음으로 해요.
+쏘다	verb	word	1	to shoot; to sting	총이나 활을 쏴요 · 벌이 침으로 찔러요.
+아무나	noun	word	1	anyone	
+앞으로	adv	word	1	from now on	
+어떻다	adj	word	1	how; to be how	어떤 모양이나 방법이에요.
+어차피	adv	word	1	anyway, after all	이렇게 해도 저렇게 해도 결국.
+얼굴	noun	word	1	face	눈, 코, 입이 있는 머리 앞쪽.
+엄청	adv	word	1	really, hugely	아주 많이.
+에잇	interj	word	1	aw, pfft	
+여태	adv	word	1	until now	
+예쁘다	adj	word	1	to be pretty	보기에 좋아요. 귀여워요.
+우수하다	adj	word	1	to be excellent	
+웬일	noun	word	1	what's going on (surprise)	
+의외	noun	word	1	surprising, unexpected	
+이만	adv	word	1	now, at this point (to leave)	
+인사	noun	word	1	greeting	만나거나 헤어질 때 하는 말이나 행동.
+일부러	adv	word	1	on purpose	알면서 하려고 해요.
+자랑하다	verb	word	1	to brag, show off	
+잡다	verb	word	1	to catch; to grab	손으로 쥐어요.
+저렇다	adj	word	1	to be like that	저것과 같아요.
+절대	adv	word	1	absolutely	어떤 일이 있어도.
+제발	adv	word	1	please	꼭 부탁해요.
+좋다	adj	word	1	to be good	마음에 들어요.
+죄송하다	adj	word	1	to be sorry	
+중간고사	noun	word	1	midterm exam	
+지우개	noun	word	1	eraser	
+짓	noun	word	1	deed; act	나쁜 행동.
+찾다	verb	word	1	to look for	없는 것을 보려고 해요.
+친해지다	verb	word	1	to become close	
+패싸움	noun	word	1	gang fight	
+하아	interj	word	1	sigh	
+학생	noun	word	1	student	공부하는 사람.
+화	noun	word	1	fire (hanja); anger	'불' 뜻의 한자 소리·화남.
+힘들다	adj	word	1	to be hard	하기 어렵고 지쳐요.
+괴롭히다	verb	word	2	to bully, harass, pick on	
+긴장	noun	word	2	nervousness, tension	
+거기	noun	word	2	there	그곳.
+어	interj	word	2	uh; yeah	
+이거	noun	word	2	this (thing)	'이것'의 줄임말.
+-다(가) 가다	grammar	gram	2	do … before leaving (stay and …)	
+노래	noun	word	2	song	소리로 부르는 음악.
+말을 걸다	expr	word	2	to talk to, strike up a conversation	
+어쩌다	verb	word	2	to do (어쩔 수 없다 = no choice)	'어쩔 수 없다'는 다른 방법이 없어요.
+이제	adv	word	2	now	지금부터. 지금은.
+-(으)ㄴ 김에	grammar	gram	2	while at it; since … anyway	
+-(으)ㄹ	grammar	gram	2	future/potential modifier (나갈 타이밍)	
+-(으)려고 하다	grammar	gram	2	intend to …	
+-(으)면서	grammar	gram	2	while; even though	
+-게	grammar	gram	2	so that; …-ly (adverb)	
+-기는커녕	grammar	gram	2	far from …; let alone	
+-는 거예요?	grammar	gram	2	what are you …-ing? (explanatory question)	
+-더라	grammar	gram	2	I noticed that … (retrospective)	
+-아/어야 하다	grammar	gram	2	have to …	
+-자는 거	grammar	gram	2	the idea was to … (quoted suggestion)	
+거기서 거기	expr	word	2	all the same, no different	
+곡	noun	word	2	counter for songs	
+그만	adv	word	2	stop, no more	더 하지 않고 멈춰서.
+기회	noun	word	2	chance, opportunity	"좋은 일을 할 수 있는 때. ""기회를 놓치다""."
+끌려오다	verb	word	2	to be dragged in	억지로 잡혀서 와요.
+내내	adv	word	2	all through	처음부터 끝까지 계속.
+누나	noun	word	2	older sister (of a male)	남자의 나이 많은 여자 형제.
+동안	noun	word	2	during, for	어떤 때부터 때까지.
+또	adv	word	2	again	다시. 한 번 더.
+명찰	noun	word	2	name tag	
+번호를 따다	expr	word	2	to get someone's number	
+볼 일	expr	word	2	business, reason to see	
+분위기	noun	word	2	atmosphere, mood	어떤 곳에서 느껴지는 느낌.
+손	noun	word	2	hand	
+시키다	verb	word	2	to order, make do	하라고 해요.
+싱겁다	adj	word	2	bland	짠맛이 부족해요.
+아직도	adv	word	2	still	
+어색하다	adj	word	2	to be awkward	자연스럽지 않고 이상해요.
+얼마나	adv	word	2	how (much, long)	어느 정도로.
+오랜만	noun	word	2	long time (no see)	오래 지난 다음에 다시.
+이어지다	verb	word	2	to continue, stretch on	끊어지지 않고 계속돼요.
+잘 가	expr	word	2	bye (to someone leaving)	
+전	noun	word	2	before	어떤 때보다 앞.
+주다	verb	word	2	to give	다른 사람한테 건네요.
+직빵	noun	word	2	works instantly, sure-fire	
+터지다	verb	word	2	to burst; explode	갑자기 깨지고 폭발해요.
+풀다	verb	word	2	to untie	묶인 것을 끌러요.
+효과	noun	word	2	effect	해서 생기는 좋은 결과예요.
+-는/(으)ㄴ 거야	grammar	gram	3	it's that ~ (explaining/asking)	
+어제	noun	word	3	yesterday	오늘의 하루 전.
+-아/야	grammar	gram	3	vocative (calling a name)	
+전교	noun	word	3	whole school	
+-구나	grammar	gram	3	oh, ~! (realization)	
+그리고	adv	word	3	and	그리고 또.
+만나다	verb	word	3	to meet	다른 사람을 보러 같이 있어요.
+생각나다	verb	word	3	to come to mind	잊어버린 것을 다시 기억해요.
+엇	interj	word	3	whoa, oops	
+있잖아	expr	word	3	you know; hey, listen	
+톡	noun	word	3	chat message (KakaoTalk)	
+-(으)ㄹ 리 없다	grammar	gram	3	there's no way ~	
+-(으)러	grammar	gram	3	in order to (go) ~	
+-(이)라니	grammar	gram	3	to think that ~! (surprise)	
+-기다	grammar	gram	3	it's a deal: ~	
+-길래	grammar	gram	3	because (they) ~ (observed reason)	
+-는걸	grammar	gram	3	but ~ (mild protest)	
+-든지	grammar	gram	3	whatever, do as you like (-지나 말든지)	
+-아/어하다	grammar	gram	3	(show) feeling ~ (adj → verb)	
+-지 못하다	grammar	gram	3	cannot ~	
+감동	noun	word	3	being moved/touched	
+고개	noun	word	3	head; hill pass	목 위의 머리.
+공동	noun	word	3	joint, shared	
+귀엽다	adj	word	3	to be cute	작고 예뻐서 좋아요.
+근처	noun	word	3	nearby	가까운 곳.
+깨지다	verb	word	3	to break, shatter	부서져서 조각이 나요.
+끼어들다	verb	word	3	butt in, interrupt	
+낚이다	verb	word	3	get baited/tricked	
+남자	noun	word	3	man, male	여자가 아닌 사람.
+노래방	noun	word	3	karaoke room	
+눈치	noun	word	3	social awareness, reading the room	
+다행이다	adj	word	3	be a relief	
+댓글	noun	word	3	comment (online)	
+두근거리다	verb	word	3	(heart) pound, flutter	
+딱딱하다	adj	word	3	to be hard, stiff	단단해요. 말이 부드럽지 않아요.
+로맨틱하다	adj	word	3	romantic	
+막	adv	word	3	to block; just now	못 하게 해요(막다). · 방금
+맞춤법	noun	word	3	spelling	
+멍청하다	adj	word	3	stupid	생각이 모자라요.
+무시하다	verb	word	3	to ignore	못 본 척, 중요하지 않게 봐요.
+박력	noun	word	3	force, intensity, charisma	
+복도	noun	word	3	corridor	방들 사이의 긴 길이에요.
+붙다	verb	word	3	to stick	떨어지지 않고 딱 닿아 있어요.
+빠지다	verb	word	3	to fall in	물이나 구멍 속으로 떨어져요.
+뽑다	verb	word	3	to pick; to pull out	여럿 중에서 골라요 · 잡아 빼요.
+생각	noun	word	3	thought	머리로 하는 것.
+셋	noun	word	3	three	숫자 3.
+수업	noun	word	3	class, lesson	학교에서 배우는 시간.
+쉽다	adj	word	3	easy	어렵지 않아요.
+시비 걸다	expr	word	3	pick a fight	
+아무것	noun	word	3	anything; nothing	어떤 것이든지. 뒤에 '안/못'.
+아직	adv	word	3	still; not yet	지금까지도. 아직 안 됐어요.
+애초	noun	word	3	the very beginning	
+어떻게든	adv	word	3	somehow, one way or another	
+연락하다	verb	word	3	to contact	전화나 말로 소식을 전해요.
+옆	noun	word	3	side, next to	오른쪽이나 왼쪽 가까운 곳.
+왕재수	noun	word	3	total jerk	
+이동	noun	word	3	moving, change of room	
+일어나다	verb	word	3	to get up; happen	잠에서 깨거나 몸을 세워요 · 생겨요.
+자꾸	adv	word	3	repeatedly	여러 번 계속.
+재수 없다	expr	word	3	obnoxious; unlucky	
+제출하다	verb	word	3	submit	
+주스	noun	word	3	juice	과일로 만든 마실 것.
+지난주	noun	word	3	last week	이번 주 바로 전 주.
+착하다	adj	word	3	to be kind	마음이 좋아요.
+천천히	adv	word	3	slowly	느리게.
+키스신	noun	word	3	kiss scene	
+향기	noun	word	3	scent, fragrance	
+환상	noun	word	3	fantasy, illusion	
+가르치다	verb	word	4	to teach	모르는 것을 알려 줘요.
+-거든(요)	grammar	gram	4	because, you see	
+-(으)ㄹ 때(까지)	grammar	gram	4	when; until	
+-(이)라서/-(이)라	grammar	gram	4	because it is N	
+-냐	grammar	gram	4	casual/blunt question ending	
+그렇지만	adv	word	4	but, however; 그치만	
+배우다	verb	word	4	to learn	새로 알게 공부해요.
+심화반	noun	word	4	advanced class	
+-(으)ㄴ가?	grammar	gram	4	is it that...? (wondering)	
+-(으)면 되다	grammar	gram	4	you just have to	
+-는데도	grammar	gram	4	even though	
+-아/어 달라(고 하다)	grammar	gram	4	ask someone to do for me	
+N 같이	grammar	gram	4	like N	
+N밖에 없다	grammar	gram	4	nothing but N	
+간이 크다	expr	word	4	to be bold, have guts	
+관심	noun	word	4	interest	더 알고 싶은 마음.
+그러니까	adv	word	4	so, that's why	그러므로, 그래서.
+꼬시다	verb	word	4	to hit on, seduce, win over	
+너무하다	adj	word	4	to be too much, unfair	
+농담	noun	word	4	joke	웃기려고 하는 말.
+도망가다	verb	word	4	to run away	피해서 빨리 가요.
+돕다	verb	word	4	to help	남의 일을 같이 해요.
+드리다	verb	word	4	to give (hon.)	'주다'의 높임말.
+목표	noun	word	4	target; goal	이루거나 맞히려는 것이에요.
+무지	adv	word	4	very, extremely	
+미안하다	adj	word	4	sorry	잘못해서 마음이 불편해요.
+방금	adv	word	4	just now	조금 전에요.
+법	noun	word	4	law; way	지켜야 하는 규칙, 방법이에요.
+부모님	noun	word	4	parents	
+사고	noun	word	4	accident	갑자기 일어난 나쁜 일.
+상위	noun	word	4	top ranks, upper level	
+서로	adv	word	4	each other	둘 다 상대에게.
+실은	adv	word	4	actually, in fact	사실은. 진짜 이야기를 하면.
+아시다시피	expr	word	4	as you know	
+엮이다	verb	word	4	to get tangled up with, associated with	
+욕먹다	verb	word	4	to get criticized, get bad-mouthed	
+이상하다	adj	word	4	to be strange	보통과 달라요.
+적	noun	word	4	enemy	싸우는 상대.
+제일	adv	word	4	the most; first	가장.
+쫓겨나다	verb	word	4	to be kicked out	억지로 밖으로 나가게 돼요.
+하루	noun	word	4	one day	한 날.
+합격률	noun	word	4	pass rate, acceptance rate	
+홀랑	adv	word	4	completely, all of it	

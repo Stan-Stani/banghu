@@ -1,0 +1,8628 @@
+{
+"areas": [
+{
+"id": "p1",
+"ko": "1교시",
+"en": "Period 1"
+},
+{
+"id": "p2",
+"ko": "2교시",
+"en": "Period 2"
+},
+{
+"id": "p3",
+"ko": "3교시",
+"en": "Period 3"
+},
+{
+"id": "p4",
+"ko": "4교시",
+"en": "Period 4"
+}
+],
+"words": [
+{
+"w": "나",
+"g": "I, me (plain)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 18
+},
+{
+"w": "것",
+"g": "thing; the fact that",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 12
+},
+{
+"w": "보다",
+"g": "to see, look; to meet",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 10
+},
+{
+"w": "-(으)ㄴ데/-는데",
+"g": "background or contrast; trailing \"but...\"",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 9
+},
+{
+"w": "가다",
+"g": "to go",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 9
+},
+{
+"w": "응",
+"g": "yeah, uh-huh",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 9
+},
+{
+"w": "하다",
+"g": "to do",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 9
+},
+{
+"w": "-아/어서",
+"g": "because; and then",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 8
+},
+{
+"w": "아",
+"g": "ah, oh",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 8
+},
+{
+"w": "아니다",
+"g": "to not be",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 8
+},
+{
+"w": "-아/어 주다",
+"g": "do something for someone",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 7
+},
+{
+"w": "-자",
+"g": "let's",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 7
+},
+{
+"w": "선생님",
+"g": "teacher",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 7
+},
+{
+"w": "야",
+"g": "hey!",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 7
+},
+{
+"w": "우리",
+"g": "we, our",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 7
+},
+{
+"w": "그렇다",
+"g": "to be so, like that",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 6
+},
+{
+"w": "남자친구",
+"g": "boyfriend",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 6
+},
+{
+"w": "말하다",
+"g": "to say, tell",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 6
+},
+{
+"w": "안",
+"g": "not",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 6
+},
+{
+"w": "얘기",
+"g": "talk, story",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 6
+},
+{
+"w": "이것",
+"g": "this (thing)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 6
+},
+{
+"w": "좀",
+"g": "a little; please (softener)",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 6
+},
+{
+"w": "진짜",
+"g": "really; for real",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 6
+},
+{
+"w": "-아/어 보다",
+"g": "try doing",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 5
+},
+{
+"w": "무슨",
+"g": "what (kind of); what nonsense",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 5
+},
+{
+"w": "뭐",
+"g": "what; something",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 5
+},
+{
+"w": "좋아하다",
+"g": "to like",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 5
+},
+{
+"w": "친구",
+"g": "friend",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 5
+},
+{
+"w": "-(는)구나",
+"g": "exclamation of realization (\"so...!\")",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 4
+},
+{
+"w": "-(스)ㅂ니다",
+"g": "formal polite ending",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 4
+},
+{
+"w": "-(으)면",
+"g": "if, when",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 4
+},
+{
+"w": "-(으)시-",
+"g": "honorific infix",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 4
+},
+{
+"w": "-겠-",
+"g": "guess/intention (\"will, must be\")",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 4
+},
+{
+"w": "-다고",
+"g": "quoting (\"that ...\")",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 4
+},
+{
+"w": "-들",
+"g": "plural suffix",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 4
+},
+{
+"w": "-지",
+"g": "right?, of course (assumption)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 4
+},
+{
+"w": "그래",
+"g": "yeah, okay; really?",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 4
+},
+{
+"w": "그러다",
+"g": "to do so, say so",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 4
+},
+{
+"w": "나오다",
+"g": "to come out; (results) to be released",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 4
+},
+{
+"w": "아니",
+"g": "no; I mean...",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 4
+},
+{
+"w": "안녕",
+"g": "hi; bye",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 4
+},
+{
+"w": "없다",
+"g": "to not exist, not have",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 4
+},
+{
+"w": "와",
+"g": "wow",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 4
+},
+{
+"w": "왜",
+"g": "why",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 4
+},
+{
+"w": "-(으)ㄹ게",
+"g": "I'll (promise/intention)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "-(으)니까",
+"g": "because, since",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "-고 싶다",
+"g": "want to",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "-네",
+"g": "realization ending",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "-만",
+"g": "only",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "-지 말다",
+"g": "don't (negative command)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "-지 않다",
+"g": "negation (\"not\")",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "같다",
+"g": "to be like, same",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "결과",
+"g": "result",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "그냥",
+"g": "just",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "그렇게",
+"g": "so, like that",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "남다",
+"g": "to remain, be left",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "남친",
+"g": "boyfriend",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "내일",
+"g": "tomorrow",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "너무",
+"g": "too, very",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "네",
+"g": "yes; pardon?",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "누구",
+"g": "who; someone",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "다",
+"g": "all, everything; completely",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "당하다",
+"g": "to suffer, undergo (passive)",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "더",
+"g": "more",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "되다",
+"g": "to be okay; to become",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "먼저",
+"g": "first, ahead",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "명",
+"g": "person (counter)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "못",
+"g": "can't",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "미안",
+"g": "sorry",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "소개팅",
+"g": "blind date",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "시절",
+"g": "days, period (of life)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "애",
+"g": "kid; (that) girl/person",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "왕따",
+"g": "outcast; bullying victim",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "있다",
+"g": "to be (somewhere), to have",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "저",
+"g": "um, er (hesitation)",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "정말",
+"g": "really, truly",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "중학생",
+"g": "middle schooler",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "지금",
+"g": "now",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "한",
+"g": "one",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "헉",
+"g": "gasp! (shock)",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 3
+},
+{
+"w": "-(으)ㄹ래",
+"g": "want to / will you? (casual)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "-(으)니",
+"g": "because; when (discovery)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "-(이)랑",
+"g": "with, and (casual)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "-거든",
+"g": "you see, because (explaining)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "-다니까",
+"g": "I'm telling you",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "-아/어도",
+"g": "even if",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "-아/어도 되다",
+"g": "it's okay to",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "-아/어야 하다/되다",
+"g": "have to",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "-요",
+"g": "polite ending",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "-지만",
+"g": "but",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "감사하다",
+"g": "to thank",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "갑자기",
+"g": "suddenly",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "같이",
+"g": "together",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "그것",
+"g": "that (thing)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "너",
+"g": "you",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "놀다",
+"g": "to play, hang out",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "눈",
+"g": "eye",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "늦다",
+"g": "to be late",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "다음",
+"g": "next (time)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "대화",
+"g": "conversation",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "돈",
+"g": "money",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "많다",
+"g": "to be many",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "말(을) 걸다",
+"g": "to talk to, strike up a conversation",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "멍청이",
+"g": "idiot",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "무섭다",
+"g": "to be scary",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "뭔가",
+"g": "somehow, something",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "바쁘다",
+"g": "to be busy",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "반",
+"g": "class (homeroom)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "버스",
+"g": "bus",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "사실대로",
+"g": "truthfully, as it is",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "설레다",
+"g": "to flutter (with excitement)",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "썰",
+"g": "story, anecdote",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "앗",
+"g": "oh! eek!",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "얘기하다",
+"g": "to talk",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "역시",
+"g": "as expected, after all",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "오늘",
+"g": "today",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "오다",
+"g": "to come",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "이렇게",
+"g": "like this",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "이렇다",
+"g": "to be like this",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "이번",
+"g": "this time",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "재밌다",
+"g": "to be fun",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "지겹다",
+"g": "to be tiresome",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "평범하다",
+"g": "to be ordinary",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "풀어지다",
+"g": "to loosen up, slack off",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "학교",
+"g": "school",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "학원",
+"g": "cram school, academy",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "혹시",
+"g": "by any chance",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "혼자",
+"g": "alone",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 2
+},
+{
+"w": "-(는) 거나 다름없다",
+"g": "is no different from",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-(으)ㄴ 것 같다",
+"g": "seems like",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-(으)ㄴ 줄 알다",
+"g": "know (that/how)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-(으)ㄴ걸",
+"g": "softened explanation (\"you know...\")",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-(으)ㄹ 때",
+"g": "when",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-(으)ㄹ 수 있다",
+"g": "can, be able to",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-(으)ㄹ 일 있어?",
+"g": "is there any reason to...? (rhetorical)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-(으)ㄹ걸",
+"g": "probably (guess)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-(으)ㄹ까",
+"g": "shall I/we?",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-(으)ㅁ",
+"g": "note-style ending (narration)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-(으)러 가다",
+"g": "go (in order) to",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-(이)라고",
+"g": "quoting a noun (\"that it's...\")",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-(이)라도",
+"g": "even if it's, at least",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-(이)라면",
+"g": "if it is",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-(이)라서인지",
+"g": "maybe because it is",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-(이)야말로",
+"g": "precisely, of all (emphasis)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-ㄴ대서",
+"g": "because (someone) said",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-같이",
+"g": "like",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-고 있다",
+"g": "be -ing",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-구먼/-구만",
+"g": "realization ending (casual)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-기 바라다",
+"g": "I hope you will (formal)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-기 힘들다",
+"g": "hard to (do)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-기는 하다",
+"g": "it is ..., but / admittedly",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-기도 하다",
+"g": "also do",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-끼리",
+"g": "among (ourselves)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-나 보다",
+"g": "seems that",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-는 거야",
+"g": "explaining/questioning ending (\"is it that...\")",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-다가",
+"g": "while doing, then",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-다는",
+"g": "reported adnominal (\"the words that...\")",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-다면",
+"g": "if (hypothetical)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-다잖아",
+"g": "they said, you know",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-던데",
+"g": "I noticed that... (recollection)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-보다",
+"g": "than; rather than",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-부터",
+"g": "from, since",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-아/어 달라고",
+"g": "asking for something to be done (quoted)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-아/어 버리다",
+"g": "end up doing (completely)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-아/어 있다",
+"g": "resulting state",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-아/어도 좋다",
+"g": "it's fine to",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-아/어야",
+"g": "only if",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-아/어야겠다",
+"g": "I guess I'd better",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-었더니",
+"g": "when I did ..., (result)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-었어야지",
+"g": "should have",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-자고",
+"g": "quoting a suggestion (\"let's\")",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-자니까",
+"g": "I said let's (insisting)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-잖아",
+"g": "you know, isn't it (obvious)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-죠",
+"g": "confirming ending (\"right?\") (polite)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-처럼",
+"g": "like, as",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-한테",
+"g": "to (a person)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "가까이",
+"g": "close, near",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "가장",
+"g": "most",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "걔",
+"g": "that kid",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "거리",
+"g": "distance",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "거짓말",
+"g": "lie",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "걱정",
+"g": "worry",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "걷다",
+"g": "to collect (money)",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "걸어가다",
+"g": "to walk (there)",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "경례",
+"g": "Salute!/Bow! (class command)",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "계속",
+"g": "continuation (to be continued)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "고등학생",
+"g": "high schooler",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "곧",
+"g": "soon",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "공부",
+"g": "study",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "교내",
+"g": "on campus, within the school",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "교장",
+"g": "principal",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "구석",
+"g": "corner",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "그",
+"g": "that (the)",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "그래도",
+"g": "still, even so",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "그러고 보니",
+"g": "come to think of it",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "그럼",
+"g": "then, in that case",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "그새",
+"g": "in that short time",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "그야",
+"g": "well, of course (that's because)",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "근데",
+"g": "but, by the way",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "꺄",
+"g": "kyaa! (squeal)",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "꼭",
+"g": "always, without fail; surely",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "끝나다",
+"g": "to end, be over",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "끼다",
+"g": "to join in, squeeze in",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "나도 모르게",
+"g": "without realizing, unconsciously",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "내 말이",
+"g": "that's what I'm saying, exactly",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "내리다",
+"g": "to get off (a vehicle)",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "내주다",
+"g": "to pay for, hand over",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "너네",
+"g": "you guys",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "놈",
+"g": "guy, thing (rough)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "다니다",
+"g": "to go around; attend",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "다들",
+"g": "everyone",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "다름없다",
+"g": "to be no different",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "다시",
+"g": "again",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "다정하다",
+"g": "to be affectionate",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "당신",
+"g": "you",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "당연히",
+"g": "of course",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "당황하다",
+"g": "to be flustered",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "대",
+"g": "versus",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "대박",
+"g": "awesome; jackpot",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "대신하다",
+"g": "to substitute, replace",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "대학생",
+"g": "college student",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "데리고 가다",
+"g": "to take (someone) along",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "동갑",
+"g": "same age",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "들쑤시다",
+"g": "to stir up, pester",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "들어가다",
+"g": "to go in",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "등",
+"g": "place, rank",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "등수",
+"g": "rank, placing",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "따돌림",
+"g": "being ostracized, bullying",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "딱",
+"g": "exactly, at a glance",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "떨어뜨리다",
+"g": "to drop",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "또래",
+"g": "peer (same age)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "마주치다",
+"g": "to meet (eyes)",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "만약",
+"g": "if, in case",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "많이",
+"g": "a lot",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "말",
+"g": "words, speech",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "말씀하다",
+"g": "to say, speak",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "망하다",
+"g": "to be ruined; I'm doomed",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "맞다",
+"g": "to be right",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "맨",
+"g": "the very",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "머리",
+"g": "head; hair",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "먹칠하다",
+"g": "to disgrace (lit. smear ink on)",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "몇",
+"g": "how many; a few",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "모고",
+"g": "mock exam",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "모르다",
+"g": "to not know",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "모양",
+"g": "state, shape",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "모의고사",
+"g": "mock exam",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "문자하다",
+"g": "to text",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "미치다",
+"g": "to go crazy",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "밀어붙이다",
+"g": "to push (against)",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "밑",
+"g": "bottom, below",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "바라다",
+"g": "to hope, wish",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "반장",
+"g": "class president",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "밥",
+"g": "meal, rice",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "번호",
+"g": "number (phone)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "벌금",
+"g": "fine, penalty",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "벽",
+"g": "wall",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "벽쿵",
+"g": "kabedon (pinning someone to a wall)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "보내다",
+"g": "to send",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "보이다",
+"g": "to be seen, seem",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "봄",
+"g": "spring",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "부럽다",
+"g": "to be envious",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "분",
+"g": "minute",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "분명",
+"g": "surely, clearly",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "비다",
+"g": "to be empty, short",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "뿐",
+"g": "only, nothing but",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "삥 뜯기다",
+"g": "to get shaken down for money",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "사귀다",
+"g": "to date; make friends",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "사람",
+"g": "person, people",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "사진",
+"g": "photo",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "생각하다",
+"g": "to think",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "설명하다",
+"g": "to explain",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "성적",
+"g": "grades, marks",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "소개시키다",
+"g": "to introduce (someone)",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "소리",
+"g": "sound; nonsense",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "소문나다",
+"g": "to have a rumor spread",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "손목",
+"g": "wrist",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "수고하다",
+"g": "to work hard, take trouble",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "시간",
+"g": "time",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "시작하다",
+"g": "to start",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "심지어",
+"g": "even, on top of that",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "싹",
+"g": "completely, all",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "쏘다",
+"g": "to treat (pay for)",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "쓰니",
+"g": "original poster (of a post)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "쓰다듬다",
+"g": "to pat, stroke",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "아무나",
+"g": "anyone",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "알다",
+"g": "to know",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "알려주다",
+"g": "to let know, inform",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "앞으로",
+"g": "from now on",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "약간",
+"g": "a little, slightly",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "어디",
+"g": "where; somewhere",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "어떻다",
+"g": "to be how",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "어쨌든",
+"g": "anyway",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "어쩌면",
+"g": "maybe, perhaps",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "어차피",
+"g": "anyway, in any case",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "언제",
+"g": "when",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "언제든지",
+"g": "anytime",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "얼굴",
+"g": "face",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "얼른",
+"g": "quickly",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "얼마",
+"g": "how much; not much left",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "엄청",
+"g": "tremendously",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "없이",
+"g": "without",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "에이",
+"g": "aw, come on",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "에잇",
+"g": "aw, pfft",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "여기",
+"g": "here",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "여기저기",
+"g": "here and there",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "여태",
+"g": "until now",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "연상",
+"g": "older (partner)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "연애",
+"g": "dating, romance",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "예쁘다",
+"g": "to be pretty",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "오빠",
+"g": "older brother / older guy (from a girl)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "요즘",
+"g": "these days",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "우수하다",
+"g": "to be excellent",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "울리다",
+"g": "to make cry",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "월",
+"g": "month",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "웬일",
+"g": "what's going on (surprise)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "유치원",
+"g": "kindergarten",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "으이구",
+"g": "ugh, good grief",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "의외",
+"g": "surprising, unexpected",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "이",
+"g": "this",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "이렇다 할",
+"g": "worth mentioning, to speak of",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "이만",
+"g": "now, at this point (to leave)",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "이미지",
+"g": "image",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "이제껏",
+"g": "until now",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "인사",
+"g": "greeting; bow",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "인사하다",
+"g": "to greet",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "일",
+"g": "matter, thing; work",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "일부러",
+"g": "on purpose",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "자",
+"g": "now, well, okay (getting attention)",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "자랑스럽다",
+"g": "to be proud",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "자랑하다",
+"g": "to brag, show off",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "잘",
+"g": "well",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "잠깐",
+"g": "a moment; wait",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "잡다",
+"g": "to grab, hold",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "쟤",
+"g": "that kid (over there)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "저기",
+"g": "um, excuse me",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "저렇다",
+"g": "to be like that (over there)",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "전국",
+"g": "nationwide",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "전하다",
+"g": "to convey, pass on",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "절대",
+"g": "never, absolutely",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "점심시간",
+"g": "lunchtime",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "정신(이) 팔리다",
+"g": "to be distracted",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "제발",
+"g": "please (begging)",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "조용히",
+"g": "quietly",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "종례",
+"g": "end-of-day homeroom",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "좋다",
+"g": "to be good, fine",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "좋아요",
+"g": "a \"like\" (social media)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "죄다",
+"g": "all, entirely",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "죄송하다",
+"g": "to be sorry",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "주저",
+"g": "hesitation",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "줍다",
+"g": "to pick up",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "중간고사",
+"g": "midterm exam",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "지그시",
+"g": "gently, quietly (gazing)",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "지다",
+"g": "to lose",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "지우개",
+"g": "eraser",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "집",
+"g": "home, house",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "집중하다",
+"g": "to concentrate",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "짓",
+"g": "act, deed (negative)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "쭉",
+"g": "all along, straight on",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "차렷",
+"g": "Attention! (class command)",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "찾다",
+"g": "to look for",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "처음",
+"g": "first time",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "초등생",
+"g": "elementary schooler",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "친해지다",
+"g": "to become close",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "큰일",
+"g": "big trouble",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "키스",
+"g": "kiss",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "패싸움",
+"g": "gang fight",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "하교",
+"g": "leaving school (end of day)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "하도",
+"g": "so much, so often",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "하아",
+"g": "sigh",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "하필",
+"g": "of all times/things",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "학년",
+"g": "school year, grade",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "학생",
+"g": "student",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "항상",
+"g": "always",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "허언증",
+"g": "compulsive lying",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "화",
+"g": "episode",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "화상",
+"g": "idiot, that clown",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "확",
+"g": "suddenly, with a whoosh",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "힘들다",
+"g": "to be hard",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 0,
+"f": 1
+},
+{
+"w": "-(으)ㄴ데/는데",
+"g": "background/contrast: …, but / so …",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 9
+},
+{
+"w": "-도",
+"g": "also, too; even",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 9
+},
+{
+"w": "괴롭히다",
+"g": "to bully, harass, pick on",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 6
+},
+{
+"w": "-(으)ㄴ/는/ㄹ 것 같다",
+"g": "seems like …; I think …",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 4
+},
+{
+"w": "괜찮다",
+"g": "to be okay, fine",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 4
+},
+{
+"w": "긴장",
+"g": "nervousness, tension",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 4
+},
+{
+"w": "하하",
+"g": "haha",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 4
+},
+{
+"w": "-다니까/-(이)라니까",
+"g": "I told you …! (insisting)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 3
+},
+{
+"w": "거기",
+"g": "there",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 3
+},
+{
+"w": "다녀오다",
+"g": "to go and come back",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 3
+},
+{
+"w": "부르다",
+"g": "to sing (a song); to call",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 3
+},
+{
+"w": "어",
+"g": "uh; yeah",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 3
+},
+{
+"w": "어떻게",
+"g": "how",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 3
+},
+{
+"w": "언니",
+"g": "older sister / older girl (said by a female)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 3
+},
+{
+"w": "이거",
+"g": "this (thing)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 3
+},
+{
+"w": "풀리다",
+"g": "to be relieved, come loose",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 3
+},
+{
+"w": "-(으)ㄹ까(요)",
+"g": "shall I …? / could …?",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 2
+},
+{
+"w": "-다(가) 가다",
+"g": "do … before leaving (stay and …)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 2
+},
+{
+"w": "걸다",
+"g": "to hang; to start (talking)",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 2
+},
+{
+"w": "나가다",
+"g": "to go out, leave",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 2
+},
+{
+"w": "노래",
+"g": "song",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 2
+},
+{
+"w": "다르다",
+"g": "to be different",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 2
+},
+{
+"w": "데려오다",
+"g": "to bring (a person) along",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 2
+},
+{
+"w": "말을 걸다",
+"g": "to talk to, strike up a conversation",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 2
+},
+{
+"w": "먹다",
+"g": "to eat",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 2
+},
+{
+"w": "뭐야",
+"g": "what is it?; what the…",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 2
+},
+{
+"w": "어쩌다",
+"g": "to do what (with)",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 2
+},
+{
+"w": "우르르",
+"g": "in a crowd, all at once",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 2
+},
+{
+"w": "이름",
+"g": "name",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 2
+},
+{
+"w": "이제",
+"g": "now (from now on)",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 2
+},
+{
+"w": "장난",
+"g": "joke, prank",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 2
+},
+{
+"w": "화장실",
+"g": "restroom",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 2
+},
+{
+"w": "-(으)ㄴ 김에",
+"g": "while at it; since … anyway",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-(으)ㄴ가 보다",
+"g": "I guess …; it seems …",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-(으)ㄴ지",
+"g": "whether; what (embedded question)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-(으)ㄹ",
+"g": "future/potential modifier",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-(으)ㄹ 동안",
+"g": "while …",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-(으)ㄹ지도 모르다",
+"g": "might …",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-(으)려고 하다",
+"g": "intend to …",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-(으)려면",
+"g": "if you want to …",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-(으)로",
+"g": "with, by means of",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-(으)면서",
+"g": "while; even though",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-(이)ㄴ 걸",
+"g": "(know) that it is …",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-(이)나",
+"g": "or something; just (casual suggestion)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-게",
+"g": "so that; …-ly (adverb)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-고 자시고",
+"g": "… or whatever (dismissive)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-기 전에",
+"g": "before …",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-기는커녕",
+"g": "far from …; let alone",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-까지",
+"g": "until; up to",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-나",
+"g": "… ? (rhetorical / self-question)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-는 거예요?",
+"g": "what are you …-ing? (explanatory question)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-는?",
+"g": "what about …?",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-다구",
+"g": "…, I said / you know",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-더라",
+"g": "I noticed that … (retrospective)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-던",
+"g": "past/recollective modifier",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-아/어라",
+"g": "do …! (casual command)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-아/어야 하다",
+"g": "have to …",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-아/어지다",
+"g": "become …",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-았/었다 오다",
+"g": "go and do … then come back",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-자는 거",
+"g": "the idea was to … (quoted suggestion)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-지 마",
+"g": "don't …",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "가리다",
+"g": "to cover, block (view)",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "거기서 거기",
+"g": "all the same, no different",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "고3",
+"g": "high-school senior (3rd year)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "고맙다",
+"g": "to be thankful",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "곡",
+"g": "counter for songs",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "교복",
+"g": "school uniform",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "그나저나",
+"g": "anyway, by the way",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "그만",
+"g": "stop (doing); that's enough",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "금방",
+"g": "soon, in a moment",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "기껏",
+"g": "after all the trouble; at most",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "기회",
+"g": "chance, opportunity",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "긴장을 풀다",
+"g": "to relax, ease nerves",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "긴장하다",
+"g": "to be nervous",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "끌려오다",
+"g": "to be dragged along",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "낑겨앉다",
+"g": "to squeeze in and sit",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "남자애",
+"g": "boy, guy",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "내내",
+"g": "the whole time, throughout",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "놀리다",
+"g": "to tease",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "놓치다",
+"g": "to miss (a chance)",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "누나",
+"g": "older sister (said by a male)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "당장",
+"g": "right away, immediately",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "대답하다",
+"g": "to answer",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "동안",
+"g": "during, while",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "따다",
+"g": "to pick; to get (a number)",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "떨어지다",
+"g": "to fall; to get separated",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "또",
+"g": "again",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "말도 안 되다",
+"g": "to be absurd, no way",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "맨날",
+"g": "every day, always",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "명찰",
+"g": "name tag",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "물",
+"g": "water",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "번",
+"g": "time (counter)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "번호를 따다",
+"g": "to get someone's number",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "벙벙하다",
+"g": "to be dumbfounded, at a loss",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "별로",
+"g": "not much; not great",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "볼 일",
+"g": "business, reason to see",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "봐주다",
+"g": "to let off, go easy on",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "부탁드리다",
+"g": "to ask a favor (humble)",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "분위기",
+"g": "mood, atmosphere",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "뽀뽀",
+"g": "peck, kiss",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "사다",
+"g": "to buy",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "손",
+"g": "hand",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "쉿",
+"g": "shh",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "시야",
+"g": "field of view",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "시키다",
+"g": "to make someone do; to order",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "싫다",
+"g": "to dislike; no way",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "심장",
+"g": "heart (organ)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "싱겁다",
+"g": "to be bland, dull",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "쓰다",
+"g": "to write",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "아까",
+"g": "a while ago, earlier",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "아직도",
+"g": "still",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "앞머리",
+"g": "bangs",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "얘",
+"g": "this kid/person",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "어색하다",
+"g": "to be awkward",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "어필",
+"g": "appeal (self-promotion)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "얼다",
+"g": "to freeze; to freeze up (nervous)",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "얼마나",
+"g": "how (much)",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "연락처",
+"g": "contact info",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "오",
+"g": "oh",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "오랜만",
+"g": "a long time (since)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "오히려",
+"g": "rather, on the contrary",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "이런",
+"g": "this kind of",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "이어지다",
+"g": "to be connected; to lead to (a couple)",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "이왕",
+"g": "since (it's happened) anyway",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "자기",
+"g": "oneself",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "잘 가",
+"g": "bye (to someone leaving)",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "재촉하다",
+"g": "to rush, press (someone)",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "쟤네",
+"g": "those guys over there",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "전",
+"g": "before",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "전화",
+"g": "phone call",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "조금",
+"g": "a little",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "주다",
+"g": "to give",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "즐기다",
+"g": "to enjoy",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "지긋이",
+"g": "steadily, gently (gaze)",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "직빵",
+"g": "works instantly, sure-fire",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "챙기다",
+"g": "to look after; to pack",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "타이밍",
+"g": "timing",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "터지다",
+"g": "to burst, explode",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "편하다",
+"g": "to be comfortable, relaxed",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "포기하다",
+"g": "to give up",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "풀다",
+"g": "to untie; to relieve",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "필요하다",
+"g": "to be needed",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "하지만",
+"g": "but",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "효과",
+"g": "effect",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "흔하다",
+"g": "to be common",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 1,
+"f": 1
+},
+{
+"w": "-랑",
+"g": "with, and",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 7
+},
+{
+"w": "-는/(으)ㄴ 거야",
+"g": "it's that ~ (explaining/asking)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 4
+},
+{
+"w": "그래서",
+"g": "so; and then?",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 4
+},
+{
+"w": "어떡하다",
+"g": "what to do",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 4
+},
+{
+"w": "어제",
+"g": "yesterday",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 4
+},
+{
+"w": "-(으)ㄴ 척하다",
+"g": "pretend to ~",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 3
+},
+{
+"w": "-(으)ㄴ/는/(으)ㄹ 것 같다",
+"g": "seems like ~, I think ~",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 3
+},
+{
+"w": "-아/야",
+"g": "vocative (calling a name)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 3
+},
+{
+"w": "나다",
+"g": "arise, come out (smell, anger, jealousy)",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 3
+},
+{
+"w": "여보세요",
+"g": "hello? (phone)",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 3
+},
+{
+"w": "전교",
+"g": "whole school",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 3
+},
+{
+"w": "첫",
+"g": "first",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 3
+},
+{
+"w": "친하다",
+"g": "close, friendly",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 3
+},
+{
+"w": "-구나",
+"g": "oh, ~! (realization)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 2
+},
+{
+"w": "-대",
+"g": "they say ~ (hearsay)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 2
+},
+{
+"w": "-밖에",
+"g": "nothing but (+ negative)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 2
+},
+{
+"w": "그리고",
+"g": "and",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 2
+},
+{
+"w": "듣다",
+"g": "hear, listen",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 2
+},
+{
+"w": "때",
+"g": "time, when",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 2
+},
+{
+"w": "만나다",
+"g": "meet; date",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 2
+},
+{
+"w": "모두",
+"g": "everyone; all",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 2
+},
+{
+"w": "사실",
+"g": "fact; actually",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 2
+},
+{
+"w": "생각나다",
+"g": "come to mind",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 2
+},
+{
+"w": "슬쩍",
+"g": "lightly, slyly",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 2
+},
+{
+"w": "아침",
+"g": "morning",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 2
+},
+{
+"w": "엇",
+"g": "whoa, oops",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 2
+},
+{
+"w": "으",
+"g": "ugh",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 2
+},
+{
+"w": "이따",
+"g": "later (today)",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 2
+},
+{
+"w": "있잖아",
+"g": "you know; hey, listen",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 2
+},
+{
+"w": "점심",
+"g": "lunch",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 2
+},
+{
+"w": "크다",
+"g": "big; tall; loud",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 2
+},
+{
+"w": "톡",
+"g": "chat message (KakaoTalk)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 2
+},
+{
+"w": "-(으)ㄴ가",
+"g": "I wonder if ~ (self-question)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-(으)ㄹ 거야",
+"g": "will ~; probably ~",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-(으)ㄹ 리 없다",
+"g": "there's no way ~",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-(으)ㄹ 줄 알다",
+"g": "assume that ~",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-(으)라니",
+"g": "(you're) telling me to ~?!",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-(으)러",
+"g": "in order to (go) ~",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-(으)려고",
+"g": "intend to ~",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-(으)면 안 되다",
+"g": "must not ~; can't you ~? (request)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-(이)라니",
+"g": "to think that ~! (surprise)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-겠지만",
+"g": "though (I) probably ~",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-기는",
+"g": "how ~! (scolding exclamation)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-기다",
+"g": "it's a deal: ~",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-기로",
+"g": "(known/rumored) for ~ing",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-기만 해도",
+"g": "just ~ing is enough",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-길래",
+"g": "because (they) ~ (observed reason)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-는 거 아니야",
+"g": "isn't it that ~?",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-는 거지",
+"g": "it's that ~, right?",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-는걸",
+"g": "but ~ (mild protest)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-다고 하다",
+"g": "say that ~ (reported speech)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-더니",
+"g": "(I saw) ~, and yet",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-든지",
+"g": "whatever, do as you like",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-라도",
+"g": "even (if it's)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-아/어 죽겠다",
+"g": "so ~ I could die",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-아/어하다",
+"g": "(show) feeling ~ (adj → verb)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-아야겠다",
+"g": "I'd better ~",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-았/었더니",
+"g": "when I did ~, (result)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "-지 못하다",
+"g": "cannot ~",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "가끔씩",
+"g": "now and then",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "가입하다",
+"g": "sign up, join",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "감동",
+"g": "being moved/touched",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "걸리다",
+"g": "(a call) go through; be caught",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "게다가",
+"g": "on top of that",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "고개",
+"g": "head (nodding/turning)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "고민하다",
+"g": "agonize, worry over",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "곳",
+"g": "place",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "공동",
+"g": "joint, shared",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "교시",
+"g": "class period",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "궁금하다",
+"g": "curious",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "귀엽다",
+"g": "cute",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "그렇다고",
+"g": "even so, that doesn't mean",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "그치만",
+"g": "but",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "근처",
+"g": "vicinity, nearby",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "급하다",
+"g": "urgent, hasty",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "까이다",
+"g": "get rejected/dumped",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "깨지다",
+"g": "break up; be broken",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "끄다",
+"g": "turn off",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "끄덕거리다",
+"g": "keep nodding",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "끼어들다",
+"g": "butt in, interrupt",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "끼우다",
+"g": "include, let in (a group)",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "나중",
+"g": "later",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "낚이다",
+"g": "get baited/tricked",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "날라리",
+"g": "delinquent, party kid",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "남고",
+"g": "boys' high school",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "남자",
+"g": "man, guy",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "내다",
+"g": "hand in, submit",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "넘치다",
+"g": "overflow, be full of",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "노래방",
+"g": "karaoke room",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "누르다",
+"g": "press",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "눈이 높다",
+"g": "have high standards",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "눈치",
+"g": "social awareness, reading the room",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "느낌",
+"g": "feeling, vibe",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "다름이 아니라",
+"g": "the reason I'm contacting you is…",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "다행이다",
+"g": "be a relief",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "답답하다",
+"g": "frustrating, stifling",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "닿다",
+"g": "touch, reach",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "댓글",
+"g": "comment (online)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "독후감",
+"g": "book report",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "되게",
+"g": "really, very",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "두근거리다",
+"g": "(heart) pound, flutter",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "두근두근하다",
+"g": "be all aflutter",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "드라마",
+"g": "TV drama",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "딱딱하다",
+"g": "stiff, formal; hard",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "떠들어대다",
+"g": "keep making noise, prattle on",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "뜬금없이",
+"g": "out of the blue",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "로맨틱하다",
+"g": "romantic",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "마무리하다",
+"g": "wrap up, finish",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "마음에 들다",
+"g": "like, be to one's liking",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "막",
+"g": "just, like (filler); wildly",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "만남",
+"g": "meeting, encounter",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "만년",
+"g": "perpetual (forever the same)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "맞춤법",
+"g": "spelling",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "매번",
+"g": "every time",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "멋대로",
+"g": "as one pleases, selfishly",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "멍청하다",
+"g": "stupid",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "모범생",
+"g": "model student",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "모의시험",
+"g": "mock exam",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "무시하다",
+"g": "ignore, look down on",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "물어보다",
+"g": "ask",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "바래다주다",
+"g": "walk/see someone home",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "박력",
+"g": "force, intensity, charisma",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "반갑다",
+"g": "glad (to meet)",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "벌써",
+"g": "already",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "복도",
+"g": "hallway",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "복숭아",
+"g": "peach",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "부탁하다",
+"g": "ask a favor",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "붙다",
+"g": "be posted, stick",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "비록",
+"g": "although",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "비밀",
+"g": "secret",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "빠지다",
+"g": "stay out of it, drop out",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "빨개지다",
+"g": "turn red",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "빨리",
+"g": "quickly",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "뽑다",
+"g": "pull out; get (from a vending machine)",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "사과하다",
+"g": "apologize",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "상황",
+"g": "situation",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "생각",
+"g": "thought",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "성격",
+"g": "personality",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "세다",
+"g": "strong, intense",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "셋",
+"g": "three (people)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "소문",
+"g": "rumor",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "수석",
+"g": "top student, valedictorian",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "수업",
+"g": "class, lesson",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "수학",
+"g": "math",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "순순히",
+"g": "obediently, without resistance",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "쉽다",
+"g": "easy",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "슬슬",
+"g": "gradually; about time to",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "시",
+"g": "o'clock",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "시비 걸다",
+"g": "pick a fight",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "시원하다",
+"g": "refreshing; clean, total",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "쓰이다",
+"g": "be written",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "아무것",
+"g": "anything/nothing",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "아이",
+"g": "aw, come on",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "아이디",
+"g": "user ID",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "아직",
+"g": "still, yet",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "안녕하세요",
+"g": "hello",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "앞",
+"g": "front",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "애초",
+"g": "the very beginning",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "얌전하다",
+"g": "quiet, well-behaved",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "어떤",
+"g": "what kind of, which",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "어떻게든",
+"g": "somehow, one way or another",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "어이없다",
+"g": "absurd, ridiculous",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "엥",
+"g": "huh?",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "연락하다",
+"g": "contact",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "엿듣다",
+"g": "eavesdrop",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "영화관",
+"g": "movie theater",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "옆",
+"g": "next to, side",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "오해하다",
+"g": "misunderstand",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "왕자님",
+"g": "prince",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "왕재수",
+"g": "total jerk",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "운명",
+"g": "fate, destiny",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "유명하다",
+"g": "famous",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "이동",
+"g": "moving, change of room",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "인소",
+"g": "web romance novel",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "일단",
+"g": "for now, first",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "일어나다",
+"g": "get up, stand up",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "입학하다",
+"g": "enter a school",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "잊다",
+"g": "forget",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "자꾸",
+"g": "repeatedly, keep",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "잘못",
+"g": "wrongly, by mistake",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "장난 아니다",
+"g": "no joke, seriously intense",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "재수 없다",
+"g": "obnoxious; unlucky",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "저렇게",
+"g": "like that",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "정도",
+"g": "degree, level",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "제출하다",
+"g": "submit",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "조심성",
+"g": "carefulness",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "주",
+"g": "week",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "주스",
+"g": "juice",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "죽다",
+"g": "die",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "중학교",
+"g": "middle school",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "지난주",
+"g": "last week",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "질투",
+"g": "jealousy",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "짱",
+"g": "the best",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "착하다",
+"g": "kind, good-natured",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "창피하다",
+"g": "embarrassing, ashamed",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "책",
+"g": "book",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "천천히",
+"g": "slowly",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "쳐다보다",
+"g": "stare at",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "키",
+"g": "height",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "키스신",
+"g": "kiss scene",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "틀리다",
+"g": "be wrong, make a mistake",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "하",
+"g": "ha!",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "향기",
+"g": "scent, fragrance",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "허",
+"g": "huh?! (indignant)",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "헛짓거리",
+"g": "pointless nonsense, stupid act",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "환상",
+"g": "fantasy, illusion",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 2,
+"f": 1
+},
+{
+"w": "N보다",
+"g": "than N",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 6
+},
+{
+"w": "대학",
+"g": "university, college",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 5
+},
+{
+"w": "가르치다",
+"g": "to teach",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 4
+},
+{
+"w": "-(으)세요",
+"g": "polite request / honorific ending",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 3
+},
+{
+"w": "-(이)란/-단",
+"g": "",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 3
+},
+{
+"w": "-거든(요)",
+"g": "because, you see",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 3
+},
+{
+"w": "-는 것 같다",
+"g": "it seems that...",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 3
+},
+{
+"w": "-다(가) 보니(까)",
+"g": "as I (did/looked), I found that...",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 3
+},
+{
+"w": "-(으)ㄹ 때(까지)",
+"g": "when; until",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 2
+},
+{
+"w": "-(으)ㄹ지/-는지 모르다",
+"g": "not know whether",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 2
+},
+{
+"w": "-(으)려나",
+"g": "I wonder if (it will)...",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 2
+},
+{
+"w": "-(이)라서/-(이)라",
+"g": "because it is N",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 2
+},
+{
+"w": "-게 하다",
+"g": "make/let someone do",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 2
+},
+{
+"w": "-기(야)",
+"g": "rule-setting: no -ing!, it's a deal",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 2
+},
+{
+"w": "-냐",
+"g": "casual/blunt question ending",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 2
+},
+{
+"w": "-다고(요)?/-다구",
+"g": "echo/emphatic: I said...! / you mean...?!",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 2
+},
+{
+"w": "N만",
+"g": "only N",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 2
+},
+{
+"w": "그렇지만",
+"g": "but, however",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 2
+},
+{
+"w": "높다",
+"g": "to be high",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 2
+},
+{
+"w": "대단하다",
+"g": "to be amazing, impressive",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 2
+},
+{
+"w": "배우다",
+"g": "to learn",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 2
+},
+{
+"w": "부탁",
+"g": "request, favor",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 2
+},
+{
+"w": "상담",
+"g": "consultation, counseling",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 2
+},
+{
+"w": "심화반",
+"g": "advanced class",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 2
+},
+{
+"w": "-(으)ㄴ 적이 없다",
+"g": "have never done",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "-(으)ㄴ 지 (되다)",
+"g": "it's been (time) since",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "-(으)ㄴ가?",
+"g": "is it that...? (wondering)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "-(으)ㄹ 테니까",
+"g": "since I will (so)...",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "-(으)ㄹ 텐데",
+"g": "it must be..., but",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "-(으)면 되다",
+"g": "you just have to",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "-ㄴ단 말이야",
+"g": "I'm saying that...",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "-나?",
+"g": "I wonder if...? (self-question)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "-는데도",
+"g": "even though",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "-다니",
+"g": "(surprise) to say that...!",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "-더만",
+"g": "I saw that... (recollection)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "-아/어 달라(고 하다)",
+"g": "ask someone to do for me",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "-아/어 대다",
+"g": "keep on doing (excessively)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "-지?",
+"g": "right? (confirming)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "N 같이",
+"g": "like N",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "N 말고",
+"g": "not N (but...); instead of N",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "N(이)나",
+"g": "or; N or something",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "N밖에 없다",
+"g": "nothing but N",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "N부터",
+"g": "from N",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "N한테",
+"g": "to/at N (person)",
+"pos": "grammar",
+"cat": "gram",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "간이 크다",
+"g": "to be bold, have guts",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "개멋지다",
+"g": "to be super cool",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "건물",
+"g": "building",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "관심",
+"g": "interest",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "광고",
+"g": "advertisement",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "구라",
+"g": "lie, BS",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "그러니까",
+"g": "so; I mean",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "기술",
+"g": "skill, technique",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "기초반",
+"g": "basic-level class",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "꼬시다",
+"g": "to hit on, seduce, win over",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "꿈",
+"g": "dream",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "끝내주다",
+"g": "to be awesome",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "너무하다",
+"g": "to be too much, unfair",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "너희",
+"g": "you (plural)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "놀라다",
+"g": "to be surprised",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "농담",
+"g": "joke",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "대강",
+"g": "roughly",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "대신",
+"g": "instead; in return",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "도망가다",
+"g": "to run away",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "도움",
+"g": "help",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "돌아가다",
+"g": "to work, run (of a mind); to go back",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "돕다",
+"g": "to help",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "동네",
+"g": "neighborhood",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "동반",
+"g": "accompanying, together with",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "드리다",
+"g": "to give (humble)",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "만",
+"g": "after (a span of time)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "목마르다",
+"g": "to be thirsty",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "목표",
+"g": "goal",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "몸부림",
+"g": "struggling, writhing",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "무리하다",
+"g": "to be unreasonable, too much",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "무지",
+"g": "very, extremely",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "무척",
+"g": "very",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "뭐든",
+"g": "anything (at all)",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "미안하다",
+"g": "to be sorry",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "반대편",
+"g": "opposite side",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "받다",
+"g": "to receive, accept",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "방금",
+"g": "just now",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "방법",
+"g": "method, way",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "범생",
+"g": "goody-goody, model student",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "법",
+"g": "way, method (how to)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "변태",
+"g": "pervert",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "볼일",
+"g": "errand, something to take care of",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "부모님",
+"g": "parents",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "빡빡하다",
+"g": "to be tight, strict, demanding",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "뽀뽀하다",
+"g": "to kiss (a peck)",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "사고",
+"g": "thinking",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "살다",
+"g": "to live",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "상관하다",
+"g": "to mind, care",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "상위",
+"g": "top ranks, upper level",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "생기다",
+"g": "to come to have, get (a boyfriend etc.)",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "생초보",
+"g": "total beginner",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "서로",
+"g": "each other",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "서울권",
+"g": "Seoul-area (universities)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "스토커",
+"g": "stalker",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "실은",
+"g": "actually, the truth is",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "쓸데없다",
+"g": "to be useless, pointless",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "아무튼",
+"g": "anyway",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "아시다시피",
+"g": "as you know",
+"pos": "expr",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "약속",
+"g": "promise",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "엑",
+"g": "eh?! (surprise)",
+"pos": "interj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "엮이다",
+"g": "to get tangled up with, associated with",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "열심히",
+"g": "hard, diligently",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "요컨대",
+"g": "in short",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "욕먹다",
+"g": "to get criticized, get bad-mouthed",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "웃기다",
+"g": "to be funny, ridiculous",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "이루다",
+"g": "to achieve",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "이상하다",
+"g": "to be strange, weird",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "이쪽",
+"g": "this way, this side",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "입학",
+"g": "school admission, entering school",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "적",
+"g": "experience (of doing)",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "적어도",
+"g": "at least",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "절박하다",
+"g": "to be desperate",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "제일",
+"g": "the most",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "주변",
+"g": "surroundings, around here",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "쪼그맣다",
+"g": "to be tiny",
+"pos": "adj",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "쫓겨나다",
+"g": "to be kicked out",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "평가",
+"g": "evaluation, assessment test",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "표정",
+"g": "facial expression",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "하루",
+"g": "one day",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "한바탕",
+"g": "a whole bout of",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "한참",
+"g": "for quite a while",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "합격률",
+"g": "pass rate, acceptance rate",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "합격하다",
+"g": "to pass (an exam), be accepted",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "해대다",
+"g": "to do (something) a lot, go on doing",
+"pos": "verb",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "홀랑",
+"g": "completely, all of it",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "회로",
+"g": "circuit",
+"pos": "noun",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+},
+{
+"w": "훨씬",
+"g": "much (more)",
+"pos": "adv",
+"cat": "word",
+"deck": "webtoon",
+"note": "",
+"area": 3,
+"f": 1
+}
+],
+"hanja": {},
+"species_ok": []
+}

@@ -1,0 +1,946 @@
+{
+ "-(으)ㄴ데/-는데": {
+  "k": "배경을 말하거나 반대를 말할 때. 비 오는데…",
+  "e": "background/contrast; trailing \"but...\""
+ },
+ "-아/어서": {
+  "k": "이유나 순서를 말할 때. 배고파서 먹었어.",
+  "e": "because; and then"
+ },
+ "-아/어 주다": {
+  "k": "남을 위해 해 줄 때. 도와줘!",
+  "e": "do something for someone"
+ },
+ "야": {
+  "k": "친구를 부를 때 하는 말. 야, 어디 가?",
+  "e": "hey! (casual)"
+ },
+ "-아/어 보다": {
+  "k": "한번 해 볼 때. 먹어 봐!",
+  "e": "try doing"
+ },
+ "-(스)ㅂ니다": {
+  "k": "아주 공손한 끝말. 감사합니다.",
+  "e": "formal polite ending"
+ },
+ "-(으)시-": {
+  "k": "윗사람을 높일 때. 선생님이 오세요.",
+  "e": "honorific marker"
+ },
+ "-다고": {
+  "k": "남의 말이나 생각을 전할 때. 재밌다고 했어.",
+  "e": "quoting (\"that...\")"
+ },
+ "-지": {
+  "k": "당연하거나 확인할 때. 맛있지?",
+  "e": "right?; of course"
+ },
+ "-(으)니까": {
+  "k": "이유를 말할 때. 추우니까 입어.",
+  "e": "because, since"
+ },
+ "-네": {
+  "k": "방금 알게 된 걸 말할 때. 비 오네!",
+  "e": "oh, ...! (realization)"
+ },
+ "-지 말다": {
+  "k": "하지 말라고 할 때. 가지 마!",
+  "e": "don't (negative command)"
+ },
+ "남친": {
+  "k": "남자 친구를 짧게 한 말.",
+  "e": "boyfriend (slang)"
+ },
+ "미안": {
+  "k": "친구에게 사과하는 말. 미안해.",
+  "e": "sorry (casual)"
+ },
+ "시절": {
+  "k": "지나간 어떤 때. 학생 시절.",
+  "e": "days, period (of life)"
+ },
+ "중학생": {
+  "k": "중학교에 다니는 학생.",
+  "e": "middle schooler"
+ },
+ "-(으)ㄹ래": {
+  "k": "하고 싶은 걸 말하거나 물을 때. 갈래?",
+  "e": "want to? / I'll (casual)"
+ },
+ "-(이)랑": {
+  "k": "'와/과'처럼 같이. 친구랑 놀아.",
+  "e": "with, and (casual)"
+ },
+ "-다니까": {
+  "k": "이미 한 말을 다시 강하게. 괜찮다니까!",
+  "e": "I'm telling you!"
+ },
+ "-아/어도 되다": {
+  "k": "해도 괜찮다고 할 때. 먹어도 돼.",
+  "e": "it's okay to"
+ },
+ "-요": {
+  "k": "말을 공손하게 끝낼 때. 좋아요.",
+  "e": "polite ending"
+ },
+ "말(을) 걸다": {
+  "k": "모르는 사람에게 먼저 말하다.",
+  "e": "to talk to, strike up a conversation"
+ },
+ "뭔가": {
+  "k": "잘 모르지만 어떤 것. 뭔가 이상해.",
+  "e": "somehow; something"
+ },
+ "설레다": {
+  "k": "기대돼서 마음이 두근거리다.",
+  "e": "to flutter (with excitement)"
+ },
+ "평범하다": {
+  "k": "특별하지 않고 보통이다.",
+  "e": "to be ordinary"
+ },
+ "학원": {
+  "k": "학교 끝나고 공부하러 가는 곳.",
+  "e": "cram school, academy"
+ },
+ "-(으)ㄴ 것 같다": {
+  "k": "그렇게 보일 때. 비가 온 것 같아.",
+  "e": "seems like"
+ },
+ "-(으)ㄴ걸": {
+  "k": "부드럽게 설명할 때. 벌써 끝난걸.",
+  "e": "you know... (soft explanation)"
+ },
+ "-(으)ㄹ 수 있다": {
+  "k": "할 능력이 있을 때. 수영할 수 있어.",
+  "e": "can, be able to"
+ },
+ "-(으)ㄹ걸": {
+  "k": "추측할 때. 벌써 갔을걸.",
+  "e": "probably (guess)"
+ },
+ "-(으)ㅁ": {
+  "k": "메모처럼 짧게 끝낼 때. 오늘 휴무임.",
+  "e": "note-style ending"
+ },
+ "-(이)라고": {
+  "k": "이름이나 말을 전할 때. 민수라고 해.",
+  "e": "quoting a noun (\"that it's...\")"
+ },
+ "-(이)라면": {
+  "k": "'~이면'과 같다. 나라면 안 가.",
+  "e": "if it is"
+ },
+ "-(이)야말로": {
+  "k": "바로 그것을 강조할 때. 너야말로!",
+  "e": "precisely, of all (emphasis)"
+ },
+ "-같이": {
+  "k": "'~처럼'. 꽃같이 예뻐.",
+  "e": "like (N같이)"
+ },
+ "-구먼/-구만": {
+  "k": "알게 된 걸 말할 때. 잘하는구먼.",
+  "e": "oh, I see... (casual realization)"
+ },
+ "-기 힘들다": {
+  "k": "하기 어려울 때. 믿기 힘들어.",
+  "e": "hard to (do)"
+ },
+ "-기도 하다": {
+  "k": "그런 일도 있을 때. 가끔 울기도 해.",
+  "e": "also do; sometimes do"
+ },
+ "-나 보다": {
+  "k": "보고 추측할 때. 비가 오나 봐.",
+  "e": "it seems that"
+ },
+ "-다가": {
+  "k": "하던 중에 바뀔 때. 걷다가 넘어졌어.",
+  "e": "while doing, then"
+ },
+ "-다면": {
+  "k": "가정할 때. 돈이 많다면 좋겠다.",
+  "e": "if (hypothetical)"
+ },
+ "-던데": {
+  "k": "직접 본 걸 말할 때. 맛있던데?",
+  "e": "I noticed that... (recollection)"
+ },
+ "-부터": {
+  "k": "시작을 말할 때. 오늘부터 시작!",
+  "e": "from, since"
+ },
+ "-아/어 버리다": {
+  "k": "완전히 끝났을 때. 다 먹어 버렸어.",
+  "e": "end up doing (completely)"
+ },
+ "-아/어도 좋다": {
+  "k": "해도 괜찮다고 할 때. 가도 좋아.",
+  "e": "it's fine to"
+ },
+ "-아/어야겠다": {
+  "k": "해야겠다고 정할 때. 자야겠다.",
+  "e": "I guess I'd better"
+ },
+ "-었어야지": {
+  "k": "안 한 걸 탓할 때. 일찍 왔어야지!",
+  "e": "should have"
+ },
+ "-자니까": {
+  "k": "같이 하자고 다시 말할 때. 가자니까!",
+  "e": "I said let's! (insisting)"
+ },
+ "-죠": {
+  "k": "'-지요'. 확인할 때. 맞죠?",
+  "e": "right? (polite)"
+ },
+ "-한테": {
+  "k": "사람에게. 친구한테 줬어.",
+  "e": "to (a person)"
+ },
+ "경례": {
+  "k": "선생님께 인사하라는 구령.",
+  "e": "Salute!/Bow! (class command)"
+ },
+ "교내": {
+  "k": "학교 안.",
+  "e": "on campus, within the school"
+ },
+ "그러고 보니": {
+  "k": "이제 생각해 보니.",
+  "e": "come to think of it"
+ },
+ "그새": {
+  "k": "그 짧은 사이에.",
+  "e": "in that short time"
+ },
+ "꺄": {
+  "k": "놀라거나 좋아서 지르는 소리.",
+  "e": "kyaa! (squeal)"
+ },
+ "내 말이": {
+  "k": "내 생각도 똑같다는 말.",
+  "e": "that's what I'm saying, exactly"
+ },
+ "너네": {
+  "k": "'너희'를 편하게 한 말.",
+  "e": "you guys (casual)"
+ },
+ "다들": {
+  "k": "모두 다.",
+  "e": "everyone"
+ },
+ "다정하다": {
+  "k": "따뜻하고 잘 챙겨 주다.",
+  "e": "to be affectionate, kind"
+ },
+ "대": {
+  "k": "둘을 비교할 때. 4 대 4.",
+  "e": "versus"
+ },
+ "대학생": {
+  "k": "대학교에 다니는 학생.",
+  "e": "college student"
+ },
+ "동갑": {
+  "k": "나이가 같음.",
+  "e": "same age"
+ },
+ "등수": {
+  "k": "시험이나 경기의 순서.",
+  "e": "rank, placing"
+ },
+ "또래": {
+  "k": "나이가 비슷한 사람.",
+  "e": "peer (same age)"
+ },
+ "말씀하다": {
+  "k": "'말하다'를 높인 말.",
+  "e": "to say, speak (honorific)"
+ },
+ "모고": {
+  "k": "'모의고사'를 짧게 한 말.",
+  "e": "mock exam (slang)"
+ },
+ "문자하다": {
+  "k": "휴대폰으로 글을 보내다.",
+  "e": "to text"
+ },
+ "벌금": {
+  "k": "규칙을 어겨서 내는 돈.",
+  "e": "fine, penalty"
+ },
+ "삥 뜯기다": {
+  "k": "힘센 애한테 돈을 뺏기다.",
+  "e": "to get shaken down for money (slang)"
+ },
+ "소개시키다": {
+  "k": "두 사람이 알게 해 주다.",
+  "e": "to introduce (someone) (colloquial)"
+ },
+ "심지어": {
+  "k": "더 놀랍게도.",
+  "e": "even, on top of that"
+ },
+ "쓰다듬다": {
+  "k": "손으로 부드럽게 만지다.",
+  "e": "to pat, stroke"
+ },
+ "알려주다": {
+  "k": "모르는 것을 말해 주다.",
+  "e": "to let know, inform"
+ },
+ "어쨌든": {
+  "k": "어떻든 간에.",
+  "e": "anyway"
+ },
+ "언제든지": {
+  "k": "어느 때라도.",
+  "e": "anytime"
+ },
+ "에이": {
+  "k": "아니라고, 실망했을 때 하는 말.",
+  "e": "aw, come on"
+ },
+ "여태": {
+  "k": "지금까지.",
+  "e": "until now"
+ },
+ "연애": {
+  "k": "사랑하며 사귀는 것.",
+  "e": "dating, romance"
+ },
+ "웬일": {
+  "k": "놀라운 일. 웬일이야!",
+  "e": "what's going on? (surprise)"
+ },
+ "으이구": {
+  "k": "답답하거나 귀여울 때 하는 소리.",
+  "e": "ugh, good grief"
+ },
+ "이": {
+  "k": "가까운 것을 가리킬 때. 이 책.",
+  "e": "this"
+ },
+ "이만": {
+  "k": "여기까지만. 이만 갈게.",
+  "e": "now, at this point (to leave)"
+ },
+ "이제껏": {
+  "k": "지금까지.",
+  "e": "until now"
+ },
+ "자랑스럽다": {
+  "k": "남에게 보여 주고 싶을 만큼 좋다.",
+  "e": "to be proud"
+ },
+ "쟤": {
+  "k": "'저 아이'를 짧게 한 말.",
+  "e": "that kid (over there)"
+ },
+ "정신(이) 팔리다": {
+  "k": "다른 데에 마음이 가 있다.",
+  "e": "to be distracted"
+ },
+ "좋아요": {
+  "k": "인터넷 글이 좋다고 누르는 버튼.",
+  "e": "a \"like\" (social media)"
+ },
+ "죄송하다": {
+  "k": "'미안하다'의 공손한 말.",
+  "e": "to be sorry (polite)"
+ },
+ "중간고사": {
+  "k": "학기 중간에 보는 시험.",
+  "e": "midterm exam"
+ },
+ "지우개": {
+  "k": "연필 글씨를 지우는 것.",
+  "e": "eraser"
+ },
+ "차렷": {
+  "k": "바르게 서라는 구령.",
+  "e": "Attention! (class command)"
+ },
+ "친해지다": {
+  "k": "사이가 가까워지다.",
+  "e": "to become close"
+ },
+ "패싸움": {
+  "k": "여러 명이 편을 나눠 싸움.",
+  "e": "gang fight"
+ },
+ "하도": {
+  "k": "너무 많이. 하도 울어서…",
+  "e": "so much, so often"
+ },
+ "하필": {
+  "k": "다른 것도 많은데 왜 꼭.",
+  "e": "of all times/things"
+ },
+ "허언증": {
+  "k": "거짓말을 자꾸 하는 병.",
+  "e": "compulsive lying"
+ },
+ "-도": {
+  "k": "'또한'. 나도 좋아.",
+  "e": "also, too; even"
+ },
+ "-(으)ㄴ/는/ㄹ 것 같다": {
+  "k": "추측할 때. 비가 올 것 같아.",
+  "e": "seems like; I think"
+ },
+ "-다니까/-(이)라니까": {
+  "k": "한 말을 다시 강하게. 진짜라니까!",
+  "e": "I told you...! (insisting)"
+ },
+ "-(으)ㄹ까(요)": {
+  "k": "제안하거나 물을 때. 갈까요?",
+  "e": "shall I/we...? / could...?"
+ },
+ "말을 걸다": {
+  "k": "모르는 사람에게 먼저 말하다.",
+  "e": "to talk to, strike up a conversation"
+ },
+ "우르르": {
+  "k": "많이 한꺼번에 몰려가는 모양.",
+  "e": "in a crowd, all at once"
+ },
+ "화장실": {
+  "k": "손 씻고 볼일 보는 곳.",
+  "e": "restroom"
+ },
+ "-(으)ㄴ가 보다": {
+  "k": "보고 추측할 때. 바쁜가 봐.",
+  "e": "I guess...; it seems..."
+ },
+ "-(으)ㄹ": {
+  "k": "앞으로 할 일을 꾸밀 때. 갈 시간.",
+  "e": "future/potential modifier"
+ },
+ "-(으)ㄹ지도 모르다": {
+  "k": "그럴 수도 있을 때. 늦을지도 몰라.",
+  "e": "might..."
+ },
+ "-(으)려면": {
+  "k": "하고 싶다면. 가려면 빨리 가.",
+  "e": "if you want to..."
+ },
+ "-(으)면서": {
+  "k": "두 일을 같이 할 때. 먹으면서 봐.",
+  "e": "while; even though"
+ },
+ "-(이)나": {
+  "k": "가볍게 제안할 때. 밥이나 먹자.",
+  "e": "or something; just (casual)"
+ },
+ "-고 자시고": {
+  "k": "필요 없다고 할 때. 생각하고 자시고 없어.",
+  "e": "...or whatever (dismissive)"
+ },
+ "-기는커녕": {
+  "k": "그건 물론 아니고. 쉬기는커녕 일했어.",
+  "e": "far from...; let alone"
+ },
+ "-나": {
+  "k": "혼자 묻듯 말할 때. 누가 왔나?",
+  "e": "...? (self-question)"
+ },
+ "-는?": {
+  "k": "다른 걸 물을 때. 너는?",
+  "e": "what about...?"
+ },
+ "-더라": {
+  "k": "보고 느낀 걸 말할 때. 맛있더라.",
+  "e": "I noticed that... (retrospective)"
+ },
+ "-아/어라": {
+  "k": "친구에게 시킬 때. 빨리 와라!",
+  "e": "do...! (casual command)"
+ },
+ "-아/어지다": {
+  "k": "상태가 바뀔 때. 추워졌어.",
+  "e": "become..."
+ },
+ "-자는 거": {
+  "k": "하자고 한 말. 같이 가자는 거야.",
+  "e": "the idea was to... (quoted suggestion)"
+ },
+ "거기서 거기": {
+  "k": "다 비슷하고 별 차이 없음.",
+  "e": "all the same, no different"
+ },
+ "곡": {
+  "k": "노래를 세는 말. 노래 한 곡.",
+  "e": "counter for songs"
+ },
+ "그나저나": {
+  "k": "그건 그렇고.",
+  "e": "anyway, by the way"
+ },
+ "긴장을 풀다": {
+  "k": "떨리는 마음을 편하게 하다.",
+  "e": "to relax, ease nerves"
+ },
+ "남자애": {
+  "k": "남자 아이, 남자 친구들.",
+  "e": "boy, guy (casual)"
+ },
+ "말도 안 되다": {
+  "k": "전혀 말이 안 맞다. 말도 안 돼!",
+  "e": "to be absurd; no way"
+ },
+ "번호를 따다": {
+  "k": "마음에 드는 사람 전화번호를 받다.",
+  "e": "to get someone's number (colloquial)"
+ },
+ "볼 일": {
+  "k": "만나거나 할 이유. 볼 일 없어.",
+  "e": "business, reason to see"
+ },
+ "부탁드리다": {
+  "k": "'부탁하다'를 높인 말.",
+  "e": "to ask a favor (humble)"
+ },
+ "손": {
+  "k": "팔 끝, 손가락이 있는 곳.",
+  "e": "hand"
+ },
+ "아직도": {
+  "k": "지금까지 계속.",
+  "e": "still"
+ },
+ "얘": {
+  "k": "'이 아이'를 짧게 한 말.",
+  "e": "this kid/person"
+ },
+ "연락처": {
+  "k": "전화번호 같은 연락할 곳.",
+  "e": "contact info"
+ },
+ "이왕": {
+  "k": "어차피 이렇게 된 거.",
+  "e": "since (it's happened) anyway"
+ },
+ "재촉하다": {
+  "k": "빨리 하라고 자꾸 말하다.",
+  "e": "to rush, press (someone)"
+ },
+ "지긋이": {
+  "k": "조용히 오래.",
+  "e": "steadily, gently (gaze)"
+ },
+ "챙기다": {
+  "k": "잘 돌봐 주거나, 필요한 걸 가지다.",
+  "e": "to look after; to pack"
+ },
+ "흔하다": {
+  "k": "어디서나 많이 볼 수 있다.",
+  "e": "to be common"
+ },
+ "-는/(으)ㄴ 거야": {
+  "k": "설명하거나 물을 때. 어디 가는 거야?",
+  "e": "it's that... (explaining/asking)"
+ },
+ "-(으)ㄴ/는/(으)ㄹ 것 같다": {
+  "k": "추측할 때. 비가 올 것 같아.",
+  "e": "seems like; I think"
+ },
+ "여보세요": {
+  "k": "전화 받을 때 처음 하는 말.",
+  "e": "hello? (phone)"
+ },
+ "-구나": {
+  "k": "새로 알았을 때. 그렇구나!",
+  "e": "oh, ...! (realization)"
+ },
+ "-밖에": {
+  "k": "그것만. 뒤에 '없다'. 너밖에 없어.",
+  "e": "nothing but (+ negative)"
+ },
+ "슬쩍": {
+  "k": "남이 모르게 살짝.",
+  "e": "lightly, slyly"
+ },
+ "으": {
+  "k": "싫거나 추울 때 내는 소리.",
+  "e": "ugh"
+ },
+ "톡": {
+  "k": "카톡 메시지를 짧게 한 말.",
+  "e": "chat message (KakaoTalk) (slang)"
+ },
+ "-(으)ㄹ 거야": {
+  "k": "앞으로의 일이나 추측. 내일 갈 거야.",
+  "e": "will...; probably..."
+ },
+ "-(으)ㄹ 줄 알다": {
+  "k": "그렇게 생각했을 때. 올 줄 알았어.",
+  "e": "assume that... (줄 알았다)"
+ },
+ "-(으)러": {
+  "k": "가는 목적. 밥 먹으러 가자.",
+  "e": "in order to (go)..."
+ },
+ "-(으)면 안 되다": {
+  "k": "하면 안 될 때. 들어가면 안 돼.",
+  "e": "must not...; can't you...? (request)"
+ },
+ "-겠지만": {
+  "k": "추측하면서 반대를 말할 때. 힘들겠지만…",
+  "e": "though (it) probably..."
+ },
+ "-기다": {
+  "k": "약속을 정할 때. 지면 네가 사기다!",
+  "e": "it's a deal: ..."
+ },
+ "-기만 해도": {
+  "k": "그것만 해도. 보기만 해도 좋아.",
+  "e": "just ...ing is enough"
+ },
+ "-는 거 아니야": {
+  "k": "그런 거 아니냐고 물을 때. 늦는 거 아니야?",
+  "e": "isn't it that...?"
+ },
+ "-는걸": {
+  "k": "가볍게 반대할 때. 벌써 하는걸.",
+  "e": "but... (mild protest)"
+ },
+ "-더니": {
+  "k": "본 것과 다른 결과. 웃더니 울어.",
+  "e": "(I saw)..., and then/yet"
+ },
+ "-라도": {
+  "k": "다른 게 없으면 그거라도. 물이라도 줘.",
+  "e": "even (if it's)"
+ },
+ "-아/어하다": {
+  "k": "마음을 행동으로. 좋아하다, 싫어하다.",
+  "e": "show feeling (adj → verb)"
+ },
+ "-았/었더니": {
+  "k": "내가 한 일의 결과. 먹었더니 배불러.",
+  "e": "when I did..., (result)"
+ },
+ "가끔씩": {
+  "k": "자주 아니고 가끔.",
+  "e": "now and then"
+ },
+ "감동": {
+  "k": "마음이 크게 움직이는 것.",
+  "e": "being moved/touched"
+ },
+ "공동": {
+  "k": "여럿이 같이 함. 공동 1등.",
+  "e": "joint, shared (tied)"
+ },
+ "그렇다고": {
+  "k": "그래도 꼭 그런 건 아니고.",
+  "e": "even so, that doesn't mean"
+ },
+ "까이다": {
+  "k": "고백했다가 거절당하다.",
+  "e": "to get rejected/dumped (slang)"
+ },
+ "끼어들다": {
+  "k": "남의 말이나 일에 들어가다.",
+  "e": "to butt in, interrupt"
+ },
+ "날라리": {
+  "k": "공부 안 하고 놀기만 하는 사람.",
+  "e": "delinquent, party kid (slang)"
+ },
+ "노래방": {
+  "k": "노래를 부르는 방.",
+  "e": "karaoke room"
+ },
+ "눈치": {
+  "k": "남의 마음을 알아채는 힘.",
+  "e": "social awareness, reading the room"
+ },
+ "다행이다": {
+  "k": "나쁜 일이 없어서 좋다.",
+  "e": "to be a relief"
+ },
+ "댓글": {
+  "k": "인터넷 글 밑에 쓰는 글.",
+  "e": "comment (online)"
+ },
+ "되게": {
+  "k": "아주, 많이.",
+  "e": "really, very (casual)"
+ },
+ "두근두근하다": {
+  "k": "가슴이 자꾸 뛰다.",
+  "e": "to be all aflutter"
+ },
+ "떠들어대다": {
+  "k": "시끄럽게 계속 말하다.",
+  "e": "to keep making noise, prattle on"
+ },
+ "로맨틱하다": {
+  "k": "사랑 이야기처럼 분위기가 좋다.",
+  "e": "to be romantic"
+ },
+ "마음에 들다": {
+  "k": "좋다고 느끼다.",
+  "e": "to like, be to one's liking"
+ },
+ "만년": {
+  "k": "늘 같은 자리에. 만년 2등.",
+  "e": "perpetual (forever the same)"
+ },
+ "멋대로": {
+  "k": "자기 마음대로.",
+  "e": "as one pleases, selfishly"
+ },
+ "모의시험": {
+  "k": "연습으로 보는 시험.",
+  "e": "mock exam"
+ },
+ "바래다주다": {
+  "k": "집까지 같이 가 주다.",
+  "e": "to walk/see someone home"
+ },
+ "복숭아": {
+  "k": "분홍색의 달고 부드러운 과일.",
+  "e": "peach"
+ },
+ "빨개지다": {
+  "k": "빨간색이 되다.",
+  "e": "to turn red"
+ },
+ "수학": {
+  "k": "숫자로 계산하는 공부.",
+  "e": "math"
+ },
+ "시비 걸다": {
+  "k": "싸우려고 먼저 건드리다.",
+  "e": "to pick a fight"
+ },
+ "아이디": {
+  "k": "인터넷에서 쓰는 내 이름.",
+  "e": "user ID"
+ },
+ "애초": {
+  "k": "맨 처음. 애초에.",
+  "e": "the very beginning"
+ },
+ "어떻게든": {
+  "k": "무슨 방법으로라도.",
+  "e": "somehow, one way or another"
+ },
+ "엥": {
+  "k": "놀라거나 이상할 때 내는 소리.",
+  "e": "huh? (casual)"
+ },
+ "영화관": {
+  "k": "영화를 보는 곳.",
+  "e": "movie theater"
+ },
+ "왕자님": {
+  "k": "왕의 아들을 높인 말.",
+  "e": "prince"
+ },
+ "운명": {
+  "k": "미리 정해진 삶의 길.",
+  "e": "fate, destiny"
+ },
+ "인소": {
+  "k": "'인터넷 소설'을 짧게 한 말.",
+  "e": "web romance novel (slang)"
+ },
+ "재수 없다": {
+  "k": "밉고 싫다. 또는 운이 나쁘다.",
+  "e": "obnoxious; unlucky (rude)"
+ },
+ "제출하다": {
+  "k": "숙제나 서류를 내다.",
+  "e": "to submit"
+ },
+ "주": {
+  "k": "7일. 이번 주.",
+  "e": "week"
+ },
+ "짱": {
+  "k": "제일 좋음, 최고.",
+  "e": "the best (slang)"
+ },
+ "하": {
+  "k": "어이없을 때 내는 소리.",
+  "e": "ha! (scoff)"
+ },
+ "허": {
+  "k": "놀라거나 기가 막힐 때 내는 소리.",
+  "e": "huh?! (indignant)"
+ },
+ "환상": {
+  "k": "진짜가 아닌 꿈 같은 생각.",
+  "e": "fantasy, illusion"
+ },
+ "대학": {
+  "k": "고등학교 다음에 가는 학교.",
+  "e": "university, college"
+ },
+ "-(이)란/-단": {
+  "k": "'-이라고 하는/-다고 하는'의 준말.",
+  "e": "contracted -다고 하는/-이라고 하는"
+ },
+ "-는 것 같다": {
+  "k": "추측할 때. 자는 것 같아.",
+  "e": "it seems that..."
+ },
+ "-(으)ㄹ 때(까지)": {
+  "k": "그 시간. 갈 때까지 기다려.",
+  "e": "when; until"
+ },
+ "-(으)려나": {
+  "k": "궁금해하며 혼자 말할 때. 비가 오려나?",
+  "e": "I wonder if (it will)..."
+ },
+ "-게 하다": {
+  "k": "남이 하도록 할 때. 웃게 했어.",
+  "e": "make/let someone do"
+ },
+ "-냐": {
+  "k": "편하게 묻는 끝말. 뭐 하냐?",
+  "e": "casual/blunt question ending"
+ },
+ "N만": {
+  "k": "그것 하나. 너만 와.",
+  "e": "only N"
+ },
+ "상담": {
+  "k": "고민을 이야기하고 도움받는 것.",
+  "e": "consultation, counseling"
+ },
+ "-(으)ㄴ 적이 없다": {
+  "k": "한 번도 안 했을 때. 가 본 적이 없어.",
+  "e": "have never done"
+ },
+ "-(으)ㄴ가?": {
+  "k": "궁금해하며 물을 때. 아픈가?",
+  "e": "is it that...? (wondering)"
+ },
+ "-(으)ㄹ 텐데": {
+  "k": "추측하며 걱정할 때. 추울 텐데.",
+  "e": "it must be..., but"
+ },
+ "-ㄴ단 말이야": {
+  "k": "내 말을 강조할 때. 간단 말이야!",
+  "e": "I'm saying that...!"
+ },
+ "-는데도": {
+  "k": "그런데도. 먹는데도 배고파.",
+  "e": "even though"
+ },
+ "-더만": {
+  "k": "본 걸 말할 때. 잘하더만.",
+  "e": "I saw that... (colloquial)"
+ },
+ "-아/어 대다": {
+  "k": "너무 자꾸 할 때. 울어 대.",
+  "e": "keep on doing (excessively)"
+ },
+ "N 같이": {
+  "k": "'~처럼'. 바보 같이.",
+  "e": "like N"
+ },
+ "N(이)나": {
+  "k": "여럿 중에 고를 때. 차나 커피.",
+  "e": "or; N or something"
+ },
+ "N부터": {
+  "k": "시작을 말할 때. 월요일부터.",
+  "e": "from N"
+ },
+ "간이 크다": {
+  "k": "겁이 없고 용감하다.",
+  "e": "to be bold, have guts"
+ },
+ "구라": {
+  "k": "거짓말.",
+  "e": "lie, BS (slang)"
+ },
+ "꼬시다": {
+  "k": "마음을 얻으려고 유혹하다.",
+  "e": "to hit on, win over (slang)"
+ },
+ "너무하다": {
+  "k": "지나쳐서 섭섭하다. 너무해!",
+  "e": "to be too much, unfair"
+ },
+ "동반": {
+  "k": "같이 함께 함.",
+  "e": "accompanying, together with"
+ },
+ "몸부림": {
+  "k": "몸을 이리저리 흔들며 애쓰는 것.",
+  "e": "struggling, writhing"
+ },
+ "무지": {
+  "k": "아주, 몹시.",
+  "e": "very, extremely (colloquial)"
+ },
+ "뭐든": {
+  "k": "무엇이라도.",
+  "e": "anything (at all)"
+ },
+ "범생": {
+  "k": "'모범생'을 짧게 한 말.",
+  "e": "goody-goody, model student (slang)"
+ },
+ "부모님": {
+  "k": "엄마와 아빠를 높인 말.",
+  "e": "parents"
+ },
+ "뽀뽀하다": {
+  "k": "입술로 가볍게 대다.",
+  "e": "to kiss (a peck)"
+ },
+ "상위": {
+  "k": "높은 순위.",
+  "e": "top ranks, upper level"
+ },
+ "서울권": {
+  "k": "서울과 그 근처. 서울권 대학.",
+  "e": "Seoul-area (universities)"
+ },
+ "쓸데없다": {
+  "k": "아무 쓸모가 없다.",
+  "e": "to be useless, pointless"
+ },
+ "아시다시피": {
+  "k": "'알다시피'의 높임말.",
+  "e": "as you know (honorific)"
+ },
+ "엮이다": {
+  "k": "다른 사람과 얽혀서 같이 되다.",
+  "e": "to get tangled up with"
+ },
+ "욕먹다": {
+  "k": "남에게 나쁜 말을 듣다.",
+  "e": "to get criticized, bad-mouthed"
+ },
+ "절박하다": {
+  "k": "아주 급하고 힘들다.",
+  "e": "to be desperate"
+ },
+ "평가": {
+  "k": "잘했는지 보는 것. 또는 시험.",
+  "e": "evaluation, assessment test"
+ },
+ "합격률": {
+  "k": "시험에 붙은 사람의 비율.",
+  "e": "pass rate, acceptance rate"
+ },
+ "해대다": {
+  "k": "어떤 일을 자꾸 많이 하다.",
+  "e": "to do (something) a lot, go on doing"
+ },
+ "회로": {
+  "k": "전기가 흐르는 길.",
+  "e": "circuit"
+ }
+}

@@ -1,0 +1,142 @@
+{
+ "왕따#0": {
+  "why": "2 WRONG SENSE: 왕따 is the bullied person, not an act one 'does'",
+  "new": "반에 왕따가 없도록 서로 챙겨 주자."
+ },
+ "그것#1": {
+  "why": "2 WRONG SENSE: 그것 isn't in the sentence (only the determiner 그)",
+  "new": "그것 말고 다른 색은 없어요?"
+ },
+ "대신하다#1": {
+  "why": "1 UNNATURAL: '말로 고마움을 대신하다' is odd; the idiom is replacing thanks with a gift",
+  "new": "작은 선물로 고마운 마음을 대신할게."
+ },
+ "등#0": {
+  "why": "1 UNNATURAL: a desk lamp is 스탠드; bare 등 fits ceiling lights",
+  "new": "교실 앞쪽 등이 하나 나갔어요."
+ },
+ "화상#0": {
+  "why": "1 UNNATURAL: misspelling 데여 (standard 데어)",
+  "new": "라면 물에 손을 데어서 화상을 입었어."
+ },
+ "따다#1": {
+  "why": "2 WRONG SENSE: 번호를 따다 (get a number) is a different sense from picking fruit and has its own entry",
+  "new": "주말에 가족이랑 딸기를 따러 갔어."
+ },
+ "벙벙하다#0": {
+  "why": "1 UNNATURAL: '얼떨떨하고 벙벙했어' is redundant; idiom is 어안이 벙벙하다",
+  "new": "갑자기 일 등이라니 어안이 벙벙했어."
+ },
+ "-대#0": {
+  "why": "2 WRONG SENSE: 휴교래 shows -래 (noun + 이래), not -대",
+  "new": "눈이 많이 와서 내일 학교 쉰대."
+ },
+ "-다고 하다#1": {
+  "why": "2 WRONG SENSE: 들어오라고 is a quoted command (-라고), not -다고 하다",
+  "new": "엄마가 오늘 늦게 들어온다고 하셨어요."
+ },
+ "교시#0": {
+  "why": "1 UNNATURAL: '졸려서 그러는데' doesn't lead into asking the period",
+  "new": "너무 졸려. 지금 몇 교시야?"
+ },
+ "죽다#0": {
+  "why": "2 WRONG SENSE: 배고파 죽겠어 is the -아/어 죽겠다 pattern, not literal dying (and identical to the -아/어 죽겠다#0 sentence)",
+  "new": "물을 안 줘서 화분 꽃이 죽었어."
+ },
+ "N부터#1": {
+  "why": "1 UNNATURAL: word order '쉬운 이 문제' (should be 이 쉬운 문제)",
+  "new": "쉬운 문제부터 먼저 풀자."
+ },
+ "것#0": {
+  "why": "2 WRONG SENSE: only the contraction 거 appears; 것 isn't there",
+  "new": "필요한 것이 있으면 말해."
+ },
+ "뭐#1": {
+  "why": "2 WRONG SENSE + 1 UNNATURAL: 뭔 is 무슨, not 뭐; the two halves don't connect",
+  "new": "뭐 마실래? 내가 살게."
+ },
+ "되다#1": {
+  "why": "2 WRONG SENSE: 안 돼 means 'not allowed', not 'to become'",
+  "new": "언니는 올해 대학생이 됐어요."
+ },
+ "끼다#1": {
+  "why": "2 WRONG SENSE: 끼다 here means 'butt in', not 'put on (gloves)'",
+  "new": "눈이 나빠서 안경을 꼈어요."
+ },
+ "당신#0": {
+  "why": "1 UNNATURAL: '뭔데 상관이에요' is garbled (상관하세요/참견이에요), and both 당신 lines were hostile",
+  "new": "아빠는 엄마를 당신이라고 불러."
+ },
+ "심장#1": {
+  "why": "1 UNNATURAL: '심장이 쿵쿵해요' (should be 쿵쿵 뛰다/쿵쿵거리다)",
+  "new": "무서운 영화를 보니 심장이 쿵쿵 뛰어요."
+ },
+ "지긋이#0": {
+  "why": "2 WRONG SENSE: gazing gently is 지그시; 지긋이 means patiently/steadily (sitting, waiting)",
+  "new": "자리에 지긋이 앉아서 공부 좀 해."
+ },
+ "지긋이#1": {
+  "why": "2 WRONG SENSE: smiling gently is 지그시; 지긋이 means patiently/steadily",
+  "new": "동생은 한 시간도 지긋이 앉아 있지 못해요."
+ },
+ "-기는#0": {
+  "why": "1 UNNATURAL: '무시하긴!' as a denial makes no sense when the speaker is the one being underestimated",
+  "new": "고맙기는, 친구끼리 당연하지."
+ },
+ "끄덕거리다#0": {
+  "why": "1 UNNATURAL: nodding off from sleepiness is 꾸벅거리다; 끄덕거리다 is nodding along",
+  "new": "친구 말에 고개를 끄덕거렸어."
+ },
+ "보다#0": {
+  "why": "2 WRONG SENSE: 안 보여요 is 보이다 (be seen), not 보다",
+  "new": "쉬는 시간에 창밖을 봤어요."
+ },
+ "-아/어 보다#1": {
+  "why": "2 WRONG SENSE: 물어보다 is a lexicalized verb 'ask', not 'try doing'",
+  "new": "이 옷 한번 입어 봐도 돼요?"
+ },
+ "걷다#1": {
+  "why": "2 WRONG SENSE: 반비를 걷다 means 'collect money', not 'walk'",
+  "new": "비가 그쳐서 집까지 천천히 걸었어요."
+ },
+ "-다(가) 가다#1": {
+  "why": "2 WRONG SENSE: 먹고 가 uses -고 가다, not -다(가) 가다",
+  "new": "시간 있으면 우리 집에서 놀다 가."
+ },
+ "풀다#1": {
+  "why": "2 WRONG SENSE: 긴장을 풀다 is figurative (and its own entry), not 'untie'",
+  "new": "머리끈을 풀고 머리를 빗었어요."
+ },
+ "그리고#0": {
+  "why": "1 UNNATURAL: -고 plus 그리고 is redundant",
+  "new": "밥부터 먹을게. 그리고 숙제할게."
+ },
+ "고개#0": {
+  "why": "1 UNNATURAL: '모르면 고개를 끄덕이지 마' is an odd thing to say",
+  "new": "누가 불러서 고개를 돌렸어."
+ },
+ "깨지다#1": {
+  "why": "2 WRONG SENSE: 깨지다 here is slang for breaking up, not shattering",
+  "new": "창문 유리가 공에 맞아서 깨졌어요."
+ },
+ "빠지다#1": {
+  "why": "2 WRONG SENSE: 너는 빠져 means 'stay out of it', not 'fall in'",
+  "new": "길에서 웅덩이에 빠져서 신발이 젖었어."
+ },
+ "환상#1": {
+  "why": "2 WRONG SENSE: 환상적 means 'fantastic', not fantasy/illusion",
+  "new": "드라마 속 학교생활은 환상일 뿐이야."
+ },
+ "-(으)ㄴ가?#1": {
+  "why": "2 WRONG SENSE: 먹었나? is -나?, not -(으)ㄴ가? (and duplicates -나?#0)",
+  "new": "이 문제가 그렇게 어려운가?"
+ },
+ "목표#1": {
+  "why": "1 UNNATURAL: '공을 목표에 맞혔어요' (a target to hit is 과녁)",
+  "new": "목표를 세우고 매일 조금씩 공부해요."
+ },
+ "적#1": {
+  "why": "2 WRONG SENSE: -ㄴ 적이 없다 is 적 'experience', not 'enemy'",
+  "new": "축구 시합에서는 친구도 적이야."
+ }
+}
