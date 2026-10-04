@@ -17,3 +17,5 @@ Never edit `index.html` by hand. Each chapter (교시) is a cartridge with its o
 - `node tests/play.mjs chN` plays `tests/walk/chN.js` with real key presses (400px phone viewport) and must end with `ERRORS: none`.
   One playtest at a time (machine-wide lock); never more than 2 agents playtesting in parallel (this 7 GB machine froze once).
 - `python3 tests/sheet.py chN`, then LOOK at every contact sheet.
+
+**Engine:** `src/engine.js` is GENERATED from the shared `../walk-engine/engine.js` (one engine for 성실호, 형제, 방과 후). Edit it there and run `walk-engine/sync.sh`. This game's settings (storage prefix, names, default player) are in `src/game.js`. `validate.mjs` fails if the copy is out of sync.
