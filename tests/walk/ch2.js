@@ -37,7 +37,7 @@
  {talk:'hariMic',wrong:true,shotSay:{text:'복도가 조용해졌어요',name:'14-on-air'},shotBuild:'14b-build'},
  {check:()=>state.f.crew4&&state.f.done&&!state.items.includes('모집 포스터'),msg:'crew of four, chapter done'},
  {check:()=>state.badges.length===C.WORDS.length,msg:'all words collected'},
- {inspect:['bcast',8,0],shot:'15-sayeon-cassette'},
+ {inspect:['bcast',13,0],shot:'15-sayeon-cassette'},
  {talk:'chanL'},
  {talk:'student'},
  {clock:26*3600e3},

@@ -57,7 +57,7 @@
  {talk:'kid'},
  {clock:26*3600e3},
  {inspect:['bcast',7,2],shot:'19-laptop-review'},
- {inspect:['bcast',8,0],shot:'20-sayeon-note'},
+ {inspect:['bcast',13,0],shot:'20-sayeon-note'},
  {talk:'jungY'},
  {check:()=>state.f.jungBye,msg:'정 선생님 after the show'},
  {talk:'jungY'},

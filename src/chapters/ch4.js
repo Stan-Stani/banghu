@@ -168,22 +168,22 @@ const ads=()=>shops()===3;
 
 const ZONES={
  bcast:{name:'방송실',reg:'BROADCAST ROOM',
-  legend:{'#':{tile:'wall'},'.':{tile:'oldFloor',walk:1},'D':{tile:'exitDoor',walk:1},'r':{tile:'rack'},'A':{tile:'onair'},'O':{tile:'poster'},'W':{tile:'hallWin'},
+  legend:{'#':{tile:'wall'},'.':{tile:'oldFloor',walk:1},'D':{tile:'exitDoor',walk:1},'r':{tile:'rack'},'A':{tile:'onair'},'O':{tile:'poster'},'W':{tile:'sideWin'},
    'M':{tile:'mixer'},'i':{tile:'micStand'},'s':{tile:'oldSofa'},'c':{tile:'tapeCart'},'x':{tile:'boxes'},'T':{tile:'terminal'},'b':{tile:'sayeon'}},
   map:[
-"##rrrr#AbOO##WW#",
-"#..............#",
-"#..MMMMT...i...#",
-"#..............#",
-"#ss.........c..#",
-"#ss............#",
-"#..............#",
-"#.....xx.......#",
-"#.....x.....x..#",
+"##rrrrADD#OO#b##",
+"#..............W",
+"#..MMMMT...i...W",
+"#..............W",
+"#ss.........c..W",
+"#ss............W",
+"#..............W",
+"#.....xx.......W",
+"#.....x.....x..W",
 "#cx.........xx.#",
-"#######DD#######"],
+"################"],
   rooms:[[1,1,14,6,'방송실'],[11,7,14,9,'방송실 · 구석']],
-  warps:{'7,10':{to:'hall',x:24,y:8,dir:'up'},'8,10':{to:'hall',x:24,y:8,dir:'up'}},
+  warps:{'7,0':{to:'hall',x:24,y:8,dir:'up'},'8,0':{to:'hall',x:24,y:8,dir:'up'}},
   spots:{},
   things:{'#':['벽에 먼지가 많아요.','구름이 벽을 닦았어요. 거기만 하얘요.','벽에 지난 방송 순서표가 붙어 있어요.'],
    'r':['카세트테이프가 가득해요. 다 옛날 노래예요.','테이프 이름이 다 손글씨예요.','테이프 하나에 "1994 축제"라고 써 있어요.'],
@@ -214,7 +214,7 @@ const ZONES={
 "#,,,,,,,,,,,,,,,,,,,,,,,,,,#",
 "#ssssEE#SSS#WWW#WW#WWWW#Qq##"],
   rooms:[[1,1,7,4,'교무실'],[9,1,15,4,'교장실'],[17,1,26,4,'복도 · 2학년 3반 앞'],[1,5,26,8,'1층 복도']],
-  warps:{'5,9':{to:'yard',x:11,y:4,dir:'down'},'6,9':{to:'yard',x:12,y:4,dir:'down'},'24,9':{to:'bcast',x:7,y:9,dir:'up'}},
+  warps:{'5,9':{to:'yard',x:11,y:4,dir:'down'},'6,9':{to:'yard',x:12,y:4,dir:'down'},'24,9':{to:'bcast',x:7,y:1,dir:'down'}},
   spots:{},
   things:{'#':['하얀 벽이에요. 아래쪽은 초록색이에요.','벽에 "복도에서 뛰지 마세요" 종이가 있어요.','벽에 축제 풍선이 하나 붙어 있어요.'],
    'N':x=>f().gotPosters?'게시판에도 방송부 광고가! "토요일 두 시"':['게시판: "축제 이번 주 토요일!"','게시판: "심화반 신청은 교무실로."'][x%2],
@@ -804,6 +804,8 @@ const TILES={
  onair:(X,Y,x,y,t)=>{face(X,Y);r(X+2,Y+3,12,6,'#2B2E36');const F=state.f,on=F.fixed&&(F.done?Math.floor(t/700)%3===0:Math.floor(t/900)%2===0);r(X+3,Y+4,10,4,on?'#E85A4A':'#5A2E2E');r(X+5,Y+5,6,1,on?'#FFD0C8':'#6E3A3A')},
  poster:(X,Y,x,y)=>{face(X,Y);const L=at(x-1,y)!=='O';r(X+(L?1:0),Y+1,L?15:14,12,'#6B4A2E');r(X+(L?2:0),Y+2,L?14:13,10,'#F2BFA0');r(X+(L?2:0),Y+2,L?14:13,1,'#F7D6C0');
   if(L){r(X+7,Y+3,4,5,'#5A5F6E');r(X+8,Y+4,2,3,'#8E94A0');r(X+8,Y+8,2,3,'#5A5F6E')}else{r(X+1,Y+3,9,1,'#C49A6C');r(X+1,Y+5,7,1,'#C49A6C');r(X+1,Y+8,10,1,'#E0A890')}},
+ sideWin:(X,Y,x,y,t)=>{cap(X,Y,x,y);r(X+4,Y,8,16,'#EDE3CF');r(X+5,Y,6,16,'#A9D8EC');r(X+6,Y,1,16,'#D6F0FA');r(X+5,Y+15,6,1,'#EDE3CF');
+  if(hash(x,y)%3===0){const s=Math.round(Math.sin(t/900+y));r(X+8+s,Y+4,3,3,'#6FA86A')}if(y%4===1)r(X+5,Y,6,4,'#F2E2B0')},
  hallWin:(X,Y,x,y,t)=>{face(X,Y);r(X+1,Y+1,14,10,'#F8F2E6');r(X+2,Y+2,12,8,'#A9D8EC');const s=Math.round(Math.sin(t/1100+x));
   if(ZID==='hagwon'){r(X+2,Y+2,12,8,'#3E4A6E');r(X+3,Y+6,3,4,'#5A6688');r(X+9,Y+5,4,5,'#5A6688');r(X+4,Y+7,1,1,'#F2C46B');r(X+10,Y+6,1,1,'#F2C46B');r(X+11,Y+8,1,1,'#F2C46B')}
   else{r(X+2,Y+6+s,12,4-s,'#6FA86A');r(X+5,Y+5+s,4,2,'#86BE7C')}
