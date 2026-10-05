@@ -796,7 +796,7 @@ const NPC={
   hide:()=>!f().promise,
   script:()=>f().done?[{say:'교장 선생님이 디제이였어? 말도 안 돼.',face:'surprised'}]:null,
   talk:()=>[{say:'우리 반은 솜사탕이야.'},{say:'먹으러 와. 너는 반값.'}]},
- xY5:{name:'2학년 학생',zone:'yard',x:19,y:10,dir:'up',look:LOOK.xY5,banmal:1,
+ xY5:{name:'2학년 학생',zone:'yard',x:16,y:10,dir:'up',look:LOOK.xY5,banmal:1,
   hide:()=>!f().clue,
   script:()=>f().done?[{say:'나 울었어. 비밀이야.',face:'sad'}]:null,
   talk:()=>[{say:'여기 자리 좋다. 무대가 잘 보여.'}]},
