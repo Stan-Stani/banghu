@@ -439,7 +439,7 @@ const NPC={
    {say:'그래서 벌금은? 지금 낼 거야?'},
    Q.daon[4],
    {say:'오백 원. 땡그랑. 고마워.'},
-   {say:'네 자리는 내 옆이야. 넷째 줄. 빨리 와.',award:['벌금','걷다','사실대로'],set:()=>{f().paidFine=1}}]},
+   {say:'네 자리는 내 옆이야. 넷째 줄. 빨리 와.',award:['벌금','걷다','사실대로'],set:()=>{f().paidFine=1},walk:{npc:'daonSeat',from:[18,10]}}]},
 
  seat:{name:'내 자리',zone:'class',x:11,y:9,dir:'down',look:CHAIR,still:1,
   hide:()=>!f().paidFine||!!f().seated,

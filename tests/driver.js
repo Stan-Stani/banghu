@@ -125,6 +125,7 @@ window.__play=async function(steps){
       check(!!dlg,'inspecting a thing opens a blurb');log(`== look ${ZID} ${tx},${ty}`);if(s.shot)await shot(s.shot);await finishDialog()}}
    else if(s.walkTo){await goZone(s.walkTo[0]);await reach((x,y)=>x===s.walkTo[1]&&y===s.walkTo[2],'walkTo');if(s.then)await shot(s.then)}
    else if(s.clock){skew+=s.clock;log(`clock +${s.clock/3600e3}h · due ${dueWords().length}`)}
+   else if(s.pause){await wait(s.pause);if(s.shot)await shot(s.shot)}
    else if(s.check){check(s.check(),s.msg)}
    else if(s.log){log(s.log())}
    else if(s.panel){$('logBtn').click();await wait(200);if(s.shot)await shot(s.shot);check(!$('panel').hidden,'log panel opens');await key('x')}
