@@ -7,7 +7,7 @@
  {bump:['hall','R']},
  {talk:'jung',wrong:true,shotBefore:'03-teachers-office',shotChoice:'03a-teacher-question',shotTap:'03b-tap-word'},
  {talk:'principal',shotBefore:'04-principal-office'},
- {talk:'daon',wrong:true,shotBefore:'05-classroom-daon'},
+ {talk:'daon',wrong:true,shotBefore:'05-classroom-daon',shotSay:{text:'넷째 줄',name:'05-daon-last-line'}},
  {check:()=>state.f.paidFine,msg:'fine paid'},
  {check:()=>!!C.NPC.daonSeat.walk,msg:'다온 is walking back to her desk'},
  {pause:0,shot:'05a-daon-walks'},

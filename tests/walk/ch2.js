@@ -16,7 +16,7 @@
  {talk:'teaser'},
  {talk:'chanG',wrong:true,shotBefore:'05-gym'},
  {talk:'teaser2'},
- {talk:'teaser',wrong:true,shotChoice:'06-stand-up',shotSay:{text:'화장실 가수',name:'06b-teasing'}},
+ {talk:'teaser',wrong:true,shotChoice:'06-stand-up',shotSay:{text:'공을 들고 나갔어요',name:'06b-seniors-last-line'}},
  {check:()=>ghosts.length===2,msg:'both 선배 walk out of the gym'},
  {pause:0,shot:'06c-seniors-leave'},
  {check:()=>state.f.stoodUp,msg:'stood up for her'},
