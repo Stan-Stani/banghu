@@ -952,10 +952,9 @@ const TILES={
  zelkova:(X,Y,x,y,t)=>{sandF(X,Y,x,y);const [ox,oy]=blockOrigin(x,y,'Y'),bx=X-(x-ox)*16,by=Y-(y-oy)*16,s=Math.sin(t/1400)*1.2;
   inTile(X,Y,()=>{g.fillStyle='rgba(60,40,20,.18)';g.beginPath();g.ellipse(bx+32,by+58,28,6,0,0,Math.PI*2);g.fill();
    r(bx+27,by+30,10,30,'#6E4A2E');r(bx+29,by+30,3,30,'#8A6040');r(bx+22,by+56,20,4,'#6E4A2E');r(bx+20,by+24,6,3,'#6E4A2E');r(bx+38,by+22,6,3,'#6E4A2E');
-   disc(bx+32+s,by+22,27,'#2F7A4E');disc(bx+18+s,by+28,15,'#2F7A4E');disc(bx+46+s,by+28,15,'#2F7A4E');
-   disc(bx+28+s,by+16,18,'#3F9460');disc(bx+44+s,by+20,10,'#3F9460');disc(bx+16+s,by+22,9,'#3F9460');
-   disc(bx+24+s,by+10,8,'#5DB070');disc(bx+40+s,by+12,6,'#5DB070');disc(bx+14+s,by+18,4,'#5DB070');
-   r(bx+20,by+40,24,2,'#256640');
+   disc(bx+32+s,by+28,25,'#256640');disc(bx+32+s,by+25,25,'#2F7A4E');disc(bx+18+s,by+31,15,'#2F7A4E');disc(bx+46+s,by+31,15,'#2F7A4E');
+   disc(bx+28+s,by+19,18,'#3F9460');disc(bx+44+s,by+23,10,'#3F9460');disc(bx+16+s,by+25,9,'#3F9460');
+   disc(bx+24+s,by+13,8,'#5DB070');disc(bx+40+s,by+15,6,'#5DB070');disc(bx+14+s,by+21,4,'#5DB070');
    if(state.f.clue)for(let i=0;i<7;i++){const on=Math.floor(t/400+i)%2;disc(bx+10+i*7+s,by+30+(i%2)*3,1.5,on?'#FFE58A':'#C9A13A')}})},
  ybench:(X,Y,x,y)=>{sandF(X,Y,x,y);const T=at(x,y-1)!=='n';r(X+4,Y+(T?2:0),9,T?14:12,'#B68350');for(let j=(T?4:2);j<16;j+=4)r(X+4,Y+j,9,1,'#9A6A3C');r(X+3,Y+(T?2:0),1,T?14:12,'#6E4A28');if(!T)r(X+4,Y+12,2,3,'#6E4A28')},
  booth:(X,Y,x,y)=>{sandF(X,Y,x,y);const T=at(x,y-1)!=='b',L=at(x-1,y)!=='b';
