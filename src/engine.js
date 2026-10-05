@@ -1,4 +1,4 @@
-/* GENERATED from walk-engine/engine.js (d918f06) — do not edit here; edit walk-engine and run its sync.sh. */
+/* GENERATED from walk-engine/engine.js (eea6e11) — do not edit here; edit walk-engine and run its sync.sh. */
 /* =====================================================================
    Engine: tiles, movement, zones, dialogue, spaced review, speech, saving.
    ===================================================================== */
@@ -416,15 +416,16 @@ function walkPath(n,[fx,fy]){
  while(q.length){const [x,y]=q.shift();if(x===tx&&y===ty)break;
   for(const [dx,dy] of Object.values(D)){const a=x+dx,b=y+dy,kk=k(a,b);if(kk in prev)continue;
    if(!(a===tx&&b===ty)&&(!walkable(a,b)||live().some(o=>o!==n&&npcPos(o)[0]===a&&npcPos(o)[1]===b)))continue;prev[kk]=[x,y];q.push([a,b])}}
- if(!(k(tx,ty) in prev))return null;
- const path=[];for(let c=[tx,ty];c;c=prev[k(...c)])path.unshift(c);return path;
+ let end=[tx,ty];  // blocked (someone stands in the doorway)? walk as close as possible, then step in
+ if(!(k(tx,ty) in prev)){let best=1e9;for(const kk in prev){const [a,b]=kk.split(',').map(Number),d=Math.abs(a-tx)+Math.abs(b-ty);if(d<best){best=d;end=[a,b]}}}
+ const path=[];for(let c=end;c;c=prev[k(...c)])path.unshift(c);return path;
 }
 function startWalks(){
  walks.splice(0).forEach(w=>{const n=C.NPC[w.npc];if(!n||(n.hide&&n.hide()))return;
   const path=walkPath(n,w.from);if(path&&path.length>1)n.walk={path,t0:performance.now(),end:n.dir}});
 }
 function walkAt(n,t){ // → [x,y,dir,frame] while walking, null when arrived
- const w=n.walk;if(!w)return null;const p=(t-w.t0)/WALK_MS,i=Math.floor(p);
+ const w=n.walk;if(!w)return null;const p=Math.max(0,(t-w.t0)/WALK_MS),i=Math.floor(p);  // a frame can be stamped just before the walk began
  if(i>=w.path.length-1){n.walk=null;n.dir=w.end;return null}
  const [ax,ay]=w.path[i],[bx,by]=w.path[i+1],f=p-i;
  const dir=bx>ax?'right':bx<ax?'left':by>ay?'down':'up';
