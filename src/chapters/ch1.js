@@ -841,8 +841,19 @@ const TILES={
  mixer:(X,Y,x,y)=>{oldF(X,Y,x,y);r(X,Y+3,16,10,'#3A3E48');r(X,Y+3,16,2,'#535866');r(X,Y+12,16,1,'#22252C');
   for(let i=0;i<4;i++){r(X+2+i*4,Y+6,1,5,'#1E2128');r(X+1+i*4,Y+7+(hash(x+i,y)%3),3,2,'#B9C1C9');r(X+2+i*4,Y+4,1,1,'#4A2A2A')}r(X+3,Y+3,3,1,'#8A8E96');r(X+10,Y+4,2,1,'#8A8E96')},
  micStand:(X,Y,x,y)=>{oldF(X,Y,x,y);r(X+7,Y+6,2,9,'#2B2E36');r(X+4,Y+14,8,2,'#2B2E36');r(X+5,Y,6,7,'#5A5F6E');r(X+6,Y+1,4,4,'#8E94A0');r(X+6,Y+2,4,1,'#6E747E');r(X+6,Y+4,4,1,'#6E747E')},
- oldSofa:(X,Y,x,y)=>{oldF(X,Y,x,y);const T=at(x,y-1)!=='s',L=at(x-1,y)!=='s';r(X,Y,16,16,'#6E5A7A');if(T)r(X,Y,16,5,'#85709A');if(L)r(X,Y,3,16,'#5A4866');else r(X+13,Y,3,16,'#5A4866');
-  if(hash(x,y)%2)r(X+6,Y+8,4,3,'#9A86AE');if(!T)r(X,Y+15,16,1,'#4A3A56')},
+ oldSofa:(X,Y,x,y)=>{oldF(X,Y,x,y);let ox=x,oy=y,ex=x,ey=y;while(at(ox-1,y)==='s')ox--;while(at(x,oy-1)==='s')oy--;while(at(ex+1,y)==='s')ex++;while(at(x,ey+1)==='s')ey++;
+  const bx=X-(x-ox)*16,by=Y-(y-oy)*16,W=(ex-ox+1)*16-3,H=(ey-oy+1)*16-2,mid=by+(H/2|0);
+  const box=(x0,y0,w,h,c)=>{r(x0+1,y0,w-2,h,c);r(x0,y0+1,w,h-2,c)};   // a rectangle with its corners rounded off
+  inTile(X,Y,()=>{ // one old sofa seen from above, its back against the wall on the left
+   box(bx+3,by+3,W,H,'rgba(0,0,0,.25)');box(bx,by,W,H,'#2E2438');                              // shadow, outline
+   box(bx+1,by+1,9,H-2,'#4E3D5C');r(bx+8,by+2,1,H-4,'#6A5680');                                  // backrest
+   box(bx+1,by+1,W-2,7,'#5F4B72');box(bx+1,by+H-8,W-2,7,'#5F4B72');                             // armrests
+   r(bx+2,by+2,W-5,1,'#7E6A96');r(bx+2,by+H-7,W-5,1,'#7E6A96');
+   const cw=W-12,c1=by+8,c2=mid+1,h1=mid-c1,h2=by+H-8-c2;
+   box(bx+10,c1,cw,h1,'#A893C0');box(bx+10,c2,cw,h2,'#A893C0');                                 // two puffy seat cushions
+   r(bx+11,c1+1,cw-3,1,'#C4B4D8');r(bx+11,c2+1,cw-3,1,'#C4B4D8');                               // highlights
+   r(bx+11,c1+h1-2,cw-2,1,'#8A75A3');r(bx+11,c2+h2-2,cw-2,1,'#8A75A3');                         // underside shading
+   r(bx+16,c2+3,5,2,'#E7DDF0');r(bx+14,c2+3,9,1,'#E2D3A6');r(bx+15,c2+5,7,1,'#E2D3A6')})}, // an old tear, taped
  tapeCart:(X,Y,x,y)=>{oldF(X,Y,x,y);r(X+1,Y+3,14,11,'#4A4E5A');r(X+1,Y+3,14,1,'#646A78');disc(X+5,Y+7,3,'#22252C');disc(X+11,Y+7,3,'#22252C');disc(X+5,Y+7,1,'#B9C1C9');disc(X+11,Y+7,1,'#B9C1C9');r(X+3,Y+11,10,1,'#8A8E96');r(X+2,Y+14,2,2,'#22252C');r(X+12,Y+14,2,2,'#22252C')},
  boxes:(X,Y,x,y)=>{oldF(X,Y,x,y);r(X+1,Y+5,14,10,'#B98E58');r(X+1,Y+5,14,2,'#D2A970');r(X+7,Y+5,2,10,'#E3C99A');r(X+1,Y+14,14,1,'#8A6A40');
   if(hash(x,y)%2){r(X+3,Y,10,6,'#A67E4A');r(X+3,Y,10,1,'#C49A6C');r(X+5,Y+2,6,2,'#F4F1E6')}},
