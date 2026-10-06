@@ -368,6 +368,7 @@ const LOOK={
  xS4:{hair:'#2E2622',skin:'#D09A72',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#C9A13A',style:'short'},
 };
 const NOTAG='하리 명찰';
+const pick=a=>a[Math.random()*a.length|0];  // a repeat line picked at random, so a character talked to often doesn't say the same thing
 
 const NPC={
  gureum:{name:'백구름',zone:'bcast',x:5,y:3,dir:'up',look:LOOK.gureum,badge:['기회','놓치다'],banmal:1,
@@ -376,6 +377,7 @@ const NPC={
   script:()=>{
    if(!has('기회'))return null;
    if(f().afterSchool)return [{say:'분식집? 나는 기계 고쳐야 돼. 다녀와.'},{say:'끝나면 방송실로 와. 나 여기 있어.'}];
+   if(f().stoodUp)return [{say:'찬이한테 톡 왔어. 3학년 선배들한테 말했다며?',face:'surprised'},{say:'너 진짜 용감하다. 나는 못 해.'}];
    if(f().knowHari)return [{say:'유하리? 1학년이구나.'},{say:'체육관은 복도 아래쪽이야. 초록색 문.'}];
    if(f().metHari)return [{say:'노래하는 애가 도망갔어? 하하… 나 같다.',face:'happy'},{say:'명찰 있으면 선생님이 알 거야.'},{say:'교무실은 복도 왼쪽 위야.'}];
    if(f().poster)return [{say:'음악실은 복도 위쪽 오른쪽이야.'},{say:'쉿, 조용히 들어가.'}];
@@ -420,11 +422,12 @@ const NPC={
    {who:'…',say:'…얼마나 놀랐으면.',award:['얼다','심장','곡'],set:()=>{f().metHari=1},leave:{npc:'hariM',to:[8,10]}}]},
 
  jung:{name:'정 선생님',zone:'hall',x:6,y:2,dir:'down',look:LOOK.jung,badge:['명찰'],
-  after:'명찰은 늘 달고 다녀요. {벌점|벌점} 무서워요.',
+  get after(){return pick([['점심 방송 잘 들었어요. 교무실이 다 조용했어요.'],['하리 학생 목소리, 정말 좋았어요.','근데 명찰은 늘 달고 다녀요. {벌점|벌점} 무서워요.']])},  // only after the finale; before it the script has a line for every phase
   status:()=>{if(!has('명찰'))return hasItem(NOTAG)?'todo':null},
   script:()=>{
    if(!has('명찰')&&!hasItem(NOTAG))return f().poster?[{say:'방송부 포스터 봤어요. 잘 만들었네요.'},{say:'목소리 좋은 학생? 음악실에 가 봐요.'}]
     :[{say:'점심은 먹었어요? 방송실 먼지 조심해요.'}];
+   if(has('명찰')&&f().stoodUp&&!f().afterSchool)return [{say:'아까 체육관이 시끄러웠어요. 무슨 일 있었어요?'},{say:'…하리 학생은 괜찮아요?'}];
    if(has('명찰')&&!f().afterSchool)return [{say:'체육관은 복도 아래쪽, 초록색 문이에요.'},{say:'1학년들은 지금 체육관에 있어요.'}];
    if(has('명찰')&&!f().nextDay)return [{say:'오늘 방과 후에 무슨 일 있어요? 표정이 바빠요.'},{say:'방송실은 복도 아래쪽 오른쪽, 포스터 붙은 문이에요.'}];
    if(has('명찰')&&!f().done)return [{say:'오늘 점심 방송 해요? 교무실에서도 들을게요.',face:'happy'}];
@@ -452,7 +455,7 @@ const NPC={
 
  chanG:{name:'남궁찬',zone:'gym',x:12,y:2,dir:'down',look:LOOK.chan,badge:['장난','놀리다'],banmal:1,
   hide:()=>!!f().afterSchool,
-  after:'선배들한테 말하는 거, 멋있었어.',
+  get after(){return pick([['선배들한테 말하는 거, 멋있었어.'],['솔직히 나 다리 떨렸어. 비밀이야.']])},
   script:()=>has('장난')&&!f().stoodUp?[{say:'저쪽이야. 공 수레 옆.'},{say:'같이 가. 나 뒤에 있을게.'}]:null,
   talk:()=>[
    {say:'헉, 너 여기서 뭐 해?',face:'surprised'},
@@ -510,12 +513,13 @@ const NPC={
 
  owner:{name:'분식집 아저씨',zone:'bunsik',x:4,y:1,dir:'down',look:LOOK.owner,
   script:()=>{const q=Q.owner[Math.random()*Q.owner.length|0];
-   return [{say:'어서 와요! 오늘 떡볶이 맛있어요.'},{say:'먹으면서 옛날 단어 하나 해요.'},{...q,old:1},{say:'잘했어요. 또 와요!',face:'happy'}]},
+   const hi=f().done?{say:'방송 잘했다면서요? 학생들이 다 얘기해요.',face:'happy'}:{say:'어서 와요! 오늘 떡볶이 맛있어요.'};
+   return [hi,{say:'먹으면서 옛날 단어 하나 해요.'},{...q,old:1},{say:'잘했어요. 또 와요!',face:'happy'}]},
   talk:()=>[]},
 
  hariB:{name:'유하리',zone:'bunsik',x:7,y:6,dir:'right',look:LOOK.hari,badge:['포기하다'],
   hide:()=>!f().afterSchool||!!f().hariMaybe,
-  after:'…한 곡만이에요. 딱 한 곡.',
+  get after(){return f().joke?['찬 선배 농담… 사실 좀 웃겼어요.']:['…저 진짜 못 할 것 같아요.']},  // she only agrees to one song later, to 다온
   talk:()=>[
    {who:'…',say:'떡볶이가 보글보글. 하리는 젓가락만 들고 있어요.'},
    {say:'선배, 저 방송… 못 할 것 같아요.',face:'sad'},
@@ -527,7 +531,7 @@ const NPC={
 
  chanB:{name:'남궁찬',zone:'bunsik',x:10,y:6,dir:'left',look:LOOK.chan,badge:['어색하다'],banmal:1,
   hide:()=>!f().afterSchool||!!f().hariMaybe,
-  after:'떡볶이는 왜 빨개? …아, 이미 했지.',
+  get after(){return pick([['떡볶이는 왜 빨개? …아, 이미 했지.'],['하리 웃었지? 봤지? 나 천재야.']])},
   status:()=>{if(!has('어색하다'))return f().hariGiveUp?'todo':'wait'},
   script:()=>!has('어색하다')&&!f().hariGiveUp?[{say:'떡볶이 나왔다! 하리 얘기부터 들어 봐.'}]:null,
   talk:()=>[
@@ -568,7 +572,7 @@ const NPC={
 
  gureumL:{name:'백구름',zone:'bcast',x:5,y:3,dir:'up',look:LOOK.gureum,badge:['기회','놓치다','타이밍','챙기다'],banmal:1,
   hide:()=>!f().hariMaybe,
-  after:'타이밍. 노래 먼저, 그다음 마이크.',
+  get after(){return pick([['하리 목소리 들었지? 복도가 다 멈췄어.'],['타이밍. 노래 먼저, 그다음 마이크.'],['부원 넷! 이제 한 명만 더.']])},
   script:()=>has('타이밍')&&!f().done?[{say:'하리한테 가 봐. 마이크 앞에 있어.'},{say:'긴장 풀리게 말 좀 걸어 줘.'}]:null,
   talk:()=>[
    {say:'어, 왔어? 나는 아직 기계 고쳐.'},
@@ -592,7 +596,7 @@ const NPC={
 
  hariMic:{name:'유하리',zone:'bcast',x:11,y:3,dir:'up',look:LOOK.hari,badge:['얼다','심장','곡','긴장하다','포기하다','효과','즐기다'],
   hide:()=>!f().nextDay,
-  after:'선배, 다음 곡도 연습하고 있어요.',
+  get after(){return pick([['선배, 다음 곡도 연습하고 있어요.'],['저 아직 손이 떨려요. 그래도 좋아요.']])},
   status:()=>{if(!has('효과'))return f().ready?'todo':'wait'},
   script:()=>!has('효과')&&!f().ready?[{say:'선배… 심장이 터질 것 같아요.',face:'sad'},{who:'…',say:'하리가 물병만 꼭 잡고 있어요.'}]:null,
   talk:()=>[
@@ -617,7 +621,7 @@ const NPC={
 
  daonL:{name:'오다온',zone:'bcast',x:13,y:5,dir:'left',look:LOOK.daon,badge:['분위기','재촉하다','연락처','데려오다'],banmal:1,
   hide:()=>!f().nextDay,
-  after:'방송부 시간표, 내가 만들게. 늦으면 벌금.',
+  get after(){return pick([['방송부 시간표, 내가 만들게. 늦으면 벌금.'],['봐. 데려온다고 했지? 나는 말한 건 해.']])},
   script:()=>f().done?null:[{say:'봐. 데려온다고 했지.'},{say:'재촉은 안 했어. …조금만 했어.',face:'think'}],
   talk:()=>[]},
 

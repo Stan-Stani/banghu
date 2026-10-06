@@ -374,6 +374,7 @@ const LOOK={
  xT3:{hair:'#1C1C1F',skin:'#C89672',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#C9A13A',style:'spiky'},
 };
 const PR='한복순 교장 선생님';
+const pick=a=>a[Math.random()*a.length|0];  // a repeat line picked at random, so a character talked to often doesn't say the same thing
 
 const NPC={
  /* ---------- 방송실, day one ---------- */
@@ -407,6 +408,7 @@ const NPC={
    if(!f().counsel)return [{say:'교무실 가 봐. 태식 선배 지금 상담 중이야.'},{say:'교무실은 복도 왼쪽 끝이야.'}];
    if(!f().fixed)return [{say:'학원? 3학년은 매일 밤까지 학원이야.'},{say:'포스터는 찬이랑 하리가 들고 갔어.'}];
    if(!f().promise)return [{say:'불 들어왔다! …나 안 울었어. 먼지야.',face:'happy'}];
+   if(f().warned)return [{say:'교장 선생님 얘기 들었어. …괜찮아.',face:'think'},{say:'우리가 잘하면 돼. 무대에서 보자.'}];
    return [{say:'교장실 빨리 가. 교무실 옆이야.',face:'angry'},{say:'늦으면 벌금이야. …농담이야. 근데 빨리.'}]},
   talk:()=>[
    {say:'구름아, 울지 마. 아직 안 끝났어.'},
@@ -428,7 +430,12 @@ const NPC={
 
  jung:{name:'정 선생님',zone:'hall',x:6,y:2,dir:'left',look:LOOK.jung,badge:['상담','대학','목표','평가','빡빡하다'],
   hide:()=>!!f().clue, // festival afternoon: she is at the stage (jungY)
-  after:'고민 있으면 언제든지 상담하러 와요.',
+  get after(){const F=f();   // the review line follows the days: after school, the fix, festival morning
+   if(F.warned)return ['교장 선생님 얘기 들었어요. 방송 잘하면 돼요.','저도 맨 앞에서 들을게요.'];
+   if(F.promise)return pick([['오늘 축제네요! 교장실에는 가 봤어요?'],['드디어 축제예요. 고민 있으면 언제든지 상담하러 와요.']]);
+   if(F.fixed)return ['늦게까지 수고했어요. 기계 고쳤다면서요?','이제 집에 가요. 무리하지 말고요.'];
+   if(F.taesikCome)return ['태식 학생이 같이 왔어요? 대단하네요.'];
+   return ['태식 학생 만났어요? 학원은 상가 오른쪽 끝이에요.']},
   status:()=>!f().needFix?null:undefined,
   script:()=>{
    if(!f().needFix)return [{say:'방송실 기계가 고장 났다면서요? 큰일이네요.',face:'sad'},{say:'구름 학생이 아침부터 울상이에요.'}];
@@ -467,7 +474,10 @@ const NPC={
  principal:{name:PR,zone:'hall',x:12,y:1,dir:'down',look:LOOK.principal,badge:['심화반','표정'],
   hide:()=>!!f().warned,
   status:()=>!f().promise?null:undefined,
-  script:()=>!f().promise?[{say:'방송실 기계가 고장 났다고요?',face:'think'},{say:'…그래도 약속은 약속이에요. 축제까지.'}]:null,
+  script:()=>{const F=f();if(F.promise)return null;
+   if(F.fixed)return [{say:'방송실에 불이 들어왔다고요?',face:'surprised'},{say:'…그래요. 잘됐네요.',face:'happy'},{say:'늦었어요. 조심히 가요.'}];
+   if(F.counsel)return [{say:'방과 후인데 아직 학교에 있어요?'},{say:'…그래도 약속은 약속이에요. 축제까지.'}];
+   return [{say:'방송실 기계가 고장 났다고요?',face:'think'},{say:'…그래도 약속은 약속이에요. 축제까지.'}]},
   talk:()=>[
    {say:'왔어요? 할 말이 있어요.'},
    {say:'{학부모회|학부모회}에서 방송실을 원해요.'},
@@ -505,6 +515,8 @@ const NPC={
   script:()=>{
    if(!f().gotPosters)return null;
    if(!ads())return [{say:'문구점, 분식집, 편의점! 세 곳이야.'},{say:'하나 붙일 때마다 하리가 인사해. 귀엽지?'}];
+   if(f().fixed)return [{say:'기계 고쳤어? 역시 태식 선배!',face:'happy'},{say:'축제 날 동네 사람 다 올 거야.'}];
+   if(f().taesikCome)return [{say:'헉, 태식 선배다! 진짜 데려왔어?',face:'surprised'},{say:'빨리 학교 가. 쉬는 시간 짧대.'}];
    return [{say:'끝? 대박. 이제 동네가 다 알겠다.',face:'happy'},{say:'태식 선배? 학원 건물은 저기 오른쪽 끝이야.'}]},
   talk:()=>[
    {say:'왔다! 광고 포스터 백 장 뽑았어.',face:'happy'},
@@ -519,6 +531,8 @@ const NPC={
   script:()=>{
    if(!f().gotPosters)return [{say:'선배, 저 진짜 못 하겠어요…',face:'sad'},{say:'…포스터는 찬 선배가 가지고 있어요.'}];
    if(!ads())return [{say:'사장님들 무서워요. 그래도 인사는 할게요.'}];
+   if(f().fixed)return [{say:'기계 고쳤어요? 다행이다…',face:'happy'},{say:'축제 날 저 두 곡 할 거예요.'}];
+   if(f().taesikCome)return [{say:'선배, 기계 꼭 고쳐 주세요.'},{say:'저희도 곧 학교에 갈게요.'}];
    return [{say:'다 붙였어요! 말하다 보니까 안 무서웠어요.',face:'happy'}]},
   talk:()=>[]},
 
@@ -615,6 +629,7 @@ const NPC={
     {who:'…',say:'그리고 토요일. 축제 날 아침.'},
     {who:'스피커',say:'방송부 학생들은 교장실로 오세요.'},
     {say:'…교장실? 우리 뭐 잘못했어?',face:'surprised',award:['부모님','약속'],set:()=>{f().promise=1}}];
+   if(f().warned)return [{say:'교장 선생님이 그랬어? …그럼 잘하면 돼.',face:'think'},{say:'나 무대 준비할게. 너도 와.'}];
    if(has('부모님'))return [{say:'교장실… 너 먼저 가. 찬이는 벌써 갔대.',face:'sad'}];
    return null},
   talk:()=>[
@@ -649,7 +664,10 @@ const NPC={
 
  daonS:{name:'오다온',zone:'yard',x:16,y:6,dir:'right',look:LOOK.daon,badge:['방법','쫓겨나다'],banmal:1,
   hide:()=>!f().clue,
-  after:'시간은 내가 지켰어. 일 초도 안 늦었어.',
+  get after(){const F=f();
+   if(F.done)return pick([['시간은 내가 지켰어. 일 초도 안 늦었어.'],['교장 선생님이 복숭아라니. 아직도 말도 안 돼.']]);
+   if(F.live)return ['쉿. 교장 선생님이야. 조용히.'];
+   return ['곧 시작이야. 구름한테 가. 빨리.']},
   status:()=>!f().ready?'todo':undefined,
   script:()=>!f().ready?[
    {say:'왔어? 생방송 십 분 전이야.'},
@@ -663,7 +681,7 @@ const NPC={
 
  gureumS:{name:'백구름',zone:'yard',x:18,y:5,dir:'down',look:LOOK.gureum,badge:['절박하다','회로','부모님','약속'],banmal:1,
   hide:()=>!f().clue,
-  after:'내일 점심에도 방송할 거야. 매일.',
+  get after(){return pick([['내일 점심에도 방송할 거야. 매일.'],['교장 선생님이 복숭아… 아직도 꿈 같아.']])},
   status:()=>!f().ready?'wait':!f().live?'todo':undefined,
   script:()=>{
    if(!f().ready)return [{say:'다온이가 시간 재고 있어. 먼저 가 봐.',face:'sad'},{say:'…나 손이 떨려.'}];
@@ -701,7 +719,7 @@ const NPC={
 
  taesikS:{name:'마태식',zone:'yard',x:14,y:8,dir:'up',look:LOOK.taesik,badge:['빡빡하다','생초보','기술','회로'],banmal:1,
   hide:()=>!f().clue,
-  after:'합격하면… 방송으로 말할게. 약속.',
+  get after(){return pick([['합격하면… 방송으로 말할게. 약속.'],['…소리 괜찮았지? 회로는 내가 봤어.']])},
   status:()=>!f().done?null:undefined,
   script:()=>f().done?null:[{say:'학원 째고 왔어. …농담이야. 오늘은 쉬는 날.'},{say:'소리는 내가 볼게. 너희는 떠들기만 해.'}],
   talk:()=>[]},
@@ -717,7 +735,7 @@ const NPC={
   talk:()=>[]},
 
  jungY:{name:'정 선생님',zone:'yard',x:8,y:11,dir:'up',look:LOOK.jung,
-  badge:['상담','대학','목표','평가','빡빡하다'],after:'고민 있으면 언제든지 상담하러 와요.',
+  badge:['상담','대학','목표','평가','빡빡하다'],get after(){return pick([['오늘 방송, 최고였어요.'],['고민 있으면 언제든지 상담하러 와요.']])},
   hide:()=>!f().clue,
   status:()=>f().jungBye?undefined:null,
   script:()=>f().done?(f().jungBye?null:[{say:'교장 선생님 그런 표정, 처음 봤어요.',face:'happy'},{say:'수고했어요. 다음 주 독후감은… 농담이에요.',set:()=>{f().jungBye=1}}])
@@ -726,7 +744,7 @@ const NPC={
 
  principalS:{name:PR,zone:'yard',x:21,y:8,dir:'up',look:LOOK.principal,badge:['심화반','표정','꿈','이루다','합격하다'],
   hide:()=>!f().live,
-  after:'여기는 느티고 방송부. 내일도 들을게요.',
+  get after(){return pick([['여기는 느티고 방송부. 내일도 들을게요.'],['삼십 년 만에 마이크를 잡았어요. 떨렸어요.']])},
   talk:()=>[
    {say:'마이크… 저도 잠깐 써도 될까요?',face:'think'},
    {who:'…',say:'앨범 사진을 보여 드렸어요.',take:[PHOTO]},

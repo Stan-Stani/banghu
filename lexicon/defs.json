@@ -19356,5 +19356,21 @@
 "삼각김밥": {
 "k": "세모 모양 김밥. 편의점에서 팔아요.",
 "e": "triangle kimbap (rice ball)"
+},
+"경비실": {
+"e": "guard's office (at the school gate)",
+"k": "경비 아저씨가 있는 작은 방."
+},
+"후식": {
+"e": "dessert",
+"k": "밥 먹고 나서 먹는 것. 과일이나 주스."
+},
+"솔직히": {
+"e": "honestly, to be frank",
+"k": "숨기지 않고 사실대로. 솔직히 말할게."
+},
+"혼나다": {
+"e": "to get scolded, get told off",
+"k": "잘못해서 꾸중을 듣다. 늦으면 혼나요."
 }
 }

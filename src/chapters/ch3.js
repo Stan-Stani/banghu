@@ -164,6 +164,7 @@ const Q={ // NPC questions, kept here so review can reuse them. who:'나' = the 
 
 const ITEMS={'가입 신청서':'방송부 가입 신청서. 부원 이름 칸이 다섯 개예요.','복숭아 편지':'분홍 편지. 복숭아 향기가 나요. "…잘 들었읍니다."','복숭아 주스':'매점 이모가 쏜 복숭아 주스 다섯 개. 시원해요.'};
 const f=()=>state.f;
+const pick=a=>a[Math.random()*a.length|0];  // a repeat line picked at random, so a character talked to often doesn't say the same thing
 const hasItem=i=>state.items.includes(i);
 const has=w=>state.badges.includes(w);
 
@@ -360,7 +361,7 @@ const NPC={
  /* ---------- 방송실 ---------- */
  gureum:{name:'백구름',zone:'bcast',x:5,y:3,dir:'up',look:LOOK.gureum,banmal:1,badge:['뽑다'],
   hide:()=>!!f().toNR,
-  after:'사연 뽑는 상자, 내가 만들었어. 예쁘지?',
+  get after(){return f().posted?pick([['게시판 포스터 봤어. 다온이 진짜 잘 만들었다.'],['사연 뽑는 상자, 내가 만들었어. 예쁘지?']]):['사연 뽑는 상자, 내가 만들었어. 예쁘지?']},
   script:()=>{const F=f();
    if(F.rumor)return [{say:'…들었어. 내가 방송부 그만둔대.',face:'sad'},{say:'나 그런 말 한 적 없는데.',face:'sad'},{who:'…',say:'구름이 마이크만 쳐다봐요.'}];
    if(!has('뽑다'))return null;
@@ -401,7 +402,7 @@ const NPC={
 
  gureumFin:{name:'백구름',zone:'bcast',x:5,y:3,dir:'up',look:LOOK.gureum,banmal:1,badge:['감동'],
   hide:()=>!f().secret,
-  after:'오늘 사연도 내가 뽑을게. 기대해.',
+  get after(){return pick([['내일 사연도 내가 뽑을게. 기대해.'],['톡이 아직도 와. 다들 감동했대.'],['복숭아 님… 진짜 누굴까?']])},  // only after the finale
   status:()=>{if(!has('감동'))return f().aired?'todo':null},
   script:()=>{const F=f();
    if(F.done)return null;
@@ -427,7 +428,7 @@ const NPC={
 
  hariFin:{name:'유하리',zone:'bcast',x:11,y:3,dir:'up',look:LOOK.hari,badge:['창피하다'],
   hide:()=>!f().letter,
-  after:'선배, 저 오늘도 창피했어요. 그래도 좋아요.',
+  get after(){return f().done?pick([['선배, 저 오늘도 창피했어요. 그래도 좋아요.'],['다음 사연은 누가 보낼까요? 궁금해요.']]):['방송 끝! …저 목소리 떨렸죠?']},
   status:()=>{if(!has('창피하다'))return f().juice?'todo':null},
   script:()=>{if(has('창피하다'))return null;if(!f().juice)return [{say:'선배, 저 여기서 연습할게요.'},{say:'…근데 목이 좀 말라요.',face:'sad'}];return null},
   talk:()=>[
@@ -446,11 +447,20 @@ const NPC={
 
  chanEnd:{name:'남궁찬',zone:'bcast',x:3,y:6,dir:'right',look:LOOK.chan,banmal:1,
   hide:()=>!f().juice,
+  script:()=>f().done?[{say:'"복숭아 님, 누구세요?" 구름이 멋있었어.',face:'happy'},{say:'정체는 꼭 내가 밝힐 거야.'},{say:'…이번엔 엿듣지 않고.',face:'happy'}]
+   :f().aired?[{say:'누가 훌쩍였어. …나 아니야.',face:'sad'},{say:'사연 진짜 감동이다. 하리 대박.'}]:null,
   talk:()=>[{say:'이모는 아니었어. 그럼 누구지?',face:'think'},{say:'복숭아의 정체, 꼭 내가 밝힐 거야.'},{say:'…이번엔 엿듣지 않고.',face:'happy'}]},
 
  /* ---------- 복도 ---------- */
  jung:{name:'정 선생님',zone:'hall',x:6,y:2,dir:'down',look:LOOK.jung,badge:['가입하다','제출하다','독후감','맞춤법'],
-  after:'맞춤법이 헷갈리면 언제든지 물어봐요.',
+  get after(){const F=f();   // the review line follows the two days: club form, rumor, the morning after, the 사연
+   if(F.aired)return pick([['사연 잘 들었어요. 선생님도 조금 울었어요.'],['맞춤법이 헷갈리면 언제든지 물어봐요.']]);
+   if(F.oldSpelling)return pick([['점심 사연 코너, 교무실에서도 들을게요.'],['"들었읍니다"라니. 오랜만에 봤어요.']]);
+   if(F.secret)return ['좋은 아침이에요. 얼굴이 밝네요.','어제 무슨 좋은 일 있었어요?'];
+   if(F.rumor)return ['학교 앱 글은 다 믿지 마요.','궁금하면 구름이한테 직접 물어봐요.'];
+   if(F.posted)return ['게시판 포스터 봤어요. 예쁘네요.'];
+   if(F.submitted)return ['정식 동아리, 축하해요.','포스터는 반장한테 말해요.'];
+   return ['맞춤법이 헷갈리면 언제든지 물어봐요.']},
   status:()=>{const F=f();if(!F.plan)return null;if(!F.formGot)return 'todo';if(!F.signed5)return null;if(!F.submitted)return 'todo';if(F.letter&&!F.oldSpelling)return 'todo'},
   script:()=>{const F=f();
    if(!F.plan)return [{say:'어, 일찍 왔네요. 방송부는 요즘 어때요?'},{say:'구름이가 아침부터 방송실에 있던데요.'}];
@@ -494,12 +504,14 @@ const NPC={
    {say:'좀 도와줘요. 다 쓰면 이름도 받아 와요.',award:['가입하다','제출하다','독후감','맞춤법'],set:()=>{f().formGot=1}}]},
 
  imo:{name:'매점 이모',zone:'hall',x:12,y:1,dir:'down',look:LOOK.imo,badge:['복숭아'],
-  after:'학생, 복숭아 주스 또 마실래요?',
+  get after(){return f().aired?pick([['사연 잘 들었어요. 이모 눈물 났어요.'],['이모가 복숭아? 하하, 아직도 웃겨요.']])
+   :pick([['학생, 복숭아 주스 또 마실래요?'],['방송 언제 해요? 이모도 들을게요.']])},
   status:()=>{if(!has('복숭아'))return f().oldSpelling?'todo':null},
   script:()=>{const F=f();
    if(has('복숭아'))return null;
    if(F.oldSpelling)return null;
    if(F.rumor&&!F.secret)return [{say:'방송부 끝났대요? 이모는 안 믿어요.'},{say:'구름 학생, 점심마다 노래 틀잖아요.'}];
+   if(F.secret)return [{say:'아침은 먹었어요? 빵이 아직 따뜻해요.'},{say:'요즘은 복숭아 주스가 제일 인기예요.'}];
    return [{say:'학생, 어서 와요. 오늘 뭐 먹어요?'},{say:'요즘은 복숭아 주스가 제일 인기예요.'}]},
   talk:()=>[
    {who:'남궁찬',say:'이모! 이모가 복숭아죠? 다 알아요!',face:'happy'},
@@ -624,7 +636,11 @@ const NPC={
    {say:'이제 답답한 거 없다! 시원하다!',face:'happy',award:['답답하다'],set:()=>{f().signed5=1}}]},
 
  lib:{name:'서지민',zone:'library',x:14,y:1,dir:'down',look:LOOK.jimin,badge:['댓글','비밀'],
-  after:'선배, 비밀은 비밀이에요. 쉿.',
+  get after(){const F=f();
+   if(F.aired)return pick([['선배, 댓글이 다 바뀌었어요. "방송부 최고."'],['선배, 비밀은 비밀이에요. 쉿.']]);
+   if(F.secret)return ['오늘 사연 코너 한대요. 저도 들을 거예요.'];
+   if(F.toNR)return ['도서관 곧 닫아요. 선배도 얼른 가세요.'];
+   return pick([['구름 선배 괜찮아요? 방송실에 가 보세요.'],['선배, 비밀은 비밀이에요. 쉿.']])},
   status:()=>{if(!has('댓글'))return f().rumor?'todo':null},
   script:()=>{const F=f();
    if(!F.rumor)return [{say:'선배, 도서관에서는 조용히 해 주세요.'},{say:'…찬 선배 말고요. 그 선배는 늘 시끄러워요.',face:'think'}];
@@ -649,7 +665,8 @@ const NPC={
  /* ---------- 학교 앞 ---------- */
  guard:{name:'박 경비 아저씨',zone:'street',x:13,y:8,dir:'up',look:LOOK.guard,
   script:()=>{const q=Q.cafe[Math.random()*Q.cafe.length|0];
-   const hi=f().secret?[{say:'사연 코너요? 옛날 방송부도 했지요.'},{say:'그때 디제이가 편지를 참 좋아했어요.'}]
+   const hi=f().aired?[{say:'오늘 사연, 경비실에서도 들었어요.'},{say:'옛날 생각이 나네요. 참 좋았어요.'}]
+    :f().secret?[{say:'사연 코너요? 옛날 방송부도 했지요.'},{say:'그때 디제이가 편지를 참 좋아했어요.'}]
     :[{say:'학생들, 노래방 가요? 좋지요.'},{say:'옛날 방송부도 여기서 많이 놀았어요.'}];
    return [...hi,{say:'자, 아저씨랑 옛날 단어 하나 해요.'},{...q,old:1},{say:'잘했어요. 차 조심해요!'}]},
   talk:()=>[]},

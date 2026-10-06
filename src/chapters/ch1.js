@@ -168,6 +168,7 @@ const f=()=>state.f;
 const hasItem=i=>state.items.includes(i);
 const has=w=>state.badges.includes(w);
 const NOTE='복숭아 쪽지';
+const pick=a=>a[Math.random()*a.length|0];  // a repeat line picked at random, so a character talked to often doesn't say the same thing
 
 const ZONES={
  yard:{name:'느티고 · 운동장',reg:'NEUTI HIGH · YARD',outdoor:1,
@@ -381,10 +382,15 @@ const lunchT=()=>!!f().lunch&&!f().deal;            // lunch break: yard, hall a
 const classT=()=>!f().lunch||(!!f().deal&&!f().crew3); // lessons and 종례: classmates in their seats
 const NPC={
  guard:{name:'박 경비 아저씨',zone:'yard',x:17,y:12,dir:'left',look:LOOK.guard,
-  script:()=>{
-   if(f().done)return [{say:'하교예요? 조심히 가요.'},{say:'…아까 그 노래, 학생도 들었어요?'},{say:'옛날 방송부 노래예요. 참 오랜만이네요.'}];
-   if(f().gotNotice)return [{who:'나',say:'아저씨, 방송실 알아요?'},{say:'방송실? 옛날에는 점심마다 노래가 나왔어요.'},{say:'그때 디제이 목소리가 참 좋았는데…'}];
-   if(f().metTeacher)return [{say:'학교는 좀 어때요? 다들 착하죠?'},{say:'여기 버스는 항상 늦어요. 내일은 일찍 타요.'}];
+  script:()=>{const F=f();   // repeat lines follow the day: morning, lunch, 종례, 하교
+   if(F.done)return [{say:'하교예요? 조심히 가요.'},{say:'…아까 그 노래, 학생도 들었어요?'},{say:'옛날 방송부 노래예요. 참 오랜만이네요.'}];
+   if(F.crew3)return [{say:'벌써 하교예요? 첫날, 수고했어요.'},{say:'방송부 한다면서요? 소문 다 났어요.'},{say:'방송실 열쇠는 아저씨한테 있어요. 언제든지 와요.'}];
+   if(F.deal)return [{say:'지금 종례 시간 아니에요?'},{say:'반장한테 혼나요. 얼른 교실에 가요.'}];
+   if(F.gotNotice)return [{who:'나',say:'아저씨, 방송실 알아요?'},{say:'방송실? 옛날에는 점심마다 노래가 나왔어요.'},{say:'그때 디제이 목소리가 참 좋았는데…'}];
+   if(F.metChan)return [{say:'점심 맛있게 먹었어요? 얼굴이 좋네요.'},{say:'벌써 친구도 생겼어요? 다행이네요.'}];
+   if(F.lunch)return [{say:'점심시간이에요. 급식실은 복도 가운데예요.'},{say:'오늘 불고기래요. 얼른 가요.'}];
+   if(F.paidFine)return [{say:'벌써 쉬는 시간이에요?'},{say:'벌금 냈어요? 하하. 여기 반장들은 무서워요.'}];
+   if(F.metTeacher)return [{say:'학교는 좀 어때요? 다들 착하죠?'},{say:'여기 버스는 항상 늦어요. 내일은 일찍 타요.'}];
    return null},
   talk:()=>[
    {say:'어이구, 학생. 늦었네요.'},
@@ -394,11 +400,17 @@ const NPC={
 
  jung:{name:'정 선생님',zone:'hall',x:6,y:2,dir:'down',look:LOOK.jung,badge:['반장','교장','동갑','평범하다','종례'],
   hide:()=>!!f().deal&&!f().crew3,
-  after:'모르는 게 있으면 언제든지 물어봐요.',
+  get after(){return f().done?pick([['아까 복도 스피커 소리 들었어요? 신기하네요.','가기 전에 하나만 물어볼게요.'],['아직 안 갔어요? 내일은 늦지 마요.','가기 전에 하나만요.']])
+   :pick([['종례 끝났네요. 조심히 가요.','아, 가기 전에 하나만요.'],['첫날 수고했어요. 모르는 게 있으면 언제든지 물어봐요.']])},
   status:()=>{if(!has('반장'))return 'todo';if(!has('종례'))return null},
-  script:()=>{
-   if(has('반장')&&!has('종례'))return [{say:'3반은 복도 오른쪽 끝이에요.'},{say:'반장 말 잘 들어요. 벌금 무서워요.'}];
-   return null},
+  script:()=>{const F=f();
+   if(!has('반장')||has('종례'))return null;   // first talk, then (after 종례) the review
+   if(!F.paidFine)return [{say:'3반은 복도 오른쪽 끝이에요.'},{say:'반장 말 잘 들어요. 벌금 무서워요.'}];
+   if(!F.seated)return [{say:'반장 만났어요? 벌금, 냈죠? 하하.'},{say:'자리는 반장 옆이에요. 얼른 앉아요.'}];
+   if(!F.lunch)return [{say:'쉬는 시간이에요? 첫 수업은 어땠어요?'},{say:'다음 시간도 집중해요. 곧 종이 쳐요.'}];
+   if(hasItem('폐부 안내문'))return [{say:'손에 그거 뭐예요? 교장 선생님 거요?'},{say:'교장실은 바로 옆이에요.'}];
+   if(F.metChan)return [{say:'점심 맛있었어요? 찬이랑 같이 먹었죠?'},{say:'찬이 말은 반만 믿어요. 하하.'}];
+   return [{say:'점심시간이네요. 밥 먹었어요?'},{say:'급식실은 복도 가운데예요. 오늘 불고기예요.'}]},
   talk:()=>[
    {say:'아, 왔어요? {전학생|전학생}이죠?'},
    {say:'저는 {담임|담임} 정미숙이에요. 국어 선생님이에요.'},
@@ -416,8 +428,10 @@ const NPC={
 
  principal:{name:'한복순 교장 선생님',zone:'hall',x:12,y:1,dir:'down',look:LOOK.principal,
   status:()=>hasItem('폐부 안내문')?'todo':null,
-  script:()=>{
-   if(f().deal)return [{say:'부원 다섯 명. 잊지 마세요.'},{say:'…방송실 열쇠는 경비 아저씨한테 있어요.'}];
+  script:()=>{const F=f();
+   if(F.done)return [{say:'스피커에서 노래가 나왔다고요?'},{say:'오래된 스피커예요. 가끔 그래요.'},{say:'조심히 가요. 내일은 늦지 마요.'}];
+   if(F.crew3)return [{say:'하교 시간이네요. 첫날은 어땠어요?'},{say:'부원 다섯 명. 잊지 마세요.'}];
+   if(F.deal)return [{say:'부원 다섯 명. 잊지 마세요.'},{say:'…방송실 열쇠는 경비 아저씨한테 있어요.'},{say:'지금은 종례 시간이죠? 교실에 가요.'}];
    if(hasItem('폐부 안내문'))return [
     {who:'…',say:'안내문을 교장 선생님한테 전했어요.',take:['폐부 안내문']},
     {say:'뒤에 답이 있네요. "아직 안 끝났어요."'},
@@ -428,15 +442,18 @@ const NPC={
     {say:'좋아요. 축제까지 방송 한 번. 부원 다섯 명.'},
     {say:'그럼 방송실은 그대로 둘게요.',set:()=>{f().deal=1}},
     {who:'…',say:'교장 선생님이 살짝 웃은 것 같아요.'}];
-   return null},
+   if(!F.metPr)return null;   // the welcome (talk) comes once
+   if(!F.metTeacher)return [{say:'담임 선생님은 만났어요? 교무실은 바로 옆이에요.'}];
+   if(F.lunch)return [{say:'점심은 먹었어요? 오늘 급식, 맛있죠?'},{say:'운동장 느티나무 밑도 가 봐요. 시원해요.'}];
+   return [{say:'또 왔어요? 지금은 수업 시간이에요.'},{say:'얼른 교실에 가요. 수업 시작했어요.'}]},
   talk:()=>[
    {say:'전학생이군요. 느티고에 온 걸 환영해요.'},
    {say:'운동장의 {느티나무|느티나무}, 봤어요? 오백 살이에요.'},
-   {say:'우리 학교 자랑이에요. 내일부터는 늦지 마요.'}]},
+   {say:'우리 학교 자랑이에요. 내일부터는 늦지 마요.',set:()=>{f().metPr=1}}]},
 
  gureumH:{name:'백구름',zone:'hall',x:25,y:2,dir:'up',look:LOOK.gureum,badge:['구석','당황하다','마주치다','전하다'],
   hide:()=>!f().crew3,
-  after:'내일 점심에 방송실에서 봐요.',
+  get after(){return pick(['내일 점심에 방송실에서 봐요.','…아까 그 노래, 계속 생각나요.','다섯 명… 그래도 해 볼게요.'])},
   status:()=>f().done?undefined:'todo',
   script:()=>{
    if(f().done)return null;
@@ -494,7 +511,12 @@ const NPC={
 
  daonSeat:{name:'오다온',zone:'class',x:12,y:9,dir:'left',look:LOOK.daon,banmal:1,badge:['일부러','하필','벌금','걷다','사실대로','지우개','줍다'],
   hide:()=>!f().paidFine,
-  after:'벌금은 내가 걷어. 규칙은 규칙이야.',
+  get after(){const F=f();   // she is at her desk from the morning to after school
+   if(F.done)return ['아까 복도 스피커 들었어? 누가 튼 거야?','…무서운 거 아니야. 그냥 궁금한 거야.'];
+   if(F.crew3)return pick([['구경만이야. 진짜 구경만.'],['종례 끝. 내일 지각하면 벌금 또 걷어.']]);
+   if(F.deal)return ['종례 시작해. 빨리 앉아.'];
+   if(F.gotNotice)return ['방송실 갔다 왔어? …아니, 안 궁금해.'];
+   return pick([['밥 안 먹어? 급식실은 복도 가운데야.'],['벌금은 내가 걷어. 규칙은 규칙이야.']])},
   status:()=>{if(!has('일부러'))return hasItem(NOTE)?'todo':null},
   script:()=>{
    if(has('일부러'))return null;
@@ -536,13 +558,15 @@ const NPC={
 
  chanC:{name:'남궁찬',zone:'class',x:9,y:9,dir:'up',look:LOOK.chan,banmal:1,badge:['소문나다','설레다','쏘다','친해지다'],
   hide:()=>!f().deal,
-  after:'방송부 소문, 벌써 다 났어. 내가 냈거든.',
+  get after(){return f().done?['야, 아까 복도 스피커! 대박.','방송실 귀신이다. 진짜야.']
+   :pick([['방송부 소문, 벌써 다 났어. 내가 냈거든.'],['나 구경만 하는 거야. …근데 좀 설레.']])},
   script:()=>!f().crew3?[{say:'야, 너 방송부 한다며? 교장실 앞에서 다 들었어.'},{say:'종례 시작한대. 빨리 앉아.'}]:null,
   talk:()=>[]},
 
  chan:{name:'남궁찬',zone:'cafe',x:6,y:6,dir:'down',look:LOOK.chan,banmal:1,badge:['소문나다','설레다','쏘다','친해지다'],
   hide:()=>!!f().deal,
-  after:'새 소문 있어? 없어? 내가 만들까?',
+  get after(){return f().gotNotice?['방송실 갔다 왔어? 귀신 있었어? 진짜?','…없었어? 에이, 재미없어.']
+   :pick([['방송실 간다며? 귀신 보면 사진 찍어 와!'],['새 소문 있어? 없어? 내가 만들까?']])},
   talk:()=>[
    {who:'…',say:'오늘은 불고기! {식판|식판}을 들고 빈자리에 앉았어요.'},
    {say:'헉, 너 그 전학생이지? 대박!'},
@@ -565,13 +589,17 @@ const NPC={
    {say:'복도 오른쪽 끝이야. 급식실 지나서. 조심해!',award:['소문나다','설레다','쏘다','친해지다'],set:()=>{f().metChan=1}}]},
 
  imo:{name:'매점 이모',zone:'cafe',x:18,y:1,dir:'down',look:LOOK.imo,
-  script:()=>{const q=Q.cafe[Math.random()*Q.cafe.length|0];
-   return [{say:'학생, 어서 와요. 이거 먹어요. 공짜예요.'},{say:'먹으면서 옛날 단어 하나 해요.'},{...q,old:1},{say:'잘했어요. 또 와요!'}]},
+  script:()=>{const q=Q.cafe[Math.random()*Q.cafe.length|0],F=f();
+   const hi=F.crew3?[{say:'하교해요? 배고프죠? 이거 먹고 가요.'}]
+    :F.deal?[{say:'종례 시간 아니에요? 쉿, 빨리 먹고 가요.'}]
+    :F.gotNotice?[{say:'또 왔어요? 이거 먹어요. 공짜예요.'}]
+    :[{say:'학생, 어서 와요. 점심 먹었어요?'},{say:'후식으로 이거 먹어요. 공짜예요.'}];
+   return [...hi,{say:'먹으면서 옛날 단어 하나 해요.'},{...q,old:1},{say:'잘했어요. 또 와요!'}]},
   talk:()=>[]},
 
  gureum:{name:'백구름',zone:'bcast',x:14,y:9,dir:'left',look:LOOK.gureum,badge:['구석','당황하다','마주치다','전하다'],
   hide:()=>!!f().crew3,
-  after:'저… 마이크 앞에서만 말을 잘해요.',
+  get after(){return f().deal?pick([['교장 선생님이 진짜 괜찮대요? …다행이에요.'],['종례 끝나면 저도 복도로 갈게요.']]):['저… 마이크 앞에서만 말을 잘해요.']},
   status:()=>f().deal||!has('구석')?undefined:'wait',
   script:()=>has('구석')&&!f().deal?[{say:'교장실은 교무실 옆이에요.'},{say:'…저는 여기서 기다릴게요.'}]:null,
   talk:()=>[
