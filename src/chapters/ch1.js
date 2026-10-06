@@ -57,6 +57,7 @@ const DICT={
  '경례':{k:'"인사!" 하는 말. 반장이 하면 다 같이 인사해요.',e:'"Bow!" (class command)'},
  '의외':{k:'생각 못 한 일이라서 좀 놀라워요.',e:'unexpected, surprising'},
  '식판':{k:'급식을 담는 큰 접시. 칸이 있어요.',e:'(school) meal tray'},
+ '생일턱':{k:'생일인 사람이 친구들한테 밥이나 간식을 사 주는 것.',e:'a birthday treat (the birthday person treats friends)'},
 };
 /* sounds-alike / looks-alike words, used when a listening question is built */
 const CONFUSE={'반장':['반찬','교장'],'교장':['교실','공장'],'종례':['조례','종이'],'소문나다':['소리 나다','소원'],'지우개':['지우다','지붕'],'줍다':['춥다','주다'],
@@ -579,7 +580,10 @@ const NPC={
    {say:'자, 이거 받아. 바나나우유!',give:'바나나우유'},
    Q.chan[2],
    Q.chan[3],
-   {say:'우유 하나로 우리 이제 친구야. 하하.'},
+   {who:'나',say:'생일인데 네가 사? 생일에는 선물을 받잖아.'},
+   {say:'한국에서는 생일인 사람이 친구들한테 쏴. {생일턱|생일턱}이야!'},
+   {who:'나',say:'아, 그렇구나. 생일 축하해!'},
+   {say:'고마워! 우유 하나로 우리 이제 친구야. 하하.'},
    {w:'친해지다',who:'나',build:['우리','벌써','친해졌어']},
    {say:'반장 다온 만났지? 무섭지? 하하.'},
    Q.chan[4],
