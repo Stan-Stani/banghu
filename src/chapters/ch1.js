@@ -172,7 +172,7 @@ const NOTE='복숭아 쪽지';
 const ZONES={
  yard:{name:'느티고 · 운동장',reg:'NEUTI HIGH · YARD',outdoor:1,
   legend:{'H':{tile:'building'},'C':{tile:'clock'},'E':{tile:'entrance',walk:1},'.':{tile:'sand',walk:1},',':{tile:'stone',walk:1},'*':{tile:'bed'},
-   'Y':{tile:'zelkova'},'n':{tile:'ybench'},'g':{tile:'goal'},'b':{tile:'booth'},'f':{tile:'fence'},'G':{tile:'gate'}},
+   'Y':{tile:'zelkova',front:'zelkovaTop'},'n':{tile:'ybench'},'g':{tile:'goal'},'b':{tile:'booth'},'f':{tile:'fence'},'G':{tile:'gate'}},
   map:[
 "HHHHHHHHHHHHHHHHHHHHHHHH",
 "HHHHHHHHHHHCCHHHHHHHHHHH",
@@ -824,10 +824,12 @@ const TILES={
   [[2,4,'#F7D154'],[7,6,'#E86D8A'],[11,3,'#F7D154'],[13,7,'#FFFFFF'],[4,8,'#E86D8A']].forEach(([a,b,c],i)=>{if((h+i)%4){r(X+a,Y+b+1,1,2,'#3E8E3A');r(X+a-1,Y+b,3,1,c);r(X+a,Y+b-1,1,1,c)}})},
  zelkova:(X,Y,x,y,t)=>{sandF(X,Y,x,y);const [ox,oy]=blockOrigin(x,y,'Y'),bx=X-(x-ox)*16,by=Y-(y-oy)*16,s=Math.sin(t/1400)*1.2;
   inTile(X,Y,()=>{g.fillStyle='rgba(60,40,20,.18)';g.beginPath();g.ellipse(bx+32,by+58,28,6,0,0,Math.PI*2);g.fill();
-   r(bx+27,by+30,10,30,'#6E4A2E');r(bx+29,by+30,3,30,'#8A6040');r(bx+22,by+56,20,4,'#6E4A2E');r(bx+20,by+24,6,3,'#6E4A2E');r(bx+38,by+22,6,3,'#6E4A2E');
-   disc(bx+32+s,by+28,25,'#256640');disc(bx+32+s,by+25,25,'#2F7A4E');disc(bx+18+s,by+31,15,'#2F7A4E');disc(bx+46+s,by+31,15,'#2F7A4E');
-   disc(bx+28+s,by+19,18,'#3F9460');disc(bx+44+s,by+23,10,'#3F9460');disc(bx+16+s,by+25,9,'#3F9460');
-   disc(bx+24+s,by+13,8,'#5DB070');disc(bx+40+s,by+15,6,'#5DB070');disc(bx+14+s,by+21,4,'#5DB070');})},
+   r(bx+27,by+30,10,30,'#6E4A2E');r(bx+29,by+30,3,30,'#8A6040');r(bx+22,by+56,20,4,'#6E4A2E');r(bx+20,by+24,6,3,'#6E4A2E');r(bx+38,by+22,6,3,'#6E4A2E');})},
+ zelkovaTop:(X,Y,x,y,t)=>{const [ox,oy]=blockOrigin(x,y,'Y');if(x!==ox||y!==oy)return;  // the canopy: drawn once, over the characters, free to overhang the row above
+  const bx=X,by=Y,s=Math.sin(t/1400)*1.2;
+   disc(bx+32+s,by+25,27,'#256640');disc(bx+32+s,by+22,27,'#2F7A4E');disc(bx+18+s,by+28,15,'#2F7A4E');disc(bx+46+s,by+28,15,'#2F7A4E');
+   disc(bx+28+s,by+16,18,'#3F9460');disc(bx+44+s,by+20,10,'#3F9460');disc(bx+16+s,by+22,9,'#3F9460');
+   disc(bx+24+s,by+10,8,'#5DB070');disc(bx+40+s,by+12,6,'#5DB070');disc(bx+14+s,by+18,4,'#5DB070')},
  ybench:(X,Y,x,y)=>{sandF(X,Y,x,y);const T=at(x,y-1)!=='n';r(X+4,Y+(T?2:0),9,T?14:12,'#B68350');for(let j=(T?4:2);j<16;j+=4)r(X+4,Y+j,9,1,'#9A6A3C');r(X+3,Y+(T?2:0),1,T?14:12,'#6E4A28');if(!T)r(X+4,Y+12,2,3,'#6E4A28')},
  goal:(X,Y,x,y)=>{sandF(X,Y,x,y);const L=at(x-1,y)!=='g';for(let i=2;i<15;i+=3)r(X,Y+i,16,1,'#E6E2D6');for(let i=1;i<16;i+=3)r(X+i,Y+2,1,13,'#E6E2D6');
   r(X,Y+1,16,2,'#F7F7F2');r(L?X+1:X+13,Y+1,2,15,'#F7F7F2')},
