@@ -307,7 +307,7 @@ const ZONES={
    't':['식판에 밥이 반쯤 남았어요.','긴 식탁이에요. 반찬 냄새가 나요.','누가 우유를 쏟았어요. 하필 여기에.','누가 밥을 다 먹었어요. 식판이 깨끗해요.']},
   npcs:['chan','imo','xK1','xK2','xK3','xK4','xK5','xK6']},
  bcast:{name:'방송실',reg:'BROADCAST ROOM',
-  legend:{'#':{tile:'wall'},'.':{tile:'oldFloor',walk:1},'D':{tile:'exitDoor',walk:1},'r':{tile:'rack'},'A':{tile:'onair'},'O':{tile:'poster'},'W':{tile:'sideWin'},
+  legend:{'#':{tile:'wall'},'.':{tile:'oldFloor',walk:1},'D':{tile:'exitDoor',walk:1},'r':{tile:'rack'},'A':{tile:'onair'},'O':{tile:'poster'},'W':{tile:'streetWin'},
    'M':{tile:'mixer'},'i':{tile:'micStand'},'s':{tile:'oldSofa'},'c':{tile:'tapeCart'},'x':{tile:'boxes'}},
   map:[
 "##rrrrADD#OO####",
@@ -328,7 +328,7 @@ const ZONES={
    'r':['카세트테이프가 가득해요. 다 옛날 노래예요.','테이프 이름이 다 손글씨예요.','테이프 하나에 "점심 방송 1"이라고 써 있어요.'],
    'A':()=>f().done?'불이 꺼진 램프예요… 방금 깜빡였어요?':'"방송 중" 램프예요. 불이 꺼졌어요.',
    'O':['빛바랜 포스터예요. 아주 옛날 거예요.','포스터에 마이크 그림이 있어요.'],
-   'W':['창문이 먼지 때문에 뿌예요.','창밖에 느티나무 가지가 보여요.'],
+   'W':['창문이 먼지 때문에 뿌예요.','창밖에 학교 앞 길하고 빌라들이 보여요.','창밖 전봇대에 전깃줄이 많아요. 새가 앉아 있어요.','건너편 건물 2층은 학원이에요. 멀리 아파트도 보여요.','길 건너에 편의점이 있어요. 밖에 파라솔하고 테이블이 있어요.'],
    'M':['방송 기계예요. 버튼을 눌러도 아무것도 안 돼요.','기계 위에 먼지가 하얗게 쌓였어요.','"절대 만지지 마세요" 종이가 붙어 있어요.'],
    'i':'마이크예요. "아, 아…" 소리가 안 나요.',
    's':['낡은 소파예요. 앉으면 먼지가 펑!','소파 밑에 과자 봉지가 있어요.'],
@@ -383,17 +383,36 @@ const ERASER={art:{pal:{O:'#1B1E2B',w:'#F4F1EA',W:'#D9D4C8',p:'#F2A38A',P:'#D982
    the tucked-in seat (seatPulled) and the seat is drawn with the sitter.
    CHAIR_N: the desk chair pulled out, facing the board (away from the camera): the seat (hidden under a sitter), then a low
    backrest and the back legs, which back:4 draws again over the sitter's lower back, so the shoulders still show.
-   STOOL_N: a lunch stool pulled out, the sitter's back to the camera: its seat and legs show right under the hips (drop 0).
+   STOOL_N: a lunch stool pulled out, the sitter's back to the camera: its seat and legs show right under the hips (drop 0), and the
+   whole seat is pulled up to the table edge (lift 10), so they sit at the table, not a tile away from it.
    STOOL: the stool of someone on the far side of a table, facing the camera: hidden behind them. The sitter shows the lap and sinks
    until it meets the table (keep 14, drop 7). */
 const CHAIR_N={art:{pal:{O:'#1B1E2B',h:'#6C8DAD',w:'#4F6F8F',m:'#6F757C'},back:4,
  down:['.OOOOOOOO.','.OhhhhhhO.','.OwwwwwwO.','.OwwwwwwO.','OOOOOOOOOO','OhhhhhhhhO','OOOOOOOOOO','.m......m.']}};
+/* the street outside the 방송실, drawn upright (sky on top, road at the bottom), 64px wide = four window tiles. A Korean school street:
+   a red-brick 빌라 with a water tank on the roof, a concrete 전봇대 with tangled power lines and a transformer (a bird on a wire),
+   a two-storey 상가 (a 학원 upstairs, a shop's sign band and glass front below) with 아파트 towers far behind, a white 빌라, and a
+   bright 편의점 (blue sign band, shelves behind the glass) with a parasol, a plastic table and red chairs out front. */
+const STREET={pal:{L:'rgba(60,66,72,.55)',k:'#3C4248',Q:'#6E8FB0',b:'#7E3E2E',B:'#9A4E3A',V:'#C9DCE6',Y:'#F2D27A',d:'#5A4636',
+  P:'#9AA0A6',X:'#5E646A',A:'#C9D2D8',a:'#AEB8C0',W:'#E6DCC8',w:'#BDB3A0',S:'#2E9C8E',s:'#F4F1E6',G:'#D8E8EE',e:'#8E979C',
+  g:'#8C8F92',m:'#E8E4D8',
+  n:'#2B6CB0',o:'#F4F1E6',H:'#F4F6E8',x:'#D9534F',y:'#F2C94C',u:'#E8E4D8',U:'#3E8E5A',p:'#6F757C',t:'#C9CED3',c:'#C0392B'},
+ rows:['..........QQ....LPLLAAA...AAAA.....QQ...........................',
+       'L.bbbbbbbbQQbb.LLPXLAaALkLAaAALLLwwwQwwwwwwwwwwLLLLLLLLLLLLLLLLL',
+       '..BVVBBVVBBVVB...P..WWWWWWWWWWW..WVVWWVVWWVVWW..................',
+       '..BBBBBBBBBBBB...P..WVVWVVWVVWW..WWWWWWWWWWWWW..nnoonnnnnn.uUUu.',
+       '..BVYBBVVBBYVB...P..SSSSsSSSsSS..WVVWWYVWWVVWW..HHHHHHHHHH..p...',
+       '..BBBBBBBBBBBB...P..GGGGGeGGGGG..WWWWWWWWWWWWW..HxyHHyxHHH.tttt.',
+       '..BVVBBddBBVVB...P..GGdGGeGGGGG..WVVWWdddWWVVW..HHdHHHHHHH.c..c.',
+       'gggmggggggmggggggmggggggmggggggmggggggmggggggmgggggmggggggmggggg']};
 const STOOL_PAL={O:'#1B1E2B',e:'#E07A5A',E:'#B85E44',m:'#6F757C'};
-const STOOL_N={art:{pal:STOOL_PAL,drop:0,
+const STOOL_N={art:{pal:STOOL_PAL,drop:0,lift:10,
  down:['.OOOOOOOO.','.OeeeeeeO.','.OOOOOOOO.','..m....m..']}};
 const STOOL={art:{pal:STOOL_PAL,keep:14,drop:7,
  down:['..OOOOOO..','..OeeeeO..','..OEEEEO..','..OOOOOO..','...m..m...']}};
-/* is the seat of the desk / table at x,y pulled out? (someone sits right below it, facing it; the player's own chair counts) */
+/* is the seat of the desk / table at x,y pulled out? (someone sits right below it, facing it; the player's own chair counts)
+   seatPulledN: someone sits right above a lunch table, facing it (their stool, on the far side, is hidden behind them) */
+const seatPulledN=(x,y)=>{try{return live().some(n=>n.x===x&&n.y===y-1&&n.dir==='down'&&!n.walk&&sitting(n))}catch(e){return false}};
 const seatPulled=(x,y)=>{try{
  if(player.sit&&player.dir==='up'&&player.x===x&&player.y===y+1)return true;
  return live().some(n=>n.x===x&&n.y===y+1&&n.dir==='up'&&!n.walk&&(sitting(n)||n.look===CHAIR_N))}catch(e){return false}};
@@ -493,7 +512,7 @@ const NPC={
   script:()=>{
    if(f().done)return null;
    return [
-    {who:'…',say:'{하교|하교} 시간. 복도가 시끄러워요.'},
+    {who:'…',say:'{하교|하교} 시간. 복도에 사람이 별로 없어요.'},
     {say:'혼자서는 무서웠는데… 오늘 진짜 고마웠어요.'},
     {say:'다섯 명은 어려워도 해 볼게요.'},
     {who:'스피커',say:'지지직… ♪ 라라라… ♪'},
@@ -534,16 +553,16 @@ const NPC={
    {who:'…',say:'수업이 시작됐어요. 국어, 영어…'},
    {who:'학교 종',say:'딩동댕동… 쉬는 시간이에요.'},
    {who:'오다온',say:'아, 떨어졌다! 하필 지금…'},
-   {who:'…',say:'다온의 지우개가 내 발 앞으로 굴러왔어요.',set:()=>{f().seated=1}}]}},
+   {who:'…',say:'다온의 지우개가 내 의자 옆으로 굴러왔어요.',set:()=>{f().seated=1}}]}},
 
  eraser:{name:'떨어진 지우개',zone:'class',x:10,y:11,dir:'down',look:ERASER,badge:['지우개','줍다'],
-  hide:()=>!f().seated||hasItem(NOTE)||has('일부러'),
+  hide:()=>!f().seated||!!f().eraserUp||hasItem(NOTE)||has('일부러'),
   after:'작은 지우개예요.',
   talk:()=>[
    {who:'…',say:'바닥에 작고 하얀 게 있어요. 종이 커버가 있어요.'},
    Q.eraser[0],
    Q.eraser[1],
-   {who:'…',say:'어? 커버 안에서 종이가 툭 떨어졌어요.'},
+   {who:'…',say:'어? 커버 안에서 종이가 툭 떨어졌어요.',set:()=>{f().eraserUp=1}},  // picked up: it's off the floor
    {who:'…',say:'"점심시간, 방송실 구석. —{복숭아|복숭아}"',give:NOTE},
    {who:'오다온',say:'고마워. …근데 그 쪽지 뭐야?',award:['지우개','줍다']}]},
 
@@ -567,7 +586,7 @@ const NPC={
    {say:'진짜야. 믿어 줘.'},
    Q.daonS[0],
    Q.daonS[1],
-   {who:'…',say:'다시 수업이에요. 과학, 음악…'},
+   {who:'…',say:'다시 수업이에요. 과학, 음악…',sit:{npc:'seat'}},
    {who:'학교 종',say:'딩동댕동… 점심시간이에요!'},
    {say:'점심시간이네. 밥부터 먹어. 급식실은 복도 가운데야.'},
    {say:'방송실은 복도 오른쪽 끝이야. 나는 안 가.'},
@@ -598,6 +617,7 @@ const NPC={
   talk:()=>[
    {who:'…',say:'오늘은 불고기! {식판|식판}을 들고 빈자리에 앉았어요.',sit:{x:10,y:6,dir:'up',chair:STOOL_N}},
    {say:'헉, 너 그 전학생이지? 대박!'},
+   {say:'아침에 방송실 앞에 서 있었지? 거기 귀신 나오는 방이야.'},
    Q.chan[0],
    {say:'나는 남궁찬. 이 학교 소문은 다 내가 알아.'},
    {say:'근데 진짜 귀신 봤어?'},
@@ -769,7 +789,7 @@ function questText(){
 }
 
 /* ---------- school tiles ---------- */
-const WALLISH=new Set(['wall','board','timetable','sideWin','hallWin','classWin','notice','speaker','classDoor','exitDoor','cafDoor','bcDoor','bcSign','menu','snacks','rack','onair','poster','lockers','shoes','stairs']);
+const WALLISH=new Set(['wall','board','timetable','sideWin','streetWin','hallWin','classWin','notice','speaker','classDoor','exitDoor','cafDoor','bcDoor','bcSign','menu','snacks','rack','onair','poster','lockers','shoes','stairs']);
 const wallish=(x,y)=>{const c=at(x,y);if(c==null)return true;const L=Z.legend[c];return !!L&&WALLISH.has(L.tile)};
 function face(X,Y){r(X,Y,16,16,'#EDE3CF');r(X,Y,16,1,'#F8F2E6');r(X,Y+11,16,5,'#8FB8A0');r(X,Y+11,16,1,'#B1D3BE');r(X,Y+15,16,1,'#6E9A82')}
 function cap(X,Y,x,y){r(X,Y,16,16,'#6B6157');r(X,Y,16,1,'#81766A');r(X,Y+15,16,1,'#5A5148');if(hash(x,y)<25)r(X+3+hash(y,x)%9,Y+5+hash(x,y)%6,2,1,'#74695E')}
@@ -801,6 +821,12 @@ const TILES={
  timetable:(X,Y)=>{face(X,Y);r(X+3,Y+1,10,9,'#F4F1E6');r(X+3,Y+1,10,2,'#E07A5A');for(let i=0;i<3;i++)r(X+4,Y+4+i*2,8,1,'#C9C2B0');r(X+7,Y+3,1,7,'#C9C2B0')},
  sideWin:(X,Y,x,y,t)=>{cap(X,Y,x,y);r(X+4,Y,8,16,'#EDE3CF');r(X+5,Y,6,16,'#A9D8EC');r(X+6,Y,1,16,'#D6F0FA');r(X+5,Y+15,6,1,'#EDE3CF');
   if(hash(x,y)%3===0){const s=Math.round(Math.sin(t/900+y));r(X+8+s,Y+4,3,3,'#6FA86A')}if(y%4===1)r(X+5,Y,6,4,'#F2E2B0')},
+ /* the 방송실's windows face the street, not the yard: STREET (below) seen through dusty glass. They are in the east wall, so the
+    view is turned like the wall: ART.rot(…,1) puts its sky at the outer edge and its road at the room edge; each tile down the
+    wall shows the next 16px of it. */
+ streetWin:(X,Y,x,y,t)=>{cap(X,Y,x,y);r(X+3,Y,10,16,'#E2D8C2');r(X+4,Y,8,16,'#B4C3C6');  // a wider pane than sideWin: 8px of view
+  const v=STREET.east||(STREET.east=ART.rot(STREET.rows,1)),o=(y%4)*16;ART.put(v.slice(o,o+16),STREET.pal,X+4,Y);
+  r(X+4,Y+3,1,1,'#D5DCDC');r(X+9,Y+11,1,1,'#D5DCDC')},
  desk:(X,Y,x,y)=>{woodF(X,Y,x,y);r(X+1,Y+2,14,7,'#E3C08A');r(X+1,Y+2,14,1,'#F0D6A8');r(X+1,Y+8,14,1,'#B98E58');r(X+2,Y+9,1,4,'#6F757C');r(X+13,Y+9,1,4,'#6F757C');
   if(!seatPulled(x,y)){r(X+4,Y+11,8,4,'#4F6F8F');r(X+4,Y+11,8,1,'#6C8DAD')}/* the chair, tucked in */const h=hash(x,y);if(h<40)r(X+3,Y+3,4,4,['#E07A5A','#5A8FB0','#7CB46A'][h%3]);if(h%3===0)r(X+9,Y+5,4,1,'#E8B93A')},
  tdesk:(X,Y,x,y)=>{woodF(X,Y,x,y);r(X,Y+3,16,11,'#9C6B3E');r(X,Y+3,16,3,'#B9844F');r(X,Y+3,16,1,'#CF9E66');r(X+2,Y+9,12,1,'#7E5430');r(X+3,Y+1,3,4,'#F2F0EA');r(X+9,Y+3,5,2,'#F4F1E6')},
@@ -851,7 +877,7 @@ const TILES={
  kitchen:(X,Y,x,y,t)=>{r(X,Y,16,16,'#C9CDC4');r(X+2,Y+5,12,10,'#AEB4B8');r(X+2,Y+5,12,2,'#D3D8DB');r(X+3,Y+6,10,1,'#7A8086');
   const s=Math.round(Math.sin(t/300+x)*2);g.fillStyle='rgba(255,255,255,.55)';g.fillRect(X+6+s,Y+1,2,3);g.fillRect(X+9-s,Y,2,2)},
  serve:(X,Y,x,y)=>{checkF(X,Y,x,y);r(X,Y+2,16,13,'#AEB4B8');r(X,Y+2,16,4,'#D3D8DB');r(X,Y+14,16,1,'#7A8086');r(X+2,Y+3,12,2,['#F4F1E6','#E0884A','#C8443A','#7CB46A','#9A5A3A'][x%5]);r(X,Y,16,1,'#E6F2F6')},
- lunchTable:(X,Y,x,y)=>{checkF(X,Y,x,y);r(X,Y+3,16,8,'#E8E2D2');r(X,Y+3,16,1,'#F6F2E8');r(X,Y+10,16,1,'#B9B2A0');const h=hash(x,y);
+ lunchTable:(X,Y,x,y)=>{checkF(X,Y,x,y);if(!seatPulledN(x,y)){r(X+3,Y,4,3,'#B85E44');r(X+9,Y,4,3,'#B85E44')}/* far-side stools, tucked in behind the table */r(X,Y+3,16,8,'#E8E2D2');r(X,Y+3,16,1,'#F6F2E8');r(X,Y+10,16,1,'#B9B2A0');const h=hash(x,y);
   if(h%3){r(X+3,Y+4,10,5,'#9AA8B0');r(X+4,Y+5,3,2,'#F4F1E6');r(X+8,Y+5,2,2,'#C8443A');r(X+10,Y+6,2,2,'#E0884A')}if(!seatPulled(x,y)){r(X+3,Y+12,4,3,'#E07A5A');r(X+9,Y+12,4,3,'#E07A5A')}/* two stools, tucked in */},
  snacks:(X,Y,x,y)=>{face(X,Y);r(X,Y+1,16,14,'#9C6B3E');r(X+1,Y+2,14,5,'#6E4A2A');r(X+1,Y+8,14,5,'#6E4A2A');const h=hash(x,y),C=['#E07A5A','#F2C46B','#5A8FB0','#7CB46A','#E86D8A','#F7D154'];
   for(let i=0;i<4;i++){r(X+2+i*3,Y+3,2,4,C[(h+i)%6]);r(X+2+i*3,Y+9,2,4,i%2?'#F7D154':C[(h+i+2)%6])}},
