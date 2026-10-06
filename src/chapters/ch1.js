@@ -201,7 +201,7 @@ const ZONES={
    'g':['축구 골대예요. 그물에 구멍이 있어요.','골대 옆에 공이 하나 있어요.'],
    'b':['경비실이에요. 라디오 소리가 작게 들려요.','창문에 열쇠가 많이 걸려 있어요.'],
    'f':['초록색 울타리예요.','울타리 밖에 버스 정류장이 보여요.'],
-   'G':()=>f().done?'정문이에요. 내일 또 와요.':'정문이에요. 아직 집에 갈 시간이 아니에요.'},
+   'G':()=>f().done?nextChapterAsk('정문이에요. 오늘은 끝!'):'정문이에요. 아직 집에 갈 시간이 아니에요.'},
   npcs:['guard','xLate','xSoc1','xSoc2','xBench1','xBench2','xHome1','xHome2']},
  hall:{name:'느티고 · 1층 복도',reg:'NEUTI HIGH · 1F',
   legend:{'#':{tile:'wall'},',':{tile:'hallFloor',walk:1},'.':{tile:'checkFloor',walk:1},'D':{tile:'doorway',walk:1},

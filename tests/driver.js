@@ -47,6 +47,7 @@ window.__play=async function(steps){
   while(dlg&&guard++<300){
    if(typing&&!typing.finished){await key('z');continue}
    const who=$('who').textContent,txt=$('txt').textContent;if(LOG[LOG.length-1]!==`  ${who}: ${txt}`)log(`  ${who}: ${txt}`);
+   if(choosing()&&dlg.cur.choose){const bs=choiceBtns();log('  ? '+dlg.cur.choose.map(c=>c[0]).join(' / ')+' > '+bs[bs.length-1].textContent);bs[bs.length-1].click();await wait(250);continue}  // a plain choice (e.g. next chapter?): stay
    if(choosing()){
     const s=dlg.cur,btns=choiceBtns();const want=i=>btns.findIndex(b=>+b.dataset.i===i);
     const ci=s.opts.findIndex(o=>o[1]),wi=s.opts.findIndex(o=>!o[1]);
