@@ -4,7 +4,11 @@ CHAPTERS.push({id:'ch1',n:'1교시',title:'전학생',place:'운동장 · 복도
     from the right wall to the back wall, so a save standing in the old door column is moved to the new door. */
  migrate:st=>{const F=st.f||(st.f={}),it=st.items||[],b=st.badges||[];
   if(F.paidFine&&!F.seated&&(it.includes('복숭아 쪽지')||b.includes('지우개')||b.includes('일부러')||F.lunch))F.seated=1;
-  if(st.zone==='class'&&st.x===19)Object.assign(st,{x:18,y:11,dir:'up'})},
+  if(st.zone==='class'&&st.x===19)Object.assign(st,{x:18,y:11,dir:'up'});
+  /* round 3: the seats moved below their desks (facing the board), and 찬 sits at a lunch table */
+  const taken=st.zone==='class'&&st.y===11&&(st.x===11||st.x===12&&F.paidFine||st.x===10&&F.seated&&!it.includes('복숭아 쪽지')&&!b.includes('일부러'));
+  if(taken)Object.assign(st,{x:13,y:11,dir:'left'});
+  if(st.zone==='cafe'&&st.x===10&&st.y===4)Object.assign(st,{y:3})},
  make:()=>{
 /* =====================================================================
    1교시 · 전학생 — story: notes/story.md (1교시). Original story; nothing from the webtoon but the word list.
@@ -269,7 +273,7 @@ const ZONES={
    'J':'시간표예요. 오늘 점심 다음은 수학이에요.',
    'W':['창밖에 느티나무가 보여요.','창문이 열려 있어요. 바람이 시원해요.','창가에 작은 화분이 있어요.'],
    'k':'교탁이에요. 분필하고 출석부가 있어요.',
-   'd':(x,y)=>x===11&&y===10?(f().seated?'내 자리예요. 아직 아무것도 없어요.':'내 자리예요. 의자가 책상 위쪽에 있어요.'):x===12&&y===10?'다온의 자리예요. 필통이 아주 깔끔해요.':['책상 위에 수학 문제집이 있어요.','책상에 작은 낙서: "졸려…"','책상 위에 필통하고 물병이 있어요.','책상 서랍에 과자가 숨어 있어요.'][x%4],
+   'd':(x,y)=>x===11&&y===10?(f().seated?'내 자리예요. 아직 아무것도 없어요.':'내 자리예요. 의자는 책상 아래쪽에 있어요.'):x===12&&y===10?'다온의 자리예요. 필통이 아주 깔끔해요.':['책상 위에 수학 문제집이 있어요.','책상에 작은 낙서: "졸려…"','책상 위에 필통하고 물병이 있어요.','책상 서랍에 과자가 숨어 있어요.'][x%4],
    'b':()=>f().paidFine?'벌금 저금통이에요. 내 오백 원도 들어 있어요.':'분홍색 돼지 저금통. 배에 "벌금"이라고 써 있어요.',
    'L':['사물함이에요. 이름표가 다 붙어 있어요.','사물함 하나가 안 닫혀요. 체육복이 보여요.','"오다온" 사물함. 아주 깔끔해요.']},
   npcs:['daon','daonSeat','seat','eraser','mate','mate2','jongnye','chanC','xC1','xC2','xC3','xC4','xC5']},
@@ -374,9 +378,39 @@ const LOOK={
 const ERASER={art:{pal:{O:'#1B1E2B',w:'#F4F1EA',W:'#D9D4C8',p:'#F2A38A',P:'#D9826C',y:'#F7E7B0'},
  down:['....yyy.....','..OOyyyOOO..','.OwwwpppppO.','.OwwwpPPppO.','.OWWWpppppO.','..OOOOOOOO..']}};
 
-/* my chair, seen from above: backrest at the top, seat, metal legs */
-const CHAIR={art:{pal:{O:'#1B1E2B',h:'#D49A5A',w:'#B5793F',d:'#8E5A2E',m:'#6F757C'},
- down:['.OOOOOOOOOO.','.OhhhhhhhhO.','.OwwwwwwwwO.','.OOOOOOOOOO.','..m......m..','.OOOOOOOOOO.','.OhhhhhhhhO.','.OwwwwwwwwO.','.OwwwwwwwwO.','.OddddddddO.','.OOOOOOOOOO.','..m......m..','..m......m..']}};
+/* seats, 3/4 view from above, bottom-aligned like every sprite. Every desk has a blue chair and every lunch table two orange stools,
+   drawn tucked in by the desk / table tile. Someone sitting right below one, facing it, has pulled their seat out: the tile skips
+   the tucked-in seat (seatPulled) and the seat is drawn with the sitter.
+   CHAIR_N: the desk chair pulled out, facing the board (away from the camera): the seat (hidden under a sitter), then a low
+   backrest and the back legs, which back:4 draws again over the sitter's lower back, so the shoulders still show.
+   STOOL_N: a lunch stool pulled out, the sitter's back to the camera: its seat and legs show right under the hips (drop 0).
+   STOOL: the stool of someone on the far side of a table, facing the camera: hidden behind them. The sitter shows the lap and sinks
+   until it meets the table (keep 14, drop 7). */
+const CHAIR_N={art:{pal:{O:'#1B1E2B',h:'#6C8DAD',w:'#4F6F8F',m:'#6F757C'},back:4,
+ down:['.OOOOOOOO.','.OhhhhhhO.','.OwwwwwwO.','.OwwwwwwO.','OOOOOOOOOO','OhhhhhhhhO','OOOOOOOOOO','.m......m.']}};
+const STOOL_PAL={O:'#1B1E2B',e:'#E07A5A',E:'#B85E44',m:'#6F757C'};
+const STOOL_N={art:{pal:STOOL_PAL,drop:0,
+ down:['.OOOOOOOO.','.OeeeeeeO.','.OOOOOOOO.','..m....m..']}};
+const STOOL={art:{pal:STOOL_PAL,keep:14,drop:7,
+ down:['..OOOOOO..','..OeeeeO..','..OEEEEO..','..OOOOOO..','...m..m...']}};
+/* is the seat of the desk / table at x,y pulled out? (someone sits right below it, facing it; the player's own chair counts) */
+const seatPulled=(x,y)=>{try{
+ if(player.sit&&player.dir==='up'&&player.x===x&&player.y===y+1)return true;
+ return live().some(n=>n.x===x&&n.y===y+1&&n.dir==='up'&&!n.walk&&(sitting(n)||n.look===CHAIR_N))}catch(e){return false}};
+
+const JONGNYE=()=>[
+ {who:'…',say:'자리에 앉았어요.',sit:{npc:'seat'}},
+ {who:'정 선생님',say:'자, 다들 자리에 앉아요.',cam:[8,3]},
+ {...Q.jong[0],who:'정 선생님'},
+ {who:'정 선생님',say:'다음 달에 {축제|축제}가 있어요.'},
+ {who:'정 선생님',say:'반마다 하나씩 준비해요. 생각해 봐요.'},
+ {who:'남궁찬',say:'선생님! 전학생이 {방송부|방송부} 한대요!'},
+ {who:'정 선생님',say:'오, 그래요? 대단하네요. {부원|부원}은요?'},
+ {who:'남궁찬',say:'…저는 구경만 할게요. 구경만.'},
+ {who:'오다온',say:'나도. 구경만. 반장은 바쁘거든.'},
+ {who:'정 선생님',say:'구경도 좋아요. 그럼 오늘 종례 끝!'},
+ {who:'오다온',say:'{차렷|차렷}. {경례|경례}.',cam:null},
+ {who:'다 같이',say:'선생님, 수고하셨습니다!',award:['종례'],set:()=>{f().crew3=1}}];
 
 /* when the background extras are around (see the extras at the end of NPC) */
 const lunchT=()=>!!f().lunch&&!f().deal;            // lunch break: yard, hall and 급식실 are busy
@@ -413,7 +447,7 @@ const NPC={
    if(F.metChan)return [{say:'점심 맛있었어요? 찬이랑 같이 먹었죠?'},{say:'찬이 말은 반만 믿어요. 하하.'}];
    return [{say:'점심시간이네요. 밥 먹었어요?'},{say:'급식실은 복도 가운데예요. 오늘 불고기예요.'}]},
   talk:()=>[
-   {say:'아, 왔어요? {전학생|전학생}이죠?'},
+   {say:'아, 왔어요? {전학생|전학생}이죠?',set:()=>{f().foundTeacher=1}},
    {say:'저는 {담임|담임} 정미숙이에요. 국어 선생님이에요.'},
    {say:'첫날부터 {지각|지각}이네요. 버스 때문이에요?'},
    {say:'하하, 괜찮아요. 우리 반은 2학년 3반이에요.'},
@@ -488,18 +522,21 @@ const NPC={
    {say:'오백 원. 땡그랑. 고마워.'},
    {say:'네 자리는 내 옆이야. 넷째 줄. 빨리 와.',award:['벌금','걷다','사실대로'],set:()=>{f().paidFine=1},walk:{npc:'daonSeat',from:[18,10]}}]},
 
- seat:{name:'내 자리',zone:'class',x:11,y:9,dir:'down',look:CHAIR,still:1,
-  hide:()=>!f().paidFine||!!f().seated,
-  status:()=>'todo',
-  talk:()=>[
+ seat:{name:'내 자리',zone:'class',x:11,y:11,dir:'up',look:CHAIR_N,still:1,
+  status:()=>{const F=f();return F.paidFine&&!F.seated||F.deal&&!F.crew3?'todo':null},
+  talk:()=>{const F=f();
+   if(!F.paidFine)return [{who:'…',say:'빈자리예요. 누구 자리일까요?'}];
+   if(F.deal&&!F.crew3)return JONGNYE();
+   if(F.seated)return [{who:'…',say:'내 자리예요. 잠깐 앉았어요.',sit:{npc:'seat'}}];
+   return [
    {who:'…',say:'내 자리. 다온 옆, 넷째 줄이에요.'},
-   {who:'…',say:'의자에 앉았어요. 가방을 내려놓아요.'},
+   {who:'…',say:'의자에 앉았어요. 가방을 내려놓아요.',sit:{npc:'seat'}},
    {who:'…',say:'수업이 시작됐어요. 국어, 영어…'},
    {who:'학교 종',say:'딩동댕동… 쉬는 시간이에요.'},
    {who:'오다온',say:'아, 떨어졌다! 하필 지금…'},
-   {who:'…',say:'다온의 지우개가 내 발 앞으로 굴러왔어요.',set:()=>{f().seated=1}}]},
+   {who:'…',say:'다온의 지우개가 내 발 앞으로 굴러왔어요.',set:()=>{f().seated=1}}]}},
 
- eraser:{name:'떨어진 지우개',zone:'class',x:11,y:9,dir:'down',look:ERASER,badge:['지우개','줍다'],
+ eraser:{name:'떨어진 지우개',zone:'class',x:10,y:11,dir:'down',look:ERASER,badge:['지우개','줍다'],
   hide:()=>!f().seated||hasItem(NOTE)||has('일부러'),
   after:'작은 지우개예요.',
   talk:()=>[
@@ -510,7 +547,7 @@ const NPC={
    {who:'…',say:'"점심시간, 방송실 구석. —{복숭아|복숭아}"',give:NOTE},
    {who:'오다온',say:'고마워. …근데 그 쪽지 뭐야?',award:['지우개','줍다']}]},
 
- daonSeat:{name:'오다온',zone:'class',x:12,y:9,dir:'left',look:LOOK.daon,banmal:1,badge:['일부러','하필','벌금','걷다','사실대로','지우개','줍다'],
+ daonSeat:{name:'오다온',zone:'class',x:12,y:11,dir:'up',look:LOOK.daon,banmal:1,sit:1,chair:CHAIR_N,badge:['일부러','하필','벌금','걷다','사실대로','지우개','줍다'],
   hide:()=>!f().paidFine,
   get after(){const F=f();   // she is at her desk from the morning to after school
    if(F.done)return ['아까 복도 스피커 들었어? 누가 튼 거야?','…무서운 거 아니야. 그냥 궁금한 거야.'];
@@ -536,40 +573,30 @@ const NPC={
    {say:'방송실은 복도 오른쪽 끝이야. 나는 안 가.'},
    {say:'…재밌는 일이면 나중에 얘기해 줘.',award:['일부러','하필'],set:()=>{f().lunch=1}}]},
 
- mate:{name:'반 친구',zone:'class',x:3,y:5,dir:'up',look:LOOK.mate,
+ mate:{name:'반 친구',zone:'class',x:3,y:5,dir:'up',look:LOOK.mate,sit:1,chair:CHAIR_N,
   talk:()=>[{say:'쿨쿨…'},{say:'…오백 원 없어… 반장, 제발…'},{who:'…',say:'자고 있어요. 깨우지 마요.'}]},
- mate2:{name:'반 친구',zone:'class',x:15,y:5,dir:'up',look:LOOK.mate2,banmal:1,
+ mate2:{name:'반 친구',zone:'class',x:15,y:5,dir:'up',look:LOOK.mate2,sit:1,chair:CHAIR_N,banmal:1,
   script:()=>f().crew3?[{say:'방송부? 대박. 부럽다.'},{say:'축제 때 구경 갈게.'}]:null,
   talk:()=>[{say:'안녕! 너 전학생이지? 반가워.'},{say:'다온이 무섭지? 그래도 착해.'},{say:'다들 학원 때문에 바빠. 나도 그래.'},{say:'어제 모의고사 망했어. 엄청 어려웠거든.'}]},
 
- jongnye:{name:'정 선생님',zone:'class',x:8,y:1,dir:'down',look:LOOK.jung,badge:['종례'],
+ jongnye:{name:'정 선생님',zone:'class',x:8,y:1,dir:'down',look:LOOK.jung,
   hide:()=>!f().deal||!!f().crew3,
-  talk:()=>[
-   {say:'자, 다들 자리에 앉아요.'},
-   Q.jong[0],
-   {say:'다음 달에 {축제|축제}가 있어요.'},
-   {say:'반마다 하나씩 준비해요. 생각해 봐요.'},
-   {who:'남궁찬',say:'선생님! 전학생이 {방송부|방송부} 한대요!'},
-   {say:'오, 그래요? 대단하네요. {부원|부원}은요?'},
-   {who:'남궁찬',say:'…저는 구경만 할게요. 구경만.'},
-   {who:'오다온',say:'나도. 구경만. 반장은 바쁘거든.'},
-   {say:'구경도 좋아요. 그럼 오늘 종례 끝!'},
-   {who:'오다온',say:'{차렷|차렷}. {경례|경례}.'},
-   {who:'다 같이',say:'선생님, 수고하셨습니다!',award:['종례'],set:()=>{f().crew3=1}}]},
+  status:()=>null,   // 종례 starts when you sit down (see JONGNYE)
+  talk:()=>[{say:'자, 자리에 앉아요. 종례 시작해요.'}]},
 
- chanC:{name:'남궁찬',zone:'class',x:9,y:9,dir:'up',look:LOOK.chan,banmal:1,badge:['소문나다','설레다','쏘다','친해지다'],
+ chanC:{name:'남궁찬',zone:'class',x:9,y:9,dir:'up',look:LOOK.chan,sit:1,chair:CHAIR_N,banmal:1,badge:['소문나다','설레다','쏘다','친해지다'],
   hide:()=>!f().deal,
   get after(){return f().done?['야, 아까 복도 스피커! 대박.','방송실 귀신이다. 진짜야.']
    :pick([['방송부 소문, 벌써 다 났어. 내가 냈거든.'],['나 구경만 하는 거야. …근데 좀 설레.']])},
   script:()=>!f().crew3?[{say:'야, 너 방송부 한다며? 교장실 앞에서 다 들었어.'},{say:'종례 시작한대. 빨리 앉아.'}]:null,
   talk:()=>[]},
 
- chan:{name:'남궁찬',zone:'cafe',x:6,y:6,dir:'down',look:LOOK.chan,banmal:1,badge:['소문나다','설레다','쏘다','친해지다'],
+ chan:{name:'남궁찬',zone:'cafe',x:10,y:4,dir:'down',look:LOOK.chan,banmal:1,sit:1,chair:STOOL,badge:['소문나다','설레다','쏘다','친해지다'],
   hide:()=>!!f().deal,
   get after(){return f().gotNotice?['방송실 갔다 왔어? 귀신 있었어? 진짜?','…없었어? 에이, 재미없어.']
    :pick([['방송실 간다며? 귀신 보면 사진 찍어 와!'],['새 소문 있어? 없어? 내가 만들까?']])},
   talk:()=>[
-   {who:'…',say:'오늘은 불고기! {식판|식판}을 들고 빈자리에 앉았어요.'},
+   {who:'…',say:'오늘은 불고기! {식판|식판}을 들고 빈자리에 앉았어요.',sit:{x:10,y:6,dir:'up',chair:STOOL_N}},
    {say:'헉, 너 그 전학생이지? 대박!'},
    Q.chan[0],
    {say:'나는 남궁찬. 이 학교 소문은 다 내가 알아.'},
@@ -681,23 +708,23 @@ const NPC={
   hide:()=>!f().crew3||!!f().done,
   talk:()=>[{say:'학생, 하교해요? 조심히 가요.'},{say:'복도 방금 닦았어요. 뛰지 마요.'}]},
 
- xC1:{name:'반 친구',zone:'class',x:3,y:7,dir:'up',look:LOOK.xC1,banmal:1,
+ xC1:{name:'반 친구',zone:'class',x:3,y:7,dir:'up',look:LOOK.xC1,sit:1,chair:CHAIR_N,banmal:1,
   hide:()=>!classT(),
   script:()=>f().deal?[{say:'종례 빨리 끝나면 좋겠다.'},{say:'오늘 학원 늦으면 큰일 나.'}]:null,
   talk:()=>[{say:'전학생이다! 반가워.'},{say:'우리 반 평범해. 근데 반장은 좀 무서워.'}]},
- xC2:{name:'반 친구',zone:'class',x:6,y:7,dir:'up',look:LOOK.xC2,banmal:1,
+ xC2:{name:'반 친구',zone:'class',x:6,y:7,dir:'up',look:LOOK.xC2,sit:1,chair:CHAIR_N,banmal:1,
   hide:()=>!classT(),
   script:()=>f().deal?[{say:'축제? 우리 반은 뭐 하지?',face:'think'}]:null,
   talk:()=>[{say:'쉿, 수학 숙제 하는 중이야.'},{say:'…너 혹시 이거 알아? 아, 몰라도 돼.'}]},
- xC3:{name:'반 친구',zone:'class',x:2,y:9,dir:'up',look:LOOK.xC3,banmal:1,
+ xC3:{name:'반 친구',zone:'class',x:2,y:9,dir:'up',look:LOOK.xC3,sit:1,chair:CHAIR_N,banmal:1,
   hide:()=>!classT(),
   script:()=>f().deal?[{say:'찬이가 또 소문냈어. 너 방송부 해?'}]:null,
   talk:()=>[{say:'지우개 좀 빌려줄래? …없어? 괜찮아.'},{say:'다온이한테 빌리면 이자 내야 돼. 농담이야.'}]},
- xC4:{name:'반 친구',zone:'class',x:14,y:7,dir:'up',look:LOOK.xC4,banmal:1,
+ xC4:{name:'반 친구',zone:'class',x:14,y:7,dir:'up',look:LOOK.xC4,sit:1,chair:CHAIR_N,banmal:1,
   hide:()=>!classT(),
   script:()=>f().deal?[{say:'종례 끝나면 같이 집에 갈래?'}]:null,
   talk:()=>[{say:'어디서 왔어? …아, 비밀이야?'},{say:'여기 애들 다 착해. 금방 친해질 거야.'}]},
- xC5:{name:'반 친구',zone:'class',x:5,y:11,dir:'up',look:LOOK.xC5,banmal:1,
+ xC5:{name:'반 친구',zone:'class',x:5,y:11,dir:'up',look:LOOK.xC5,sit:1,chair:CHAIR_N,banmal:1,
   hide:()=>!lunchT(),
   talk:()=>[{say:'나는 급식 안 먹어. 도시락 싸 왔어.'},{say:'엄마 김밥이 최고야. 하나 줄까?'}]},
 
@@ -707,16 +734,16 @@ const NPC={
  xK2:{name:'1학년 학생',zone:'cafe',x:6,y:3,dir:'up',look:LOOK.xK2,
   hide:()=>!lunchT(),
   talk:()=>[{say:'배고파요… 일 분이 한 시간 같아요.',face:'sad'}]},
- xK3:{name:'2학년 학생',zone:'cafe',x:3,y:6,dir:'up',look:LOOK.xK3,banmal:1,
+ xK3:{name:'2학년 학생',zone:'cafe',x:3,y:6,dir:'up',look:LOOK.xK3,sit:1,chair:STOOL_N,banmal:1,
   hide:()=>!lunchT(),
   talk:()=>[{say:'김치 진짜 맵다. 물, 물!',face:'surprised'}]},
- xK4:{name:'2학년 학생',zone:'cafe',x:9,y:8,dir:'down',look:LOOK.xK4,banmal:1,
+ xK4:{name:'2학년 학생',zone:'cafe',x:9,y:8,dir:'down',look:LOOK.xK4,sit:1,chair:STOOL,banmal:1,
   hide:()=>!lunchT(),
   talk:()=>[{say:'너 3반 전학생이지? 소문 다 났어.'},{say:'방송실 귀신 봤다며? 진짜야?',face:'surprised'}]},
- xK5:{name:'2학년 학생',zone:'cafe',x:9,y:10,dir:'up',look:LOOK.xK5,banmal:1,
+ xK5:{name:'2학년 학생',zone:'cafe',x:9,y:10,dir:'up',look:LOOK.xK5,sit:1,chair:STOOL_N,banmal:1,
   hide:()=>!lunchT(),
   talk:()=>[{say:'귀신 얘기는 찬이가 만든 거야.'},{say:'걔 원래 그래. 사실대로 말하는 날이 없어.'}]},
- xK6:{name:'3학년 선배',zone:'cafe',x:15,y:6,dir:'up',look:LOOK.xK6,banmal:1,
+ xK6:{name:'3학년 선배',zone:'cafe',x:15,y:6,dir:'up',look:LOOK.xK6,sit:1,chair:STOOL_N,banmal:1,
   hide:()=>!lunchT(),
   talk:()=>[{say:'…혼자 먹는 게 편해.'},{say:'고3은 밥 먹을 시간도 아까워.'}]},
 };
@@ -729,7 +756,7 @@ const DONE=['1교시 끝!','노래는 곧 멈췄어요. 복도가 다시 조용�
 function questText(){
  const F=f();
  if(F.done)return '1교시 끝 · 교탁 위 복습 노트';
- if(!F.metTeacher)return '교무실 · 담임 선생님 찾기';
+ if(!F.metTeacher)return F.foundTeacher?'교무실 · 담임 선생님하고 이야기':'교무실 · 담임 선생님 찾기';
  if(!F.paidFine)return '2학년 3반 · 반장 만나기';
  if(!F.seated&&!hasItem(NOTE)&&!has('일부러'))return '교실 · 내 자리 찾기';
  if(!hasItem(NOTE)&&!has('일부러'))return '교실 · 떨어진 지우개';
@@ -775,7 +802,7 @@ const TILES={
  sideWin:(X,Y,x,y,t)=>{cap(X,Y,x,y);r(X+4,Y,8,16,'#EDE3CF');r(X+5,Y,6,16,'#A9D8EC');r(X+6,Y,1,16,'#D6F0FA');r(X+5,Y+15,6,1,'#EDE3CF');
   if(hash(x,y)%3===0){const s=Math.round(Math.sin(t/900+y));r(X+8+s,Y+4,3,3,'#6FA86A')}if(y%4===1)r(X+5,Y,6,4,'#F2E2B0')},
  desk:(X,Y,x,y)=>{woodF(X,Y,x,y);r(X+1,Y+2,14,7,'#E3C08A');r(X+1,Y+2,14,1,'#F0D6A8');r(X+1,Y+8,14,1,'#B98E58');r(X+2,Y+9,1,4,'#6F757C');r(X+13,Y+9,1,4,'#6F757C');
-  r(X+4,Y+11,8,4,'#4F6F8F');r(X+4,Y+11,8,1,'#6C8DAD');const h=hash(x,y);if(h<40)r(X+3,Y+3,4,4,['#E07A5A','#5A8FB0','#7CB46A'][h%3]);if(h%3===0)r(X+9,Y+5,4,1,'#E8B93A')},
+  if(!seatPulled(x,y)){r(X+4,Y+11,8,4,'#4F6F8F');r(X+4,Y+11,8,1,'#6C8DAD')}/* the chair, tucked in */const h=hash(x,y);if(h<40)r(X+3,Y+3,4,4,['#E07A5A','#5A8FB0','#7CB46A'][h%3]);if(h%3===0)r(X+9,Y+5,4,1,'#E8B93A')},
  tdesk:(X,Y,x,y)=>{woodF(X,Y,x,y);r(X,Y+3,16,11,'#9C6B3E');r(X,Y+3,16,3,'#B9844F');r(X,Y+3,16,1,'#CF9E66');r(X+2,Y+9,12,1,'#7E5430');r(X+3,Y+1,3,4,'#F2F0EA');r(X+9,Y+3,5,2,'#F4F1E6')},
  terminal:(X,Y,x,y,t)=>{woodF(X,Y,x,y);r(X,Y+3,16,11,'#9C6B3E');r(X,Y+3,16,3,'#B9844F');r(X+2,Y+9,12,1,'#7E5430');
   r(X+2,Y,12,7,'#3E5E8C');r(X+3,Y+1,10,5,'#F7F3E8');r(X+7,Y+1,1,5,'#C9BFA8');r(X+4,Y+2,2,1,'#9AA3B5');r(X+4,Y+4,3,1,'#9AA3B5');r(X+9,Y+2,3,1,'#9AA3B5');r(X+9,Y+4,2,1,'#9AA3B5');
@@ -825,7 +852,7 @@ const TILES={
   const s=Math.round(Math.sin(t/300+x)*2);g.fillStyle='rgba(255,255,255,.55)';g.fillRect(X+6+s,Y+1,2,3);g.fillRect(X+9-s,Y,2,2)},
  serve:(X,Y,x,y)=>{checkF(X,Y,x,y);r(X,Y+2,16,13,'#AEB4B8');r(X,Y+2,16,4,'#D3D8DB');r(X,Y+14,16,1,'#7A8086');r(X+2,Y+3,12,2,['#F4F1E6','#E0884A','#C8443A','#7CB46A','#9A5A3A'][x%5]);r(X,Y,16,1,'#E6F2F6')},
  lunchTable:(X,Y,x,y)=>{checkF(X,Y,x,y);r(X,Y+3,16,8,'#E8E2D2');r(X,Y+3,16,1,'#F6F2E8');r(X,Y+10,16,1,'#B9B2A0');const h=hash(x,y);
-  if(h%3){r(X+3,Y+4,10,5,'#9AA8B0');r(X+4,Y+5,3,2,'#F4F1E6');r(X+8,Y+5,2,2,'#C8443A');r(X+10,Y+6,2,2,'#E0884A')}r(X+3,Y+12,4,3,'#E07A5A');r(X+9,Y+12,4,3,'#E07A5A')},
+  if(h%3){r(X+3,Y+4,10,5,'#9AA8B0');r(X+4,Y+5,3,2,'#F4F1E6');r(X+8,Y+5,2,2,'#C8443A');r(X+10,Y+6,2,2,'#E0884A')}if(!seatPulled(x,y)){r(X+3,Y+12,4,3,'#E07A5A');r(X+9,Y+12,4,3,'#E07A5A')}/* two stools, tucked in */},
  snacks:(X,Y,x,y)=>{face(X,Y);r(X,Y+1,16,14,'#9C6B3E');r(X+1,Y+2,14,5,'#6E4A2A');r(X+1,Y+8,14,5,'#6E4A2A');const h=hash(x,y),C=['#E07A5A','#F2C46B','#5A8FB0','#7CB46A','#E86D8A','#F7D154'];
   for(let i=0;i<4;i++){r(X+2+i*3,Y+3,2,4,C[(h+i)%6]);r(X+2+i*3,Y+9,2,4,i%2?'#F7D154':C[(h+i+2)%6])}},
  shopCounter:(X,Y,x,y)=>{checkF(X,Y,x,y);r(X,Y+3,16,11,'#C98F5A');r(X,Y+3,16,3,'#E3B07A');r(X,Y+13,16,1,'#8A5E36');

@@ -68,9 +68,9 @@ window.__play=async function(steps){
    if(opts.shotTap&&$('txt').querySelector('.w')){ // tap a word → Korean definition, then ? → English
     const w=[...$('txt').querySelectorAll('.w')].sort((a,b)=>b.textContent.length-a.textContent.length)[0];w.click();await wait(150);
     check(!$('gloss').hidden,'tapping a word should open the dictionary');log('  tap '+w.textContent+' → '+$('gloss').textContent.slice(0,60));
-    await shot(opts.shotTap+'-ko');$('gloss').querySelector('.q')?.click();await wait(100);await shot(opts.shotTap+'-en');
-    $('gloss').querySelector('.gr').click();await wait(80);check($('gloss').classList.contains('pinned')&&getComputedStyle($('gloss').querySelector('.gx')).display!=='none','tapping the definition pins it and shows ×');
-    await wait(8500);check(!$('gloss').hidden,'a pinned definition stays open');await shot(opts.shotTap+'-pinned');
+    await shot(opts.shotTap+'-ko');$('gloss').querySelector('.q')?.click();await wait(100);check(!$('gloss').querySelector('.en').hidden,'? shows the English');await shot(opts.shotTap+'-en');
+    check(getComputedStyle($('gloss').querySelector('.gx')).display!=='none','the definition shows ×');
+    await wait(8500);check(!$('gloss').hidden,'the definition stays open until closed');await shot(opts.shotTap+'-stays');
     $('gloss').querySelector('.gx').click();await wait(60);check($('gloss').hidden,'× closes it');opts.shotTap=null;continue}
    await key('z');
   }
@@ -134,7 +134,7 @@ window.__play=async function(steps){
      if(s.shot)await shot(s.shot);const w=[...$('talkList').querySelectorAll('.w')].sort((a,b)=>b.textContent.length-a.textContent.length)[0];w.click();await wait(150);
      check(!$('gloss').hidden,'tapping a word in the log opens the dictionary: '+w.textContent);if(s.shot)await shot(s.shot+'-tap');await key('x');await key('x');check($('talkPanel').hidden,'B closes the log')}
    else if(s.start){$('startBtn').click();await wait(200);check(!$('startPanel').hidden,'START opens the menu');
-     check($('startPanel').querySelectorAll('.mi').length===7,'menu has 대화 · 사전 · 교시 고르기 · 나 꾸미기 · 읽기 · 소리 · 문제 알리기');if(s.shot)await shot(s.shot);
+     check($('startPanel').querySelectorAll('.mi').length===8,'menu has 대화 · 사전 · 교시 고르기 · 나 꾸미기 · 읽기 · 소리 · 문제 알리기 · 디버그');if(s.shot)await shot(s.shot);
      await key('x');check($('startPanel').hidden,'B closes the menu');
      $('startBtn').click();await wait(120);$('tapBtn').click();await wait(200);check($('startPanel').hidden&&!$('tapPanel').hidden,'a menu item closes the menu and opens its panel');await key('x')}
    else if(s.taps){$('tapBtn').click();await wait(250);const rows=[...$('tapList').querySelectorAll('.tp')];

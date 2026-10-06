@@ -77,13 +77,15 @@ canvas{display:block;width:100%;height:auto;image-rendering:pixelated;image-rend
 .tile.sel{border-color:var(--amber);background:#2A2418}
 .tile.bad{animation:shake .3s}
 .tile.used{visibility:hidden}
+.tile.hint{animation:hint 1.1s ease-in-out infinite;border-color:var(--amber)}
+@keyframes hint{0%,100%{transform:none}50%{transform:translateY(-4px)}}
 @keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
 
 .gloss{position:absolute;left:12px;right:12px;top:10px;line-height:1.45;background:var(--amber-soft);color:var(--amber-ink);border-radius:6px;padding:8px 11px;font-size:.9rem;z-index:2;box-shadow:0 4px 0 rgba(0,0,0,.25)}
 .gloss b{font-family:var(--display);font-weight:400;font-size:1.05rem;margin-right:6px}
 .gloss{display:flex;flex-direction:column;gap:5px;padding-right:44px}
-.gloss .gx{display:none;position:absolute;right:42px;top:8px;width:28px;height:28px;border-radius:50%;border:0;background:rgba(0,0,0,.18);color:inherit;font-size:1.1rem;line-height:1;cursor:pointer}
-.gloss.pinned .gx{display:block}.gloss.pinned{padding-right:82px}.gloss.pinned{outline:3px solid rgba(0,0,0,.25);outline-offset:-3px}
+.gloss .gx{display:block;position:absolute;right:42px;top:8px;width:28px;height:28px;border-radius:50%;border:0;background:rgba(0,0,0,.18);color:inherit;font-size:1.1rem;line-height:1;cursor:pointer}
+.gloss{padding-right:82px}
 .gloss .gr{line-height:1.45}
 .gloss .en{font-family:var(--mono);font-size:.72rem;opacity:.75;display:block;margin-top:1px}
 .gloss .q{position:absolute;right:8px;top:8px;width:28px;height:28px;border-radius:50%;border:2px solid var(--amber-ink);background:transparent;color:var(--amber-ink);font-family:var(--mono);font-weight:500;cursor:pointer;line-height:1}
@@ -176,7 +178,7 @@ canvas{display:block;width:100%;height:auto;image-rendering:pixelated;image-rend
 .tl-empty{color:var(--glass-muted);margin:0}
 body.talkopen .gloss{position:fixed;top:calc(env(safe-area-inset-top,0px) + 14px);left:50%;transform:translateX(-50%);width:min(440px,calc(100% - 32px));z-index:20;box-sizing:border-box}
 @media (max-width:370px){.dpad{grid-template-columns:repeat(3,48px);grid-template-rows:repeat(3,48px)}.ab button{width:56px;height:56px}.wlist{grid-template-columns:repeat(3,1fr)}h1{font-size:1.35rem}}
-@media (prefers-reduced-motion: reduce){.more{animation:none}.fade{transition:none}.tile.bad{animation:none}}
+@media (prefers-reduced-motion: reduce){.more{animation:none}.fade{transition:none}.tile.bad{animation:none}.tile.hint{animation:none}}
 </style>
 </head><body>
 <div class="wrap">
