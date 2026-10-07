@@ -101,7 +101,7 @@ const Q={ // NPC questions, kept here so review can reuse them. who:'나' = the 
   {w:'맞춤법',done:'"방송 잘 들었습니다."',ask:'그럼 지금 맞춤법으로 써 봐요. "방송 잘 ___."',opts:[['들었습니다',1],['들었읍니다',0,'"읍니다"는 1988년 전 맞춤법이에요. 지금은 "들었습니다".'],['듣었습니다',0,'듣다는 "들어요, 들었어요"로 바뀌어요. 그래서 "들었습니다".']]},
  ],
  chanL:[
-  {w:'독후감',who:'나',ask:'책이 거꾸로잖아. 읽는 ___했지?',opts:[['척',1],['적',0,'"읽은 적 있어"는 경험이야. 안 읽는데 읽는 것처럼 하면 "읽는 척".']]},
+  {w:'독후감',who:'나',ask:'책이 거꾸로잖아. 읽는 ___하는 거지?',opts:[['척',1],['적',0,'"읽은 적 있어"는 경험이야. 안 읽는데 읽는 것처럼 하면 "읽는 척".']]},
   {w:'답답하다',ask:'어제부터 계속 세 줄이야. 가슴이 ___.',opts:[['답답해',1],['시원해',0,'시원하면 막힌 게 없어. 글이 안 나와서 막힌 느낌은 "답답해".'],['대답해',0,'대답하다는 질문에 말하는 거야. 막힌 느낌은 "답답해".']]},
   {w:'맞춤법',ok:'오, 그렇구나!',ask:'"주인공이 왕이 ___." 맞춤법에 맞는 건?',opts:[['됐다',1],['됬다',0,'"되었다"를 줄이면 "됐다". "됬다"는 없는 글자야.']]},
   {w:'맞춤법',ok:'아하, 그렇구나!',ask:'"그 일은 ___ 전에 있었다." 바른 건?',opts:[['며칠',1],['몇일',0,'소리는 같지만 맞춤법은 "며칠"이야. "몇일"은 틀려.']]},
@@ -162,7 +162,7 @@ const Q={ // NPC questions, kept here so review can reuse them. who:'나' = the 
  ],
 };
 
-const ITEMS={'가입 신청서':'방송부 가입 신청서. 부원 이름 칸이 다섯 개예요.','복숭아 편지':'분홍 편지. 복숭아 향기가 나요. "…잘 들었읍니다."','복숭아 주스':'매점 이모가 쏜 복숭아 주스 다섯 개. 시원해요.'};
+const ITEMS={'찬 독후감':'찬이 쓴 독후감. 두 장이어야 하는데… 세 줄이에요.','가입 신청서':'방송부 가입 신청서. 부원 이름 칸이 다섯 개예요.','복숭아 편지':'분홍 편지. 복숭아 향기가 나요. "…잘 들었읍니다."','복숭아 주스':'매점 이모가 쏜 복숭아 주스 다섯 개. 시원해요.'};
 /* a library chair (as 2학년 3반's), for the first-year asleep at the reading table */
 const CHAIR_N={art:{pal:{O:'#1B1E2B',h:'#6C8DAD',w:'#4F6F8F',m:'#6F757C'},back:4,lift:5,  /* pulled up to the table's edge */
  down:['.OOOOOOOO.','.OhhhhhhO.','.OwwwwwwO.','.OwwwwwwO.','OOOOOOOOOO','OhhhhhhhhO','OOOOOOOOOO','.m......m.']}};
@@ -330,7 +330,8 @@ const NPC={
    {say:'하리는 좀 떨린대. 하하.'},
    {say:'근데 문제가 있어. 우리 아직 {정식|정식} 동아리가 아니야.'},
    {say:'{가입 신청서|가입 신청서}를 내야 돼. 정 선생님한테.'},
-   {say:'나는 사람 많은 교무실은 좀… 부탁해.',face:'sad',award:['뽑다'],set:()=>{f().plan=1}}]},
+   {say:'나는 사람 많은 교무실은 좀… 부탁해.',face:'sad',award:['뽑다'],set:()=>{f().plan=1}},
+   {say:'교무실은 복도 왼쪽 끝이야.'}]},
 
  daonB:{name:'오다온',zone:'bcast',x:9,y:5,dir:'left',look:LOOK.daon,banmal:1,badge:['무시하다'],
   hide:()=>!f().sawComments||!!f().toNR,
@@ -374,9 +375,9 @@ const NPC={
    :[{say:'방송까지 십 분. 늦으면 벌금이야.'},{say:'하리 목 마르대. 주스 하나 사 와.'}],
   talk:()=>[]},
 
- hariFin:{name:'유하리',zone:'bcast',x:12,y:2,dir:'left',look:LOOK.hari,badge:['창피하다'],
+ hariFin:{name:'유하리',zone:'bcast',x:12,y:2,dir:'left',fixed:1,look:LOOK.hari,badge:['창피하다'],
   hide:()=>!f().letter,
-  get after(){return f().done?pick([['선배, 저 오늘도 창피했어요. 그래도 좋아요.'],['다음 사연은 누가 보낼까요? 궁금해요.']]):['방송 끝! …저 목소리 떨렸죠?']},
+  get after(){return f().done?pick([['선배, 저 오늘도 창피했어요. 그래도 좋아요.'],['다음 사연은 누가 보낼까요? 궁금해요.']]):['사연 코너 끝! …저 목소리 떨렸죠?']},
   status:()=>{if(!has('창피하다'))return f().juice?'todo':null},
   script:()=>{if(has('창피하다'))return null;if(!f().juice)return [{say:'선배, 저 여기서 연습할게요.'},{say:'…근데 목이 좀 말라요.',face:'sad'}];return null},
   talk:()=>[
@@ -419,7 +420,7 @@ const NPC={
     {who:'…',say:'다섯 번째 이름: 남궁찬. 글씨가 삐뚤삐뚤해요.'},
     {say:'다섯 명! 좋아요. 제출 완료예요.',face:'happy'},
     Q.jungS[0],
-    {say:'네, 주세요. …오, 맞춤법이 많이 좋아졌네요.'},
+    {say:'네, 주세요. …오, 맞춤법이 많이 좋아졌네요.',take:['찬 독후감']},
     {say:'이제 방송부는 정식 동아리예요. 축하해요!',face:'happy'},
     {say:'게시판에 포스터 붙여도 돼요. 반장한테 말해요.'},
     {say:'다온이는 복도 게시판 앞에 있어요.',set:()=>{f().submitted=1}}];
@@ -478,9 +479,9 @@ const NPC={
    {who:'…',say:'덜컹, 덜컹… 복숭아 주스 다섯 개!',give:'복숭아 주스'},
    {who:'남궁찬',say:'…이모 아니면 누구지? 더 궁금해.',face:'think'},
    {say:'방송실까지 뛰어가요. 방송 잘 들을게요!',face:'happy',award:['복숭아']},
-   {who:'…',say:'찬이 주스를 안고 먼저 뛰어갔어요.',set:()=>{f().juice=1}}]},
+   {who:'…',say:'찬이 먼저 방송실로 뛰어갔어요.',set:()=>{f().juice=1}}]},
 
- daonBoard:{name:'오다온',zone:'hall',x:20,y:1,dir:'left',look:LOOK.daon,banmal:1,badge:['붙다'],
+ daonBoard:{name:'오다온',zone:'hall',x:21,y:1,dir:'left',look:LOOK.daon,banmal:1,badge:['붙다'],
   hide:()=>!!f().sawComments,
   after:'포스터 비뚤어지면 벌금이야. 농담 아니야.',
   status:()=>{if(!has('붙다'))return f().submitted?'todo':null},
@@ -500,6 +501,7 @@ const NPC={
    {who:'…',say:'포스터 밑에 작은 {사연함|사연함}도 놓았어요.'},
    {say:'…으, 근데 내 신발 밑에 이거 뭐야?',face:'angry'},
    Q.daonBd[1],
+   {who:'…',say:'한참 뒤에 껌이 겨우 떨어졌어요.'},
    {say:'됐다. 사연이 많이 오면 좋겠다.',award:['붙다'],walk:{npc:'chanRumor',from:[9,8]}}]},
 
  box:{name:'사연함',zone:'hall',x:19,y:1,dir:'down',look:BOX,still:1,
@@ -514,7 +516,7 @@ const NPC={
   after:'엿들은 거 아니라니까. 귀가 거기 있었어.',
   script:()=>{const F=f();if(!F.rumor)return null;
    if(!F.sawComments)return [{say:'도서관 컴퓨터로 봐 봐. 댓글 장난 아니야.',face:'surprised'}];
-   return [{say:'…내가 좀 오해한 것 같아?',face:'sad'},{say:'다온이가 엄청 화났어. 무서워.',face:'sad'}]},
+   return [{say:'…내가 좀 오해한 것 같아.',face:'sad'},{say:'다온이가 엄청 화났어. 무서워.',face:'sad'}]},
   talk:()=>[
    {say:'헉, 헉… 큰일 났어! 진짜 큰일!',face:'surprised'},
    {say:'아까 계단 밑에서 구름이가 전화했어.'},
@@ -536,7 +538,7 @@ const NPC={
    {say:'하나는 "급식에 떡볶이 넣어 주세요."'},
    {say:'하나는 "찬 선배, 수업 시간에 조용히 해요."'},
    {who:'남궁찬',say:'뭐? 누구야! …{인정|인정}.',face:'surprised'},
-   {say:'하나는 "제 짝이 전학을 갔어요." 이건 오늘 방송에서 읽을 거예요.'},
+   {say:'하나는 "제 짝이 전학을 갔어요." 구름 선배가 오늘 방송에 이걸 뽑았어요.'},
    {say:'그리고 이거… 냄새 맡아 보세요.'},
    {who:'…',say:'분홍 편지예요. 달콤한 냄새가 나요.'},
    Q.hariB[1],
@@ -584,7 +586,7 @@ const NPC={
    {who:'나',say:'찬아, 여기 이름 좀 써 줘. 방송부 신청서.'},
    {say:'당연하지! 이름 크게 쓸게.',face:'happy'},
    {who:'…',say:'신청서에 다섯 번째 이름이 생겼어요.'},
-   {say:'이 독후감도 선생님한테 같이 내 줘.'},
+   {say:'이 독후감도 선생님한테 같이 내 줘.',give:'찬 독후감'},
    {say:'이제 답답한 거 없다! 시원하다!',face:'happy',award:['답답하다'],set:()=>{f().signed5=1}}]},
 
  lib:{name:'서지민',zone:'library',x:14,y:1,dir:'down',look:LOOK.jimin,badge:['댓글','비밀'],
@@ -598,7 +600,8 @@ const NPC={
    if(!F.rumor)return [{say:'선배, 도서관에서는 조용히 해 주세요.'},{say:'…아, 선배 말고 찬 선배요. 그 선배는 늘 시끄러워요.',face:'think'}];
    return null},
   talk:()=>[
-   {say:'선배, 혹시 방송부예요? 이거 봤어요?',face:'surprised'},
+   {say:'선배, 혹시 방송부예요? 저는 도서부 서지민이에요.',face:'surprised'},
+   {say:'1학년이에요. 이거 봤어요?'},
    {who:'…',say:'컴퓨터에 학교 앱 게시판이 떠 있어요.'},
    {who:'…',say:'"방송부 끝났대?" 밑에 글이 서른 개!'},
    {say:'"헐, 진짜?" "부원 없대." "구름 선배 운대."'},
@@ -607,7 +610,6 @@ const NPC={
    {say:'근데… 저 하나 알아요. 들을래요?',face:'think'},
    {say:'첫 글 쓴 사람, 찬 선배예요. 아이디가 "찬찬찬".',face:'happy'},
    Q.lib[1],
-   {say:'저는 도서부 서지민. 1학년이에요.'},
    {say:'저는 아무 말도 안 했어요. 쉿.'},
    {say:'구름 선배 괜찮을까요? 방송실에 가 보세요.',award:['댓글','비밀'],set:()=>{f().sawComments=1}}]},
 
@@ -797,12 +799,12 @@ const shopOf=x=>x<6?0:x<12?1:x<18?2:3;
 const VARIANTS={
  rack:(X,Y,x,y)=>{face(X,Y);r(X,Y+1,16,14,'#6B4A2E');r(X+1,Y+2,14,5,'#3E2A1A');r(X+1,Y+8,14,5,'#3E2A1A');const h=hash(x,y),C=['#E3ECE4','#F2C46B','#E07A5A','#5A8FB0','#B9C1C9'];
   for(let i=0;i<7;i++){r(X+1+i*2,Y+3,1,4,C[(h+i)%5]);if(!(x===5&&i===3))r(X+1+i*2,Y+9,1,4,C[(h+i*3)%5])}},  // a gap where the 1994 tape was
- onair:(X,Y,x,y,t)=>{face(X,Y);r(X+2,Y+3,12,6,'#2B2E36');const on=state.f.aired&&Math.floor(t/700)%4!==0;r(X+3,Y+4,10,4,on?'#E85A4A':'#5A2E2E');r(X+5,Y+5,6,1,on?'#FFD0C8':'#6E3A3A')},  // lit while the 사연 airs
+ onair:(X,Y,x,y,t)=>{face(X,Y);r(X+2,Y+3,12,6,'#2B2E36');const on=!!state.f.aired;r(X+3,Y+4,10,4,on?'#E85A4A':'#5A2E2E');r(X+5,Y+5,6,1,on?'#FFD0C8':'#6E3A3A')},  // lit while the 사연 airs
  poster:(X,Y,x,y)=>{face(X,Y);const L=at(x-1,y)!=='O';r(X+(L?1:0),Y+1,L?15:14,12,'#6B4A2E');r(X+(L?2:0),Y+2,L?14:13,10,'#F2BFA0');r(X+(L?2:0),Y+2,L?14:13,1,'#F7D6C0');
   if(L){r(X+7,Y+3,4,5,'#5A5F6E');r(X+8,Y+4,2,3,'#8E94A0');r(X+8,Y+8,2,3,'#5A5F6E')}else{r(X+1,Y+3,9,1,'#C49A6C');r(X+1,Y+5,7,1,'#C49A6C');r(X+8,Y+8,3,3,'#F2A3B8');r(X+9,Y+7,1,1,'#3F8F4A')}},  // a small peach drawn in the corner
  mixer:(X,Y,x,y,t)=>{oldF(X,Y,x,y);r(X,Y+3,16,10,'#3A3E48');r(X,Y+3,16,2,'#535866');r(X,Y+12,16,1,'#22252C');
   for(let i=0;i<4;i++){r(X+2+i*4,Y+6,1,5,'#1E2128');r(X+1+i*4,Y+7+(hash(x+i,y)%3),3,2,'#B9C1C9');const lit=Math.floor(t/300+i+x)%3!==0;r(X+2+i*4,Y+4,1,1,lit?'#7CF07A':'#2E5A2E')}r(X+3,Y+3,3,1,'#8A8E96');
-  if(state.f.smoke&&x===5){for(let n=0;n<4;n++){const p=(Math.floor(t/120)+n*5)%20,sz=3+(p>>2),c=p<8?'#E2DFD9':p<14?'#B9B6B0':'#8E8B86';r(X+6+((n*7+p)%7)-(sz>>1),Y+6-p,sz,sz,c)}}  /* 펑! smoke billowing off the mixer */},  // working again
+  if(state.f.smoke&&x===3){for(let n=0;n<4;n++){const p=(Math.floor(t/120)+n*5)%20,sz=3+(p>>2),c=p<8?'#E2DFD9':p<14?'#B9B6B0':'#8E8B86';r(X+6+((n*7+p)%7)-(sz>>1),Y+6-p,sz,sz,c)}}  /* 펑! smoke billowing off the mixer */},  // working again
  notebook:(X,Y,x,y,t)=>{oldF(X,Y,x,y);r(X,Y+6,16,8,'#6B4A2E');r(X,Y+6,16,2,'#8A6040');r(X,Y+13,16,1,'#4A3220');
   r(X+3,Y,10,8,'#2B2E36');r(X+4,Y+1,8,6,'#3E5E8C');r(X+5,Y+2,4,1,'#C9D6F0');r(X+5,Y+4,6,1,'#9AB0D8');r(X+5,Y+5,3,1,'#9AB0D8');r(X+2,Y+8,12,3,'#B9C1C9');r(X+2,Y+8,12,1,'#D3D8DB');r(X+4,Y+9,8,1,'#8A8E96');
   r(X+10,Y+2,2,2,'#F2A3B8');const due=state&&dueWords().length>0;if(due){const on=Math.floor(t/350)%2;r(X+12,Y,4,4,on?'#F2C46B':'#E8962A');r(X+13,Y+1,2,2,on?'#FFF3C4':'#F2C46B')}},  // the club's laptop
@@ -838,12 +840,8 @@ const TILES={...SCHOOL_TILES,...VARIANTS,
  /* 학교 앞 */
  shopSign:(X,Y,x,y,t)=>{const k=shopOf(x),[c,l]=SHOP[k];r(X,Y,16,16,'#5A5F6E');r(X,Y,16,1,'#6E747E');r(X,Y+3,16,12,c);r(X,Y+3,16,1,l);r(X,Y+14,16,2,'#3E4350');
   const i=x%6;if(i===0)r(X,Y+3,1,12,'#3E4350');
-  if(i===2){if(k===0){r(X+4,Y+6,8,5,'#F4F1E6');r(X+5,Y+7,6,3,'#E0884A')}else if(k===1){r(X+3,Y+9,10,2,'#F2C46B');r(X+12,Y+9,2,2,'#F2A38A');r(X+3,Y+9,1,2,'#3E4350')}else if(k===2){const on=Math.floor(t/400)%2;r(X+6,Y+5,4,5,on?'#FFE0FA':'#E86DD8');r(X+7,Y+10,2,3,'#F4F1E6')}else{r(X+4,Y+6,3,6,'#F4F1E6');r(X+9,Y+6,3,6,'#F4F1E6');r(X+5,Y+8,1,2,c)}}
-  else if(i!==0){const w='#F4F1E6',v=(k+i)%3;/* two Hangul-like syllable blocks: ㅁ+ㅏ, ㅇ+ㅣ, ㄴ over ㅡ */
-   if(v===0){r(X+2,Y+6,4,1,w);r(X+2,Y+10,4,1,w);r(X+2,Y+6,1,5,w);r(X+5,Y+6,1,5,w);r(X+7,Y+5,1,7,w);r(X+8,Y+8,1,1,w)}
-   else if(v===1){r(X+3,Y+6,2,1,w);r(X+3,Y+10,2,1,w);r(X+2,Y+7,1,3,w);r(X+5,Y+7,1,3,w);r(X+7,Y+5,1,7,w)}
-   else{r(X+2,Y+5,1,3,w);r(X+2,Y+7,4,1,w);r(X+1,Y+10,7,1,w)}
-   r(X+10,Y+5,1,4,w);r(X+10,Y+8,4,1,w);r(X+10,Y+10,4,1,w);r(X+13,Y+10,1,2,w);r(X+10,Y+11,1,1,w)}},
+  if(i===1){if(k===0){r(X+4,Y+6,8,5,'#F4F1E6');r(X+5,Y+7,6,3,'#E0884A')}else if(k===1){r(X+3,Y+9,10,2,'#F2C46B');r(X+12,Y+9,2,2,'#F2A38A');r(X+3,Y+9,1,2,'#3E4350')}else if(k===2){const on=Math.floor(t/400)%2;r(X+6,Y+5,4,5,on?'#FFE0FA':'#E86DD8');r(X+7,Y+10,2,3,'#F4F1E6')}else{r(X+4,Y+6,3,6,'#F4F1E6');r(X+9,Y+6,3,6,'#F4F1E6');r(X+5,Y+8,1,2,c)}}  /* the shop's icon */
+  else if(i>=2)SIGN_TEXT(X,Y,x,x-i+2,x-i+5,4,['분식집','문구점','코인 노래방','편의점'][k],'#F4F1E6')},  // its name, in Hangul you can read
  shopFront:(X,Y,x,y,t)=>{const k=shopOf(x);r(X,Y,16,16,'#E9E1D0');r(X,Y+14,16,2,'#9A9286');r(X+1,Y+1,14,12,'#6E7B88');r(X+2,Y+2,12,10,k===2?'#3A2A52':'#BFE3F0');r(X+3,Y+3,3,1,'#E6F6FC');
   if(k===0){r(X+3,Y+7,10,4,'#2B2E36');r(X+4,Y+7,8,2,'#D2533F');r(X+5,Y+7,2,1,'#F08A6A')}
   else if(k===1){r(X+3,Y+7,3,4,'#F2C46B');r(X+6,Y+8,3,3,'#5A8FB0');r(X+10,Y+6,3,5,'#7CB46A')}

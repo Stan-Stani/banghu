@@ -829,7 +829,7 @@ function blockOrigin(x,y,ch){let ox=x,oy=y;while(at(ox-1,y)===ch)ox--;while(at(x
 function inTile(X,Y,fn){g.save();g.beginPath();g.rect(X,Y,16,16);g.clip();fn();g.restore()}
 const disc=(cx,cy,rad,c)=>{g.fillStyle=c;g.beginPath();g.arc(cx,cy,rad,0,Math.PI*2);g.fill()};
 const floorOf=(X,Y,x,y)=>ZID==='bcast'?oldF(X,Y,x,y):ZID==='hagwon'?hF(X,Y,x,y):checkF(X,Y,x,y);
-const SHOP=x=>x===7||x===14?-1:x<7?0:x<14?1:2;
+const SHOP=x=>x===7||x===14||x>20?-1:x<7?0:x<14?1:2;  // three shops; brick between them; the 학원 from x 21
 const SHOPC=[['#4F7AA8','#6E96C2','#3A5E86'],['#C8443A','#E0655A','#9A3028'],['#3F8F5A','#5DB070','#2E6E44']];
 const BUNT=['#E8762A','#F2C46B','#5A8FB0','#E86D8A','#7CB46A'];
 
@@ -913,9 +913,9 @@ const TILES={...SCHOOL_TILES,...VARIANTS,
  roof:(X,Y,x,y)=>{const s=SHOP(x);if(s<0)return TILES.brick(X,Y,x,y);const [c,l,d]=SHOPC[s];r(X,Y,16,16,c);for(let j=2;j<12;j+=4)r(X,Y+j,16,1,l);r(X,Y+12,16,4,d);
   for(let i=0;i<16;i+=4)r(X+i,Y+12,2,4,'#F4F1E6')},
  sign:(X,Y,x,y)=>{const s=SHOP(x);if(s<0)return TILES.brick(X,Y,x,y);const [c,l,d]=SHOPC[s];r(X,Y,16,16,'#E9E1D0');r(X,Y+2,16,11,c);r(X,Y+2,16,1,l);r(X,Y+12,16,1,d);
-  if(SHOP(x-1)!==s)r(X,Y+2,1,11,d);if(SHOP(x+1)!==s)r(X+15,Y+2,1,11,d);const mid=[3,10,17][s];
-  if(x===mid){if(s===0){r(X+3,Y+6,9,3,'#F2C46B');r(X+12,Y+6,2,3,'#F2A38A');r(X+2,Y+7,1,1,'#2B2E36')}else if(s===1){r(X+3,Y+9,10,2,'#2B2E36');r(X+4,Y+5,8,4,'#E8762A');r(X+5,Y+6,3,1,'#F7F3E8');r(X+9,Y+7,2,1,'#F7F3E8')}else{r(X+3,Y+5,4,6,'#F7F3E8');r(X+9,Y+5,4,6,'#F7F3E8');r(X+4,Y+6,2,2,c);r(X+10,Y+8,2,2,c)}}
-  else if((x+s)%2===0){r(X+3,Y+5,4,5,'#F7F3E8');r(X+9,Y+5,4,5,'#F7F3E8');r(X+4,Y+6,2,3,c);r(X+10,Y+7,2,2,c)}},
+  if(SHOP(x-1)!==s)r(X,Y+2,1,11,d);if(SHOP(x+1)!==s)r(X+15,Y+2,1,11,d);let x0=x,x1=x;while(x0>0&&SHOP(x0-1)===s)x0--;while(x1<MW-1&&SHOP(x1+1)===s)x1++;  /* the shop's tiles (bounded by the map) */
+  if(x===x0+1){if(s===0){r(X+3,Y+6,9,3,'#F2C46B');r(X+12,Y+6,2,3,'#F2A38A');r(X+2,Y+7,1,1,'#2B2E36')}else if(s===1){r(X+3,Y+9,10,2,'#2B2E36');r(X+4,Y+5,8,4,'#E8762A');r(X+5,Y+6,3,1,'#F7F3E8');r(X+9,Y+7,2,1,'#F7F3E8')}else{r(X+3,Y+5,4,6,'#F7F3E8');r(X+9,Y+5,4,6,'#F7F3E8');r(X+4,Y+6,2,2,c);r(X+10,Y+8,2,2,c)}}
+  else if(x>=x0+2)SIGN_TEXT(X,Y,x,x0+2,x1,3,['느티 문구','엄마손 분식','24시 편의점'][s],'#F7F3E8')},  // the shop's name, in Hangul you can read
  shopWin:(X,Y,x,y,t)=>{const s=SHOP(x);r(X,Y,16,16,'#E9E1D0');r(X+1,Y+1,14,12,'#3E4350');r(X+2,Y+2,12,10,'#A9D8EC');r(X+3,Y+3,2,1,'#E6F6FC');const h=hash(x,y),F=state.f;
   if(s===0){r(X+3,Y+7,3,4,'#E86D8A');r(X+7,Y+6,3,5,'#5A8FB0');r(X+11,Y+8,2,3,'#F2C46B')}
   else if(s===1){r(X+3,Y+8,10,3,'#2B2E36');r(X+4,Y+7,8,2,'#D8442A');const w=Math.round(Math.sin(t/400+x)*1.5);g.fillStyle='rgba(255,255,255,.6)';g.fillRect(X+6+w,Y+3,2,3);g.fillRect(X+9-w,Y+4,2,2)}

@@ -26,6 +26,7 @@ for w,tag in names: kiwi.add_user_word(w,tag,score=5)
 texts=[]
 for p in sorted((repo/'src/chapters').glob('ch*.js'))+[q for q in [repo/'src/school.js'] if q.exists()]:  # school.js: the 방과 후 school every 교시 shares
     src=p.read_text(encoding='utf-8')
+    src='\n'.join(l for l in src.split('\n') if '/*nolex*/' not in l)  # pixel-font tables and the like aren't game text
     for m in re.finditer(r"'((?:[^'\\\n]|\\.)*)'|`([^`]*)`|\"((?:[^\"\\\n]|\\.)*)\"",src):
         t=next(g for g in m.groups() if g is not None)
         if re.search('[가-힣]',t): texts.append(re.sub(r'\{([^|}]+)\|[^}]+\}',r'\1',t))
