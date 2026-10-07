@@ -63,11 +63,12 @@ canvas{display:block;width:100%;height:auto;image-rendering:pixelated;image-rend
 .gl{color:var(--amber-soft);text-decoration:underline dotted var(--amber);text-underline-offset:3px;cursor:help}
 .more{align-self:flex-end;font-size:.7rem;color:var(--amber);animation:blink 1s steps(2) infinite;line-height:1}
 @keyframes blink{50%{opacity:0}}
-.choices{display:flex;flex-direction:column;gap:5px}
-.choice{font-family:var(--body);font-size:1.05rem;font-weight:600;text-align:left;background:var(--glass-2);color:var(--glass-ink);border:1px solid var(--glass-edge);border-radius:5px;padding:7px 11px;cursor:pointer;word-break:keep-all;display:flex;gap:8px}
-.choice::before{content:"▸";color:var(--amber);visibility:hidden}
+.choices{display:flex;flex-direction:row;flex-wrap:wrap;gap:4px}  /* side by side when they fit (three short answers on one line), else two per row; a leftover keeps its column's width */
+.choice{font-family:var(--body);font-size:1rem;font-weight:600;text-align:center;background:var(--glass-2);color:var(--glass-ink);border:1px solid var(--glass-edge);border-radius:5px;padding:5px 8px;cursor:pointer;word-break:keep-all;display:flex;gap:6px;justify-content:center;align-items:center;flex:1 1 30%;max-width:calc(50% - 2px);box-sizing:border-box}
+.choices .choice:only-child{max-width:none}
+.choice::before{content:"▸";color:var(--amber);display:none}
 .choice.sel{border-color:var(--amber);background:#2A2418}
-.choice.sel::before{visibility:visible}
+.choice.sel::before{display:inline}
 .build{display:flex;flex-direction:column;gap:7px}
 .slots{display:flex;flex-wrap:wrap;gap:5px;min-height:2.1em;align-items:center;border-bottom:1px dashed var(--glass-edge);padding-bottom:6px}
 .slots .ph{font-family:var(--mono);font-size:.75rem;color:var(--glass-muted);letter-spacing:.1em}
@@ -92,7 +93,9 @@ canvas{display:block;width:100%;height:auto;image-rendering:pixelated;image-rend
 .txt .w{cursor:pointer;border-radius:3px}
 .txt .w:active{background:rgba(232,166,74,.25)}
 .card .enb{width:26px;height:26px;padding:0;border-radius:50%;text-align:center}
-.toast{position:absolute;left:50%;top:34px;transform:translateX(-50%);line-height:1.3;background:var(--amber);color:var(--amber-ink);font-family:var(--body);font-weight:600;font-size:.95rem;padding:6px 14px;border-radius:5px;white-space:nowrap;max-width:90%;overflow:hidden;text-overflow:ellipsis;z-index:3;box-shadow:0 3px 0 #9A5E14}
+.dlg.attop{top:6px;bottom:auto}  /* near the bottom of the map the box sits at the top (the camera stays in the room); toasts and word help move down */
+.screen:has(.dlg.attop) .toast{top:auto;bottom:10px}.screen:has(.dlg.attop) .gloss{top:auto;bottom:10px}
+.toast{position:absolute;left:50%;top:6px;transform:translateX(-50%);line-height:1.3;background:var(--amber);color:var(--amber-ink);font-family:var(--body);font-weight:600;font-size:.88rem;padding:4px 12px;border-radius:5px;white-space:nowrap;max-width:90%;overflow:hidden;text-overflow:ellipsis;z-index:3;box-shadow:0 3px 0 #9A5E14}
 
 .pad{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:6px;touch-action:none}
 .dpad{display:grid;grid-template-columns:repeat(3,56px);grid-template-rows:repeat(3,56px);filter:drop-shadow(0 3px 0 var(--pad-sh))}
