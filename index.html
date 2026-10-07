@@ -2602,7 +2602,7 @@ const ZONES={...SCHOOL({open:['cafe','hall2','music','library','bcast'],gate:{to
    'K':['도서부 책상이에요. 도장이 있어요.','"반납은 여기" 상자예요.'],
    't':['책상 위에 펼친 책이 있어요.','책상에 작은 낙서: "독후감 싫어…"','지우개 가루가 잔뜩 있어요.','누가 수학 문제집을 두고 갔어요.'],
    'n':['잡지 꽂이예요. 패션 잡지, 게임 잡지.','학교 신문이에요. "느티나무, 올해도 건강해요."'],
-   'c':x=>f().rumor&&!f().sawComments?'학교 앱 게시판이에요. 로그인은 안쪽 책상 도서부 학생한테 물어봐요.':['학생용 컴퓨터예요. 학교 앱 게시판이 떠 있어요.','컴퓨터 화면에 "게임 금지" 종이가 붙어 있어요.'][x%2],
+   'c':x=>f().rumor&&!f().sawComments?'학교 앱 게시판이에요. 로그인은 오른쪽 위 책상, 도서부 학생한테 물어봐요.':['학생용 컴퓨터예요. 학교 앱 게시판이 떠 있어요.','컴퓨터 화면에 "게임 금지" 종이가 붙어 있어요.'][x%2],
    'r':'반납 수레예요. 책이 높이 쌓였어요.',
    'p':'화분이에요. 도서부가 매일 물을 줘요.'},
   npcs:['chanLib','lib','reader','xL1','xL2']}}}),
@@ -2670,7 +2670,7 @@ const LOOK={
  imo:{hair:'#4A3A34',skin:'#D9A882',shirt:'#F2E6C8',pants:'#6B5B4B',style:'bun',lashes:1,lips:'#C06A6A'},
  guard:{hair:'#8C8C90',skin:'#C9926C',shirt:'#3E5A46',pants:'#33403A',style:'bald',cap:'#3E5A46'},
  jimin:{hair:'#2E2226',skin:'#ECC6A6',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#3F7D5A',style:'short',lashes:1,lips:'#C97A80'},
- kid:{hair:'#3A2B26',skin:'#E8BE98',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#3F7D5A',style:'spiky'},
+ kid:{hair:'#1F1B1E',skin:'#E8BE98',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#3F7D5A',style:'short'},
  reader:{hair:'#251E1C',skin:'#DDB08A',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#3F7D5A',style:'short'},
  /* extras: background students (tie colour by year) */
  xM1:{hair:'#2A2220',skin:'#F0CAA8',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#3F7D5A',style:'bob',lashes:1,lips:'#D27C86'},
@@ -2871,7 +2871,7 @@ const NPC={
    {say:'방송실까지 뛰어가요. 방송 잘 들을게요!',face:'happy',award:['복숭아']},
    {who:'…',say:'찬이 먼저 방송실로 뛰어갔어요.',set:()=>{f().juice=1}}]},
 
- daonBoard:{name:'오다온',zone:'hall',x:21,y:1,dir:'left',look:LOOK.daon,banmal:1,badge:['붙다'],
+ daonBoard:{name:'오다온',zone:'hall',x:18,y:2,dir:'up',look:LOOK.daon,banmal:1,badge:['붙다'],
   hide:()=>!!f().sawComments,
   after:'포스터 비뚤어지면 벌금이야. 농담 아니야.',
   status:()=>{if(!has('붙다'))return f().submitted?'todo':null},
@@ -2943,7 +2943,7 @@ const NPC={
   hide:()=>!f().secret||!!f().letter,
   talk:()=>[{say:'어제 고마웠어. 진짜로.',face:'happy'},{say:'사연함 열어 봐. 하리가 기다려.'},{say:'…나한테 온 편지는 없겠지?',face:'think'}]},
 
- kid:{name:'1학년 학생',zone:'hall',x:9,y:7,dir:'up',look:LOOK.kid,
+ kid:{name:'1학년 학생',zone:'hall',x:11,y:8,dir:'left',look:LOOK.kid,
   hide:()=>!f().rumor,
   script:()=>f().aired?[{say:'선배! 오늘 사연 듣고 울었어요.',face:'sad'},{say:'저도 사연 보낼래요!',face:'happy'}]
    :f().secret?[{say:'오늘 점심에 사연 코너 한대요!',face:'happy'},{say:'방송부 안 끝났대요. 다행이다.'}]
@@ -3105,11 +3105,11 @@ const NPC={
   hide:()=>!f().secret,
   script:()=>f().aired?[{say:'선배! 사연 듣고 감동했어요.',face:'happy'},{say:'저도 사연 써 볼래요.'}]:null,
   talk:()=>[{say:'이모, 빵 하나 주세요.'},{say:'아침을 못 먹었어요. 배고파요.'}]},
- xN2:{name:'2학년 학생',zone:'hall',x:19,y:7,dir:'right',look:LOOK.xN2,banmal:1,
+ xN2:{name:'2학년 학생',zone:'hall',x:19,y:8,dir:'right',look:LOOK.xN2,banmal:1,
   hide:()=>!f().secret,
   script:()=>f().aired?[{say:'그 사연 누가 보냈을까?',face:'think'}]:null,
   talk:()=>[{say:'오늘 점심에 사연 코너 한대.'},{say:'나도 사연 보낼까? 비밀로.'}]},
- xN3:{chat:'xN2',name:'2학년 학생',zone:'hall',x:20,y:7,dir:'left',look:LOOK.xN3,banmal:1,
+ xN3:{chat:'xN2',name:'2학년 학생',zone:'hall',x:20,y:8,dir:'left',look:LOOK.xN3,banmal:1,
   hide:()=>!f().secret,
   script:()=>f().aired?[{say:'복숭아? 이름이 귀엽다.'},{say:'나도 사연 쓸 때 별명 쓸래.'}]:null,
   talk:()=>[{say:'너 사연 쓰면 창피해서 어떡해?'},{say:'이름 안 쓰면 돼. 하하.'}]},
@@ -4230,7 +4230,7 @@ var GAME={prefix:'banghu',title:'방과 후',log:'단어 일지',
  player:{hair:'#2A2F4A',skin:'#F1C9A5',shirt:'#F4F2EA',pants:'#2B3A5C',belt:'#9B2D30'}};
 </script>
 <script>
-/* GENERATED from walk-engine/engine.js (c55a7de) — do not edit here; edit walk-engine and run its sync.sh. */
+/* GENERATED from walk-engine/engine.js (8a3182a) — do not edit here; edit walk-engine and run its sync.sh. */
 /* =====================================================================
    Engine: tiles, movement, zones, dialogue, spaced review, speech, saving.
    ===================================================================== */
@@ -4917,7 +4917,8 @@ function confirmSel(){if(sel<0||performance.now()-choicesAt<450)return;const b=(
 function renderBuild(s){
  s.got=0;$('build').hidden=false;
  $('slots').innerHTML='<span class="ph">· · ·</span>';
- let order;do order=shuffle(s.build.map((_,i)=>i));while(s.build.length>1&&order.every((v,i)=>v===i));  /* never start already solved */
+ let order;const solved=o=>[s.build,...(s.alts||[])].some(a=>o.every((v,i)=>s.build[v]===a[i]));
+ do order=shuffle(s.build.map((_,i)=>i));while(s.build.length>1&&solved(order));  /* never start already solved (in any right order) */
  $('tiles').innerHTML=order.map(i=>`<button class="tile" data-i="${i}">${s.build[i]}</button>`).join('');
  $('tiles').querySelectorAll('.tile').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();pickTile(s,b)}));
  sel=-1;choicesAt=performance.now();markSel();hintTile(s,4000);
