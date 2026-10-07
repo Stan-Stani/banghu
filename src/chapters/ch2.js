@@ -332,9 +332,9 @@ const NPC={
    if(!has('기회'))return null;
    if(f().afterSchool)return [{say:'분식집? 나는 기계 고쳐야 돼. 다녀와.'},{say:'끝나면 방송실로 와. 나 여기 있어.'}];
    if(f().stoodUp)return [{say:'찬이한테 톡 왔어. 3학년 선배들한테 말했다며?',face:'surprised'},{say:'너 진짜 용감하다. 나는 못 해.'}];
-   if(f().knowHari)return [{say:'유하리? 1학년이구나.'},{say:'체육관은 복도 아래쪽이야. 초록색 문.'}];
+   if(f().knowHari)return [{say:'유하리? 1학년이구나.'},{say:'체육관은 운동장 오른쪽이야. 초록색 지붕.'}];
    if(f().metHari)return [{say:'노래하는 애가 도망갔어? 하하… 나 같다.',face:'happy'},{say:'명찰 있으면 선생님이 알 거야.'},{say:'교무실은 복도 왼쪽 위야.'}];
-   if(f().poster)return [{say:'음악실은 복도 위쪽 오른쪽이야.'},{say:'쉿, 조용히 들어가.'}];
+   if(f().poster)return [{say:'음악실은 2층이야. 계단으로 올라가.'},{say:'쉿, 조용히 들어가.'}];
    return null},
   talk:()=>[
    {say:'왔어요? 어제 진짜 고마웠어요.',face:'happy'},
