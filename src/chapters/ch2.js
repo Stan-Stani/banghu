@@ -79,7 +79,7 @@ const BANK=[
  {w:'연락처',ask:'새 친구한테 ___를 물어봤어요.',opts:[['연락처',1],['연습장',0,'연습장은 공부하는 공책이에요. 전화번호는 "연락처".']]},
  {w:'데려오다',ask:'내일 우리 집에 올 때 동생도 ___ 돼.',opts:[['데려와도',1],['데려가도',0,'우리 집으로 "오는" 거니까 "데려와도". 다른 곳으로 같이 가면 "데려가도".'],['내려와도',0,'내려오다는 위에서 아래로 오는 거예요. 같이 오면 "데려와도".']]},
  /* grammar: -(으)ㄹ까(요) (shall we? / should I?) · -지 마 (don't) */
- {w:'곡',ask:'노래방이다! 내가 먼저 한 곡 ___?',opts:[['부를까',1],['부르지 마',0,'"-지 마"는 하지 말라는 거야. 물어볼 때는 "부를까?"']]},
+ {w:'곡',gram:1,ask:'노래방이다! 내가 먼저 한 곡 ___?',opts:[['부를까',1],['부르지 마',0,'"-지 마"는 하지 말라는 거야. 물어볼 때는 "부를까?"']]},
  {w:'놀리다',ask:'동생한테: "내 머리 보고 웃지 마. ___!"',opts:[['놀리지 마',1],['놀릴까',0,'"-ㄹ까"는 물어보는 말이에요. 하지 말라고 할 때는 "놀리지 마".']]},
  {w:'포기하다',ask:'너무 힘들어… 그냥 여기서 ___?',opts:[['포기할까',1],['포기할게',0,'"-ㄹ게"는 약속이에요. 고민하면서 물어볼 때는 "포기할까?"']]},
  {w:'긴장하다',ask:'발표하는 친구한테: "괜찮아. ___."',opts:[['긴장하지 마',1],['긴장할까',0,'"-ㄹ까"는 물어볼 때예요. 하지 말라고 할 때는 "긴장하지 마".']]},
@@ -294,7 +294,7 @@ const LOOK={
  gureum:{hair:'#3B2E2A',skin:'#E2B794',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#B8433A',style:'bob'},
  daon:{hair:'#2A2024',skin:'#EBC3A2',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#B8433A',style:'bun',lashes:1,lips:'#C9707A'},
  chan:{hair:'#6B4A2E',skin:'#D9A57E',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#B8433A',style:'spiky'},
- hari:{hair:'#1F1A1E',skin:'#F0CDAF',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#3F7D5A',style:'long',lashes:1,lips:'#D27C86'},
+ hari:{hair:'#6E3F2C',skin:'#F0CDAF',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#3F7D5A',style:'long',lashes:1,lips:'#D27C86'},
  jung:{hair:'#3A2A28',skin:'#E6BE9C',shirt:'#3F8A80',pants:'#3E4350',style:'bob',lashes:1,lips:'#B85F68'},
  owner:{hair:'#3A2E2A',skin:'#D6A07A',shirt:'#E8833A',pants:'#4A4038',style:'short'},
  teaser:{hair:'#2A2426',skin:'#D2A07A',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#C9A13A',style:'spiky'},
@@ -685,11 +685,11 @@ const NPC={
 const FOLLOW=null;
 
 const INTRO=[{who:'…',say:'다음 날 점심시간. 방송실.'},{who:'…',say:'구름이 큰 종이를 들고 기다려요.'}];
-const DONE=['2교시 끝!','사연함에 카세트가 하나 들어 있어요.','"1994 방송부 · 복숭아" 쪽지: "목소리 좋다. 다음은 이야기."','방송실 책상 위 복습 노트에서 단어를 다시 볼 수 있어요.'];
+const DONE=['사연함에 카세트가 하나 들어 있어요.','"1994 방송부 · 복숭아" 쪽지: "목소리 좋다. 다음은 이야기."','2교시 끝!','방송실 책상 위 복습 노트북에서 단어를 다시 볼 수 있어요.'];
 
 function questText(){
  const F=f();
- if(F.done)return '2교시 끝 · 방송실 복습 노트';
+ if(F.done)return '2교시 끝 · 방송실 복습 노트북';
  if(!F.poster)return '방송실 · 구름이랑 얘기하기';
  if(!F.metHari)return '음악실 · 노래하는 사람 찾기';
  if(!F.knowHari)return '교무실 · 명찰 보여 드리기';
@@ -800,5 +800,6 @@ const TILES={...SCHOOL_TILES,...VARIANTS,
   r(X+12,Y+14,2,1,Math.floor(t/700)%2?'#7CF07A':'#2E5A2E')},
 };
 const PLAYER=LOOK.player;
-return {WORDS,DICT,CONFUSE,BANK,Q,ITEMS,ZONES,NPC,FOLLOW,INTRO,DONE,questText,TILES,VARIANTS,PLAYER,seatPulled,seatPulledN};  // the school's desks and tables ask these whether a chair is pulled out
+const term={name:'복습 노트북'};  // the 방송실 laptop (1교시 reviews in a paper 복습 노트)
+return {WORDS,DICT,CONFUSE,BANK,Q,ITEMS,ZONES,NPC,FOLLOW,INTRO,DONE,questText,TILES,VARIANTS,PLAYER,seatPulled,seatPulledN,term};  // the school's desks and tables ask these whether a chair is pulled out
 }});

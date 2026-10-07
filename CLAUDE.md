@@ -29,3 +29,9 @@ The school's tiles are one tileset: a 교시 draws a school tile its own way onl
 each: why it looks different then); places outside the school (분식집, street, 노래방, 학원) use their own tile names. Objects stand on the
 floor layer (zone `floor`, or legend `floor`), so object tiles draw no floor. `validate.mjs` enforces both. Before an art or layout
 refactor, dump every zone (`node ../walk-engine/tools/zonedump.mjs out/`) and diff after (`zonediff.py`): change only what you meant to.
+
+**Playtesters (agents):** a tester who starts mid-story (e.g. only 3교시) gets the story so far in their prompt: who 다온 (반장), 하리,
+구름 and 찬 are, the five-member 방송부, 하리's first broadcast, 벌금 jokes. Settled by the owner, so testers needn't report them:
+word-order tiles have no instruction text on purpose (only the first tile of the first one ever bobs, after 4 s); the school gate
+is mirrored (you walk ↓ out and face ↑ on the street); long walks across the 1층; words above TOPIK 3 (all tappable); a word quizzed
+several times in one 교시; review right after a word is taught; the sleeper sits upright; the 1층 south wall has windows and doors.

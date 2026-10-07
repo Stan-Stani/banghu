@@ -28,6 +28,9 @@ for(const CH of ctx.CHAPTERS){
   for(const k of Z.npcs){const n=C.NPC[k];if(!n){E('no npc '+k);continue}if(n.zone!==id)E(`npc ${k} zone ${n.zone}≠${id}`);if(!walk(Z,n.x,n.y)&&!n.proxy)E(`npc ${k} on unwalkable ${n.x},${n.y}`);if(n.chat&&(!C.NPC[n.chat]||C.NPC[n.chat].zone!==id))E(`npc ${k} chats with ${n.chat}, who isn't in ${id}`)}  // a proxy (e.g. a table) may stand on furniture
  }
  if(!Object.values(C.ZONES).some(Z=>Object.values(Z.legend).some(L=>L.tile==='terminal'||L.term)))E('no review computer anywhere (a terminal tile, or a legend entry with term:1)');
+ // review asks a word's own questions; gram:1 ones (척, -대, -다 보니 asked under some word) don't count, so each word needs one that isn't
+ {const qs=[...(C.BANK||[]),...Object.entries(C.Q).filter(([k])=>k!=='cafe').flatMap(([,v])=>v)];
+  for(const w of C.WORDS)if(!qs.some(q=>q.w===w&&!q.gram))E(`word "${w}" has no question of its own (all gram:1 or none): review can't ask it`)}
  // one tileset: a 교시 draws a school tile its own way only as a declared story variant (VARIANTS), never by redefining it
  if(ctx.SCHOOL_TILES){const S=ctx.SCHOOL_TILES,V=C.VARIANTS||{};
   for(const k of Object.keys(V))if(!(k in S))E(`VARIANTS.${k} is not a school tile: give it its own name in TILES`);

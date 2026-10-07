@@ -36,7 +36,10 @@ const STREET={pal:{L:'rgba(60,66,72,.55)',k:'#3C4248',Q:'#6E8FB0',b:'#7E3E2E',B:
        '..BVVBBddBBVVB...P..GGdGGeGGGGG..WVVWWdddWWVVW..HHdHHHHHHH.c..c.',
        'gggmggggggmggggggmggggggmggggggmggggggmggggggmgggggmggggggmggggg']};
 
-const WALLISH=new Set(['wall','board','timetable','sideWin','streetWin','hallWin','classWin','notice','speaker','classDoor','exitDoor','cafDoor','bcDoor','bcSign','classSign','menu','snacks','rack','onair','poster','lockers','shoes','stairs','musicDoor','libDoor','sayeon','staffBoard','portraits','gymWin','hoop','bookWall','libWin']);
+/* a name plate on the wall beside a door, spread over the run of plate tiles (2 tiles: room for 3 syllables) */
+function roomPlate(X,Y,x,y,text){face(X,Y);const c=at(x,y);let a=x,b=x;while(at(a-1,y)===c)a--;while(at(b+1,y)===c)b++;const L=x===a,R=x===b;
+ r(X+(L?2:0),Y+3,16-(L?2:0)-(R?2:0),12,'#8A8E96');r(X+(L?3:0),Y+4,16-(L?3:0)-(R?3:0),10,'#F4F1E6');SIGN_TEXT(X,Y,x,a,b,4,text,'#2F3A44')}
+const WALLISH=new Set(['wall','board','timetable','sideWin','streetWin','hallWin','classWin','notice','speaker','classDoor','exitDoor','cafDoor','bcDoor','bcSign','classSign','officePlate','princPlate','stairSign','menu','snacks','rack','onair','poster','lockers','shoes','stairs','musicDoor','libDoor','sayeon','staffBoard','portraits','gymWin','hoop','bookWall','libWin']);
 const wallish=(x,y)=>{const c=at(x,y);if(c==null)return true;const L=Z.legend[c];return !!L&&WALLISH.has(L.tile)};
 const TILES={
  wall:(X,Y,x,y)=>{if(!wallish(x,y+1)||(y===MH-1&&!wallish(x,y-1)))face(X,Y);else cap(X,Y,x,y)},
@@ -112,6 +115,9 @@ const TILES={
    r(X+2,Y+1,12,15,'#5A3E26');r(X+3,Y+2,10,14,'#8E5E3A');r(X+3,Y+2,10,1,'#A87448');
   r(X+5,Y+3,6,4,'#2B2E36');r(X+6,Y+4,2,1,'#5A6478');r(X+5,Y+9,6,5,'#7A4E2E');r(X+6,Y+10,4,3,'#8E5E3A');
   r(X+11,Y+9,2,2,'#E8B93A');r(X+11,Y+9,2,1,'#F7D98C')},
+  officePlate:(X,Y,x,y)=>roomPlate(X,Y,x,y,'교무실'),princPlate:(X,Y,x,y)=>roomPlate(X,Y,x,y,'교장실'),  // the two look-alike doors get names
+  stairSign:(X,Y,x,y)=>{face(X,Y);r(X+1,Y+1,14,15,'#8A8E96');r(X+2,Y+2,12,13,'#F4F1E6');const c='#2F3A44';  // "2층 ↑": the stairs up are in the bottom wall
+   r(X+7,Y+3,2,4,c);r(X+6,Y+4,4,1,c);r(X+5,Y+5,1,1,c);r(X+10,Y+5,1,1,c);SIGN_TEXT(X,Y,x,x,x,7,'2층',c)},
   classSign:(X,Y,x,y)=>{face(X,Y);r(X+2,Y+1,12,9,'#8A8E96');r(X+3,Y+2,10,7,'#F4F1E6');r(X+3,Y+2,10,1,'#3E7A5A');
   const D=['111001111100111','111001111001111'];  // "2" and "3", 3 wide × 5 tall, row by row
   const glyph=(g,ox)=>{for(let i=0;i<15;i++)if(D[g][i]==='1')r(X+ox+i%3,Y+4+(i/3|0),1,1,'#2B3038')};
@@ -300,20 +306,21 @@ const base=()=>({
   legend:{'#':{tile:'wall'},',':{tile:'hallFloor',walk:1},'.':{tile:'checkFloor',walk:1},'D':{tile:'doorway',walk:1},
    'N':{tile:'notice'},'V':{tile:'classWin'},'R':{tile:'classDoor',walk:1},'P':{tile:'speaker'},
    'c':{tile:'cabinet',floor:'checkFloor'},'w':{tile:'water',floor:'checkFloor'},'p':{tile:'plant',floor:'checkFloor'},'k':{tile:'odesk',floor:'checkFloor'},'t':{tile:'trophy',floor:'checkFloor'},'K':{tile:'pdesk',over:1,floor:'checkFloor'},'o':{tile:'sofa',floor:'checkFloor'},'a':{tile:'lowTable',floor:'checkFloor'},
-   's':{tile:'shoes'},'E':{tile:'exitDoor',walk:1},'S':{tile:'stairs',walk:1},'W':{tile:'hallWin'},'F':{tile:'cafDoor',walk:1},'Q':{tile:'bcDoor',walk:1},'q':{tile:'bcSign'},'m':{tile:'classSign'}},
+   's':{tile:'shoes'},'E':{tile:'exitDoor',walk:1},'S':{tile:'stairs',walk:1},'W':{tile:'hallWin'},'F':{tile:'cafDoor',walk:1},'Q':{tile:'bcDoor',walk:1},'q':{tile:'bcSign'},'m':{tile:'classSign'},
+   'g':{tile:'officePlate'},'j':{tile:'princPlate'},'u':{tile:'stairSign'}},
   map:[
 "##################NN#VRm#P##",
 "#ccw.pcc#tt...tt#,,,,,,,,,,#",
 "#.......#..KK...#,,,,,,,,,,#",
 "#kk..kk.#.......#,,,,,,,,,,#",
 "#kk..kk.#oao....#,,,,,,,,,,#",
-"####D########D###,,,,,,,,,,#",
+"##ggD######jjD###,,,,,,,,,,#",
 "#,,,,,,,,,,,,,,,,,,,,,,,,,,#",
 "#,,,,,,,,,,,,,,,,,,,,,,,,,,#",
 "#,,,,,,,,,,,,,,,,,,,,,,,,,,#",
-"#ssssEE#SSS#WWW#FF#WWWW#Qq##"],
+"#ssssEE#SSSuWWW#FF#WWWWqQQ##"],
   rooms:[[1,1,7,4,'교무실'],[9,1,15,4,'교장실'],[17,1,26,4,'복도 · 2학년 3반 앞'],[1,5,26,8,'1층 복도'],[15,7,18,8,'1층 복도 · 급식실 앞'],[22,6,26,8,'복도 끝 · 방송실 앞']],
-  warps:{'5,9':{to:'yard',x:11,y:4,dir:'down'},'6,9':{to:'yard',x:12,y:4,dir:'down'},'22,0':{to:'class',x:18,y:11,dir:'up'},'16,9':{to:'cafe',x:10,y:1,dir:'down'},'17,9':{to:'cafe',x:11,y:1,dir:'down'},'24,9':{to:'bcast',x:7,y:1,dir:'down'},'8,9':{to:'hall2',x:8,y:8,dir:'up'},'9,9':{to:'hall2',x:9,y:8,dir:'up'},'10,9':{to:'hall2',x:10,y:8,dir:'up'}},
+  warps:{'5,9':{to:'yard',x:11,y:4,dir:'down'},'6,9':{to:'yard',x:12,y:4,dir:'down'},'22,0':{to:'class',x:18,y:11,dir:'up'},'16,9':{to:'cafe',x:10,y:1,dir:'down'},'17,9':{to:'cafe',x:11,y:1,dir:'down'},'24,9':{to:'bcast',x:7,y:1,dir:'down'},'25,9':{to:'bcast',x:8,y:1,dir:'down'},'8,9':{to:'hall2',x:8,y:8,dir:'up'},'9,9':{to:'hall2',x:9,y:8,dir:'up'},'10,9':{to:'hall2',x:10,y:8,dir:'up'}},
   things:{'#':['하얀 벽이에요. 아래쪽은 초록색이에요.','벽에 "복도에서 뛰지 마세요" 종이가 있어요.','누가 벽에 작게 낙서했어요.'],
    'N':['게시판: "축제 다음 달! 반마다 하나씩 준비해요."','게시판: "중간고사 등수는 교무실 앞에."','게시판 구석에 "방송부 부원 모집" 종이가 찢어져 있어요.'],
    'V':['창문으로 2학년 3반 교실이 보여요.','교실 안에서 웃음소리가 들려요.'],
@@ -329,7 +336,8 @@ const base=()=>({
    's':['신발장이에요. 실내화가 줄줄이 있어요.','신발장에 이름표가 다 붙어 있어요.'],
    'W':['창밖에 운동장하고 느티나무가 보여요.','창밖에서 새가 짹짹 울어요.'],
    'm':'"2학년 3반" 팻말이에요. 문 옆에 있어요.',
-   'q':'"방송실" 팻말이에요. 문 옆에 있어요.'}},
+   'q':'"방송실" 팻말이에요. 문 옆에 있어요.',
+   'g':'"교무실" 팻말이에요.','j':'"교장실" 팻말이에요.','u':'"2층 ↑" 팻말이에요. 계단으로 올라가요.'}},
 
  hall2:{name:'느티고 · 2층 복도',reg:'NEUTI HIGH · 2F',floor:'hallFloor',
   legend:{'#':{tile:'wall'},',':{tile:'hallFloor',walk:1},'V':{tile:'classWin'},'R':{tile:'classDoor',walk:1},'U':{tile:'musicDoor',walk:1},
@@ -429,7 +437,7 @@ const base=()=>({
 "#cx.........xx.#",
 "################"],
   rooms:[[1,1,14,6,'방송실'],[11,7,14,9,'방송실 · 구석']],
-  warps:{'7,0':{to:'hall',x:24,y:8,dir:'up'},'8,0':{to:'hall',x:24,y:8,dir:'up'}},
+  warps:{'7,0':{to:'hall',x:24,y:8,dir:'up'},'8,0':{to:'hall',x:25,y:8,dir:'up'}},
   things:{'#':['벽에 먼지가 많아요.','벽에 오래된 사진 자국이 있어요.','구름이 벽을 조금 닦았어요. 거기만 하얘요.'],
    'r':['카세트테이프가 가득해요. 다 옛날 노래예요.','테이프 이름이 다 손글씨예요.','테이프 하나에 "점심 방송 1"이라고 쓰여 있어요.'],
    'A':'"방송 중" 램프예요.',
@@ -568,6 +576,11 @@ const GLYPHS={
  '래':['####.#.#','...#.#.#','####.###','#....#.#','####.#.#','.....#.#','.....#.#','.....#.#','........'],  /*nolex*/
  '방':['#..#.#.','####.#.','#..#.##','####.#.','.....#.','..###..','.#...#.','.#...#.','..###..'],  /*nolex*/
  '집':['#####.#','..#...#','.#.#..#','#...#.#','......#','.#...#.','.#####.','.#...#.','.#####.'],  /*nolex*/
+ '교':['#######','......#','......#','......#','.......','..#.#..','..#.#..','#######','.......'],  /*nolex*/
+ '무':['.#####.','.#...#.','.#...#.','.#####.','.......','#######','...#...','...#...','...#...'],  /*nolex*/
+ '실':['..#...#','.#.#..#','#...#.#','......#','.#####.','.....#.','.#####.','.#.....','.#####.'],  /*nolex*/
+ '장':['#####.#.','..#...#.','.#.#..##','#...#.#.','......#.','..####..','.#....#.','.#....#.','..####..'],  /*nolex*/
+ '층':['...#...','#######','..#.#..','.#...#.','#######','.......','..###..','.#...#.','..###..'],  /*nolex*/
  '2':['.###.','#...#','....#','...#.','..#..','.#...','#####','.....','.....'],  /*nolex*/
  '4':['...#.','..##.','.#.#.','#..#.','#####','...#.','...#.','.....','.....']};
 globalThis.SIGN_TEXT=(X,Y,x,x0,x1,top,text,c)=>{const gs=[...text].map(ch=>GLYPHS[ch]||null),GAP=2,W=(x1-x0+1)*16,ox=(x-x0)*16;

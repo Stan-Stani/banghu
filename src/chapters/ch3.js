@@ -1,6 +1,7 @@
 CHAPTERS.push({id:'ch3',n:'3교시',title:'비밀 사연',place:'방송실 · 복도 · 도서관 · 학교 앞 · 코인 노래방',words:20,save:'banghu-ch3',color:'#C97A8E',
  start:{zone:'bcast',x:8,y:6,dir:'up'},introWho:'…',
- migrate:st=>{const F=st.f||{};if(F.posted&&!F.boxed)F.boxed=1},  // saves from before the 사연함 had its own flag (2026-10-07)
+ migrate:st=>{const F=st.f||{};if(F.posted&&!F.boxed)F.boxed=1;  // saves from before the 사연함 had its own flag (2026-10-07)
+  const it=st.items||[],i=it.indexOf('가입 신청서');if(i>=0)it[i]='동아리 등록 신청서'},  // …and from before the form was renamed
  make:()=>{
 /* =====================================================================
    3교시 · 비밀 사연 — story: notes/story.md (3교시). Original story; nothing from the webtoon but the word list.
@@ -37,7 +38,7 @@ const DICT={
  /* glosses for words in lines that are not badges */
  '사연':{k:'라디오에 보내는 사람들의 이야기나 편지.',e:'listener story (sent to a radio show)'},
  '사연함':{k:'사연 편지를 넣는 상자.',e:'story box (for listener letters)'},
- '가입 신청서':{k:'동아리에 들어가려고 이름을 쓰는 종이.',e:'membership application form'},
+ '동아리 등록 신청서':{k:'동아리를 학교에 정식으로 등록하는 종이. 부원 이름을 다 써요.',e:'club registration form'},
  '정식':{k:'학교 규칙에 맞게 진짜로 된 것. "정식 동아리"',e:'official, formal'},
  '학교 앱':{k:'학생들이 핸드폰으로 글을 쓰는 학교 게시판.',e:"the school's (phone) app board"},
  '코인 노래방':{k:'동전을 넣고 한 곡씩 부르는 작은 노래방.',e:'coin karaoke'},
@@ -62,7 +63,7 @@ const BANK=[
  {w:'오해하다',ask:'늦은 건 잠 때문이 아니야. 버스 때문이야. ___하지 마.',opts:[['오해',1],['이해',0,'"이해하지 마"는 이상해요. 잘못 알지 말라는 뜻이면 "오해하지 마".'],['오래',0,'오래는 시간이 길 때야. 잘못 알지 말라는 뜻이면 "오해".']]},
  {w:'사과하다',ask:'동생 과자를 몰래 다 먹었어요. 그래서 동생한테 ___.',opts:[['사과했어요',1],['감사했어요',0,'감사는 고마울 때예요. 내가 잘못했으면 "사과했어요".'],['사과를 먹었어요',0,'하하, 그건 과일 사과예요. 미안하다고 말하면 "사과했어요".']]},
  {w:'독후감',ask:'책 다 읽었어요? 그럼 이제 ___ 쓸 차례예요.',opts:[['독후감',1],['독감',0,'독감은 아주 심한 감기예요. 책을 읽고 쓰는 글은 "독후감".'],['일기',0,'일기는 하루 일을 쓰는 글이에요. 책을 읽고 쓰면 "독후감".']]},
- {w:'맞춤법',ask:'"수업 중에 핸드폰은 안 ___." 맞춤법에 맞는 건?',opts:[['돼요',1],['되요',0,'"되어요"를 줄이면 "돼요". "되요"는 틀린 글자예요.']]},
+ {w:'맞춤법',gram:1,ask:'"수업 중에 핸드폰은 안 ___." 맞춤법에 맞는 건?',opts:[['돼요',1],['되요',0,'"되어요"를 줄이면 "돼요". "되요"는 틀린 글자예요.']]},
  {w:'제출하다',ask:'시험지를 다 쓰고 선생님한테 ___.',opts:[['제출했어요',1],['출제했어요',0,'출제는 선생님이 문제를 만드는 거예요. 학생이 내면 "제출했어요".']]},
  {w:'댓글',ask:'하리 노래 영상 밑에 친구들이 "최고!" ___을 백 개나 썼어요.',opts:[['댓글',1],['대답',0,'대답은 질문에 말로 하는 거야. 글 밑에 쓰는 건 "댓글".'],['답장',0,'답장은 편지나 문자에 다시 보내는 거야. 영상 밑에 쓰는 건 "댓글".']]},
  {w:'눈치',ask:'선생님이 화났는데 찬이 또 농담해요. 찬은 ___가 없어요.',opts:[['눈치',1],['눈썹',0,'눈썹은 눈 위의 털이에요. 분위기를 모르면 "눈치가 없어요".']]},
@@ -78,10 +79,10 @@ const BANK=[
  {w:'붙다',ask:'공부 열심히 했어! 시험에 ___!',opts:[['붙었어',1],['붙였어',0,'"붙였어"는 내가 종이를 벽에 단 거야. 시험에 안 떨어지면 "붙었어".']]},
  {w:'뽑다',ask:'이가 아파서 치과에서 이를 ___.',opts:[['뽑았어요',1],['붙였어요',0,'붙이면 딱 닿게 하는 거예요. 잡아서 빼면 "뽑았어요".']]},
  /* grammar: -(으)ㄴ 척하다 (pretend) · -대 (hearsay) */
- {w:'독후감',ask:'독후감 숙제 안 했는데 한 ___했어. 들킬까 봐 무서워.',opts:[['척',1],['적',0,'"한 적 있다"는 경험이야. 아닌데 그런 것처럼 하면 "한 척".']]},
- {w:'눈치',ask:'다 알면서 모르는 ___하는 거, 그것도 눈치야.',opts:[['척',1],['적',0,'"-ㄴ 적"은 경험이에요. 아는데 모르는 것처럼 하면 "척".']]},
- {w:'비밀',ask:'하리가 그러는데, 내일 비밀 공연이 ___.',opts:[['있대',1],['있을게',0,'"-ㄹ게"는 내가 약속하는 말이야. 들은 말을 전하면 "있대".']]},
- {w:'댓글',ask:'댓글 봤어? 시험 문제가 엄청 ___.',opts:[['쉽대',1],['쉬울게',0,'"-ㄹ게"는 내가 하겠다는 약속이야. 들은 말은 "쉽대".']]},
+ {w:'독후감',gram:1,ask:'독후감 숙제 안 했는데 한 ___했어. 들킬까 봐 무서워.',opts:[['척',1],['적',0,'"한 적 있다"는 경험이야. 아닌데 그런 것처럼 하면 "한 척".']]},
+ {w:'눈치',gram:1,ask:'다 알면서 모르는 ___하는 거, 그것도 눈치야.',opts:[['척',1],['적',0,'"-ㄴ 적"은 경험이에요. 아는데 모르는 것처럼 하면 "척".']]},
+ {w:'비밀',gram:1,ask:'하리가 그러는데, 내일 비밀 공연이 ___.',opts:[['있대',1],['있을게',0,'"-ㄹ게"는 내가 약속하는 말이야. 들은 말을 전하면 "있대".']]},
+ {w:'댓글',gram:1,ask:'댓글 봤어? 시험 문제가 엄청 ___.',opts:[['쉽대',1],['쉬울게',0,'"-ㄹ게"는 내가 하겠다는 약속이야. 들은 말은 "쉽대".']]},
 ];
 
 const Q={ // NPC questions, kept here so review can reuse them. who:'나' = the player says it; who:'…' = narration.
@@ -99,13 +100,13 @@ const Q={ // NPC questions, kept here so review can reuse them. who:'나' = the 
   {w:'제출하다',who:'나',ask:'찬 독후감도 지금 같이 ___ 돼요?',opts:[['제출해도',1],['출제해도',0,'출제는 문제를 만드는 거예요. 독후감을 내면 "제출해도 돼요?".'],['가입해도',0,'가입은 모임에 들어가는 거예요. 독후감을 내면 "제출해도 돼요?".']]},
  ],
  jungL:[
-  {w:'맞춤법',done:'"방송 잘 들었습니다."',ask:'그럼 지금 맞춤법으로 써 봐요. "방송 잘 ___."',opts:[['들었습니다',1],['들었읍니다',0,'"읍니다"는 1988년 전 맞춤법이에요. 지금은 "들었습니다".'],['듣었습니다',0,'듣다는 "들어요, 들었어요"로 바뀌어요. 그래서 "들었습니다".']]},
+  {w:'맞춤법',gram:1,done:'"방송 잘 들었습니다."',ask:'그럼 지금 맞춤법으로 써 봐요. "방송 잘 ___."',opts:[['들었습니다',1],['들었읍니다',0,'"읍니다"는 1988년 전 맞춤법이에요. 지금은 "들었습니다".'],['듣었습니다',0,'듣다는 "들어요, 들었어요"로 바뀌어요. 그래서 "들었습니다".']]},
  ],
  chanL:[
-  {w:'독후감',who:'나',ask:'책이 거꾸로잖아. 읽는 ___하는 거지?',opts:[['척',1],['적',0,'"읽은 적 있어"는 경험이야. 안 읽는데 읽는 것처럼 하면 "읽는 척".']]},
+  {w:'독후감',gram:1,who:'나',ask:'책이 거꾸로잖아. 읽는 ___하는 거지?',opts:[['척',1],['적',0,'"읽은 적 있어"는 경험이야. 안 읽는데 읽는 것처럼 하면 "읽는 척".']]},
   {w:'답답하다',ask:'어제부터 계속 세 줄이야. 가슴이 ___.',opts:[['답답해',1],['시원해',0,'시원하면 막힌 게 없어. 글이 안 나와서 막힌 느낌은 "답답해".'],['대답해',0,'대답하다는 질문에 말하는 거야. 막힌 느낌은 "답답해".']]},
-  {w:'맞춤법',ok:'오, 그렇구나!',ask:'"주인공이 왕이 ___." 맞춤법에 맞는 건?',opts:[['됐다',1],['됬다',0,'"되었다"를 줄이면 "됐다". "됬다"는 없는 글자야.']]},
-  {w:'맞춤법',ok:'아하, 그렇구나!',ask:'"그 일은 ___ 전에 있었다." 바른 건?',opts:[['며칠',1],['몇일',0,'소리는 같지만 맞춤법은 "며칠"이야. "몇일"은 틀려.']]},
+  {w:'맞춤법',gram:1,ok:'오, 그렇구나!',ask:'"주인공이 왕이 ___." 맞춤법에 맞는 건?',opts:[['됐다',1],['됬다',0,'"되었다"를 줄이면 "됐다". "됬다"는 없는 글자야.']]},
+  {w:'맞춤법',gram:1,ok:'아하, 그렇구나!',ask:'"그 일은 ___ 전에 있었다." 바른 건?',opts:[['며칠',1],['몇일',0,'소리는 같지만 맞춤법은 "며칠"이야. "몇일"은 틀려.']]},
  ],
  daonBd:[
   {w:'붙다',ask:'좋아. 포스터가 게시판에 잘 ___ 있어.',opts:[['붙어',1],['붙여',0,'"붙여"는 내가 붙이는 거야. 포스터가 그대로 있으면 "붙어 있어".'],['부어',0,'붓다는 물을 따를 때야. 종이가 벽에 있으면 "붙어".']]},
@@ -113,7 +114,7 @@ const Q={ // NPC questions, kept here so review can reuse them. who:'나' = the 
  ],
  chanR:[
   {w:'엿듣다',who:'나',ask:'너, 구름이 전화를 ___?',opts:[['엿들었어',1],['엿봤어',0,'엿보다는 몰래 보는 거야. 전화는 귀로 들으니까 "엿들었어".']]},
-  {w:'엿듣다',own:1,ask:'큰일이야. 구름이가 방송부 그만___!',opts:[['둔대',1],['둘게',0,'"-ㄹ게"는 내가 약속하는 말이야. 남한테 들은 말은 "그만둔대".'],['둘래',0,'"그만둘래"는 내가 그만두고 싶을 때야. 남한테 들은 말은 "그만둔대".']]},
+  {w:'엿듣다',gram:1,own:1,ask:'큰일이야. 구름이가 방송부 그만___!',opts:[['둔대',1],['둘게',0,'"-ㄹ게"는 내가 약속하는 말이야. 남한테 들은 말은 "그만둔대".'],['둘래',0,'"그만둘래"는 내가 그만두고 싶을 때야. 남한테 들은 말은 "그만둔대".']]},
   {w:'오해하다',who:'나',ask:'다 안 들었잖아. 네가 ___ 수도 있어.',opts:[['오해했을',1],['이해했을',0,'이해는 바르게 아는 거야. 다 안 듣고 잘못 알면 "오해했을".'],['오래 했을',0,'오래는 시간이 길 때야. 잘못 알면 "오해했을".']]},
  ],
  lib:[
@@ -122,7 +123,7 @@ const Q={ // NPC questions, kept here so review can reuse them. who:'나' = the 
  ],
  daonB:[
   {w:'무시하다',who:'나',ask:'맞아, 구름아. 그런 댓글은 그냥 ___.',opts:[['무시해',1],['무서워해',0,'무서워하다는 겁이 날 때야. 못 본 척하면 "무시해".'],['기억해',0,'기억하면 계속 생각나. 못 본 척하면 "무시해".']]},
-  {w:'무시하다',who:'…',ask:'구름이 댓글을 무시하는 ___해요. 근데 눈은 계속 핸드폰에 있어요.',opts:[['척',1],['적',0,'"-ㄴ 적 있다"는 경험이에요. 아닌데 그런 것처럼 하면 "척".']]},
+  {w:'무시하다',gram:1,who:'…',ask:'구름이 댓글을 무시하는 ___해요. 근데 눈은 계속 핸드폰에 있어요.',opts:[['척',1],['적',0,'"-ㄴ 적 있다"는 경험이에요. 아닌데 그런 것처럼 하면 "척".']]},
  ],
  chanNR:[
   {w:'끼어들다',who:'나',ask:'찬아, 남의 노래에 그렇게 ___ 안 돼.',opts:[['끼어들면',1],['끼우면',0,'끼우다는 물건을 사이에 넣는 거야. 사람이 갑자기 들어오면 "끼어들면".']]},
@@ -146,7 +147,7 @@ const Q={ // NPC questions, kept here so review can reuse them. who:'나' = the 
  ],
  hariF:[
   {w:'창피하다',who:'나',ask:'하리야, 틀려도 ___ 거 아니야. 괜찮아.',opts:[['창피한',1],['창피하는',0,'"예쁜 거", "작은 거"처럼 "창피한 거"예요. "창피하는"은 틀려요.']]},
-  {w:'창피하다',ask:'떨리지만 안 떨리는 ___할게요.',opts:[['척',1],['적',0,'"-ㄴ 적"은 경험이에요. 아닌데 그런 것처럼 하면 "척".']]},
+  {w:'창피하다',gram:1,ask:'떨리지만 안 떨리는 ___할게요.',opts:[['척',1],['적',0,'"-ㄴ 적"은 경험이에요. 아닌데 그런 것처럼 하면 "척".']]},
  ],
  gureumF:[
   {w:'감동',ask:'사연 듣고 다들 울었대. 진짜 ___이었대.',opts:[['감동',1],['감기',0,'하하, 감기는 아픈 거야. 마음이 크게 움직이면 "감동".'],['감자',0,'감자는 먹는 거야! 마음이 움직이면 "감동".']]},
@@ -163,7 +164,7 @@ const Q={ // NPC questions, kept here so review can reuse them. who:'나' = the 
  ],
 };
 
-const ITEMS={'찬 독후감':'찬이 쓴 독후감. 두 장이어야 하는데… 세 줄이에요.','가입 신청서':'방송부 가입 신청서. 부원 이름 칸이 다섯 개예요.','복숭아 편지':'분홍 편지. 복숭아 향기가 나요. "…잘 들었읍니다."','복숭아 주스':'매점 이모가 쏜 복숭아 주스 다섯 개. 시원해요.'};
+const ITEMS={'찬 독후감':'찬이 쓴 독후감. 두 장이어야 하는데… 세 줄이에요.','동아리 등록 신청서':'방송부 동아리 등록 신청서. 부원 이름 칸이 다섯 개예요.','복숭아 편지':'분홍 편지. 복숭아 향기가 나요. "…잘 들었읍니다."','복숭아 주스':'매점 이모가 쏜 복숭아 주스 다섯 개. 시원해요.'};
 /* a library chair (as 2학년 3반's), for the first-year asleep at the reading table */
 const CHAIR_N={art:{pal:{O:'#1B1E2B',h:'#6C8DAD',w:'#4F6F8F',m:'#6F757C'},back:4,lift:5,  /* pulled up to the table's edge */
  down:['.OOOOOOOO.','.OhhhhhhO.','.OwwwwwwO.','.OwwwwwwO.','OOOOOOOOOO','OhhhhhhhhO','OOOOOOOOOO','.m......m.']}};
@@ -199,7 +200,7 @@ const ZONES={...SCHOOL({open:['cafe','hall2','music','library','bcast'],gate:{to
    's':['신발장이에요. 실내화가 줄줄이 있어요.','신발장 하나에 "남궁찬" 이름표. 냄새가… 좀.'],
    'W':['창밖에 운동장하고 느티나무가 보여요.','창밖에서 새가 짹짹 울어요.'],
    'q':()=>f().aired?'"방송실" 팻말. "방송 중" 불이 깜빡여요!':'"방송실" 팻말이에요. "방송 중" 불은 꺼져 있어요.'},
-  npcs:['jung','daonBoard','box','hariBox','chanBox','chanRumor','kid','xB1','xB2','xW','xN2','xN3','xN4']},
+  npcs:['jung','kimT','hanT','daonBoard','box','hariBox','chanBox','chanRumor','kid','xB1','xB2','xW','xN2','xN3','xN4']},
  cafe:{
   things:{'h':['과자하고 빵이 가득해요.','복숭아 주스가 한 줄 있어요. 분홍색이에요.','바나나우유는 벌써 다 팔렸어요.'],
    'm':'매점 계산대예요. "외상 안 돼요!"라고 써 있어요.',
@@ -276,8 +277,10 @@ const LOOK={
  gureum:{hair:'#3B2E2A',skin:'#E2B794',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#B8433A',style:'bob'},
  daon:{hair:'#2A2024',skin:'#EBC3A2',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#B8433A',style:'bun',lashes:1,lips:'#C9707A'},
  chan:{hair:'#6B4A2E',skin:'#D9A57E',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#B8433A',style:'spiky'},
- hari:{hair:'#1F1A1E',skin:'#F0CDAF',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#3F7D5A',style:'long',lashes:1,lips:'#D27C86'},
+ hari:{hair:'#6E3F2C',skin:'#F0CDAF',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#3F7D5A',style:'long',lashes:1,lips:'#D27C86'},
  jung:{hair:'#3A2A28',skin:'#E6BE9C',shirt:'#3F8A80',pants:'#3E4350',style:'bob',lashes:1,lips:'#B85F68'},
+ kimT:{hair:'#2B2B30',skin:'#DDB08C',shirt:'#8A6E9E',pants:'#3E4350',style:'short'},
+ hanT:{hair:'#5A4A42',skin:'#E8C2A0',shirt:'#B98A4E',pants:'#4A4F5C',style:'bob',lashes:1,lips:'#B8606A'},
  imo:{hair:'#4A3A34',skin:'#D9A882',shirt:'#F2E6C8',pants:'#6B5B4B',style:'bun',lashes:1,lips:'#C06A6A'},
  guard:{hair:'#8C8C90',skin:'#C9926C',shirt:'#3E5A46',pants:'#33403A',style:'bald',cap:'#3E5A46'},
  jimin:{hair:'#2E2226',skin:'#ECC6A6',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#3F7D5A',style:'short',lashes:1,lips:'#C97A80'},
@@ -308,7 +311,7 @@ const FINALE=()=>[{say:'보내 주신 사연, 잘 읽었어요.'},{say:'그리�
 const NPC={
  /* ---------- 방송실 ---------- */
  gureum:{name:'백구름',zone:'bcast',x:5,y:3,dir:'up',look:LOOK.gureum,banmal:1,badge:['뽑다'],
-  hide:()=>!!f().toNR,
+  hide:()=>!!f().toNR,hold:()=>f().sawComments?'phone':null,  // reading the comments
   get after(){return f().posted?pick([['게시판 포스터 봤어. 다온이 진짜 잘 만들었다.'],['사연 뽑는 상자, 내가 만들었어. 예쁘지?']]):['사연 뽑는 상자, 내가 만들었어. 예쁘지?']},
   script:()=>{const F=f();
    if(F.rumor)return [{say:'…들었어. 내가 방송부 그만둔대.',face:'sad'},{say:'나 그런 말 한 적 없는데.',face:'sad'},{who:'…',say:'구름이 마이크만 쳐다봐요.'}];
@@ -330,7 +333,7 @@ const NPC={
    Q.gureum[1],
    {say:'하리는 좀 떨린대. 하하.'},
    {say:'근데 문제가 있어. 우리 아직 {정식|정식} 동아리가 아니야.'},
-   {say:'{가입 신청서|가입 신청서}를 내야 돼. 정 선생님한테.'},
+   {say:'{동아리 등록 신청서|동아리 등록 신청서}를 내야 돼. 정 선생님한테.'},
    {say:'나는 사람 많은 교무실은 좀… 부탁해.',face:'sad',award:['뽑다'],set:()=>{f().plan=1}},
    {say:'교무실은 복도 왼쪽 끝, 교장실 옆이야.'}]},
 
@@ -339,7 +342,7 @@ const NPC={
   after:'댓글은 무시. 벌금은 무시 못 해.',
   talk:()=>[
    {say:'댓글 봤어? 누가 이런 거짓말을 써?',face:'angry'},
-   {who:'…',say:'구름은 아무 말도 안 해요. 핸드폰만 봐요.'},
+   {who:'…',say:'구름은 아무 말도 안 해요. 핸드폰만 봐요.',turn:{npc:'gureum',dir:'down'}},
    {say:'구름아, 그런 거 읽지 마.'},
    Q.daonB[0],
    {who:'백구름',say:'…응. 나 괜찮아.',face:'sad'},
@@ -402,6 +405,12 @@ const NPC={
   talk:()=>[{say:'이모는 아니었어. 그럼 누구지?',face:'think'},{say:'복숭아의 정체, 꼭 내가 밝힐 거야.'},{say:'…이번엔 엿듣지 않고.',face:'happy'}]},
 
  /* ---------- 복도 ---------- */
+ /* two more teachers at their desks: the 교무실 구름 calls 사람 많은 */
+ kimT:{name:'김 선생님',zone:'hall',x:3,y:4,dir:'left',look:LOOK.kimT,
+  talk:()=>[{say:'시험지를 보고 있어요. 빨간 펜이 모자라요.'},{say:'정 선생님 자리는 화분 옆이에요.'}]},
+ hanT:{name:'한 선생님',zone:'hall',x:7,y:3,dir:'left',look:LOOK.hanT,
+  talk:()=>[{say:'방송부? 점심 방송 잘 듣고 있어요.',face:'happy'},{say:'교무실에서는 조용히 해 주세요.'}]},
+
  jung:{name:'정 선생님',zone:'hall',x:6,y:2,dir:'down',look:LOOK.jung,badge:['가입하다','제출하다','독후감','맞춤법'],
   get after(){const F=f();   // the review line follows the two days: club form, rumor, the morning after, the 사연
    if(F.aired)return pick([['사연 잘 들었어요. 선생님도 조금 울었어요.'],['맞춤법이 헷갈리면 언제든지 물어봐요.']]);
@@ -417,7 +426,7 @@ const NPC={
    if(!F.formGot)return null;
    if(!F.signed5)return [{say:'찬은 도서관 왼쪽 구석에 있어요. 2층, 파란 문이에요.'}];
    if(!F.submitted)return [
-    {who:'…',say:'신청서를 정 선생님한테 냈어요.',take:['가입 신청서']},
+    {who:'…',say:'신청서를 정 선생님한테 냈어요.',take:['동아리 등록 신청서']},
     {who:'…',say:'다섯 번째 이름: 남궁찬. 글씨가 삐뚤삐뚤해요.'},
     {say:'다섯 명! 좋아요. 제출 완료예요.',face:'happy'},
     Q.jungS[0],
@@ -440,13 +449,13 @@ const NPC={
    return null},
   talk:()=>[
    {say:'어, 방송부 왔어요? 무슨 일이에요?'},
-   {who:'나',say:'선생님, 동아리 가입 신청서 주세요.'},
+   {who:'나',say:'선생님, 동아리 등록 신청서 주세요.'},
    {say:'아, 드디어! 여기 신청서예요.',face:'happy'},
    {say:'부원 다섯 명이 다 이름을 써야 해요.'},
    Q.jung[0],
    {say:'그리고 오늘 안에 저한테 내야 돼요.'},
    Q.jung[1],
-   {who:'…',say:'신청서를 받았어요. 네 명은 금방 이름을 썼어요.',give:'가입 신청서'},
+   {who:'…',say:'신청서를 받았어요. 네 명은 금방 이름을 썼어요.',give:'동아리 등록 신청서'},
    {who:'…',say:'…찬 이름만 없어요.'},
    {say:'남궁찬 이름이 없네요. 지금 도서관에 있어요. 2층이요.'},
    {say:'지난주 국어 시간에 잤거든요. 그래서 벌을 받았어요.',face:'angry'},
@@ -475,10 +484,10 @@ const NPC={
    {say:'이모는 편지 같은 거 안 써요. 글씨가 {엉망|엉망}이거든.'},
    {say:'대신 복숭아 주스는 많이 팔지요!'},
    {say:'자, 동전. 오늘은 이모가 쏠게요.'},
-   {say:'자판기에서 다섯 개 가져가요.'},
+   {say:'자판기에서 다섯 개 가져가요.',cam:[21,3]},
    Q.imo[1],
-   {who:'…',say:'덜컹, 덜컹… 복숭아 주스 다섯 개!',give:'복숭아 주스'},
-   {who:'남궁찬',say:'…이모 아니면 누구지? 더 궁금해.',face:'think'},
+   {who:'…',say:'덜컹, 덜컹… 복숭아 주스 다섯 개!',give:'복숭아 주스',sfx:'item',set:()=>{f().canned=1}},
+   {who:'남궁찬',say:'…이모 아니면 누구지? 더 궁금해.',face:'think',cam:null},
    {say:'방송실까지 뛰어가요. 방송 잘 들을게요!',face:'happy',award:['복숭아']},
    {who:'…',say:'찬이 먼저 방송실로 뛰어갔어요.',set:()=>{f().juice=1}}]},
 
@@ -661,10 +670,12 @@ const NPC={
    {say:'구름은 슬픈데, 찬은 아직도 웃어.',face:'angry'},
    Q.daonNR[0],
    {say:'너는 눈치 빠르잖아. 어떻게 하지?'},
+   {who:'나',say:'서지민이 다 말해 줬어. 그 첫 글, 찬이 썼어.'},
+   {say:'뭐? 찬이?! …진짜 눈치 없다.',face:'angry'},
    Q.daonNR[1],
    {who:'나',say:'찬아, 구름한테 사과해.',cam:[5,4]},
    {who:'남궁찬',say:'…내가? 왜? …아.',face:'surprised'},
-   {who:'남궁찬',say:'구름아, 미안. 내가 엿듣고 멋대로 썼어.',face:'sad'},
+   {who:'남궁찬',say:'구름아, 미안. 내가 엿듣고 멋대로 썼어.',face:'sad',move:{npc:'chanNR',to:[7,5],dir:'left'},turn:{npc:'gureumNR',dir:'right'}},
    {who:'남궁찬',say:'다 내 오해야. 진짜 미안해.',face:'sad'},
    {w:'사과하다',who:'…',build:['찬이','구름한테','사과했어요'],alts:[['구름한테','찬이','사과했어요']]},
    {say:'잘했어. 눈치 백 점.',face:'happy',award:['눈치','사과하다'],set:()=>{f().apology=1},cam:null}]},
@@ -686,8 +697,8 @@ const NPC={
    {say:'엄마한테 사실대로 말할 거야. 안 그만둬.'},
    Q.gureumNR[1],
    {who:'오다온',say:'맞아. 혼자 고민하면 벌금이야.',face:'happy'},
-   {who:'유하리',say:'선배, 그럼 다 같이 한 곡 해요!',face:'happy'},
-   {who:'…',say:'다섯 명이 다 같이 노래했어요.',cam:[5,4]},
+   {who:'유하리',say:'선배, 그럼 다 같이 한 곡 해요!',face:'happy',move:{npc:'hariNR',to:[4,5],dir:'right'}},
+   {who:'…',say:'다섯 명이 다 같이 노래했어요.',cam:[5,5]},
    {who:'…',say:'그리고 다음 날 아침. 다시 학교예요.',award:['고민하다'],set:()=>{f().secret=1},go:['hall',5,8,'up']}]},
 
  /* ---------- extras: one-off students so the school feels lived-in. No badges, no teaching.
@@ -754,13 +765,13 @@ const FOLLOW={name:'남궁찬',look:LOOK.chan,when:()=>!!f().letter&&!f().juice,
  talk:()=>f().oldSpelling?[{say:'매점! 급식실 안에! 범인은 이모야!',face:'happy'}]:[{say:'복숭아… 복숭아… 누굴까?',face:'think'},{say:'일단 정 선생님한테 가자.'}]};
 
 const INTRO=[{who:'…',say:'하리의 첫 방송 뒤, 방송실이 밝아졌어요.'},{who:'…',say:'월요일 아침. 구름이 벌써 기계 앞에 있어요.',cam:[5,3]}];
-const DONE=['3교시 끝!','방송이 끝나자 교장 선생님 방송이 나와요.','"축제가 끝나면 방송실은 심화반 교실이 됩니다."',{say:'그 순간, 방송 기계에서 펑! 연기가 나요.',set:()=>{f().smoke=1}},'방송실 노트북에서 단어를 다시 볼 수 있어요.'];
+const DONE=['방송이 끝나자 교무실 마이크로 교장 선생님 방송이 나와요.','"축제가 끝나면 방송실은 심화반 교실이 됩니다."',{say:'그 순간, 방송 기계에서 펑! 연기가 나요.',set:()=>{f().smoke=1}},'3교시 끝!','방송실 복습 노트북에서 단어를 다시 볼 수 있어요.'];
 
 function questText(){
  const F=f();
- if(F.done)return '3교시 끝 · 노트북에서 복습';
+ if(F.done)return '3교시 끝 · 방송실 복습 노트북';
  if(!F.plan)return '방송실 · 구름이랑 얘기하기';
- if(!F.formGot)return '교무실 · 가입 신청서 받기';
+ if(!F.formGot)return '교무실 · 등록 신청서 받기';
  if(!F.signed5)return '도서관 · 찬 이름 받기';
  if(!F.submitted)return '교무실 · 신청서 제출하기';
  if(!F.posted)return '복도 게시판 · 포스터 붙이기';
@@ -787,7 +798,7 @@ function checkF(X,Y,x,y){r(X,Y,16,16,'#D8D2C2');r(X,Y,8,8,'#CBC4B2');r(X+8,Y+8,8
 function oldF(X,Y,x,y){r(X,Y,16,16,'#8E6E4E');for(let j=3;j<16;j+=5)r(X,Y+j,16,1,'#7A5C40');const h=hash(x,y);r(X+h%14,Y+(h>>2)%14,2,1,'#A58A6C');if(h<30)r(X+(h*5)%13,Y+(h*3)%13,1,1,'#B9A488')}
 function carpetF(X,Y,x,y){r(X,Y,16,16,'#7F9073');r(X,Y,8,8,'#78896C');r(X+8,Y+8,8,8,'#78896C');const h=hash(x,y);if(h<30)r(X+h%14+1,Y+(h>>2)%14+1,1,1,'#8E9F82')}
 function walkF(X,Y,x,y){r(X,Y,16,16,'#C9C2B4');r(X,Y,16,1,'#B3AC9E');r(X,Y+8,16,1,'#B3AC9E');r(X+(y%2?4:12),Y,1,8,'#B3AC9E');r(X+(y%2?12:4),Y+8,1,8,'#B3AC9E');const h=hash(x,y);if(h<25)r(X+h%14+1,Y+(h>>3)%14+1,1,1,'#DAD4C8')}
-function nrF(X,Y,x,y,t){r(X,Y,16,16,'#2E2440');r(X,Y,16,1,'#382C4E');const h=hash(x,y);if(h<40){const on=Math.floor(t/450+h)%3===0;r(X+h%14+1,Y+(h>>2)%14+1,1,1,on?['#F27AD8','#6FE0F2','#F2D86F'][h%3]:'#43365C')}}
+function nrF(X,Y,x,y,t){r(X,Y,16,16,'#3B2F52');r(X,Y,16,1,'#463A60');const h=hash(x,y);if(h<40){const on=Math.floor(t/450+h)%3===0;r(X+h%14+1,Y+(h>>2)%14+1,1,1,on?['#F27AD8','#6FE0F2','#F2D86F'][h%3]:'#53457A')}}
 function nrFace(X,Y){r(X,Y,16,16,'#4A3866');r(X,Y,16,1,'#5E4A80');r(X,Y+12,16,1,'#E86DD8');r(X,Y+13,16,3,'#3A2A52')}
 /* the floor under an object, by zone */
 function fl(X,Y,x,y,t){if(ZID==='bcast')oldF(X,Y,x,y);else if(ZID==='library')carpetF(X,Y,x,y);else if(ZID==='street')walkF(X,Y,x,y);else if(ZID==='nr')nrF(X,Y,x,y,t||0);else checkF(X,Y,x,y)}
@@ -813,9 +824,9 @@ const VARIANTS={
   for(let i=0;i<4;i++){r(X+2+i*3,Y+3,2,4,C[(h+i)%6]);r(X+2+i*3,Y+9,2,4,i%2?'#F2A3B8':C[(h+i+2)%6])}},  // peach juice on the shelf
  shopCounter:(X,Y,x,y)=>{checkF(X,Y,x,y);r(X,Y+3,16,11,'#C98F5A');r(X,Y+3,16,3,'#E3B07A');r(X,Y+13,16,1,'#8A5E36');
   if(x%2){r(X+3,Y,3,4,'#F2A3B8');r(X+7,Y,3,4,'#F7D154');r(X+3,Y,3,1,'#E07A98');r(X+7,Y,3,1,'#5A8FB0')}else{r(X+4,Y,8,4,'#3E4350');r(X+5,Y+1,4,1,'#69CFD8')}},  // the 매점 under 이모
- vending:(X,Y,x,y,t)=>{checkF(X,Y,x,y);r(X+1,Y,14,16,'#C8443A');r(X+1,Y,14,1,'#E0655A');r(X+3,Y+2,8,8,'#BFE3F0');const out=state.f.juice;
+ vending:(X,Y,x,y,t)=>{checkF(X,Y,x,y);r(X+1,Y,14,16,'#C8443A');r(X+1,Y,14,1,'#E0655A');r(X+3,Y+2,8,8,'#BFE3F0');const out=state.f.juice||state.f.canned;
   for(let i=0;i<3;i++){r(X+4+i*2,Y+3,1,2,out?'#BFE3F0':'#F2A3B8');r(X+4+i*2,Y+6,1,2,'#7CB46A')}
-  r(X+12,Y+3,2,1,Math.floor(t/600)%2?'#7CF07A':'#2E5A2E');r(X+3,Y+12,8,2,'#2B2E36')},  // the peach juice runs out
+  r(X+12,Y+3,2,1,Math.floor(t/600)%2?'#7CF07A':'#2E5A2E');r(X+3,Y+12,8,2,'#2B2E36');if(state.f.canned&&!state.f.juice)for(let i=0;i<3;i++)r(X+4+i*2,Y+12,1,2,'#F2A3B8')},  // the peach juice runs out (five cans drop into the slot)
  notice:(X,Y,x,y)=>{face(X,Y);const L=at(x-1,y)!=='N';r(X+(L?1:0),Y+1,15,10,'#8A5E36');r(X+(L?2:0),Y+2,14,8,'#C49A6C');
   if(L){r(X+3,Y+3,5,6,'#F4F1E6');r(X+9,Y+4,4,4,'#F2C46B');r(X+5,Y+3,1,1,'#D2533F')}
   else if(state.f.posted&&ZID==='hall'){r(X+1,Y+2,11,9,'#F7C6D2');r(X+1,Y+2,11,1,'#FBE0E8');r(X+5,Y+3,3,4,'#5A5F6E');r(X+6,Y+7,1,2,'#5A5F6E');r(X+2,Y+9,9,1,'#E07A98');r(X+9,Y+3,2,2,'#F2A3B8');r(X+3,Y+1,2,2,'#F2E6A0');r(X+9,Y+1,2,2,'#F2E6A0')}
@@ -873,5 +884,6 @@ const TILES={...SCHOOL_TILES,...VARIANTS,
 function car(X,Y,x,y,t){if(y!==4&&y!==5)return;const W=MW*16+96,cx=y===4?((t/9)%W)-48:W-48-((t/12+400)%W),px=cx-x*16;if(px<=-32||px>=16)return;
  inTile(X,Y,()=>{const bx=X+px,c=y===4?'#D2533F':'#F2C46B';r(bx,Y+4,30,9,c);r(bx+6,Y+2,16,5,c);r(bx+8,Y+3,5,3,'#BFE3F0');r(bx+15,Y+3,5,3,'#BFE3F0');r(bx+3,Y+12,5,3,'#1B1E2B');r(bx+22,Y+12,5,3,'#1B1E2B');r(y===4?bx+28:bx,Y+6,2,2,'#FFF3C4')})}
 const PLAYER=LOOK.player;
-return {WORDS,DICT,CONFUSE,BANK,Q,ITEMS,ZONES,NPC,FOLLOW,INTRO,DONE,questText,TILES,VARIANTS,PLAYER};
+const term={name:'복습 노트북'};  // the 방송실 laptop (1교시 reviews in a paper 복습 노트)
+return {WORDS,DICT,CONFUSE,BANK,Q,ITEMS,ZONES,NPC,FOLLOW,INTRO,DONE,questText,TILES,VARIANTS,PLAYER,term};
 }});
