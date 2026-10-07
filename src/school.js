@@ -233,6 +233,11 @@ const TILES={
   libShelf:(X,Y,x,y)=>{carpetF(X,Y,x,y);const T=at(x,y-1)!=='b',L=at(x-1,y)!=='b';r(X,Y+(T?2:0),16,T?14:13,'#7A5230');if(T)r(X,Y+2,16,2,'#93623C');
   r(X+(L?1:0),Y+(T?5:1),L?15:15,T?8:9,'#4A3220');const h=hash(x,y),C=['#B8433A','#3E5E8C','#3F7D5A','#C9A13A','#E3ECE4','#C97A8E'];for(let i=0;i<7;i++)r(X+(L?2:0)+i*2,Y+(T?6:2)+(h+i)%3,1,(T?7:8)-(h+i)%3,C[(h+i)%6]);
   if(!T)r(X,Y+14,16,2,'#5A3E26')},
+ /* the 2층 corridor's own furniture: same art on the hallway floor (the 교무실 and 도서관 versions carry their rooms' floors) */
+ hallWater:(X,Y,x,y)=>{hallF(X,Y,x,y);r(X+4,Y+4,8,12,'#F2F0EA');r(X+4,Y+15,8,1,'#C9C6BC');r(X+5,Y,6,5,'#8FC8E8');r(X+6,Y+1,1,3,'#C4E6F6');r(X+6,Y+8,1,2,'#D2533F');r(X+9,Y+8,1,2,'#3A86C8');r(X+5,Y+11,6,1,'#9A968C')},
+ hallPlant:(X,Y,x,y)=>{hallF(X,Y,x,y);r(X+5,Y+10,6,6,'#B5653A');r(X+5,Y+10,6,1,'#D07E52');r(X+3,Y+3,10,7,'#3F8F4A');r(X+5,Y+1,6,3,'#3F8F4A');r(X+5,Y+3,2,2,'#6CC07A');r(X+10,Y+6,2,2,'#6CC07A')},
+ studyTable:(X,Y,x,y)=>{hallF(X,Y,x,y);const L=at(x-1,y)!=='t',R=at(x+1,y)!=='t';r(X,Y+3,16,9,'#D9B07A');r(X,Y+3,16,1,'#EBC995');r(X,Y+11,16,1,'#A67E4A');
+  if(L)r(X+1,Y+12,2,4,'#8A6040');if(R)r(X+13,Y+12,2,4,'#8A6040');const h=hash(x,y);if(h%3===0){r(X+3,Y+5,10,5,'#F7F3E8');r(X+8,Y+5,1,5,'#C9BFA8');r(X+4,Y+6,3,1,'#9AA3B5');r(X+9,Y+7,3,1,'#9AA3B5')}else if(h%3===1)r(X+4,Y+5,6,4,['#3E5E8C','#B8433A','#3F7D5A'][h%3])},
  /* the 체육관: its own building across the 운동장, green roof, green double doors (J) facing the yard */
  gymBldg:(X,Y,x,y)=>{if(y<=1){r(X,Y,16,16,'#3E7A5A');r(X,Y+(y?13:0),16,y?3:1,y?'#2E5E44':'#5A9A74');for(let i=3;i<16;i+=4)r(X+i,Y,1,y?13:16,'#356A4E')}
   else{r(X,Y,16,16,'#E8E2D4');r(X,Y,16,1,'#F4F0E6');if(y===2){r(X+2,Y+4,12,5,'#5E7F8E');r(X+3,Y+5,10,3,'#A9D8EC');r(X+8,Y+5,1,3,'#5E7F8E')}
@@ -311,7 +316,7 @@ const base=()=>({
 
  hall2:{name:'느티고 · 2층 복도',reg:'NEUTI HIGH · 2F',
   legend:{'#':{tile:'wall'},',':{tile:'hallFloor',walk:1},'V':{tile:'classWin'},'R':{tile:'classDoor',walk:1},'U':{tile:'musicDoor',walk:1},
-   'L':{tile:'libDoor',walk:1},'N':{tile:'notice'},'P':{tile:'speaker'},'W':{tile:'hallWin'},'S':{tile:'stairs',walk:1},'p':{tile:'plant'},'w':{tile:'water'},'t':{tile:'readTable'}},
+   'L':{tile:'libDoor',walk:1},'N':{tile:'notice'},'P':{tile:'speaker'},'W':{tile:'hallWin'},'S':{tile:'stairs',walk:1},'p':{tile:'hallPlant'},'w':{tile:'hallWater'},'t':{tile:'studyTable'}},
   map:[
 "#VUUV##VRV##VRV##NN#VLLV#P##",
 "#,,,,,,,,,,,,,,,,,,,,,,,,,,#",

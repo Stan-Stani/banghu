@@ -883,7 +883,7 @@ const TILES={...SCHOOL_TILES,
   if(hash(x,y)%2){r(X+3,Y,10,6,'#A67E4A');r(X+3,Y,10,1,'#C49A6C');r(X+5,Y+2,6,2,'#F4F1E6')}},
  /* corridor */
  notice:(X,Y,x,y)=>{face(X,Y);const L=at(x-1,y)!=='N';r(X+(L?1:0),Y+1,15,10,'#8A5E36');r(X+(L?2:0),Y+2,14,8,'#C49A6C');
-  if(L){r(X+3,Y+3,5,6,'#F4F1E6');r(X+9,Y+4,4,4,'#F2C46B');r(X+5,Y+3,1,1,'#D2533F')}else if(state.f.gotPosters){r(X+1,Y+2,10,8,'#F7F3E8');r(X+2,Y+3,8,2,'#E0884A');r(X+4,Y+6,3,3,'#5A5F6E');r(X+8,Y+6,2,1,'#C9C2B0')}
+  if(L){r(X+3,Y+3,5,6,'#F4F1E6');r(X+9,Y+4,4,4,'#F2C46B');r(X+5,Y+3,1,1,'#D2533F')}else if(state.f.gotPosters&&ZID==='hall'){r(X+1,Y+2,10,8,'#F7F3E8');r(X+2,Y+3,8,2,'#E0884A');r(X+4,Y+6,3,3,'#5A5F6E');r(X+8,Y+6,2,1,'#C9C2B0')}
   else{r(X+1,Y+3,6,4,'#BFE3F0');r(X+8,Y+3,4,6,'#F4F1E6')}},
  classWin:(X,Y,x,y)=>{face(X,Y);r(X+1,Y+1,14,9,'#F8F2E6');r(X+2,Y+2,12,7,'#C9D6CC');r(X+3,Y+6,4,2,'#C99A62');r(X+9,Y+6,4,2,'#C99A62');r(X+8,Y+2,1,7,'#F8F2E6');r(X+3,Y+3,3,2,BUNT[x%5])},
  classDoor:(X,Y,x,y)=>{face(X,Y);r(X+2,Y+1,12,15,'#A9794A');r(X+2,Y+1,12,1,'#C4925F');r(X+4,Y+3,8,5,'#BFE3F0');r(X+5,Y+4,2,1,'#E6F6FC');r(X+11,Y+10,2,2,'#5A3E26')},
