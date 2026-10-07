@@ -103,7 +103,7 @@ const TILES={
   if(state.f.done&&x===2)r(X+3,Y+6,4,3,'#F2A38A')},
   exitDoor:(X,Y,x,y)=>{if(ZID==='bcast')oldF(X,Y,x,y);else checkF(X,Y,x,y);r(X,Y,16,16,'#6E7B88');r(X+1,Y+1,14,15,'#BFE3F0');r(X+2,Y+2,3,1,'#E6F6FC');const L=at(x-1,y)!==at(x,y);r(L?X+15:X,Y,1,16,'#6E7B88');r(L?X+12:X+3,Y+8,1,3,'#3A4046')},
   stairs:(X,Y,x,y)=>{r(X,Y,16,16,'#B8BCB0');for(let j=0;j<16;j+=4){r(X,Y+j,16,1,'#8E9286');r(X,Y+j+1,16,1,'#D2D6CA')}if(at(x-1,y)!=='S')r(X,Y,2,16,'#7A5A3A');if(at(x+1,y)!=='S')r(X+14,Y,2,16,'#7A5A3A')},
-  cafDoor:(X,Y,x,y)=>{face(X,Y);const L=at(x-1,y)!=='F';r(X+(L?2:0),Y+2,14,14,'#C27A4A');r(X+(L?2:0),Y+2,14,1,'#D9925E');r(X+(L?5:4),Y+5,6,4,'#BFE3F0');r(L?X+14:X+1,Y+9,1,3,'#5A3E26');if(L)r(X+10,Y,6,2,'#F2C46B');else r(X,Y,6,2,'#F2C46B')},
+  cafDoor:(X,Y,x,y)=>{face(X,Y);const L=at(x-1,y)!==at(x,y);r(X+(L?2:0),Y+2,14,14,'#C27A4A');r(X+(L?2:0),Y+2,14,1,'#D9925E');r(X+(L?5:4),Y+5,6,4,'#BFE3F0');r(L?X+14:X+1,Y+9,1,3,'#5A3E26');if(L)r(X+10,Y,6,2,'#F2C46B');else r(X,Y,6,2,'#F2C46B')},
   bcDoor:(X,Y,x,y)=>{face(X,Y);r(X+2,Y+1,12,15,'#5A3E26');r(X+3,Y+2,10,14,'#8E5E3A');r(X+3,Y+2,10,1,'#A87448');
   r(X+5,Y+3,6,4,'#2B2E36');r(X+6,Y+4,2,1,'#5A6478');r(X+5,Y+9,6,5,'#7A4E2E');r(X+6,Y+10,4,3,'#8E5E3A');
   r(X+11,Y+9,2,2,'#E8B93A');r(X+11,Y+9,2,1,'#F7D98C')},
@@ -213,8 +213,8 @@ const TILES={
  doorway:(X,Y,x,y)=>{checkF(X,Y,x,y);r(X,Y,2,16,'#A9794A');r(X+14,Y,2,16,'#A9794A');r(X+2,Y,12,2,'#B9BCB0')},
   mShelf:(X,Y,x,y)=>{r(X,Y+1,16,14,'#8A5E36');r(X+1,Y+2,14,5,'#5A3A20');r(X+1,Y+8,14,6,'#5A3A20');for(let i=0;i<4;i++)r(X+2+i*3,Y+2,1,5,i%2?'#F4F1E6':'#E8D9A8');
   if(at(x-1,y)!=='x'){disc(X+8,Y+11,3,'#E0A060');r(X+8,Y+8,1,3,'#7A5230')}else{disc(X+7,Y+11,3,'#C9A13A');disc(X+7,Y+11,2,'#5A3A20')}},
-  libDoor:(X,Y,x,y)=>{face(X,Y);const L=at(x-1,y)!=='L';r(X+(L?2:0),Y+2,14,14,'#4F7FA8');r(X+(L?2:0),Y+2,14,1,'#6E9AC4');r(X+(L?5:4),Y+5,6,4,'#BFE3F0');r(L?X+14:X+1,Y+9,1,3,'#2B3E52');
-  if(L){r(X+10,Y,6,2,'#F4F1E6');r(X+12,Y,1,2,'#8A5E36')}else{r(X,Y,6,2,'#F4F1E6');r(X+3,Y,1,2,'#8A5E36')}},
+  libDoor:(X,Y,x,y)=>{face(X,Y);const L=at(x-1,y)!==at(x,y);r(X+(L?2:0),Y+2,14,14,'#4F7FA8');r(X+(L?2:0),Y+2,14,1,'#6E9AC4');r(X+(L?5:4),Y+5,6,4,'#BFE3F0');r(L?X+14:X+1,Y+9,1,3,'#2B3E52');
+  if(!L){r(X+4,Y+10,6,4,'#F4F1E6');r(X+5,Y+11,2,2,'#3E5E8C');r(X+7,Y+11,2,2,'#B8433A')}},  /* a little book plaque on the right leaf */
   bookWall:(X,Y,x,y)=>{r(X,Y,16,16,'#6B4A2E');r(X,Y,16,1,'#8A6040');r(X+1,Y+1,14,6,'#3E2A1A');r(X+1,Y+8,14,6,'#3E2A1A');r(X,Y+14,16,2,'#5A3E26');const h=hash(x,y),C=['#B8433A','#3E5E8C','#3F7D5A','#C9A13A','#E3ECE4','#7A3E54'];
   for(let i=0;i<7;i++){const a=(h+i*3)%4;r(X+1+i*2,Y+1+a%2,2,6-a%2,C[(h+i)%6]);r(X+1+i*2,Y+8+(a>>1),2,6-(a>>1),C[(h+i*2+1)%6])}},
   libWin:(X,Y,x,y,t)=>{r(X,Y,16,16,'#E6DCC8');r(X,Y,16,1,'#F4ECDC');const L=at(x-1,y)!=='W';r(X+(L?2:0),Y+2,L?14:14,11,'#F8F2E6');r(X+(L?3:0),Y+3,L?13:13,9,'#A9D8EC');
@@ -380,7 +380,7 @@ const base=()=>({
    'L':['사물함이에요. 이름표가 다 붙어 있어요.','사물함 하나가 안 닫혀요. 체육복이 보여요.','"오다온" 사물함. 아주 깔끔해요.']}},
 
  cafe:{name:'급식실',reg:'CAFETERIA',floor:'checkFloor',
-  legend:{'#':{tile:'wall'},',':{tile:'checkFloor',walk:1},'D':{tile:'exitDoor',walk:1},'M':{tile:'menu'},'W':{tile:'sideWin'},'h':{tile:'snacks'},
+  legend:{'#':{tile:'wall'},',':{tile:'checkFloor',walk:1},'D':{tile:'cafDoor',walk:1},'M':{tile:'menu'},'W':{tile:'sideWin'},'h':{tile:'snacks'},
    'k':{tile:'kitchen'},'=':{tile:'serve',over:1},'m':{tile:'shopCounter',over:1},'v':{tile:'vending'},'t':{tile:'lunchTable'}},
   map:[
 "#####MM###DD#####hhhhhh#",
@@ -409,7 +409,7 @@ const base=()=>({
 
  bcast:{name:'방송실',reg:'BROADCAST ROOM',floor:'oldFloor',
   legend:{'#':{tile:'wall'},'.':{tile:'oldFloor',walk:1},'D':{tile:'exitDoor',walk:1},'r':{tile:'rack'},'A':{tile:'onair'},'O':{tile:'poster'},'W':{tile:'streetWin'},
-   'M':{tile:'mixer'},'i':{tile:'micStand'},'s':{tile:'oldSofa'},'c':{tile:'tapeCart'},'x':{tile:'boxes'},'T':{tile:'notebook',term:1},'b':{tile:'sayeon'}},
+   'M':{tile:'mixer'},'i':{tile:'micStand',over:1},'s':{tile:'oldSofa'},'c':{tile:'tapeCart'},'x':{tile:'boxes'},'T':{tile:'notebook',term:1},'b':{tile:'sayeon'}},
   map:[
 "##rrrrADD#OO####",
 "#..............W",
