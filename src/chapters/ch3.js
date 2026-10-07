@@ -7,7 +7,7 @@ CHAPTERS.push({id:'ch3',n:'3교시',title:'비밀 사연',place:'방송실 · �
    3교시 · 비밀 사연 — story: notes/story.md (3교시). Original story; nothing from the webtoon but the word list.
    After 2교시 (하리 joined, first test broadcast): register the club (찬's name is missing; he is writing a
    punishment 독후감 in the library), post the 사연 poster, survive 찬's rumor ("구름이 그만둔대"), make up at
-   the coin 노래방 (구름's secret: 학원 at lunch), open the first 사연 (peach scent, "했읍니다"), 매점 이모 red herring,
+   the coin 노래방 (구름's secret: one more 학원, after school), open the first 사연 (peach scent, "했읍니다"), 매점 이모 red herring,
    하리 reads the first 사연 on air. Hook for 4교시 stays in DONE.
    ===================================================================== */
 const WORDS=['비밀','엿듣다','오해하다','사과하다','독후감','맞춤법','제출하다','댓글','눈치','고민하다','답답하다','창피하다','무시하다','끼어들다','향기','복숭아','가입하다','감동','붙다','뽑다'];
@@ -134,7 +134,7 @@ const Q={ // NPC questions, kept here so review can reuse them. who:'나' = the 
   {w:'사과하다',who:'나',ask:'찬이 구름한테 먼저 ___ 돼.',opts:[['사과해야',1],['사과 먹어야',0,'하하, 그 사과는 과일이야! 미안하다고 말하면 "사과해야".'],['사귀어야',0,'사귀다는 친구나 애인이 되는 거야. 미안하다고 말하면 "사과해야".']]},
  ],
  gureumNR:[
-  {w:'고민하다',who:'나',ask:'그래서 요즘 조용했구나. 혼자 많이 ___?',opts:[['고민했어',1],['고장 났어',0,'고장은 기계가 망가진 거야. 사람이 걱정하며 생각하면 "고민했어".'],['고백했어',0,'고백은 좋아한다고 말하는 거야. 걱정하며 생각하면 "고민했어".']]},
+  {w:'고민하다',who:'나',ask:'그래서 아까 아무 말도 안 했구나. 혼자 많이 ___?',opts:[['고민했어',1],['고장 났어',0,'고장은 기계가 망가진 거야. 사람이 걱정하며 생각하면 "고민했어".'],['고백했어',0,'고백은 좋아한다고 말하는 거야. 걱정하며 생각하면 "고민했어".']]},
   {w:'고민하다',who:'나',ask:'좋아. 다음엔 혼자 ___ 말고 우리한테 말해.',opts:[['고민하지',1],['고민한지',0,'"-지 말고"예요. 하지 말라는 뜻이니까 "고민하지 말고".']]},
  ],
  hariB:[
@@ -214,7 +214,7 @@ const ZONES={...SCHOOL({open:['cafe','hall2','music','library','bcast'],gate:{to
    'K':['도서부 책상이에요. 도장이 있어요.','"반납은 여기" 상자예요.'],
    't':['책상 위에 펼친 책이 있어요.','책상에 작은 낙서: "독후감 싫어…"','지우개 가루가 잔뜩 있어요.','누가 수학 문제집을 두고 갔어요.'],
    'n':['잡지 꽂이예요. 패션 잡지, 게임 잡지.','학교 신문이에요. "느티나무, 올해도 건강해요."'],
-   'c':x=>f().rumor&&!f().sawComments?'학교 앱 게시판이에요. 로그인은 오른쪽 위 책상, 도서부 학생한테 물어봐요.':['학생용 컴퓨터예요. 학교 앱 게시판이 떠 있어요.','컴퓨터 화면에 "게임 금지" 종이가 붙어 있어요.'][x%2],
+   'c':x=>f().rumor&&!f().sawComments?'학생용 컴퓨터예요. 댓글 얘기는 오른쪽 위 책상, 도서부 학생한테 물어봐요.':['학생용 컴퓨터예요. 학교 앱 게시판이 떠 있어요.','컴퓨터 화면에 "게임 금지" 종이가 붙어 있어요.'][x%2],
    'r':'반납 수레예요. 책이 높이 쌓였어요.',
    'p':'화분이에요. 도서부가 매일 물을 줘요.'},
   npcs:['chanLib','lib','reader','xL1','xL2']}}}),
@@ -455,7 +455,8 @@ const NPC={
    Q.jung[0],
    {say:'그리고 오늘 안에 저한테 내야 돼요.'},
    Q.jung[1],
-   {who:'…',say:'신청서를 받았어요. 네 명은 금방 이름을 썼어요.',give:'동아리 등록 신청서'},
+   {say:'아, 이름은 다온이가 아침에 벌써 받아 왔어요. 네 명이요.'},
+   {who:'…',say:'신청서를 받았어요. 이름이 벌써 네 개 있어요.',give:'동아리 등록 신청서'},
    {who:'…',say:'…찬 이름만 없어요.'},
    {say:'남궁찬 이름이 없네요. 지금 도서관에 있어요. 2층이요.'},
    {say:'지난주 국어 시간에 잤거든요. 그래서 벌을 받았어요.',face:'angry'},
@@ -497,7 +498,7 @@ const NPC={
   status:()=>{if(!has('붙다'))return f().submitted?'todo':null},
   script:()=>{const F=f();
    if(!F.submitted)return [{say:'게시판? 반장 허락 없이는 안 돼.'},{say:'{정식|정식} 동아리만 붙일 수 있어. 규칙이야.',face:'angry'}];
-   if(F.rumor)return [{say:'거짓 소문이야. 근데 다들 믿네.',face:'angry'},{say:'도서관 컴퓨터? 거기서 다 봐.'}];
+   if(F.rumor)return [{say:'거짓 소문이야. 근데 다들 믿네.',face:'angry'},{say:'댓글? 도서관 서지민한테 물어봐. 도서부야.'}];
    if(F.posted)return [{say:'포스터 예쁘지? 내가 만들었어.',face:'happy'}];
    return null},
   talk:()=>[
@@ -525,7 +526,7 @@ const NPC={
   hide:()=>!f().posted||!!f().toNR,
   after:'엿들은 거 아니라니까. 귀가 거기 있었어.',
   script:()=>{const F=f();if(!F.rumor)return null;
-   if(!F.sawComments)return [{say:'도서관 컴퓨터로 봐 봐. 댓글 장난 아니야.',face:'surprised'}];
+   if(!F.sawComments)return [{say:'도서관 서지민한테 물어봐. 댓글 장난 아니야.',face:'surprised'}];
    return [{say:'…내가 좀 오해한 것 같아.',face:'sad'},{say:'다온이가 엄청 화났어. 무서워.',face:'sad'}]},
   talk:()=>[
    {say:'헉, 헉… 큰일 났어! 진짜 큰일!',face:'surprised'},
@@ -538,7 +539,7 @@ const NPC={
    Q.chanR[2],
    {say:'오해? 아니야. 벌써 {학교 앱|학교 앱}에도 글이 올라왔어.'},
    {say:'누가 "방송부 {끝났대|-대}?" 이렇게 썼어.'},
-   {say:'근데 댓글이 막… 도서관 컴퓨터로 봐 봐.',face:'sad',award:['엿듣다','오해하다'],set:()=>{f().rumor=1}}]},
+   {say:'근데 댓글이 막… 도서관 서지민한테 물어봐.',face:'sad',award:['엿듣다','오해하다'],set:()=>{f().rumor=1}}]},
 
  hariBox:{name:'유하리',zone:'hall',x:20,y:1,dir:'left',look:LOOK.hari,badge:['향기'],
   hide:()=>!f().secret||!!f().letter,
@@ -599,7 +600,7 @@ const NPC={
    {say:'이 독후감도 선생님한테 같이 내 줘.',give:'찬 독후감'},
    {say:'이제 답답한 거 없다! 시원하다!',face:'happy',award:['답답하다'],set:()=>{f().signed5=1}}]},
 
- lib:{name:'서지민',zone:'library',x:14,y:2,dir:'down',look:LOOK.jimin,badge:['댓글','비밀'],
+ lib:{name:'서지민',zone:'library',x:14,y:2,dir:'down',look:LOOK.jimin,badge:['댓글','비밀'],hold:()=>f().rumor&&!f().sawComments?'phone':null,
   get after(){const F=f();
    if(F.aired)return pick([['선배, 댓글이 다 바뀌었어요. "방송부 최고."'],['선배, 비밀은 비밀이에요. 쉿.']]);
    if(F.secret)return ['오늘 사연 코너 한대요. 저도 들을 거예요.'];
@@ -612,7 +613,7 @@ const NPC={
   talk:()=>[
    {say:'선배, 혹시 방송부예요? 저는 도서부 서지민이에요.',face:'surprised'},
    {say:'1학년이에요. 이거 봤어요?'},
-   {who:'…',say:'컴퓨터에 학교 앱 게시판이 떠 있어요.'},
+   {who:'…',say:'서지민이 핸드폰을 보여 줘요. 학교 앱 게시판이에요.'},
    {who:'…',say:'"방송부 끝났대?" 밑에 글이 서른 개!'},
    {say:'"헐, 진짜?" "부원 없대." "구름 선배 운대."'},
    {say:'다들 멋대로 써요. 아무도 확인 안 해요.'},
@@ -690,8 +691,8 @@ const NPC={
   talk:()=>[
    {say:'…고마워, 찬. 근데 사실 반은 맞아.',face:'sad'},
    {say:'이건 비밀이었는데… 말할게.'},
-   {say:'엄마가 그러는데, 점심에 학원 수업이 있대.'},
-   {say:'그래서 그만둘까… 며칠 동안 잠도 못 잤어.',face:'think'},
+   {say:'엄마가 학원을 하나 더 다니래. 방과 후에.'},
+   {say:'그럼 방송부 못 해… 그래서 그만둘까, 며칠 동안 잠도 못 잤어.',face:'think'},
    Q.gureumNR[0],
    {say:'응. 근데 오늘 알았어. 나 방송 진짜 좋아해.',face:'happy'},
    {say:'엄마한테 사실대로 말할 거야. 안 그만둬.'},
