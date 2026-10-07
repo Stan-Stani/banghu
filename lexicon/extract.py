@@ -24,7 +24,7 @@ for w,v in _defs.items():
     if v and ' — ' in (v.get('e') or '') and re.fullmatch('[가-힣]{2,}',w): names.add((w,'NNP'))
 for w,tag in names: kiwi.add_user_word(w,tag,score=5)
 texts=[]
-for p in sorted((repo/'src/chapters').glob('ch*.js'))+[q for q in [repo/'src/school.js'] if q.exists()]:  # school.js: the 방과 후 school every 교시 shares
+for p in sorted((repo/'src/chapters').glob('ch*.js'))+[q for q in [repo/'src/school.js',repo/'src/culture.js'] if q.exists()]:  # school.js: the school every 교시 shares; culture.js: 문화 노트
     src=p.read_text(encoding='utf-8')
     src='\n'.join(l for l in src.split('\n') if '/*nolex*/' not in l)  # pixel-font tables and the like aren't game text
     for m in re.finditer(r"'((?:[^'\\\n]|\\.)*)'|`([^`]*)`|\"((?:[^\"\\\n]|\\.)*)\"",src):

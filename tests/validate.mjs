@@ -59,4 +59,13 @@ for(const CH of ctx.CHAPTERS){
 // the engine is generated from the shared walk-engine: the copy here must match it
 {const shared=new URL('../../walk-engine/engine.js',import.meta.url);if(fs.existsSync(shared)){const mine=fs.readFileSync(new URL('../src/engine.js',import.meta.url),'utf8').replace(/^\/\*[^\n]*\*\/\n/,'');
  if(mine!==fs.readFileSync(shared,'utf8')){errs.push('src/engine.js differs from walk-engine/engine.js — edit walk-engine and run its sync.sh')}}}
+// 문화 노트: every line cites real sources (numbers into src), every source is a link, every culture:'id' a chapter uses exists
+{const N=ctx.CULTURE_NOTES||{};
+ for(const [k,n] of Object.entries(N)){
+  if(!n.t||!Array.isArray(n.lines)||!n.lines.length)errs.push(`culture ${k}: needs a title and lines`);
+  if(!Array.isArray(n.src)||!n.src.length)errs.push(`culture ${k}: no sources`);
+  (n.src||[]).forEach(([t,u],i)=>{if(!t||!/^https:\/\//.test(u||''))errs.push(`culture ${k}: source ${i+1} needs a title and an https link`)});
+  (n.lines||[]).forEach(([ko,en,s],i)=>{if(!ko||!en)errs.push(`culture ${k} line ${i+1}: needs Korean and English`);
+   if(!Array.isArray(s)||!s.length||s.some(x=>!(x>=1&&x<=(n.src||[]).length)))errs.push(`culture ${k} line ${i+1}: must cite sources 1–${(n.src||[]).length}`)})}
+ for(const f of fs.readdirSync('src/chapters'))for(const m of fs.readFileSync('src/chapters/'+f,'utf8').matchAll(/culture:'([^']+)'/g))if(!N[m[1]])errs.push(`${f}: culture:'${m[1]}' has no note in src/culture.js`)}
 console.log(errs.length?errs.join('\n'):`ok · ${ctx.CHAPTERS.length} chapter(s), ${allWords.size} words`);process.exit(errs.length?1:0);

@@ -182,6 +182,42 @@ canvas{display:block;width:100%;height:auto;image-rendering:pixelated;image-rend
 body.talkopen .gloss{position:fixed;top:calc(env(safe-area-inset-top,0px) + 14px);left:50%;transform:translateX(-50%);width:min(440px,calc(100% - 32px));z-index:20;box-sizing:border-box}
 @media (max-width:370px){.dpad{grid-template-columns:repeat(3,48px);grid-template-rows:repeat(3,48px)}.ab button{width:56px;height:56px}.wlist{grid-template-columns:repeat(3,1fr)}h1{font-size:1.35rem}}
 @media (prefers-reduced-motion: reduce){.more{animation:none}.fade{transition:none}.tile.bad{animation:none}.tile.hint{animation:none}}
+/* the phone screen: an app filling the game view (status bar + app header say "phone"); the D-pad and A/B stay below */
+#phonePanel{position:absolute;inset:0;z-index:4;display:flex;line-height:1.3}
+.screen:has(#phonePanel:not([hidden])) .gloss{z-index:6}
+.phone{flex:1;display:flex;min-width:0}
+.pscr{flex:1;min-width:0;background:#F4F5F7;color:#1D2227;overflow:hidden;display:flex;flex-direction:column;font-family:var(--body)}
+.pstat{display:flex;justify-content:space-between;align-items:center;background:#2F6149;color:#E8F2EC;font-family:var(--mono);font-size:.66rem;padding:3px 12px 1px;letter-spacing:.04em}
+.pst{display:inline-flex;align-items:center;gap:4px}
+.sig{display:inline-flex;align-items:flex-end;gap:1px;height:9px}
+.sig b{width:3px;background:#E8F2EC;border-radius:1px}
+.sig b:nth-child(1){height:3px}.sig b:nth-child(2){height:5px}.sig b:nth-child(3){height:7px}.sig b:nth-child(4){height:9px}
+.sig b.off{opacity:.3}
+.bat{display:inline-block;position:relative;width:15px;height:8px;border:1px solid #E8F2EC;border-radius:2px;box-sizing:border-box;padding:1px}
+.bat::after{content:"";position:absolute;right:-3px;top:2px;width:2px;height:3px;background:#E8F2EC;border-radius:0 1px 1px 0}
+.bat i{display:block;height:100%;background:#E8F2EC;border-radius:1px}
+.pbar{background:#3E7A5A;color:#fff;font-weight:700;font-size:.82rem;padding:6px 12px 7px;display:flex;justify-content:space-between}
+.ppost{background:#fff;padding:9px 12px;border-bottom:1px solid #DDE1E6;display:flex;flex-direction:column;gap:3px}
+.ppost b{font-size:1.12rem}
+.pmeta{font-size:.72rem;color:#7A828C;font-family:var(--mono)}
+.pcount{font-size:.78rem;color:#3E7A5A;font-weight:700;padding:7px 12px 4px}
+.plist{flex:1;overflow:auto;padding:0 9px 9px;display:flex;flex-direction:column;gap:5px}
+.pc{background:#fff;border-radius:9px;padding:6px 10px;display:flex;flex-direction:column;gap:1px;line-height:1.35}
+.pc .pn{font-size:.7rem;color:#7A828C;font-family:var(--mono)}
+.pc .pt{font-size:1rem;font-weight:600;word-break:keep-all}
+.pmore{font-size:.78rem;color:#7A828C;text-align:center;padding:4px}
+</style>
+/* 문화 노트 in the journal */
+.notes{display:flex;flex-wrap:wrap;gap:6px}
+.notes .nb{font-family:var(--body);font-weight:600;font-size:.9rem;border:1px solid var(--seam);background:var(--hull);color:var(--ink);border-radius:6px;padding:6px 10px;cursor:pointer}
+.notes .none{font-size:.85rem;color:var(--muted);margin:0}
+#noteCard .nt{font-family:var(--display);font-size:1.25rem;line-height:1.2}
+#noteCard ol{margin:0;padding-left:1.4em;display:flex;flex-direction:column;gap:6px}
+#noteCard li{font-weight:600;line-height:1.5;word-break:keep-all}
+#noteCard .en{display:block;font-family:var(--body);font-weight:400;font-size:.85rem;color:var(--glass-muted);margin-top:2px}
+#noteCard .src{font-size:.75rem;color:var(--glass-muted);line-height:1.45;display:flex;flex-direction:column;gap:3px}
+#noteCard .src a{color:var(--amber-soft)}
+#noteCard sup{font-family:var(--mono);font-size:.62rem;color:var(--amber);margin-left:2px}
 </style>
 </head><body>
 <div class="wrap">
@@ -207,6 +243,7 @@ body.talkopen .gloss{position:fixed;top:calc(env(safe-area-inset-top,0px) + 14px
       <div class="more" id="more" hidden>▼</div>
     </div>
     <div class="toast" id="toast" hidden></div>
+    <div id="phonePanel" hidden><div class="phone"><div class="pscr" id="pscr"></div></div></div>
   </div>
   <div class="pad">
     <div class="dpad" id="dpad">
@@ -270,6 +307,9 @@ body.talkopen .gloss{position:fixed;top:calc(env(safe-area-inset-top,0px) + 14px
     <h2>단어 일지 <small id="logCount"></small></h2>
     <div class="wlist" id="wlist"></div>
     <div class="card" id="card"></div>
+    <h3>문화 노트</h3>
+    <div class="notes" id="notes"></div>
+    <div class="card" id="noteCard" hidden></div>
     <h3>가방</h3>
     <ul class="items" id="items"></ul>
     <div class="row">

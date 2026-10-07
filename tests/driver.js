@@ -60,8 +60,11 @@ window.__play=async function(steps){
    if(building()){
     const s=dlg.cur;
     if(opts.shotBuild){await shot(opts.shotBuild);opts.shotBuild=null}
-    const tiles=()=>tileBtns(),idxOf=i=>tiles().findIndex(b=>+b.dataset.i===i);
-    while(building()&&s.got<s.build.length){const t=idxOf(s.got);for(let n=0;sel!==t&&n<8;n++)await key('ArrowRight');await key('z');await wait(20)}
+    const tiles=()=>tileBtns();
+    // the next right tile in whichever accepted order the answer has started (alts: another natural order is fine too)
+    const next=()=>{const seq=s.seq||[],o=[s.build,...(s.alts||[])].find(o=>seq.every((w,j)=>o[j]===w))||s.build;return tiles().findIndex(b=>s.build[+b.dataset.i]===o[seq.length])};
+    await until(()=>performance.now()-choicesAt>=470,1000);  // like a person: fresh tiles ignore keys for 0.45 s (held walking keys)
+    while(building()&&s.got<s.build.length){const t=next();for(let n=0;sel!==t&&n<8;n++)await key('ArrowRight');await key('z');await wait(20)}
     log('  > built: '+s.build.join(' '));continue;
    }
    if(opts.shotSay&&txt.includes(opts.shotSay.text)){await shot(opts.shotSay.name);opts.shotSay=null}

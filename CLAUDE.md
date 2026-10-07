@@ -35,3 +35,7 @@ refactor, dump every zone (`node ../walk-engine/tools/zonedump.mjs out/`) and di
 word-order tiles have no instruction text on purpose (only the first tile of the first one ever bobs, after 4 s); the school gate
 is mirrored (you walk ↓ out and face ↑ on the street); long walks across the 1층; words above TOPIK 3 (all tappable); a word quizzed
 several times in one 교시; review right after a word is taught; the sleeper sits upright; the 1층 south wall has windows and doors.
+
+**문화 노트** (`src/culture.js`): the real-world culture behind a story moment, unlocked by a step's or phone's `culture:'id'`, read in
+the journal. Fact-check every line against the sources themselves (open pages that block plain fetches in a real browser), cite each
+line by source number, and drop or soften any claim no source supports. `validate.mjs` checks the citations and links.
