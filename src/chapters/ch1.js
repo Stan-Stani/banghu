@@ -416,7 +416,7 @@ const STOOL={art:{pal:STOOL_PAL,keep:14,drop:7,
 const seatPulledN=(x,y)=>{try{return live().some(n=>n.x===x&&n.y===y-1&&n.dir==='down'&&!n.walk&&sitting(n))}catch(e){return false}};
 const seatPulled=(x,y)=>{try{
  if(player.sit&&player.dir==='up'&&player.x===x&&player.y===y+1)return true;
- return live().some(n=>n.x===x&&n.y===y+1&&n.dir==='up'&&!n.walk&&(sitting(n)||n.look===CHAIR_N))}catch(e){return false}};
+ return live().some(n=>n.x===x&&n.y===y+1&&!n.walk&&(n.look===CHAIR_N||n.dir==='up'&&sitting(n)))}catch(e){return false}};  // my chair counts whichever way it faces
 
 const JONGNYE=()=>[
  {who:'…',say:'자리에 앉았어요.',sit:{npc:'seat'}},
@@ -542,7 +542,7 @@ const NPC={
    {say:'오백 원. 땡그랑. 고마워.'},
    {say:'네 자리는 내 옆이야. 넷째 줄. 빨리 와.',award:['벌금','걷다','사실대로'],set:()=>{f().paidFine=1},walk:{npc:'daonSeat',from:[18,10]}}]},
 
- seat:{name:'내 자리',zone:'class',x:11,y:11,dir:'up',look:CHAIR_N,still:1,
+ seat:{name:'내 자리',zone:'class',x:11,y:11,dir:'up',look:CHAIR_N,still:1,fixed:1,
   status:()=>{const F=f();return F.paidFine&&!F.seated||F.deal&&!F.crew3?'todo':null},
   talk:()=>{const F=f();
    if(!F.paidFine)return [{who:'…',say:'빈자리예요. 누구 자리일까요?'}];

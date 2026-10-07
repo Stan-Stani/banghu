@@ -702,7 +702,7 @@ const STOOL={art:{pal:STOOL_PAL,keep:14,drop:7,
 const seatPulledN=(x,y)=>{try{return live().some(n=>n.x===x&&n.y===y-1&&n.dir==='down'&&!n.walk&&sitting(n))}catch(e){return false}};
 const seatPulled=(x,y)=>{try{
  if(player.sit&&player.dir==='up'&&player.x===x&&player.y===y+1)return true;
- return live().some(n=>n.x===x&&n.y===y+1&&n.dir==='up'&&!n.walk&&(sitting(n)||n.look===CHAIR_N))}catch(e){return false}};
+ return live().some(n=>n.x===x&&n.y===y+1&&!n.walk&&(n.look===CHAIR_N||n.dir==='up'&&sitting(n)))}catch(e){return false}};  // my chair counts whichever way it faces
 
 const JONGNYE=()=>[
  {who:'…',say:'자리에 앉았어요.',sit:{npc:'seat'}},
@@ -828,7 +828,7 @@ const NPC={
    {say:'오백 원. 땡그랑. 고마워.'},
    {say:'네 자리는 내 옆이야. 넷째 줄. 빨리 와.',award:['벌금','걷다','사실대로'],set:()=>{f().paidFine=1},walk:{npc:'daonSeat',from:[18,10]}}]},
 
- seat:{name:'내 자리',zone:'class',x:11,y:11,dir:'up',look:CHAIR_N,still:1,
+ seat:{name:'내 자리',zone:'class',x:11,y:11,dir:'up',look:CHAIR_N,still:1,fixed:1,
   status:()=>{const F=f();return F.paidFine&&!F.seated||F.deal&&!F.crew3?'todo':null},
   talk:()=>{const F=f();
    if(!F.paidFine)return [{who:'…',say:'빈자리예요. 누구 자리일까요?'}];
@@ -4242,7 +4242,7 @@ var GAME={prefix:'banghu',title:'방과 후',log:'단어 일지',
  player:{hair:'#2A2F4A',skin:'#F1C9A5',shirt:'#F4F2EA',pants:'#2B3A5C',belt:'#9B2D30'}};
 </script>
 <script>
-/* GENERATED from walk-engine/engine.js (544d1bb) — do not edit here; edit walk-engine and run its sync.sh. */
+/* GENERATED from walk-engine/engine.js (ca8062c) — do not edit here; edit walk-engine and run its sync.sh. */
 /* =====================================================================
    Engine: tiles, movement, zones, dialogue, spaced review, speech, saving.
    ===================================================================== */
@@ -5043,7 +5043,7 @@ function interact(){
  const F=facing();if(!F)return;
  if(F.n){
   let n=F.n;if(n.proxy){const p=n.proxy();if(p)n=p}
-  if(!n.pos&&!sitting(n)){n.dir=OPP[player.dir];n.turnAt=performance.now()+6000}
+  if(!n.pos&&!sitting(n)&&!n.fixed){n.dir=OPP[player.dir];n.turnAt=performance.now()+6000}  // fixed: furniture (a chair) never turns to face you
   let steps=n.script?n.script():null,isReview=false;
   if(!steps){
    if(n.badge&&n.badge.every(has)){steps=[...says(n.after),reviewFor(n.badge)];isReview=true}
