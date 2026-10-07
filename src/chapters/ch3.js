@@ -103,8 +103,8 @@ const Q={ // NPC questions, kept here so review can reuse them. who:'나' = the 
  chanL:[
   {w:'독후감',who:'나',ask:'책이 거꾸로잖아. 읽는 ___했지?',opts:[['척',1],['적',0,'"읽은 적 있어"는 경험이야. 안 읽는데 읽는 것처럼 하면 "읽는 척".']]},
   {w:'답답하다',ask:'어제부터 계속 세 줄이야. 가슴이 ___.',opts:[['답답해',1],['시원해',0,'시원하면 막힌 게 없어. 글이 안 나와서 막힌 느낌은 "답답해".'],['대답해',0,'대답하다는 질문에 말하는 거야. 막힌 느낌은 "답답해".']]},
-  {w:'맞춤법',ask:'"주인공이 왕이 ___." 맞춤법에 맞는 건?',opts:[['됐다',1],['됬다',0,'"되었다"를 줄이면 "됐다". "됬다"는 없는 글자야.']]},
-  {w:'맞춤법',ask:'"그 일은 ___ 전에 있었다." 바른 건?',opts:[['며칠',1],['몇일',0,'소리는 같지만 맞춤법은 "며칠"이야. "몇일"은 틀려.']]},
+  {w:'맞춤법',ok:'오, 그렇구나!',ask:'"주인공이 왕이 ___." 맞춤법에 맞는 건?',opts:[['됐다',1],['됬다',0,'"되었다"를 줄이면 "됐다". "됬다"는 없는 글자야.']]},
+  {w:'맞춤법',ok:'아하, 그렇구나!',ask:'"그 일은 ___ 전에 있었다." 바른 건?',opts:[['며칠',1],['몇일',0,'소리는 같지만 맞춤법은 "며칠"이야. "몇일"은 틀려.']]},
  ],
  daonBd:[
   {w:'붙다',ask:'좋아. 포스터가 게시판에 잘 ___ 있어.',opts:[['붙어',1],['붙여',0,'"붙여"는 내가 붙이는 거야. 포스터가 그대로 있으면 "붙어 있어".'],['부어',0,'붓다는 물을 따를 때야. 종이가 벽에 있으면 "붙어".']]},
@@ -112,7 +112,7 @@ const Q={ // NPC questions, kept here so review can reuse them. who:'나' = the 
  ],
  chanR:[
   {w:'엿듣다',who:'나',ask:'너, 구름이 전화를 ___?',opts:[['엿들었어',1],['엿봤어',0,'엿보다는 몰래 보는 거야. 전화는 귀로 들으니까 "엿들었어".']]},
-  {w:'엿듣다',own:1,ask:'큰일이야. 구름이가 방송부 그만___!',opts:[['둔대',1],['둘게',0,'"-ㄹ게"는 내가 약속하는 말이야. 남한테 들은 말은 "그만둔대".'],['뒀대',0,'"뒀대"는 벌써 그만둔 거야. 구름은 아직 방송실에 있어. 그러니까 "그만둔대".']]},
+  {w:'엿듣다',own:1,ask:'큰일이야. 구름이가 방송부 그만___!',opts:[['둔대',1],['둘게',0,'"-ㄹ게"는 내가 약속하는 말이야. 남한테 들은 말은 "그만둔대".'],['둘래',0,'"그만둘래"는 내가 그만두고 싶을 때야. 남한테 들은 말은 "그만둔대".']]},
   {w:'오해하다',who:'나',ask:'다 안 들었잖아. 네가 ___ 수도 있어.',opts:[['오해했을',1],['이해했을',0,'이해는 바르게 아는 거야. 다 안 듣고 잘못 알면 "오해했을".'],['오래 했을',0,'오래는 시간이 길 때야. 잘못 알면 "오해했을".']]},
  ],
  lib:[
@@ -164,7 +164,7 @@ const Q={ // NPC questions, kept here so review can reuse them. who:'나' = the 
 
 const ITEMS={'가입 신청서':'방송부 가입 신청서. 부원 이름 칸이 다섯 개예요.','복숭아 편지':'분홍 편지. 복숭아 향기가 나요. "…잘 들었읍니다."','복숭아 주스':'매점 이모가 쏜 복숭아 주스 다섯 개. 시원해요.'};
 /* a library chair (as 2학년 3반's), for the first-year asleep at the reading table */
-const CHAIR_N={art:{pal:{O:'#1B1E2B',h:'#6C8DAD',w:'#4F6F8F',m:'#6F757C'},back:4,
+const CHAIR_N={art:{pal:{O:'#1B1E2B',h:'#6C8DAD',w:'#4F6F8F',m:'#6F757C'},back:4,lift:5,  /* pulled up to the table's edge */
  down:['.OOOOOOOO.','.OhhhhhhO.','.OwwwwwwO.','.OwwwwwwO.','OOOOOOOOOO','OhhhhhhhhO','OOOOOOOOOO','.m......m.']}};
 const f=()=>state.f;
 const pick=a=>a[Math.random()*a.length|0];  // a repeat line picked at random, so a character talked to often doesn't say the same thing
@@ -344,7 +344,7 @@ const NPC={
    Q.daonB[1],
    {say:'괜찮은 척 말고. 진짜 괜찮아야지.',face:'angry'},
    {say:'오늘 방과 후에 노래방 연습, 그대로 해.'},
-   {say:'학교 앞 {코인 노래방|코인 노래방}. 정문 건너편이야.'},
+   {say:'학교 앞 {코인 노래방|코인 노래방}, 큰 방이야. 정문 건너편.'},
    {say:'신발장 옆 문으로 나가. 늦으면 벌금이야.',award:['무시하다']},
    {who:'…',say:'다온이 구름 손을 잡고 먼저 나갔어요.',set:()=>{f().toNR=1},leave:[{npc:'daonB',to:[7,0]},{npc:'gureum',to:[8,0]}]}]},
 
@@ -374,7 +374,7 @@ const NPC={
    :[{say:'방송까지 십 분. 늦으면 벌금이야.'},{say:'하리 목 마르대. 주스 하나 사 와.'}],
   talk:()=>[]},
 
- hariFin:{name:'유하리',zone:'bcast',x:11,y:3,dir:'up',look:LOOK.hari,badge:['창피하다'],
+ hariFin:{name:'유하리',zone:'bcast',x:12,y:2,dir:'left',look:LOOK.hari,badge:['창피하다'],
   hide:()=>!f().letter,
   get after(){return f().done?pick([['선배, 저 오늘도 창피했어요. 그래도 좋아요.'],['다음 사연은 누가 보낼까요? 궁금해요.']]):['방송 끝! …저 목소리 떨렸죠?']},
   status:()=>{if(!has('창피하다'))return f().juice?'todo':null},
@@ -407,13 +407,13 @@ const NPC={
    if(F.secret)return ['좋은 아침이에요. 얼굴이 밝네요.','어제 무슨 좋은 일 있었어요?'];
    if(F.rumor)return ['학교 앱 글은 다 믿지 마요.','궁금하면 구름이한테 직접 물어봐요.'];
    if(F.posted)return ['게시판 포스터 봤어요. 예쁘네요.'];
-   if(F.submitted)return ['정식 동아리, 축하해요.','포스터는 반장한테 말해요.'];
+   if(F.submitted)return ['정식 동아리, 축하해요.','포스터는 반장한테 말해요.','다온이는 복도 게시판 앞에 있어요.'];
    return ['맞춤법이 헷갈리면 언제든지 물어봐요.']},
   status:()=>{const F=f();if(!F.plan)return null;if(!F.formGot)return 'todo';if(!F.signed5)return null;if(!F.submitted)return 'todo';if(F.letter&&!F.oldSpelling)return 'todo'},
   script:()=>{const F=f();
    if(!F.plan)return [{say:'어, 일찍 왔네요. 방송부는 요즘 어때요?'},{say:'구름이가 아침부터 방송실에 있던데요.'}];
    if(!F.formGot)return null;
-   if(!F.signed5)return [{say:'찬은 도서관에 있어요. 2층, 파란 문이에요.'}];
+   if(!F.signed5)return [{say:'찬은 도서관 왼쪽 구석에 있어요. 2층, 파란 문이에요.'}];
    if(!F.submitted)return [
     {who:'…',say:'신청서를 정 선생님한테 냈어요.',take:['가입 신청서']},
     {who:'…',say:'다섯 번째 이름: 남궁찬. 글씨가 삐뚤삐뚤해요.'},
@@ -477,7 +477,8 @@ const NPC={
    Q.imo[1],
    {who:'…',say:'덜컹, 덜컹… 복숭아 주스 다섯 개!',give:'복숭아 주스'},
    {who:'남궁찬',say:'…이모 아니면 누구지? 더 궁금해.',face:'think'},
-   {say:'방송실까지 뛰어가요. 방송 잘 들을게요!',face:'happy',award:['복숭아'],set:()=>{f().juice=1}}]},
+   {say:'방송실까지 뛰어가요. 방송 잘 들을게요!',face:'happy',award:['복숭아']},
+   {who:'…',say:'찬이 주스를 안고 먼저 뛰어갔어요.',set:()=>{f().juice=1}}]},
 
  daonBoard:{name:'오다온',zone:'hall',x:20,y:1,dir:'left',look:LOOK.daon,banmal:1,badge:['붙다'],
   hide:()=>!!f().sawComments,
@@ -523,18 +524,19 @@ const NPC={
    {say:'엿들은 거 아니야! 그냥 귀가 거기 있었어.',face:'surprised'},
    {who:'…',say:'정말 방송부 얘기였을까요? 좀 이상해요.'},
    Q.chanR[2],
-   {say:'오해? 아니야. 벌써 {학교 앱|학교 앱}에도 올렸어.'},
-   {say:'"방송부 {끝났대|-대}?" 이렇게 물어만 봤어.'},
+   {say:'오해? 아니야. 벌써 {학교 앱|학교 앱}에도 글이 올라왔어.'},
+   {say:'누가 "방송부 {끝났대|-대}?" 이렇게 썼어.'},
    {say:'근데 댓글이 막… 도서관 컴퓨터로 봐 봐.',face:'sad',award:['엿듣다','오해하다'],set:()=>{f().rumor=1}}]},
 
  hariBox:{name:'유하리',zone:'hall',x:20,y:1,dir:'left',look:LOOK.hari,badge:['향기'],
   hide:()=>!f().secret||!!f().letter,
   after:'선배, 이 편지 냄새 진짜 좋아요.',
   talk:()=>[
-   {say:'선배! 사연함에 편지가 세 통 왔어요!',face:'happy'},
+   {say:'선배! 사연함에 편지가 네 통 왔어요!',face:'happy'},
    {say:'하나는 "급식에 떡볶이 넣어 주세요."'},
    {say:'하나는 "찬 선배, 수업 시간에 조용히 해요."'},
    {who:'남궁찬',say:'뭐? 누구야! …{인정|인정}.',face:'surprised'},
+   {say:'하나는 "제 짝이 전학을 갔어요." 이건 오늘 방송에서 읽을 거예요.'},
    {say:'그리고 이거… 냄새 맡아 보세요.'},
    {who:'…',say:'분홍 편지예요. 달콤한 냄새가 나요.'},
    Q.hariB[1],
@@ -609,7 +611,7 @@ const NPC={
    {say:'저는 아무 말도 안 했어요. 쉿.'},
    {say:'구름 선배 괜찮을까요? 방송실에 가 보세요.',award:['댓글','비밀'],set:()=>{f().sawComments=1}}]},
 
- reader:{name:'1학년 학생',zone:'library',x:9,y:7,dir:'up',look:LOOK.reader,sit:1,chair:CHAIR_N,
+ reader:{name:'1학년 학생',zone:'library',x:9,y:7,dir:'up',look:LOOK.reader,sit:1,chair:CHAIR_N,sleep:1,
   talk:()=>[{say:'쿨쿨…',face:'sleep'},{say:'…독후감… 내일 제출… 쿨…',face:'sleep'},{who:'…',say:'책을 베개처럼 베고 자요.'}]},
 
  /* ---------- 학교 앞 ---------- */

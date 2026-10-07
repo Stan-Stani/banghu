@@ -70,7 +70,9 @@ const TILES={
   if(hash(x,y)%3===0){const s=Math.round(Math.sin(t/900+y));r(X+8+s,Y+4,3,3,'#6FA86A')}if(y%4===1)r(X+5,Y,6,4,'#F2E2B0')},
   streetWin:(X,Y,x,y,t)=>{cap(X,Y,x,y);r(X+3,Y,10,16,'#E2D8C2');r(X+4,Y,8,16,'#B4C3C6');  // a wider pane than sideWin: 8px of view
   const v=STREET.east||(STREET.east=ART.rot(STREET.rows,1)),o=(y%4)*16;ART.put(v.slice(o,o+16),STREET.pal,X+4,Y);
-  r(X+4,Y+3,1,1,'#D5DCDC');r(X+9,Y+11,1,1,'#D5DCDC')},
+  g.fillStyle='rgba(225,240,248,.28)';g.fillRect(X+4,Y,8,16);  /* glass */
+  r(X+3,Y,10,2,'#E2D8C2');r(X+3,Y+2,10,1,'#B9AE98');r(X+3,Y,1,16,'#B9AE98');r(X+12,Y,1,16,'#F2EBDD');  /* pane bar at each tile, frame with a lit sill edge */
+  r(X+5,Y+4,1,3,'rgba(255,255,255,.55)');r(X+6,Y+3,1,2,'rgba(255,255,255,.55)')},
   desk:(X,Y,x,y)=>{r(X+1,Y+2,14,7,'#E3C08A');r(X+1,Y+2,14,1,'#F0D6A8');r(X+1,Y+8,14,1,'#B98E58');r(X+2,Y+9,1,4,'#6F757C');r(X+13,Y+9,1,4,'#6F757C');
   if(!(C.seatPulled&&C.seatPulled(x,y))){r(X+4,Y+11,8,4,'#4F6F8F');r(X+4,Y+11,8,1,'#6C8DAD')}/* the chair, tucked in */const h=hash(x,y);if(h<40)r(X+3,Y+3,4,4,['#E07A5A','#5A8FB0','#7CB46A'][h%3]);if(h%3===0)r(X+9,Y+5,4,1,'#E8B93A')},
   tdesk:(X,Y,x,y)=>{r(X,Y+3,16,11,'#9C6B3E');r(X,Y+3,16,3,'#B9844F');r(X,Y+3,16,1,'#CF9E66');r(X+2,Y+9,12,1,'#7E5430');r(X+3,Y+1,3,4,'#F2F0EA');r(X+9,Y+3,5,2,'#F4F1E6')},
@@ -223,7 +225,8 @@ const TILES={
   libWin:(X,Y,x,y,t)=>{r(X,Y,16,16,'#E6DCC8');r(X,Y,16,1,'#F4ECDC');const L=at(x-1,y)!=='W';r(X+(L?2:0),Y+2,L?14:14,11,'#F8F2E6');r(X+(L?3:0),Y+3,L?13:13,9,'#A9D8EC');
   const s=Math.round(Math.sin(t/1100+x));r(X+(L?3:0),Y+8+s,13,4-s,'#6FA86A');r(X,Y+13,16,3,'#C9BCA4')},
   readTable:(X,Y,x,y)=>{const L=at(x-1,y)!=='t',R=at(x+1,y)!=='t';r(X,Y+3,16,9,'#D9B07A');r(X,Y+3,16,1,'#EBC995');r(X,Y+11,16,1,'#A67E4A');
-  if(L)r(X+1,Y+12,2,4,'#8A6040');if(R)r(X+13,Y+12,2,4,'#8A6040');const h=hash(x,y);if(h%3===0){r(X+3,Y+5,10,5,'#F7F3E8');r(X+8,Y+5,1,5,'#C9BFA8');r(X+4,Y+6,3,1,'#9AA3B5');r(X+9,Y+7,3,1,'#9AA3B5')}else if(h%3===1)r(X+4,Y+5,6,4,['#3E5E8C','#B8433A','#3F7D5A'][h%3])},
+  if(L)r(X+1,Y+12,2,4,'#8A6040');if(R)r(X+13,Y+12,2,4,'#8A6040');const h=hash(x,y);if(h%3===0){r(X+3,Y+5,10,5,'#F7F3E8');r(X+8,Y+5,1,5,'#C9BFA8');r(X+4,Y+6,3,1,'#9AA3B5');r(X+9,Y+7,3,1,'#9AA3B5')}else if(h%3===1)r(X+4,Y+5,6,4,['#3E5E8C','#B8433A','#3F7D5A'][h%3]);
+   if(live().some(n=>n.x===x&&n.y===y+1&&sitting(n))){r(X+4,Y+6,8,4,'#F7F3EA');r(X+7,Y+6,2,4,'#C9BFA8');r(X+5,Y+7,2,1,'#9AA3B5');r(X+10,Y+8,1,1,'#9AA3B5')}  /* someone sitting here: an open book */},
   libDesk:(X,Y,x,y)=>{r(X,Y+3,16,11,'#8A5E36');r(X,Y+3,16,3,'#B9844F');r(X,Y+3,16,1,'#CF9E66');r(X,Y+13,16,1,'#5A3E26');const L=at(x-1,y)!=='K',R=at(x+1,y)!=='K';
   if(!L&&!R){r(X+3,Y-2,10,7,'#2B3238');r(X+4,Y-1,8,5,'#69CFD8');r(X+5,Y,4,1,'#F2F2F2');r(X+7,Y+5,2,1,'#2B3238')}else if(L){r(X+3,Y+1,8,2,'#3E5E8C');r(X+4,Y-1,7,2,'#B8433A');r(X+12,Y+2,2,2,'#C8443A')}else{r(X+3,Y+1,9,4,'#5A3E26');r(X+4,Y+2,7,1,'#1B1E2B')}},
   magRack:(X,Y,x,y)=>{r(X+1,Y+2,14,13,'#7A5230');r(X+1,Y+2,14,1,'#93623C');const h=hash(x,y),C=['#E07A5A','#F2C46B','#5A8FB0','#7CB46A','#F2A3B8'];for(let i=0;i<3;i++){r(X+2+i*4,Y+4,3,5,C[(h+i)%5]);r(X+2+i*4,Y+10,3,4,C[(h+i+2)%5])}},
