@@ -786,8 +786,8 @@ const base=()=>({
   map:[
 "#BBBBBBBBWWBBBBBBBB#",
 "#..................#",
-"#.bb.bb.bb...KKK...#",
 "#.bb.bb.bb.........#",
+"#.bb.bb.bb...KKK...#",
 "#..................#",
 "#..................#",
 "#.tttt..tttt...nn..#",
@@ -2979,7 +2979,7 @@ const NPC={
    {say:'이 독후감도 선생님한테 같이 내 줘.',give:'찬 독후감'},
    {say:'이제 답답한 거 없다! 시원하다!',face:'happy',award:['답답하다'],set:()=>{f().signed5=1}}]},
 
- lib:{name:'서지민',zone:'library',x:14,y:1,dir:'down',look:LOOK.jimin,badge:['댓글','비밀'],
+ lib:{name:'서지민',zone:'library',x:14,y:2,dir:'down',look:LOOK.jimin,badge:['댓글','비밀'],
   get after(){const F=f();
    if(F.aired)return pick([['선배, 댓글이 다 바뀌었어요. "방송부 최고."'],['선배, 비밀은 비밀이에요. 쉿.']]);
    if(F.secret)return ['오늘 사연 코너 한대요. 저도 들을 거예요.'];
