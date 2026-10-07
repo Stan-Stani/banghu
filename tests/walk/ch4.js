@@ -75,4 +75,5 @@
  {walkTo:['yard',19,6],then:'28-stage'},
  {walkTo:['yard',4,10],then:'29-zelkova-lights'},
  {walkTo:['hall',13,3],then:'30-principal-office'},
+ {walkTo:['hall2',16,3],then:'31-second-floor'},
 ]

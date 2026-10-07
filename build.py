@@ -14,6 +14,7 @@ used={l for ls in lexmap.values() for l in ls}
 lex={'map':{k:v for k,v in lexmap.items() if any(l in alldefs and alldefs[l] for l in v)},'defs':{l:d for l,d in alldefs.items() if l in used and d}}
 parts=['<script>\n/* Tap-a-word dictionary: word as written → dictionary forms, and learner definitions (lexicon/). */\nwindow.LEX='+json.dumps(lex,ensure_ascii=False,separators=(',',':'))+';\n</script>',
  '<script>\n/* Chapters register themselves here; each keeps its own save. */\nconst CHAPTERS=[];\n</script>']
+parts.append(f'<script>\n{(root/"src/school.js").read_text(encoding="utf-8")}</script>')  # the school every 교시 is set in
 parts+=[f'<script>\n{p.read_text(encoding="utf-8")}</script>' for p in chs]
 parts.append(f'<script>\n{(root/"src/game.js").read_text(encoding="utf-8")}</script>')  # this game's settings for the shared engine
 parts.append(f'<script>\n{(root/"src/engine.js").read_text(encoding="utf-8")}</script>')

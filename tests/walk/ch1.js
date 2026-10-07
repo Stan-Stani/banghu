@@ -70,4 +70,5 @@
  {walkTo:['cafe',3,3],then:'18-serving-line'},
  {walkTo:['class',1,11],then:'19-class-back'},
  {walkTo:['yard',11,5],then:'20-school-front'},
+ {walkTo:['yard',27,7],then:'21-gym-outside'},
 ]

@@ -27,6 +27,18 @@ for(const CH of ctx.CHAPTERS){
   for(const k of Object.keys(Z.spots||{})){const [x,y]=k.split(',').map(Number);if(walk(Z,x,y))E(`${id} spot ${k} is on a walkable tile`)}
   for(const k of Z.npcs){const n=C.NPC[k];if(!n){E('no npc '+k);continue}if(n.zone!==id)E(`npc ${k} zone ${n.zone}≠${id}`);if(!walk(Z,n.x,n.y)&&!n.proxy)E(`npc ${k} on unwalkable ${n.x},${n.y}`)}  // a proxy (e.g. a table) may stand on furniture
  }
+ // one school (src/school.js): every 교시 has every school zone, same walls, doors and warps; it may only paint props onto floor or wall
+ if(ctx.SCHOOL_BASE){const B=ctx.SCHOOL_BASE(),STRUCT=new Set([...ctx.SCHOOL_WALLISH,'building','fence','gymBldg','clock']);
+  for(const [id,S] of Object.entries(B)){const Z=C.ZONES[id];if(!Z){E(`school zone ${id} missing`);continue}
+   if(Z.map.length!==S.map.length||Z.map[0].length!==S.map[0].length){E(`school ${id} size changed`);continue}
+   const painted=new Set(Z.painted||[]);
+   Z.map.forEach((row,y)=>[...row].forEach((c,x)=>{const b=S.map[y][x],k=x+','+y;
+    if(c===b&&Z.legend[c].tile===S.legend[b].tile)return;
+    if(!painted.has(k))E(`school ${id} ${k} is "${c}" but the school has "${b}" (paint it, or change src/school.js)`);
+    else if(S.warps[k])E(`school ${id} ${k}: a door can't be painted over`);
+    else if(STRUCT.has(S.legend[b].tile)&&Z.legend[c].walk)E(`school ${id} ${k}: a wall can't be painted walkable`)}));
+   for(const k of Object.keys(S.warps)){const w=Z.warps[k],s=S.warps[k];if(!w||w.to!==s.to||w.x!==s.x||w.y!==s.y)E(`school ${id} warp ${k} differs from the school's`)}
+   for(const k of Object.keys(Z.warps))if(!S.warps[k]&&!(id==='yard'&&/^1[12],13$/.test(k)))E(`school ${id} has an extra warp ${k}`)}}
  const qs=[...Object.values(C.Q).flat(),...(C.BANK||[])];const hasQ=new Set(qs.map(q=>q.w).filter(Boolean));
  for(const q of qs){if(q.w&&!C.WORDS.includes(q.w))E(`question w "${q.w}" not a chapter word`);if(q.opts&&!q.opts.some(o=>o[1]))E('question without a right answer: '+q.ask);if(q.opts)q.opts.filter(o=>!o[1]).forEach(o=>{if(!o[2])E('wrong option without explanation: '+o[0])})}
  const badge=new Set(Object.values(C.NPC).flatMap(n=>n.badge||[]));

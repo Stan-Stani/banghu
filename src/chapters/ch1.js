@@ -175,61 +175,15 @@ const has=w=>state.badges.includes(w);
 const NOTE='복숭아 쪽지';
 const pick=a=>a[Math.random()*a.length|0];  // a repeat line picked at random, so a character talked to often doesn't say the same thing
 
-const ZONES={
- yard:{name:'느티고 · 운동장',reg:'NEUTI HIGH · YARD',outdoor:1,
-  legend:{'H':{tile:'building'},'C':{tile:'clock'},'E':{tile:'entrance',walk:1},'.':{tile:'sand',walk:1},',':{tile:'stone',walk:1},'*':{tile:'bed'},
-   'Y':{tile:'zelkova',front:'zelkovaTop'},'n':{tile:'ybench'},'g':{tile:'goal'},'b':{tile:'booth'},'f':{tile:'fence'},'G':{tile:'gate'}},
-  map:[
-"HHHHHHHHHHHHHHHHHHHHHHHH",
-"HHHHHHHHHHHCCHHHHHHHHHHH",
-"HHHHHHHHHHHHHHHHHHHHHHHH",
-"HHHHHHHHHHHEEHHHHHHHHHHH",
-"f****......,,......****f",
-"f..........,,..........f",
-"f.YYYY.....,,......gg..f",
-"f.YYYY.....,,..........f",
-"f.YYYY.n...,,..........f",
-"f.YYYY.n...,,..........f",
-"f..........,,..........f",
-"f..........,,.....bb...f",
-"f..........,,.....bb...f",
-"fffffffffffGGfffffffffff"],
-  rooms:[[1,4,10,12,'운동장 · 느티나무'],[13,4,22,12,'운동장']],
-  warps:{'11,3':{to:'hall',x:5,y:8,dir:'up'},'12,3':{to:'hall',x:6,y:8,dir:'up'}},
-  spots:{},
-  things:{'H':['느티고등학교 건물이에요. 창문이 반짝여요.','3층 창문에서 누가 손을 흔들어요.','오래된 건물이지만 깨끗해요.'],
-   'C':()=>f().done?'시계가 네 시를 가리켜요. 하교 시간이에요.':f().lunch?'시계가 열두 시 반이에요. 점심시간!':'시계가 아홉 시 십오 분이에요. 지각이에요!',
-   '*':['화단에 노란 꽃이 피었어요.','꽃 이름표: "2학년 3반이 심었어요."','벌이 꽃 사이를 날아다녀요.'],
-   'Y':['아주 큰 느티나무예요. 학교 이름도 이 나무예요.','나뭇잎 사이로 햇빛이 반짝여요.','나무에 작은 이름표: "오백 살"','바람이 불어요. 나뭇잎이 사락사락.'],
-   'n':'나무 벤치예요. 누가 이름을 새겼어요.',
-   'g':['축구 골대예요. 그물에 구멍이 있어요.','골대 옆에 공이 하나 있어요.'],
-   'b':['경비실이에요. 라디오 소리가 작게 들려요.','창문에 열쇠가 많이 걸려 있어요.'],
-   'f':['초록색 울타리예요.','울타리 밖에 버스 정류장이 보여요.'],
+/* 느티고 (src/school.js): this 교시 opens 2학년 3반, the 급식실 and the 방송실; the 2층 and the 체육관 stay shut. */
+const ZONES=SCHOOL({open:['class','cafe','bcast'],zones:{
+ yard:{
+  things:{'C':()=>f().done?'시계가 네 시를 가리켜요. 하교 시간이에요.':f().lunch?'시계가 열두 시 반이에요. 점심시간!':'시계가 아홉 시 십오 분이에요. 지각이에요!',
    'G':()=>f().done?nextChapterAsk('정문이에요. 오늘은 끝!'):'정문이에요. 아직 집에 갈 시간이 아니에요.'},
   npcs:['guard','xLate','xSoc1','xSoc2','xBench1','xBench2','xHome1','xHome2']},
- hall:{name:'느티고 · 1층 복도',reg:'NEUTI HIGH · 1F',
-  legend:{'#':{tile:'wall'},',':{tile:'hallFloor',walk:1},'.':{tile:'checkFloor',walk:1},'D':{tile:'doorway',walk:1},
-   'N':{tile:'notice'},'V':{tile:'classWin'},'R':{tile:'classDoor',walk:1},'P':{tile:'speaker'},
-   'c':{tile:'cabinet'},'w':{tile:'water'},'p':{tile:'plant'},'k':{tile:'odesk'},'t':{tile:'trophy'},'K':{tile:'pdesk',over:1},'o':{tile:'sofa'},'a':{tile:'lowTable'},
-   's':{tile:'shoes'},'E':{tile:'exitDoor',walk:1},'S':{tile:'stairs'},'W':{tile:'hallWin'},'F':{tile:'cafDoor',walk:1},'Q':{tile:'bcDoor',walk:1},'q':{tile:'bcSign'},'m':{tile:'classSign'}},
-  map:[
-"##################NN#VRm#P##",
-"#ccw.pcc#tt...tt#,,,,,,,,,,#",
-"#.......#..KK...#,,,,,,,,,,#",
-"#kk..kk.#.......#,,,,,,,,,,#",
-"#kk..kk.#oao....#,,,,,,,,,,#",
-"####D########D###,,,,,,,,,,#",
-"#,,,,,,,,,,,,,,,,,,,,,,,,,,#",
-"#,,,,,,,,,,,,,,,,,,,,,,,,,,#",
-"#,,,,,,,,,,,,,,,,,,,,,,,,,,#",
-"#ssssEE#SSS#WWW#FF#WWWW#Qq##"],
-  rooms:[[1,1,7,4,'교무실'],[9,1,15,4,'교장실'],[17,1,26,4,'복도 · 2학년 3반 앞'],[1,5,26,8,'1층 복도'],[15,7,18,8,'1층 복도 · 급식실 앞'],[22,6,26,8,'복도 끝 · 방송실 앞']],
-  warps:{'5,9':{to:'yard',x:11,y:4,dir:'down'},'6,9':{to:'yard',x:12,y:4,dir:'down'},
-   '22,0':{to:'class',x:18,y:11,dir:'up',lock:()=>!f().metTeacher&&'2학년 3반. 아직 담임 선생님을 못 만났어요.'},
-   '16,9':{to:'cafe',x:10,y:1,dir:'down',lock:()=>!f().lunch&&'급식실 문이 닫혔어요. 아직 점심시간이 아니에요.'},
-   '17,9':{to:'cafe',x:11,y:1,dir:'down',lock:()=>!f().lunch&&'급식실 문이 닫혔어요. 아직 점심시간이 아니에요.'},
-   '24,9':{to:'bcast',x:7,y:1,dir:'down',lock:()=>!f().metChan&&(hasItem(NOTE)?'방송실… 배가 꼬르륵. 점심부터 먹어요.':'"방송실". 문이 잠겨 있어요.')}},
-  spots:{},
+ hall:{locks:{class:()=>!f().metTeacher&&'2학년 3반. 아직 담임 선생님을 못 만났어요.',
+   cafe:()=>!f().lunch&&'급식실 문이 닫혔어요. 아직 점심시간이 아니에요.',
+   bcast:()=>!f().metChan&&(hasItem(NOTE)?'방송실… 배가 꼬르륵. 점심부터 먹어요.':'"방송실". 문이 잠겨 있어요.')},
   things:{'#':['하얀 벽이에요. 아래쪽은 초록색이에요.','벽에 "복도에서 뛰지 마세요" 종이가 있어요.','누가 벽에 작게 낙서했어요.'],
    'N':['게시판: "축제 다음 달! 반마다 하나씩 준비해요."','게시판: "중간고사 등수는 교무실 앞에."','게시판 구석에 "방송부 부원 모집" 종이가 찢어져 있어요.'],
    'V':['창문으로 2학년 3반 교실이 보여요.','교실 안에서 웃음소리가 들려요.'],
@@ -243,32 +197,11 @@ const ZONES={
    'o':'까만 소파예요. 아주 푹신해 보여요.',
    'a':'작은 탁자 위에 녹차가 두 잔 있어요.',
    's':x=>!f().done?'신발장이에요. 실내화가 줄줄이 있어요.':x===2?'쪽지: "고마워. 다음은 노래. —복숭아"':'신발장이에요. 옆 칸에 분홍색 종이가 보여요.',
-   'S':['계단이에요. 위층은 3학년 교실이에요.','위에서 선배들 목소리가 들려요. 좀 무서워요.'],
    'W':['창밖에 운동장하고 느티나무가 보여요.','창밖에서 새가 짹짹 울어요.'],
    'm':'"2학년 3반" 팻말이에요. 문 옆에 있어요.',
    'q':()=>f().done?'"방송실" 팻말. "방송 중" 불이 깜빡여요!':'"방송실" 팻말이에요. "방송 중" 불은 꺼져 있어요.'},
   npcs:['jung','principal','gureumH','xHall1','xHall2','xNotice','xWin','xSenior','xBye','xClean']},
- class:{name:'2학년 3반 교실',reg:'CLASS 2-3',
-  legend:{'#':{tile:'wall'},'.':{tile:'wood',walk:1},'B':{tile:'board'},'J':{tile:'timetable'},'W':{tile:'sideWin'},'k':{tile:'tdesk',over:1},'T':{tile:'terminal'},
-   'R':{tile:'classDoor',walk:1},'d':{tile:'desk'},'L':{tile:'lockers'},'b':{tile:'piggy'}},
-  map:[
-"####BBBBBBBBB##J####",
-"W..................#",
-"W.......kT.........#",
-"W..................#",
-"W.dd.dd.dd.dd.dd...#",
-"W..................#",
-"W.dd.dd.dd.dd.dd...#",
-"W..................#",
-"W.dd.dd.dd.dd.dd...#",
-"W..................#",
-"W.dd.dd.dd.dd.dd.b.#",
-"W..................#",
-"WLLLLLLLLLLLLLLLLLR#",
-"####################"],
-  rooms:[[1,1,18,3,'2학년 3반 · 교탁 앞'],[1,4,18,11,'2학년 3반 교실']],
-  warps:{'18,12':{to:'hall',x:22,y:1,dir:'down'}},
-  spots:{},
+ class:{
   things:{'#':['교실 벽이에요. 반 사진이 붙어 있어요.','벽에 "2학년 3반"이라고 써 있어요.'],
    'B':x=>x===4?'칠판에 오늘 날짜가 있어요.':x===12?'칠판 구석: "주번: 남궁찬"':['칠판에 "전학생 환영!"이라고 써 있어요.','분필 글씨가 반쯤 지워졌어요.','칠판에 수학 문제가 남아 있어요. 어려워요.'][x%3],
    'J':'시간표예요. 오늘 점심 다음은 수학이에요.',
@@ -278,25 +211,7 @@ const ZONES={
    'b':()=>f().paidFine?'벌금 저금통이에요. 내 오백 원도 들어 있어요.':'분홍색 돼지 저금통. 배에 "벌금"이라고 써 있어요.',
    'L':['사물함이에요. 이름표가 다 붙어 있어요.','사물함 하나가 안 닫혀요. 체육복이 보여요.','"오다온" 사물함. 아주 깔끔해요.']},
   npcs:['daon','daonSeat','seat','eraser','mate','mate2','jongnye','chanC','xC1','xC2','xC3','xC4','xC5']},
- cafe:{name:'급식실',reg:'CAFETERIA',
-  legend:{'#':{tile:'wall'},',':{tile:'checkFloor',walk:1},'D':{tile:'exitDoor',walk:1},'M':{tile:'menu'},'W':{tile:'sideWin'},'h':{tile:'snacks'},
-   'k':{tile:'kitchen'},'=':{tile:'serve',over:1},'m':{tile:'shopCounter',over:1},'v':{tile:'vending'},'t':{tile:'lunchTable'}},
-  map:[
-"#####MM###DD#####hhhhhh#",
-"#kkkkkkkk#,,,,,,#,,,,,,#",
-"#========#,,,,,,#mmmm,v#",
-"W,,,,,,,,,,,,,,,#,,,,,,#",
-"W,,,,,,,,,,,,,,,,,,,,,,#",
-"W,tttt,,tttt,,tttt,,,,,#",
-"W,,,,,,,,,,,,,,,,,,,,,,#",
-"W,tttt,,tttt,,tttt,,,,,#",
-"W,,,,,,,,,,,,,,,,,,,,,,#",
-"W,tttt,,tttt,,tttt,,,,,#",
-"W,,,,,,,,,,,,,,,,,,,,,,#",
-"########################"],
-  rooms:[[1,1,15,10,'급식실'],[17,1,22,4,'매점']],
-  warps:{'10,0':{to:'hall',x:16,y:8,dir:'up'},'11,0':{to:'hall',x:17,y:8,dir:'up'}},
-  spots:{},
+ cafe:{
   things:{'#':['급식실 벽이에요. 맛있는 냄새가 나요.','벽에 "음식 남기지 마세요!"라고 써 있어요.'],
    'M':'오늘의 메뉴: 밥, 미역국, 불고기, 김치.',
    'W':['창밖에 느티나무가 보여요.','창밖 운동장에서 남자애들이 공을 차요.'],
@@ -307,24 +222,7 @@ const ZONES={
    'v':()=>f().metChan?'자판기예요. 바나나우유는 벌써 다 팔렸어요.':'자판기예요. 동전이 없어요.',
    't':['식판에 밥이 반쯤 남았어요.','긴 식탁이에요. 반찬 냄새가 나요.','누가 우유를 쏟았어요. 하필 여기에.','누가 밥을 다 먹었어요. 식판이 깨끗해요.']},
   npcs:['chan','imo','xK1','xK2','xK3','xK4','xK5','xK6']},
- bcast:{name:'방송실',reg:'BROADCAST ROOM',
-  legend:{'#':{tile:'wall'},'.':{tile:'oldFloor',walk:1},'D':{tile:'exitDoor',walk:1},'r':{tile:'rack'},'A':{tile:'onair'},'O':{tile:'poster'},'W':{tile:'streetWin'},
-   'M':{tile:'mixer'},'i':{tile:'micStand'},'s':{tile:'oldSofa'},'c':{tile:'tapeCart'},'x':{tile:'boxes'}},
-  map:[
-"##rrrrADD#OO####",
-"#..............W",
-"#..MMMM....i...W",
-"#..............W",
-"#ss.........c..W",
-"#ss............W",
-"#..............W",
-"#.....xx.......W",
-"#.....x.....x..W",
-"#cx.........xx.#",
-"################"],
-  rooms:[[1,1,14,6,'방송실'],[11,7,14,9,'방송실 · 구석']],
-  warps:{'7,0':{to:'hall',x:24,y:8,dir:'up'},'8,0':{to:'hall',x:24,y:8,dir:'up'}},
-  spots:{},
+ bcast:{
   things:{'#':['벽에 먼지가 많아요.','벽에 오래된 사진 자국이 있어요.'],
    'r':['카세트테이프가 가득해요. 다 옛날 노래예요.','테이프 이름이 다 손글씨예요.','테이프 하나에 "점심 방송 1"이라고 써 있어요.'],
    'A':()=>f().done?'불이 꺼진 램프예요… 방금 깜빡였어요?':'"방송 중" 램프예요. 불이 꺼졌어요.',
@@ -335,8 +233,8 @@ const ZONES={
    's':['낡은 소파예요. 앉으면 먼지가 펑!','소파 밑에 과자 봉지가 있어요.'],
    'c':'옛날 녹음기예요. 테이프가 걸려 있어요.',
    'x':['상자에 "축제 1998"이라고 써 있어요.','상자 안에 전선이 가득해요.','상자가 무거워요. 안 움직여요.']},
-  npcs:['gureum']},
-};
+  npcs:['gureum']}
+}});
 
 const LOOK={
  player:{hair:'#2B2422',skin:'#E6BE9C',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#B8433A',style:'short'},
@@ -551,7 +449,7 @@ const NPC={
    return [
    {who:'…',say:'내 자리. 다온 옆, 넷째 줄이에요.'},
    {who:'…',say:'의자에 앉았어요. 가방을 내려놓아요.',sit:{npc:'seat'}},
-   {who:'…',say:'수업이 시작됐어요. 국어, 영어…'},
+   {who:'…',sfx:'bell',say:'수업이 시작됐어요. 국어, 영어…'},
    {who:'학교 종',say:'딩동댕동… 쉬는 시간이에요.'},
    {who:'오다온',say:'아, 떨어졌다! 하필 지금…'},
    {who:'…',say:'다온의 지우개가 내 의자 옆으로 굴러왔어요.',set:()=>{f().seated=1}}]}},
@@ -587,7 +485,7 @@ const NPC={
    {say:'진짜야. 믿어 줘.'},
    Q.daonS[0],
    Q.daonS[1],
-   {who:'…',say:'다시 수업이에요. 과학, 음악…',sit:{npc:'seat'}},
+   {who:'…',sfx:'bell',say:'다시 수업이에요. 과학, 음악…',sit:{npc:'seat'}},
    {who:'학교 종',say:'딩동댕동… 점심시간이에요!'},
    {say:'점심시간이네. 밥부터 먹어. 급식실은 복도 가운데야.'},
    {say:'방송실은 복도 오른쪽 끝이야. 나는 안 가.'},
@@ -790,7 +688,7 @@ function questText(){
 }
 
 /* ---------- school tiles ---------- */
-const WALLISH=new Set(['wall','board','timetable','sideWin','streetWin','hallWin','classWin','notice','speaker','classDoor','exitDoor','cafDoor','bcDoor','bcSign','classSign','menu','snacks','rack','onair','poster','lockers','shoes','stairs']);
+const WALLISH=new Set([...SCHOOL_WALLISH,'wall','board','timetable','sideWin','streetWin','hallWin','classWin','notice','speaker','classDoor','exitDoor','cafDoor','bcDoor','bcSign','classSign','menu','snacks','rack','onair','poster','lockers','shoes','stairs']);
 const wallish=(x,y)=>{const c=at(x,y);if(c==null)return true;const L=Z.legend[c];return !!L&&WALLISH.has(L.tile)};
 function face(X,Y){r(X,Y,16,16,'#EDE3CF');r(X,Y,16,1,'#F8F2E6');r(X,Y+11,16,5,'#8FB8A0');r(X,Y+11,16,1,'#B1D3BE');r(X,Y+15,16,1,'#6E9A82')}
 function cap(X,Y,x,y){r(X,Y,16,16,'#6B6157');r(X,Y,16,1,'#81766A');r(X,Y+15,16,1,'#5A5148');if(hash(x,y)<25)r(X+3+hash(y,x)%9,Y+5+hash(x,y)%6,2,1,'#74695E')}
@@ -806,7 +704,7 @@ function blockOrigin(x,y,ch){let ox=x,oy=y;while(at(ox-1,y)===ch)ox--;while(at(x
 function inTile(X,Y,fn){g.save();g.beginPath();g.rect(X,Y,16,16);g.clip();fn();g.restore()}
 const disc=(cx,cy,rad,c)=>{g.fillStyle=c;g.beginPath();g.arc(cx,cy,rad,0,Math.PI*2);g.fill()};
 
-const TILES={
+const TILES={...SCHOOL_TILES,
  wall:(X,Y,x,y)=>{if(!wallish(x,y+1)||(y===MH-1&&!wallish(x,y-1)))face(X,Y);else cap(X,Y,x,y)},
  wood:(X,Y,x,y)=>woodF(X,Y,x,y),
  hallFloor:(X,Y,x,y)=>hallF(X,Y,x,y),

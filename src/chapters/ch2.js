@@ -1,6 +1,7 @@
 CHAPTERS.push({id:'ch2',n:'2교시',title:'노래 한 곡',place:'방송실 · 음악실 · 체육관 · 학교 앞 분식집',words:20,save:'banghu-ch2',color:'#5A8FB0',
  start:{zone:'bcast',x:9,y:6,dir:'up'},introWho:'…',
- migrate:st=>{const F=st.f||{};if((F.ready||F.done)&&!F.nextDay)F.nextDay=1}, // saves from before the day break (2026-10-04)
+ migrate:st=>{const F=st.f||{};if((F.ready||F.done)&&!F.nextDay)F.nextDay=1;  // saves from before the day break (2026-10-04)
+  if(!st.school){if(st.zone==='gym')st.y=12-st.y;if(st.zone==='hall')Object.assign(st,{x:5,y:8,dir:'up'});st.school=1}},  // saves from before the shared school (2026-10-06): gym flipped, 1층 redrawn
  make:()=>{
 /* =====================================================================
    2교시 · 노래 한 곡 — story: notes/story.md (2교시). Original story; nothing from the webtoon but the word list.
@@ -155,25 +156,9 @@ const has=w=>state.badges.includes(w);
 
 /* school exit: closed in class time and during the next day's lunch until the broadcast is done */
 const outLock=()=>!f().afterSchool?'아직 수업 시간이에요. 밖에 못 나가요.':f().nextDay&&!f().done?'점심시간이에요. 학교 밖에 나가면 안 돼요.':false;
-const ZONES={
- bcast:{name:'방송실',reg:'BROADCAST ROOM',
-  legend:{'#':{tile:'wall'},'.':{tile:'oldFloor',walk:1},'D':{tile:'exitDoor',walk:1},'r':{tile:'rack'},'A':{tile:'onair'},'O':{tile:'poster'},'W':{tile:'streetWin'},
-   'M':{tile:'mixer'},'i':{tile:'micStand'},'s':{tile:'oldSofa'},'c':{tile:'tapeCart'},'x':{tile:'boxes'},'T':{tile:'terminal'},'b':{tile:'sayeon'}},
-  map:[
-"##rrrrADD#OO#b##",
-"#..............W",
-"#..MMMMT...i...W",
-"#..............W",
-"#ss.........c..W",
-"#ss............W",
-"#..............W",
-"#.....xx.......W",
-"#.....x.....x..W",
-"#cx.........xx.#",
-"################"],
-  rooms:[[1,1,14,6,'방송실'],[11,7,14,9,'방송실 · 구석']],
-  warps:{'7,0':{to:'hall',x:19,y:8,dir:'up'},'8,0':{to:'hall',x:19,y:8,dir:'up'}},
-  spots:{},
+/* 느티고 (src/school.js): the 방송실, the 2층 음악실 and the 체육관 across the 운동장 are open; the 정문 leads to 학교 앞. */
+const ZONES={...SCHOOL({open:['hall2','music','gym','bcast'],gate:{to:'street',x:10,y:8,dir:'up',lock:outLock},zones:{
+ bcast:{paint:[[13,0,'b'],[7,2,'T']],
   things:{'#':['벽에 먼지가 많아요.','벽에 오래된 사진 자국이 있어요.','구름이 벽을 조금 닦았어요. 거기만 하얘요.'],
    'r':['카세트테이프가 가득해요. 다 옛날 노래예요.','테이프 이름이 다 손글씨예요.','테이프 하나에 "점심 방송 1"이라고 쓰여 있어요.'],
    'A':()=>f().done?'"방송 중" 램프. 아직 따뜻해요.':f().ready?'"방송 중" 램프. 곧 켜질 거예요.':'"방송 중" 램프예요. 불이 꺼졌어요.',
@@ -187,61 +172,21 @@ const ZONES={
    'c':'옛날 녹음기예요. 테이프가 걸려 있어요.',
    'x':['상자에 "축제 1998"이라고 쓰여 있어요.','상자 안에 전선이 가득해요.','상자가 무거워요. 안 움직여요.']},
   npcs:['gureum','gureumL','hariMic','daonL','chanL']},
- hall:{name:'느티고 · 1층 복도',reg:'NEUTI HIGH · 1F',
-  legend:{'#':{tile:'wall'},',':{tile:'hallFloor',walk:1},'.':{tile:'checkFloor',walk:1},'D':{tile:'doorway',walk:1},
-   'N':{tile:'notice'},'V':{tile:'classWin'},'U':{tile:'musicDoor',walk:1},'P':{tile:'speaker'},
-   'c':{tile:'cabinet'},'w':{tile:'water'},'p':{tile:'plant'},'k':{tile:'odesk'},
-   's':{tile:'shoes'},'E':{tile:'exitDoor',walk:1},'S':{tile:'stairs'},'W':{tile:'hallWin'},'G':{tile:'gymDoor',walk:1},'Q':{tile:'bcDoor',walk:1}},
-  map:[
-"#########NN#WWW##VUUV#P###",
-"#ccw.pkk#,,,,,,,,,,,,,,,,#",
-"#.......#,,,,,,,,,,,,,,,,#",
-"#kk..kk.#,,,,,,,,,,,,,,,,#",
-"#kk..kk.#,,,,,,,,,,,,,,,,#",
-"####D####,,,,,,,,,,,,,,,,#",
-"#,,,,,,,,,,,,,,,,,,,,,,,,#",
-"#,,,,,,,,,,,,,,,,,,,,,,,,#",
-"#,,,,,,,,,,,,,,,,,,,,,,,,#",
-"#ssssEE#SSS#GG#WWW#QQ#####"],
-  rooms:[[1,1,7,4,'교무실'],[9,1,24,4,'복도 · 음악실 앞'],[1,5,24,8,'1층 복도']],
-  warps:{'18,0':{to:'music',x:8,y:9,dir:'up',lock:()=>!f().poster&&'음악실이에요. 문이 잠겨 있어요.'},
-   '19,0':{to:'music',x:9,y:9,dir:'up',lock:()=>!f().poster&&'음악실이에요. 문이 잠겨 있어요.'},
-   '12,9':{to:'gym',x:11,y:1,dir:'down',lock:()=>!f().knowHari&&'체육관이에요. 점심시간이라 문이 잠겨 있어요.'},
-   '13,9':{to:'gym',x:12,y:1,dir:'down',lock:()=>!f().knowHari&&'체육관이에요. 점심시간이라 문이 잠겨 있어요.'},
-   '5,9':{to:'street',x:10,y:8,dir:'up',lock:outLock},
-   '6,9':{to:'street',x:11,y:8,dir:'up',lock:outLock},
-   '19,9':{to:'bcast',x:7,y:1,dir:'down'},'20,9':{to:'bcast',x:8,y:1,dir:'down'}},
-  spots:{},
+ hall:{
   things:{'#':['하얀 벽이에요. 아래쪽은 초록색이에요.','벽에 "복도에서 뛰지 마세요" 종이가 있어요.','누가 벽에 작게 음표를 그렸어요.'],
    'N':()=>f().poster?'게시판: "방송부 부원 모집! 목소리만 있으면 돼요."':'게시판: "축제 다음 달! 반마다 하나씩 준비해요."',
-   'V':()=>!f().poster?'음악실 창문이에요. 안이 조용해요.':!f().metHari?'창문 너머로 노랫소리가 들려요!':'음악실 안에 피아노가 보여요.',
    'P':()=>f().done?'스피커에서 아직 노래가 귀에 남아요.':f().ready?'스피커예요. 곧 소리가 날 거예요.':'낡은 스피커예요. 아무 소리도 안 나요.',
    'c':['서류가 가득한 캐비닛이에요.','서랍에 "벌점 기록"이라고 쓰여 있어요. 무서워요.'],
    'w':'정수기예요. 물이 시원해요.',
    'p':'화분이에요. 잎이 반짝반짝해요.',
    'k':['선생님 책상이에요. 시험지가 높이 쌓였어요.','커피 컵에 "국어"라고 쓰여 있어요.','책상 위에 독후감 종이가 한 무더기 있어요.'],
    's':['신발장이에요. 실내화가 줄줄이 있어요.','신발장 하나에 초록색 운동화. 1학년 거예요.'],
-   'S':['계단이에요. 위층은 3학년 교실이에요.','위에서 고3 선배들 한숨 소리가 들려요.'],
    'W':['창밖에 운동장하고 느티나무가 보여요.','창밖에서 새가 짹짹 울어요.']},
   npcs:['jung','student','xA','xB','xSenior','xWin','xClean','xBye','xF','xG','xH','xI','xJ']},
- music:{name:'음악실',reg:'MUSIC ROOM',
-  legend:{'#':{tile:'wall'},'.':{tile:'wood',walk:1},'D':{tile:'exitDoor',walk:1},'M':{tile:'staffBoard'},'J':{tile:'portraits'},'W':{tile:'sideWin'},
-   'P':{tile:'piano'},'s':{tile:'mstand'},'h':{tile:'chair'},'d':{tile:'drums'},'x':{tile:'shelf'}},
-  map:[
-"####MMMMMM##JJ####",
-"W................#",
-"W..PPP......s.s..#",
-"W................#",
-"W..hh.hh.hh.hh...#",
-"W................#",
-"W..hh.hh.hh.hh...#",
-"W................#",
-"W.dd.........xx..#",
-"W................#",
-"########DD########"],
-  rooms:[[1,1,16,3,'음악실 · 피아노 앞'],[1,4,16,9,'음악실']],
-  warps:{'8,10':{to:'hall',x:18,y:1,dir:'down'},'9,10':{to:'hall',x:19,y:1,dir:'down'}},
-  spots:{},
+ hall2:{locks:{music:()=>!f().poster&&'음악실이에요. 문이 잠겨 있어요.'},
+  things:{'V':x=>x>4?(x>=20?'도서관 창문이에요. 책장이 보여요.':'3학년 교실이에요. 다들 문제집만 봐요.'):(()=>!f().poster?'음악실 창문이에요. 안이 조용해요.':!f().metHari?'창문 너머로 노랫소리가 들려요!':'음악실 안에 피아노가 보여요.')()}},
+ yard:{locks:{gym:()=>!f().knowHari&&'체육관이에요. 점심시간이라 문이 잠겨 있어요.'}},
+ music:{
   things:{'#':['벽에 "조용히! 연습 중"이라고 쓰여 있어요.','벽이 폭신해요. 소리를 먹는 벽이에요.'],
    'M':x=>x===4?'칠판에 높은음자리표가 크게 있어요.':['칠판에 악보가 그려져 있어요.','칠판 구석: "다음 시간 가창 시험"','칠판에 음표가 춤을 추는 것 같아요.'][x%3],
    'J':x=>x===12?'옛날 음악가 사진이에요. 하얀 머리가 길어요.':'옛날 음악가 사진. 눈이 나를 따라와요…',
@@ -252,32 +197,14 @@ const ZONES={
    'd':['드럼이에요. 치고 싶지만… 쉿.','심벌이 반짝반짝해요.'],
    'x':['악기 선반이에요. 리코더하고 우쿨렐레가 있어요.','탬버린이 하나 있어요. 방울이 하나 빠졌어요.']},
   npcs:['hariM','tagM']},
- gym:{name:'체육관',reg:'GYM',
-  legend:{'#':{tile:'wall'},',':{tile:'court',walk:1},'D':{tile:'exitDoor',walk:1},'W':{tile:'sideWin'},'H':{tile:'hoop'},'m':{tile:'mat'},'o':{tile:'ballCart'},'b':{tile:'bleacher'}},
-  map:[
-"###########DD###########",
-"#,,,,,,,,,,,,,,,,,,,,,,#",
-"W,,,,,,,,,,,,,,,,,,,,,,W",
-"Wmm,,,,,,,,,,,,,,,,,,ooW",
-"Wmm,,,,,,,,,,,,,,,,,,,,W",
-"#,,,,,,,,,,,,,,,,,,,,,,#",
-"H,,,,,,,,,,,,,,,,,,,,,,H",
-"#,,,,,,,,,,,,,,,,,,,,,,#",
-"W,,,,,,,,,,,,,,,,,,,,,,W",
-"W,,,,,,,,,,,,,,,,,,,,,,W",
-"#bbbbbbbb,,,,,,bbbbbbbb#",
-"#bbbbbbbb,,,,,,bbbbbbbb#",
-"########################"],
-  rooms:[[1,1,22,11,'체육관']],
-  warps:{'11,0':{to:'hall',x:12,y:8,dir:'up'},'12,0':{to:'hall',x:13,y:8,dir:'up'}},
-  spots:{},
+ gym:{
   things:{'#':['체육관 벽이에요. 공 자국이 많아요.','벽에 "느티고 화이팅!" 현수막이 있어요.'],
    'W':['높은 창문이에요. 햇빛이 길게 들어와요.','창문에 그물이 있어요. 공 때문이에요.'],
    'H':['농구 골대예요. 그물이 반쯤 찢어졌어요.','골대가 높아요. 찬은 한 번도 못 넣었대요.'],
    'm':['파란 매트예요. 누우면 바로 잠이 와요.','매트에서 땀 냄새가 나요. 별로예요.'],
    'o':['공 수레예요. 농구공하고 배구공이 가득해요.','공 하나가 바람이 빠졌어요.'],
    'b':['나무 관람석이에요. 계단처럼 높아져요.','관람석에 누가 물병을 두고 갔어요.','관람석 밑에 배드민턴 공이 숨어 있어요.']},
-  npcs:['chanG','chanG2','teaser','teaser2','hariG','xPE','xBall1','xBall2']},
+  npcs:['chanG','chanG2','teaser','teaser2','hariG','xPE','xBall1','xBall2']}}}),
  street:{name:'학교 앞',reg:'IN FRONT OF SCHOOL',outdoor:1,
   legend:{'R':{tile:'roof'},'K':{tile:'sign'},'O':{tile:'shopWin'},'e':{tile:'closedDoor'},'E':{tile:'shopDoor',walk:1},'h':{tile:'brick'},
    ',':{tile:'pave',walk:1},'r':{tile:'road'},'z':{tile:'crosswalk',walk:1},'l':{tile:'lamp'},'t':{tile:'streetTree'},'B':{tile:'busStop'},
@@ -294,7 +221,7 @@ const ZONES={
 ",t,,,,,,,,,,,,,,,,,,,,t,",
 "ffffffffffGGffffffffffff"],
   rooms:[[0,3,23,4,'학교 앞 · 가게'],[0,7,23,8,'학교 앞']],
-  warps:{'11,2':{to:'bunsik',x:7,y:9,dir:'up'},'10,9':{to:'hall',x:5,y:8,dir:'up'},'11,9':{to:'hall',x:6,y:8,dir:'up'}},
+  warps:{'11,2':{to:'bunsik',x:7,y:9,dir:'up'},'10,9':{to:'yard',x:11,y:12,dir:'up'},'11,9':{to:'yard',x:12,y:12,dir:'up'}},
   spots:{},
   things:{'R':x=>x<7?'문구점 지붕이에요. 파란색이에요.':x<16?'분식집 지붕이에요. 빨간색이에요.':'편의점 지붕이에요. 초록색이에요.',
    'K':x=>x<7?'간판: "느티 문구"':x<16?'간판: "엄마손 분식" 떡볶이 그림이 있어요.':'간판: "24시 편의점"',
@@ -334,8 +261,7 @@ const ZONES={
    'j':'물은 셀프예요. 컵이 쌓여 있어요.',
    'p':'화분이에요. 고추가 열렸어요!',
    'u':['냉장고에 음료수가 가득해요.','바나나우유가 있어요. 찬이 좋아하겠어요.']},
-  npcs:['owner','hariB','chanB','daonB','tableB']},
-};
+  npcs:['owner','hariB','chanB','daonB','tableB']}};
 
 /* the street outside the 방송실, drawn upright (sky on top, road at the bottom), 64px wide = four window tiles. A Korean school street:
    a red-brick 빌라 with a water tank on the roof, a concrete 전봇대 with tangled power lines and a transformer (a bird on a wire),
@@ -428,7 +354,7 @@ const NPC={
    {say:'누군지는 몰라. 가서 말을 걸어 볼래?'},
    {say:'나는… 모르는 사람은 좀 무서워.',face:'sad'},
    {w:'놓치다',who:'나',build:['이번 기회는','절대','안 놓칠게']},
-   {say:'좋아! 음악실은 복도 위쪽 오른쪽이야.',face:'happy',award:['기회','놓치다'],set:()=>{f().poster=1}}]},
+   {say:'좋아! 음악실은 2층이야. 계단으로 올라가.',face:'happy',award:['기회','놓치다'],set:()=>{f().poster=1}}]},
 
  hariM:{name:'유하리',zone:'music',x:7,y:2,dir:'up',look:LOOK.hari,badge:['얼다','심장','곡'],
   hide:()=>!!f().metHari,
@@ -460,10 +386,10 @@ const NPC={
   get after(){return pick([['점심 방송 잘 들었어요. 교무실이 다 조용했어요.'],['하리 학생 목소리, 정말 좋았어요.','근데 명찰은 늘 달고 다녀요. {벌점|벌점} 무서워요.']])},  // only after the finale; before it the script has a line for every phase
   status:()=>{if(!has('명찰'))return hasItem(NOTAG)?'todo':null},
   script:()=>{
-   if(!has('명찰')&&!hasItem(NOTAG))return f().poster?[{say:'방송부 포스터 봤어요. 잘 만들었네요.'},{say:'목소리 좋은 학생? 음악실에 가 봐요.'}]
+   if(!has('명찰')&&!hasItem(NOTAG))return f().poster?[{say:'방송부 포스터 봤어요. 잘 만들었네요.'},{say:'목소리 좋은 학생? 2층 음악실에 가 봐요.'}]
     :[{say:'점심은 먹었어요? 방송실 먼지 조심해요.'}];
    if(has('명찰')&&f().stoodUp&&!f().afterSchool)return [{say:'아까 체육관이 시끄러웠어요. 무슨 일 있었어요?'},{say:'…하리 학생은 괜찮아요?'}];
-   if(has('명찰')&&!f().afterSchool)return [{say:'체육관은 복도 아래쪽, 초록색 문이에요.'},{say:'1학년들은 지금 체육관에 있어요.'}];
+   if(has('명찰')&&!f().afterSchool)return [{say:'체육관은 운동장 오른쪽, 초록색 지붕이에요.'},{say:'1학년들은 지금 체육관에 있어요.'}];
    if(has('명찰')&&!f().nextDay)return [{say:'오늘 방과 후에 무슨 일 있어요? 표정이 바빠요.'},{say:'방송실은 복도 아래쪽 오른쪽, 포스터 붙은 문이에요.'}];
    if(has('명찰')&&!f().done)return [{say:'오늘 점심 방송 해요? 교무실에서도 들을게요.',face:'happy'}];
    return null},
@@ -476,19 +402,19 @@ const NPC={
    {say:'명찰이 없으면 {벌점|벌점}이에요. 빨리 줘야 해요.'},
    Q.jung[1],
    {say:'네, 좋아요. 다음 시간이 1학년 체육이에요.'},
-   {say:'지금 체육관에 있을 거예요. 복도 아래쪽, 초록색 문.',award:['명찰'],set:()=>{f().knowHari=1}}]},
+   {say:'지금 체육관에 있을 거예요. 운동장 오른쪽, 초록색 지붕.',award:['명찰'],set:()=>{f().knowHari=1}}]},
 
- student:{name:'1학년 학생',zone:'hall',x:15,y:2,dir:'down',look:LOOK.student,
+ student:{name:'1학년 학생',zone:'hall',x:7,y:8,dir:'right',look:LOOK.student,
   script:()=>{
    if(f().done)return [{say:'선배! 점심 방송 들었어요! 하리 대박!',face:'happy'},{say:'우리 반이 다 울었어요. 진짜로요.'}];
    if(f().metHari)return [{say:'하리요? 우리 반이에요. 착해요.'},{say:'근데 말이 별로 없어요. 노래도 혼자만 해요.'}];
    return null},
   talk:()=>[
    {say:'선배, 그 소문 들었어요?'},
-   {say:'음악실에서 노래하는 귀신이 나온대요!',face:'surprised'},
+   {say:'2층 음악실에서 노래하는 귀신이 나온대요!',face:'surprised'},
    {say:'근데 목소리가 엄청 예쁘대요. 이상하죠?'}]},
 
- chanG:{name:'남궁찬',zone:'gym',x:12,y:2,dir:'down',look:LOOK.chan,badge:['장난','놀리다'],banmal:1,
+ chanG:{name:'남궁찬',zone:'gym',x:12,y:10,dir:'up',look:LOOK.chan,badge:['장난','놀리다'],banmal:1,
   hide:()=>!!f().afterSchool||!!f().chanGym,
   get after(){return pick([['선배들한테 말하는 거, 멋있었어.'],['솔직히 나 다리 떨렸어. 비밀이야.']])},
   script:()=>has('장난')&&!f().stoodUp?[{say:'저쪽이야. 공 수레 옆.'},{say:'같이 가. 나 뒤에 있을게.'}]:null,
@@ -496,14 +422,14 @@ const NPC={
    {say:'헉, 너 여기서 뭐 해?',face:'surprised'},
    {who:'나',say:'1학년 유하리를 찾아. 너는?'},
    {say:'나? 선생님이 공 가져오라고 시켰어.'},
-   {say:'근데 저기 봐. 3학년 선배들 또 저래.',face:'angry',cam:[21,5]},
+   {say:'근데 저기 봐. 3학년 선배들 또 저래.',face:'angry',cam:[21,7]},
    {say:'1학년 애 노래를 따라 하면서 웃어. 맨날 저래.'},
    Q.chanG[0],
    {say:'선배들은 웃어. 진짜 재밌대.'},
    Q.chanG[1],
    {say:'근데 저 1학년 얼굴 봐. 하나도 안 웃어.',face:'sad'},
    Q.chanG[2],
-   {say:'같이 가자. 나 혼자는… 좀 무서워. 하하.',award:['장난','놀리다'],set:()=>{f().chanGym=1},walk:{npc:'chanG2',from:[12,2]},cam:null}]},
+   {say:'같이 가자. 나 혼자는… 좀 무서워. 하하.',award:['장난','놀리다'],set:()=>{f().chanGym=1},walk:{npc:'chanG2',from:[12,10]},cam:null}]},
 
  /* 찬 next to the seniors, once he's said "같이 가자" (he walks over from the door) */
  chanG2:{name:'남궁찬',zone:'gym',x:19,y:6,dir:'right',look:LOOK.chan,badge:['장난','놀리다'],banmal:1,
@@ -512,7 +438,7 @@ const NPC={
   script:()=>!f().stoodUp?[{say:'저 선배들이야. 공 수레 옆.'},{say:'같이 가. 나 바로 뒤에 있을게.'}]:null,
   talk:()=>[]},
 
- teaser:{name:'3학년 선배',zone:'gym',x:20,y:5,dir:'right',look:LOOK.teaser,badge:['괴롭히다'],banmal:1,
+ teaser:{name:'3학년 선배',zone:'gym',x:20,y:7,dir:'right',look:LOOK.teaser,badge:['괴롭히다'],banmal:1,
   hide:()=>!!f().stoodUp,
   status:()=>f().chanGym?undefined:'wait',
   script:()=>!f().chanGym?[{say:'뭐야, 2학년? 우리한테 볼일 있어?',face:'angry'}]:null,
@@ -527,13 +453,13 @@ const NPC={
    {...Q.teaser[1],ok:'…뭐?'},
    {who:'갈색 머리 선배',say:'…야, 2학년이 이런 말까지 하네. 가자.'},
    {say:'…알았어. 그만할게. 쳇.',face:'sad'},
-   {who:'…',say:'선배들이 공을 들고 나갔어요.',award:['괴롭히다'],set:()=>{f().stoodUp=1},leave:[{npc:'teaser',to:[11,0]},{npc:'teaser2',to:[12,0]}]}]},
+   {who:'…',say:'선배들이 공을 들고 나갔어요.',award:['괴롭히다'],set:()=>{f().stoodUp=1},leave:[{npc:'teaser',to:[11,12]},{npc:'teaser2',to:[12,12]}]}]},
 
- teaser2:{name:'갈색 머리 선배',zone:'gym',x:21,y:6,dir:'up',look:LOOK.teaser2,banmal:1,
+ teaser2:{name:'갈색 머리 선배',zone:'gym',x:21,y:6,dir:'down',look:LOOK.teaser2,banmal:1,
   hide:()=>!!f().stoodUp,
   talk:()=>[{say:'뭐야. 우리 고3이야. 공부 때문에 힘들어.'},{say:'그래서 좀 웃자는 거야. 별거 아니야.'}]},
 
- hariG:{name:'유하리',zone:'gym',x:22,y:5,dir:'left',look:LOOK.hari,badge:['긴장하다'],
+ hariG:{name:'유하리',zone:'gym',x:22,y:7,dir:'left',look:LOOK.hari,badge:['긴장하다'],
   hide:()=>!!f().afterSchool,
   status:()=>{if(!has('긴장하다'))return f().stoodUp?'todo':'wait'},
   script:()=>!f().stoodUp?[{say:'…',face:'sad'},{who:'…',say:'하리가 고개를 푹 숙이고 있어요.'}]:null,
@@ -554,7 +480,7 @@ const NPC={
    {say:'네? 저, 저도요…?',face:'surprised'},
    {who:'남궁찬',say:'당연하지! 떡볶이는 다 같이 먹어야 맛있어.',face:'happy'},
    {say:'…네. 갈게요.',face:'happy'},
-   {who:'…',say:'그리고 오후 수업이 다 끝났어요.',award:['긴장하다'],set:()=>{f().afterSchool=1}}]},
+   {who:'…',sfx:'bell',say:'그리고 오후 수업이 다 끝났어요.',award:['긴장하다'],set:()=>{f().afterSchool=1}}]},
 
  /* the 분식집 table: one ! in its middle (markDx: between its two tiles), and A at the table, even from your seat, talks to
     whoever's turn it is (proxy); their own markers are off (nomark) */
@@ -694,16 +620,16 @@ const NPC={
     Day one lunch (before afterSchool): the hall is busy. After school (afterSchool, before nextDay): 학교 앞 is busy,
     the 농구부 practises in the gym, a cleaner is in the hall. Next day's lunch (nextDay): the hall waits for the broadcast,
     and after the finale talks about it. The 음악실 and the 분식집 stay as the scenes describe them. ---------- */
- xA:{name:'2학년 학생',zone:'hall',x:10,y:2,dir:'right',look:LOOK.xA,banmal:1,
+ xA:{name:'2학년 학생',zone:'hall',x:18,y:2,dir:'right',look:LOOK.xA,banmal:1,
   hide:()=>!!f().afterSchool,
   talk:()=>[{say:'방송부가 부원 모집한대. 봤어?'},{say:'목소리만 있으면 된대. 너 해 봐!'}]},
- xB:{name:'2학년 학생',zone:'hall',x:11,y:2,dir:'left',look:LOOK.xB,banmal:1,
+ xB:{name:'2학년 학생',zone:'hall',x:19,y:2,dir:'left',look:LOOK.xB,banmal:1,
   hide:()=>!!f().afterSchool,
   talk:()=>[{say:'나? 싫어. 마이크 앞에 서면 얼어.',face:'sad'},{say:'노래는 노래방에서만 할래.'}]},
- xSenior:{name:'3학년 선배',zone:'hall',x:9,y:8,dir:'left',look:LOOK.xSenior,banmal:1,
+ xSenior:{name:'3학년 선배',zone:'hall',x:12,y:8,dir:'left',look:LOOK.xSenior,banmal:1,
   hide:()=>!!f().afterSchool,
   talk:()=>[{say:'…모의고사 끝나면 잘 거야.'},{say:'삼 일 동안. 아무도 깨우지 마.'}]},
- xWin:{name:'2학년 학생',zone:'hall',x:16,y:8,dir:'down',look:LOOK.xWin,banmal:1,
+ xWin:{name:'2학년 학생',zone:'hall',x:20,y:8,dir:'down',look:LOOK.xWin,banmal:1,
   hide:()=>!!f().afterSchool,
   talk:()=>[{say:'점심시간에 체육관은 잠겨 있어.'},{say:'근데 안에서 공 소리가 나. 이상하지?',face:'think'}]},
  xClean:{name:'청소 아주머니',zone:'hall',x:22,y:7,dir:'left',look:LOOK.cleaner,
@@ -712,19 +638,19 @@ const NPC={
  xBye:{name:'1학년 학생',zone:'hall',x:2,y:7,dir:'right',look:LOOK.xBye,
   hide:()=>!f().afterSchool||!!f().nextDay,
   talk:()=>[{say:'선배, 안녕히 가세요!'},{say:'저는 학원이요. 벌써 늦었어요!',face:'surprised'}]},
- xF:{name:'2학년 학생',zone:'hall',x:10,y:2,dir:'right',look:LOOK.xF,banmal:1,
+ xF:{name:'2학년 학생',zone:'hall',x:18,y:2,dir:'right',look:LOOK.xF,banmal:1,
   hide:()=>!f().nextDay,
   script:()=>f().done?[{say:'아까 그 노래 들었어? 소름!',face:'happy'}]:null,
   talk:()=>[{say:'오늘 점심에 방송한대. 진짜야?'}]},
- xG:{name:'2학년 학생',zone:'hall',x:11,y:2,dir:'left',look:LOOK.xG,banmal:1,
+ xG:{name:'2학년 학생',zone:'hall',x:19,y:2,dir:'left',look:LOOK.xG,banmal:1,
   hide:()=>!f().nextDay,
   script:()=>f().done?[{say:'1학년이래. 목소리 진짜 좋다.'},{say:'처음엔 떨던데, 금방 괜찮아졌어.'}]:null,
   talk:()=>[{say:'스피커 고장 아니었어? 맨날 조용했잖아.'}]},
- xH:{name:'1학년 학생',zone:'hall',x:16,y:8,dir:'down',look:LOOK.xH,
+ xH:{name:'1학년 학생',zone:'hall',x:20,y:8,dir:'down',look:LOOK.xH,
   hide:()=>!f().nextDay,
   script:()=>f().done?[{say:'복도에서 다 같이 박수 쳤어요!',face:'happy'},{say:'저 심장이 아직 쿵쿵해요.'}]:null,
   talk:()=>[{say:'선배, 스피커에서 무슨 소리 나요?'},{say:'지지직… 아, 기대돼요.'}]},
- xI:{name:'3학년 선배',zone:'hall',x:9,y:8,dir:'left',look:LOOK.xI,banmal:1,
+ xI:{name:'3학년 선배',zone:'hall',x:12,y:8,dir:'left',look:LOOK.xI,banmal:1,
   hide:()=>!f().nextDay,
   script:()=>f().done?[{say:'…노래 좋더라. 고3도 귀는 있어.'}]:null,
   talk:()=>[{say:'점심 방송? 시끄럽지만 않으면 돼.'}]},
@@ -733,13 +659,13 @@ const NPC={
   script:()=>f().done?[{say:'방송 내일도 해? 매일 해?',face:'happy'}]:null,
   talk:()=>[{say:'방송실 앞에 사람이 많네. 무슨 일이야?'}]},
 
- xPE:{name:'체육 선생님',zone:'gym',x:6,y:2,dir:'down',look:LOOK.pe,
+ xPE:{name:'체육 선생님',zone:'gym',x:6,y:10,dir:'up',look:LOOK.pe,
   hide:()=>!f().afterSchool||!!f().nextDay,
   talk:()=>[{say:'지금은 농구부 연습 시간이에요.'},{say:'구경은 괜찮아요. 공 조심해요!'}]},
  xBall1:{name:'2학년 학생',zone:'gym',x:2,y:6,dir:'left',look:LOOK.xBall1,banmal:1,
   hide:()=>!f().afterSchool||!!f().nextDay,
   talk:()=>[{say:'슛! …또 안 들어갔어.',face:'sad'},{say:'오늘 타이밍이 계속 안 맞아.'}]},
- xBall2:{name:'2학년 학생',zone:'gym',x:4,y:8,dir:'left',look:LOOK.xBall2,banmal:1,
+ xBall2:{name:'2학년 학생',zone:'gym',x:4,y:4,dir:'left',look:LOOK.xBall2,banmal:1,
   hide:()=>!f().afterSchool||!!f().nextDay,
   talk:()=>[{say:'야, 너도 한 번 던져 볼래?'},{say:'못 넣으면 아이스크림 쏘기. 하하, 장난이야.'}]},
 
@@ -779,7 +705,7 @@ function questText(){
 }
 
 /* ---------- school tiles (shared look with 1교시) ---------- */
-const WALLISH=new Set(['wall','board','timetable','sideWin','streetWin','hallWin','classWin','notice','speaker','classDoor','exitDoor','bcDoor','menu','rack','onair','poster','lockers','shoes','stairs',
+const WALLISH=new Set([...SCHOOL_WALLISH,'wall','board','timetable','sideWin','streetWin','hallWin','classWin','notice','speaker','classDoor','exitDoor','bcDoor','menu','rack','onair','poster','lockers','shoes','stairs',
  'sayeon','musicDoor','gymDoor','staffBoard','portraits','gymWin','hoop']);
 const wallish=(x,y)=>{const c=at(x,y);if(c==null)return true;const L=Z.legend[c];return !!L&&WALLISH.has(L.tile)};
 function face(X,Y){const B=ZID==='bunsik',G=ZID==='gym';r(X,Y,16,16,B?'#F2D6A8':'#EDE3CF');r(X,Y,16,1,B?'#FAE6C4':'#F8F2E6');
@@ -802,7 +728,7 @@ const floorOf=(X,Y,x,y)=>ZID==='bcast'?oldF(X,Y,x,y):ZID==='music'?woodF(X,Y,x,y
 const SHOP=x=>x===7||x===16?-1:x<7?0:x<16?1:2;
 const SHOPC=[['#4F7AA8','#6E96C2','#3A5E86'],['#C8443A','#E0655A','#9A3028'],['#3F8F5A','#5DB070','#2E6E44']];
 
-const TILES={
+const TILES={...SCHOOL_TILES,
  wall:(X,Y,x,y)=>{if(!wallish(x,y+1)||(y===MH-1&&!wallish(x,y-1)))face(X,Y);else cap(X,Y,x,y)},
  wood:(X,Y,x,y)=>woodF(X,Y,x,y),
  hallFloor:(X,Y,x,y)=>hallF(X,Y,x,y),
