@@ -211,9 +211,9 @@ const ZONES={
   legend:{'#':{tile:'wall'},',':{tile:'hallFloor',walk:1},'.':{tile:'checkFloor',walk:1},'D':{tile:'doorway',walk:1},
    'N':{tile:'notice'},'V':{tile:'classWin'},'R':{tile:'classDoor',walk:1},'P':{tile:'speaker'},
    'c':{tile:'cabinet'},'w':{tile:'water'},'p':{tile:'plant'},'k':{tile:'odesk'},'t':{tile:'trophy'},'K':{tile:'pdesk',over:1},'o':{tile:'sofa'},'a':{tile:'lowTable'},
-   's':{tile:'shoes'},'E':{tile:'exitDoor',walk:1},'S':{tile:'stairs'},'W':{tile:'hallWin'},'F':{tile:'cafDoor',walk:1},'Q':{tile:'bcDoor',walk:1},'q':{tile:'bcSign'}},
+   's':{tile:'shoes'},'E':{tile:'exitDoor',walk:1},'S':{tile:'stairs'},'W':{tile:'hallWin'},'F':{tile:'cafDoor',walk:1},'Q':{tile:'bcDoor',walk:1},'q':{tile:'bcSign'},'m':{tile:'classSign'}},
   map:[
-"##################NN#VRV#P##",
+"##################NN#VRm#P##",
 "#ccw.pcc#tt...tt#,,,,,,,,,,#",
 "#.......#..KK...#,,,,,,,,,,#",
 "#kk..kk.#.......#,,,,,,,,,,#",
@@ -245,6 +245,7 @@ const ZONES={
    's':x=>!f().done?'신발장이에요. 실내화가 줄줄이 있어요.':x===2?'쪽지: "고마워. 다음은 노래. —복숭아"':'신발장이에요. 옆 칸에 분홍색 종이가 보여요.',
    'S':['계단이에요. 위층은 3학년 교실이에요.','위에서 선배들 목소리가 들려요. 좀 무서워요.'],
    'W':['창밖에 운동장하고 느티나무가 보여요.','창밖에서 새가 짹짹 울어요.'],
+   'm':'"2학년 3반" 팻말이에요. 문 옆에 있어요.',
    'q':()=>f().done?'"방송실" 팻말. "방송 중" 불이 깜빡여요!':'"방송실" 팻말이에요. "방송 중" 불은 꺼져 있어요.'},
   npcs:['jung','principal','gureumH','xHall1','xHall2','xNotice','xWin','xSenior','xBye','xClean']},
  class:{name:'2학년 3반 교실',reg:'CLASS 2-3',
@@ -459,7 +460,7 @@ const NPC={
   status:()=>{if(!has('반장'))return 'todo';if(!has('종례'))return null},
   script:()=>{const F=f();
    if(!has('반장')||has('종례'))return null;   // first talk, then (after 종례) the review
-   if(!F.paidFine)return [{say:'3반은 복도 오른쪽 끝이에요.'},{say:'반장 말 잘 들어요. 벌금 무서워요.'}];
+   if(!F.paidFine)return [{say:'3반은 복도 오른쪽 끝, 위쪽 문이에요.'},{say:'반장 말 잘 들어요. 벌금 무서워요.'}];
    if(!F.seated)return [{say:'반장 만났어요? 벌금, 냈죠? 하하.'},{say:'자리는 반장 옆이에요. 얼른 앉아요.'}];
    if(!F.lunch)return [{say:'쉬는 시간이에요? 첫 수업은 어땠어요?'},{say:'다음 시간도 집중해요. 곧 종이 쳐요.'}];
    if(hasItem('폐부 안내문'))return [{say:'손에 그거 뭐예요? 교장 선생님 거요?'},{say:'교장실은 바로 옆이에요.'}];
@@ -478,7 +479,7 @@ const NPC={
    Q.jung[2],
    Q.jung[3],
    {say:'교장 선생님은 좀 무서워요. 하하, 농담이에요.'},
-   {say:'자, {얼른|얼른} 교실에 가요. 3반은 복도 오른쪽 끝이에요.',award:['반장','교장','동갑','평범하다'],set:()=>{f().metTeacher=1}}]},
+   {say:'자, {얼른|얼른} 교실에 가요. 3반은 복도 오른쪽 끝, 위쪽 문이에요.',award:['반장','교장','동갑','평범하다'],set:()=>{f().metTeacher=1}}]},
 
  principal:{name:'한복순 교장 선생님',zone:'hall',x:12,y:1,dir:'down',look:LOOK.principal,
   status:()=>hasItem('폐부 안내문')?'todo':null,
@@ -789,7 +790,7 @@ function questText(){
 }
 
 /* ---------- school tiles ---------- */
-const WALLISH=new Set(['wall','board','timetable','sideWin','streetWin','hallWin','classWin','notice','speaker','classDoor','exitDoor','cafDoor','bcDoor','bcSign','menu','snacks','rack','onair','poster','lockers','shoes','stairs']);
+const WALLISH=new Set(['wall','board','timetable','sideWin','streetWin','hallWin','classWin','notice','speaker','classDoor','exitDoor','cafDoor','bcDoor','bcSign','classSign','menu','snacks','rack','onair','poster','lockers','shoes','stairs']);
 const wallish=(x,y)=>{const c=at(x,y);if(c==null)return true;const L=Z.legend[c];return !!L&&WALLISH.has(L.tile)};
 function face(X,Y){r(X,Y,16,16,'#EDE3CF');r(X,Y,16,1,'#F8F2E6');r(X,Y+11,16,5,'#8FB8A0');r(X,Y+11,16,1,'#B1D3BE');r(X,Y+15,16,1,'#6E9A82')}
 function cap(X,Y,x,y){r(X,Y,16,16,'#6B6157');r(X,Y,16,1,'#81766A');r(X,Y+15,16,1,'#5A5148');if(hash(x,y)<25)r(X+3+hash(y,x)%9,Y+5+hash(x,y)%6,2,1,'#74695E')}
@@ -869,6 +870,11 @@ const TILES={
  bcDoor:(X,Y,x,y)=>{face(X,Y);r(X+2,Y+1,12,15,'#5A3E26');r(X+3,Y+2,10,14,'#8E5E3A');r(X+3,Y+2,10,1,'#A87448');
   r(X+5,Y+3,6,4,'#2B2E36');r(X+6,Y+4,2,1,'#5A6478');r(X+5,Y+9,6,5,'#7A4E2E');r(X+6,Y+10,4,3,'#8E5E3A');
   r(X+11,Y+9,2,2,'#E8B93A');r(X+11,Y+9,2,1,'#F7D98C')},
+ /* the 2-3 class plate beside its door: a white plate with a green band and "2-3" in a 3×5 pixel font */
+ classSign:(X,Y,x,y)=>{face(X,Y);r(X+2,Y+1,12,9,'#8A8E96');r(X+3,Y+2,10,7,'#F4F1E6');r(X+3,Y+2,10,1,'#3E7A5A');
+  const D=['111001111100111','111001111001111'];  // "2" and "3", 3 wide × 5 tall, row by row
+  const glyph=(g,ox)=>{for(let i=0;i<15;i++)if(D[g][i]==='1')r(X+ox+i%3,Y+4+(i/3|0),1,1,'#2B3038')};
+  glyph(0,3);r(X+7,Y+6,2,1,'#2B3038');glyph(1,10);r(X+7,Y+10,2,1,'#8A8E96')},  // 2, a gap, the dash, a gap, 3
  bcSign:(X,Y,x,y,t)=>{face(X,Y);const on=state.f.done&&Math.floor(t/500)%2;
   r(X+2,Y+1,12,9,'#8A8E96');r(X+3,Y+2,10,7,'#F4F1E6');r(X+4,Y+3,8,2,on?'#FF6A5A':'#A8443C');r(X+5,Y+3,6,1,on?'#FFD0C8':'#C45A50');
   r(X+4,Y+6,3,1,'#3E4350');r(X+8,Y+6,4,1,'#3E4350');r(X+7,Y+10,2,1,'#8A8E96')},
