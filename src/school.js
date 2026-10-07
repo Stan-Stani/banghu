@@ -6,7 +6,7 @@
    a door: tests/validate.mjs checks every 교시's school against this one. SCHOOL_TILES draws it (a 교시's own tile of the same
    name wins, so its art can differ; the layout can't). Generated from the 1교시–3교시 originals; edit here. */
 (function(){
-function face(X,Y){r(X,Y,16,16,'#EDE3CF');r(X,Y,16,1,'#F8F2E6');r(X,Y+11,16,5,'#8FB8A0');r(X,Y+11,16,1,'#B1D3BE');r(X,Y+15,16,1,'#6E9A82')}
+function face(X,Y){const G=ZID==='gym';r(X,Y,16,16,'#EDE3CF');r(X,Y,16,1,'#F8F2E6');r(X,Y+11,16,5,G?'#5A8FB0':'#8FB8A0');r(X,Y+11,16,1,G?'#7AAFD0':'#B1D3BE');r(X,Y+15,16,1,G?'#3E6E90':'#6E9A82')}  /* the 체육관's wainscot is blue */
 function cap(X,Y,x,y){r(X,Y,16,16,'#6B6157');r(X,Y,16,1,'#81766A');r(X,Y+15,16,1,'#5A5148');if(hash(x,y)<25)r(X+3+hash(y,x)%9,Y+5+hash(x,y)%6,2,1,'#74695E')}
 function woodF(X,Y,x,y){r(X,Y,16,16,'#C99A62');for(let j=3;j<16;j+=4)r(X,Y+j,16,1,'#B5854F');const h=hash(x,y);r(X+(h%12)+2,Y+(h%4)*4,1,3,'#B5854F');r(X+(h*7%13),Y+((h>>2)%4)*4+1,2,1,'#D6AA74')}
 function hallF(X,Y,x,y){r(X,Y,16,16,'#C9CCC0');r(X,Y,16,1,'#B9BCB0');r(X,Y,1,16,'#B9BCB0');const h=hash(x,y);r(X+h%13+1,Y+(h>>3)%13+1,1,1,'#A9AD9F');r(X+(h*3)%14+1,Y+(h*7)%14+1,1,1,'#DCDED4')}
@@ -177,7 +177,7 @@ const TILES={
   gate:(X,Y,x,y)=>{sandF(X,Y,x,y);r(X,Y+3,16,2,'#2B2E36');r(X,Y+13,16,2,'#2B2E36');for(let i=1;i<16;i+=3)r(X+i,Y+3,1,12,'#3E4350');const L=at(x-1,y)!=='G';r(L?X:X+13,Y,3,16,'#9AA3AD');r(L?X:X+13,Y,3,1,'#C9D2DA')},
   sayeon:(X,Y,x,y)=>{face(X,Y);r(X+3,Y+1,10,10,'#C98F5A');r(X+3,Y+1,10,2,'#E3B07A');r(X+5,Y+4,6,1,'#3E2A1A');r(X+5,Y+6,6,3,'#F4F1E6');r(X+6,Y+7,4,1,'#E86D8A');
   if(state.f.done){r(X+6,Y+2,4,2,'#2B2E36');r(X+7,Y+2,2,1,'#F2A38A')}},
-  terminal:(X,Y,x,y,t)=>{r(X+1,Y+9,14,3,'#6E4A2E');r(X+1,Y+9,14,1,'#8A6040');r(X+2,Y+12,2,4,'#4A3020');r(X+12,Y+12,2,4,'#4A3020');
+  notebook:(X,Y,x,y,t)=>{r(X+1,Y+9,14,3,'#6E4A2E');r(X+1,Y+9,14,1,'#8A6040');r(X+2,Y+12,2,4,'#4A3020');r(X+12,Y+12,2,4,'#4A3020');
   r(X+2,Y+3,12,6,'#3E6B8A');r(X+3,Y+4,5,4,'#F4F1E6');r(X+8,Y+4,5,4,'#F4F1E6');r(X+8,Y+3,1,6,'#2B4D66');  // the 복습 노트, open: blue cover, two pages
   r(X+4,Y+5,3,1,'#9AA3AD');r(X+4,Y+7,3,1,'#9AA3AD');r(X+9,Y+5,3,1,'#9AA3AD');r(X+9,Y+7,3,1,'#9AA3AD');r(X+12,Y+2,1,4,'#E8962A');
   const due=state&&dueWords().length>0;if(due){const on=Math.floor(t/350)%2;r(X+11,Y,4,4,on?'#F2C46B':'#E8962A');r(X+12,Y+1,2,2,on?'#FFF3C4':'#F2C46B')}},
@@ -245,6 +245,10 @@ const TILES={
   s(0,3,3,1,'#7A5A3A');s(W-3,3,3,1,'#7A5A3A');s(2,2,W-4,13,'#F7F3EA');s(2,2,W-4,1,'#3F7D5A');s(2,14,W-4,1,'#3F7D5A');
   const GL=[['.#.....','.#.....','.#.....','.#.....','.#####.','.......','.......','#######','.......'],['#####.#','#.....#','#.....#','#####.#','#.....#','#.....#','#####.#','......#','......#'],['######.','.....#.','.....#.','.....#.','.......','...#...','...#...','#######','.......'],['.','.','.','.','.','.','.','.','.'],['..#...#.','#####.#.','.###..#.','#...#.##','.###..#.','..#...#.','#####.#.','......#.','......#.'],['......#','.###..#','#...#.#','#...#.#','#...#.#','.###..#','......#','......#','......#'],['#####.#','#.....#','#####.#','#.....#','#####.#','.......','..###..','.#...#.','..###..'],['#','#','#','#','#','#','.','#','.']],GAP=3,tw=GL.reduce((n,g)=>n+g[0].length,0)+GAP*(GL.length-1);
   let gx=Math.floor((W-tw)/2);for(const gl of GL){gl.forEach((row,j)=>{for(let i=0;i<row.length;i++)if(row[i]==='#')s(gx+i,4+j,1,1,'#C8443A')});gx+=gl[0].length+GAP}},
+ /* 2학년 3반's computer on the teacher's desk (the 방송실 laptop is notebook) */
+ terminal:(X,Y,x,y,t)=>{r(X,Y+3,16,11,'#9C6B3E');r(X,Y+3,16,3,'#B9844F');r(X+2,Y+9,12,1,'#7E5430');
+  r(X+2,Y,12,7,'#3E5E8C');r(X+3,Y+1,10,5,'#F7F3E8');r(X+7,Y+1,1,5,'#C9BFA8');r(X+4,Y+2,2,1,'#9AA3B5');r(X+4,Y+4,3,1,'#9AA3B5');r(X+9,Y+2,3,1,'#9AA3B5');r(X+9,Y+4,2,1,'#9AA3B5');
+  const due=state&&dueWords().length>0;if(due){const on=Math.floor(t/350)%2;r(X+11,Y,4,4,on?'#F2C46B':'#E8962A');r(X+12,Y+1,2,2,on?'#FFF3C4':'#F2C46B')}},
  /* the 체육관: its own building across the 운동장, green roof, green double doors (J) facing the yard */
  gymBldg:(X,Y,x,y)=>{if(y<=1){r(X,Y,16,16,'#3E7A5A');r(X,Y+(y?13:0),16,y?3:1,y?'#2E5E44':'#5A9A74');for(let i=3;i<16;i+=4)r(X+i,Y,1,y?13:16,'#356A4E')}
   else{r(X,Y,16,16,'#E8E2D4');r(X,Y,16,1,'#F4F0E6');if(y===2){r(X+2,Y+4,12,5,'#5E7F8E');r(X+3,Y+5,10,3,'#A9D8EC');r(X+8,Y+5,1,3,'#5E7F8E')}
@@ -347,7 +351,7 @@ const base=()=>({
    't':['복도 자습 책상이에요. 3학년 선배들 자리예요.','책상 위에 단어장이 펼쳐져 있어요.','누가 책상에 "수능까지 백 일!"이라고 썼어요.']}},
 
  class:{name:'2학년 3반 교실',reg:'CLASS 2-3',floor:'wood',
-  legend:{'#':{tile:'wall'},'.':{tile:'wood',walk:1},'B':{tile:'board'},'J':{tile:'timetable'},'W':{tile:'sideWin'},'k':{tile:'tdesk',over:1},'T':{tile:'terminal',floor:'oldFloor'},
+  legend:{'#':{tile:'wall'},'.':{tile:'wood',walk:1},'B':{tile:'board'},'J':{tile:'timetable'},'W':{tile:'sideWin'},'k':{tile:'tdesk',over:1},'T':{tile:'terminal'},
    'R':{tile:'classDoor',walk:1},'d':{tile:'desk'},'L':{tile:'lockers'},'b':{tile:'piggy'}},
   map:[
 "####BBBBBBBBB##J####",
@@ -405,7 +409,7 @@ const base=()=>({
 
  bcast:{name:'방송실',reg:'BROADCAST ROOM',floor:'oldFloor',
   legend:{'#':{tile:'wall'},'.':{tile:'oldFloor',walk:1},'D':{tile:'exitDoor',walk:1},'r':{tile:'rack'},'A':{tile:'onair'},'O':{tile:'poster'},'W':{tile:'streetWin'},
-   'M':{tile:'mixer'},'i':{tile:'micStand'},'s':{tile:'oldSofa'},'c':{tile:'tapeCart'},'x':{tile:'boxes'},'T':{tile:'terminal'},'b':{tile:'sayeon'}},
+   'M':{tile:'mixer'},'i':{tile:'micStand'},'s':{tile:'oldSofa'},'c':{tile:'tapeCart'},'x':{tile:'boxes'},'T':{tile:'notebook',term:1},'b':{tile:'sayeon'}},
   map:[
 "##rrrrADD#OO####",
 "#..............W",
@@ -486,7 +490,7 @@ const base=()=>({
 
  library:{name:'도서관',reg:'LIBRARY',floor:'carpet',
   legend:{'#':{tile:'wall'},'.':{tile:'carpet',walk:1},'D':{tile:'exitDoor',walk:1},'B':{tile:'bookWall'},'W':{tile:'libWin'},'b':{tile:'libShelf'},
-   'K':{tile:'libDesk',over:1},'t':{tile:'readTable'},'n':{tile:'magRack'},'c':{tile:'pc'},'r':{tile:'bookCart'},'p':{tile:'plant',floor:'checkFloor'}},
+   'K':{tile:'libDesk',over:1},'t':{tile:'readTable'},'n':{tile:'magRack'},'c':{tile:'pc'},'r':{tile:'bookCart'},'p':{tile:'plant'}},
   map:[
 "#BBBBBBBBWWBBBBBBBB#",
 "#..................#",

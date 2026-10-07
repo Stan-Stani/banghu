@@ -25,3 +25,7 @@ Never edit `index.html` by hand. Each chapter (교시) is a cartridge with its o
 **School:** every 교시 is set in the one 느티고 of `src/school.js` (운동장 + 체육관, 1층, 2층 with 음악실 and 도서관, 2학년 3반, 급식실 + 매점,
 방송실). A chapter calls `SCHOOL({open, gate, zones})` to open rooms, add its people, lines, locks and event props (`paint`); it never redraws
 a school map. `validate.mjs` fails if a 교시's walls, doors or warps differ from the school's. Later 교시 keep earlier rooms open.
+The school's tiles are one tileset: a 교시 draws a school tile its own way only as a declared story variant in `VARIANTS` (one comment
+each: why it looks different then); places outside the school (분식집, street, 노래방, 학원) use their own tile names. Objects stand on the
+floor layer (zone `floor`, or legend `floor`), so object tiles draw no floor. `validate.mjs` enforces both. Before an art or layout
+refactor, dump every zone (`node ../walk-engine/tools/zonedump.mjs out/`) and diff after (`zonediff.py`): change only what you meant to.

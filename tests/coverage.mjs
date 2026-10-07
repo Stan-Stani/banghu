@@ -8,6 +8,6 @@ for(const s of scripts.slice(1,-1))vm.runInContext(s,ctx);
 for(const CH of ctx.CHAPTERS){if(process.argv[2]&&CH.id!==process.argv[2])continue;
  ctx.state={f:{},items:[],badges:[],lv:{}};const C=CH.make();let tot=0,cov=0;const silent={};
  for(const [id,Z] of Object.entries(C.ZONES)){const sp=new Set(Object.keys(Z.spots||{}));
-  Z.map.forEach((r,y)=>[...r].forEach((c,x)=>{const L=Z.legend[c];if(!L||L.walk||L.tile==='terminal')return;tot++;
+  Z.map.forEach((r,y)=>[...r].forEach((c,x)=>{const L=Z.legend[c];if(!L||L.walk||L.tile==='terminal'||L.term)return;tot++;
    if(sp.has(x+','+y)||(Z.things&&Z.things[c]))cov++;else{const k=`${id}:${c}(${L.tile})`;silent[k]=(silent[k]||0)+1}}))}
  console.log(`${CH.id}: ${cov}/${tot} object tiles say something`+(Object.keys(silent).length?' · silent: '+Object.entries(silent).sort((a,b)=>b[1]-a[1]).map(([k,v])=>k+'×'+v).join(' '):''))}

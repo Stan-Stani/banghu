@@ -27,6 +27,13 @@ for(const CH of ctx.CHAPTERS){
   for(const k of Object.keys(Z.spots||{})){const [x,y]=k.split(',').map(Number);if(walk(Z,x,y))E(`${id} spot ${k} is on a walkable tile`)}
   for(const k of Z.npcs){const n=C.NPC[k];if(!n){E('no npc '+k);continue}if(n.zone!==id)E(`npc ${k} zone ${n.zone}≠${id}`);if(!walk(Z,n.x,n.y)&&!n.proxy)E(`npc ${k} on unwalkable ${n.x},${n.y}`);if(n.chat&&(!C.NPC[n.chat]||C.NPC[n.chat].zone!==id))E(`npc ${k} chats with ${n.chat}, who isn't in ${id}`)}  // a proxy (e.g. a table) may stand on furniture
  }
+ if(!Object.values(C.ZONES).some(Z=>Object.values(Z.legend).some(L=>L.tile==='terminal'||L.term)))E('no review computer anywhere (a terminal tile, or a legend entry with term:1)');
+ // one tileset: a 교시 draws a school tile its own way only as a declared story variant (VARIANTS), never by redefining it
+ if(ctx.SCHOOL_TILES){const S=ctx.SCHOOL_TILES,V=C.VARIANTS||{};
+  for(const k of Object.keys(V))if(!(k in S))E(`VARIANTS.${k} is not a school tile: give it its own name in TILES`);
+  for(const k of Object.keys(S))if(C.TILES[k]!==S[k]&&C.TILES[k]!==V[k])E(`TILES.${k} redraws the school's tile: declare it in VARIANTS, or give it its own name`)}
+ for(const [id,Z] of Object.entries(C.ZONES)){if(Z.floor&&!(Z.floor in C.TILES))E(`${id} floor "${Z.floor}" is not a tile`);
+  for(const [c,L] of Object.entries(Z.legend))if(L.floor&&!(L.floor in C.TILES))E(`${id} "${c}" floor "${L.floor}" is not a tile`)}
  // one school (src/school.js): every 교시 has every school zone, same walls, doors and warps; it may only paint props onto floor or wall
  if(ctx.SCHOOL_BASE){const B=ctx.SCHOOL_BASE(),STRUCT=new Set([...ctx.SCHOOL_WALLISH,'building','fence','gymBldg','clock']);
   for(const [id,S] of Object.entries(B)){const Z=C.ZONES[id];if(!Z){E(`school zone ${id} missing`);continue}

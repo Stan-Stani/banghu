@@ -1,4 +1,4 @@
-/* GENERATED from walk-engine/engine.js (1df8264) — do not edit here; edit walk-engine and run its sync.sh. */
+/* GENERATED from walk-engine/engine.js (e15657c) — do not edit here; edit walk-engine and run its sync.sh. */
 /* =====================================================================
    Engine: tiles, movement, zones, dialogue, spaced review, speech, saving.
    ===================================================================== */
@@ -792,7 +792,7 @@ function facing(){
  if(n)return {n};
  if(petOn()&&pet.x===tx&&pet.y===ty&&!(pet.x===player.x&&pet.y===player.y))return {pet:1};
  const key=tx+','+ty;
- if(Z.legend[at(tx,ty)]?.tile==='terminal')return {term:1};
+ {const L=Z.legend[at(tx,ty)];if(L&&(L.tile==='terminal'||L.term))return {term:1}}  // the review computer: the 'terminal' tile, or any tile marked term:1 (a laptop, …)
  if(Z.spots&&Z.spots[key])return {spot:Z.spots[key]};
  const w=warpAt(tx,ty);if(w&&w.lock&&w.lock())return {spot:w.lock()};
  /* things: a line for every tile of a kind (Z.things[char] = text | [variants, picked by position] | fn(x,y) → either) */
