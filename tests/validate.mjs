@@ -25,7 +25,7 @@ for(const CH of ctx.CHAPTERS){
    const vs=[].concat(typeof th==='function'?th(0,0):th).filter(Boolean);
    for(const v of vs){if(typeof v!=='string')E(`${id} things "${c}" gives a non-string`);else if(/[A-Za-z]/.test(v)||v.length>60)E(`${id} things "${c}" line is English or too long: ${v}`)}}
   for(const k of Object.keys(Z.spots||{})){const [x,y]=k.split(',').map(Number);if(walk(Z,x,y))E(`${id} spot ${k} is on a walkable tile`)}
-  for(const k of Z.npcs){const n=C.NPC[k];if(!n){E('no npc '+k);continue}if(n.zone!==id)E(`npc ${k} zone ${n.zone}≠${id}`);if(!walk(Z,n.x,n.y)&&!n.proxy)E(`npc ${k} on unwalkable ${n.x},${n.y}`)}  // a proxy (e.g. a table) may stand on furniture
+  for(const k of Z.npcs){const n=C.NPC[k];if(!n){E('no npc '+k);continue}if(n.zone!==id)E(`npc ${k} zone ${n.zone}≠${id}`);if(!walk(Z,n.x,n.y)&&!n.proxy)E(`npc ${k} on unwalkable ${n.x},${n.y}`);if(n.chat&&(!C.NPC[n.chat]||C.NPC[n.chat].zone!==id))E(`npc ${k} chats with ${n.chat}, who isn't in ${id}`)}  // a proxy (e.g. a table) may stand on furniture
  }
  // one school (src/school.js): every 교시 has every school zone, same walls, doors and warps; it may only paint props onto floor or wall
  if(ctx.SCHOOL_BASE){const B=ctx.SCHOOL_BASE(),STRUCT=new Set([...ctx.SCHOOL_WALLISH,'building','fence','gymBldg','clock']);
