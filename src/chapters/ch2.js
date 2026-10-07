@@ -295,7 +295,7 @@ const LOOK={
  daon:{hair:'#2A2024',skin:'#EBC3A2',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#B8433A',style:'bun',lashes:1,lips:'#C9707A'},
  chan:{hair:'#6B4A2E',skin:'#D9A57E',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#B8433A',style:'spiky'},
  hari:{hair:'#1F1A1E',skin:'#F0CDAF',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#3F7D5A',style:'long',lashes:1,lips:'#D27C86'},
- jung:{hair:'#3A2A28',skin:'#E6BE9C',shirt:'#C98F6A',pants:'#3E4350',style:'bob',lashes:1,lips:'#B85F68'},
+ jung:{hair:'#3A2A28',skin:'#E6BE9C',shirt:'#3F8A80',pants:'#3E4350',style:'bob',lashes:1,lips:'#B85F68'},
  owner:{hair:'#3A2E2A',skin:'#D6A07A',shirt:'#E8833A',pants:'#4A4038',style:'short'},
  teaser:{hair:'#2A2426',skin:'#D2A07A',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#C9A13A',style:'spiky'},
  teaser2:{hair:'#4A3428',skin:'#E4B994',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#C9A13A',style:'short'},
@@ -736,11 +736,11 @@ const VARIANTS={
  notice:(X,Y,x,y)=>{face(X,Y);const L=at(x-1,y)!=='N';r(X+(L?1:0),Y+1,15,10,'#8A5E36');r(X+(L?2:0),Y+2,14,8,'#C49A6C');
   if(L){r(X+3,Y+3,5,6,'#F4F1E6');r(X+9,Y+4,4,4,'#F2C46B');r(X+5,Y+3,1,1,'#D2533F')}else if(state.f.poster&&ZID==='hall'){r(X+1,Y+2,10,8,'#F7F3E8');r(X+2,Y+3,8,2,'#5A8FB0');r(X+4,Y+6,3,3,'#5A5F6E');r(X+8,Y+6,2,1,'#C9C2B0')}
   else{r(X+1,Y+3,6,4,'#BFE3F0');r(X+8,Y+3,4,6,'#F4F1E6')}},  // the 방송부 poster on the 1층 board
- bcDoor:(X,Y,x,y,t)=>{face(X,Y);const L=at(x-1,y)!=='Q',on=(state.f.ready&&!state.f.done)||(state.f.done&&Math.floor(t/500)%2);  // two-leaf door, ON AIR lamp over the middle
+ bcDoor:(X,Y,x,y,t)=>{face(X,Y);const L=at(x-1,y)!==at(x,y),on=(state.f.ready&&!state.f.done)||(state.f.done&&Math.floor(t/500)%2);  // two-leaf door, ON AIR lamp over the middle
   r(X+(L?1:0),Y+1,15,15,'#2B2E36');r(X+(L?2:0),Y+2,L?14:13,14,'#4A5672');r(X+(L?2:0),Y+2,L?14:13,1,'#62708E');r(L?X+15:X,Y+2,1,14,'#2B2E36');
   r(X+(L?5:3),Y+4,6,4,'#BFE3F0');r(X+(L?6:4),Y+5,2,1,'#E6F6FC');r(L?X+13:X+2,Y+9,1,3,'#C9D2DA');
   if(L)r(X+11,Y,5,2,on?'#E85A4A':'#6A3A36');else r(X,Y,4,2,on?'#E85A4A':'#6A3A36');
-  if(at(x+1,y)!=='Q'&&state.f.poster){r(X+4,Y+9,8,6,'#F7F3E8');  /* the poster on the last (or only) leaf */r(X+5,Y+10,6,2,'#5A8FB0');r(X+7,Y+13,2,1,'#5A5F6E')}},  // ON AIR lamp, and the poster on the door
+  if(at(x+1,y)!==at(x,y)&&state.f.poster){r(X+4,Y+9,8,6,'#F7F3E8');  /* the poster on the last (or only) leaf */r(X+5,Y+10,6,2,'#5A8FB0');r(X+7,Y+13,2,1,'#5A5F6E')}},  // ON AIR lamp, and the poster on the door
  classWin:(X,Y,x,y)=>{face(X,Y);r(X+1,Y+1,14,9,'#F8F2E6');r(X+2,Y+2,12,7,'#C9D6CC');const M=ZID==='hall2'&&x<=4;  // the 음악실's windows (2층) look in on the piano; the rest on desks
   if(M){r(X+3,Y+5,6,3,'#22252C');r(X+3,Y+5,6,1,'#3A3E48')}else{r(X+3,Y+6,4,2,'#C99A62');r(X+9,Y+6,4,2,'#C99A62')}r(X+8,Y+2,1,7,'#F8F2E6');
   if(M&&state.f.poster&&!state.f.metHari){r(X+11,Y+2,1,3,'#2B2E36');r(X+10,Y+4,2,1,'#2B2E36')}},  // the 음악실's windows look in on the piano (and a ♪ while someone sings)

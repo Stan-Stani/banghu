@@ -283,7 +283,7 @@ const LOOK={
  chan:{hair:'#6B4A2E',skin:'#D9A57E',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#B8433A',style:'spiky'},
  hari:{hair:'#1F1A1E',skin:'#F0CDAF',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#3F7D5A',style:'long',lashes:1,lips:'#D27C86'},
  taesik:{hair:'#1C1C1F',skin:'#C89672',shirt:'#1E2228',pants:'#5A5F6E',belt:'#C9A13A',style:'short',coat:1},
- jung:{hair:'#3A2A28',skin:'#E6BE9C',shirt:'#C98F6A',pants:'#3E4350',style:'bob',lashes:1,lips:'#B85F68'},
+ jung:{hair:'#3A2A28',skin:'#E6BE9C',shirt:'#3F8A80',pants:'#3E4350',style:'bob',lashes:1,lips:'#B85F68'},
  principal:{hair:'#C9C6C2',skin:'#E3B898',shirt:'#7A3E54',pants:'#3A3340',style:'bun',coat:1,lashes:1,lips:'#A8505E'},
  guard:{hair:'#8C8C90',skin:'#C9926C',shirt:'#3E5A46',pants:'#33403A',style:'bald',cap:'#3E5A46'},
  owner:{hair:'#3A2E2A',skin:'#D6A07A',shirt:'#E8833A',pants:'#4A4038',style:'short'},

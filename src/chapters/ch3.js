@@ -85,7 +85,7 @@ const BANK=[
 
 const Q={ // NPC questions, kept here so review can reuse them. who:'나' = the player says it; who:'…' = narration.
  gureum:[
-  {w:'뽑다',who:'나',ask:'재밌겠다! 근데 사연은 어떻게 ___?',opts:[['뽑아',1],['밟아',0,'밟다는 발로 누르는 거야. 상자에서 하나를 꺼내면 "뽑아".'],['뽑혀',0,'"뽑혀"는 누가 나를 고를 때야. 상자에서 꺼내면 "뽑아".']]},
+  {w:'뽑다',who:'나',ask:'재밌겠다! 근데 사연은 누가 ___?',opts:[['뽑아',1],['밟아',0,'밟다는 발로 누르는 거야. 상자에서 하나를 꺼내면 "뽑아".'],['뽑혀',0,'"뽑혀"는 누가 나를 고를 때야. 고르는 사람을 물으면 "누가 뽑아?"']]},
   {w:'뽑다',own:1,ask:'반장 투표처럼 했어. 다들 하리를 ___.',opts:[['뽑았어',1],['뽑혔어',0,'"뽑혔어"는 하리가 주어일 때야. "하리가 뽑혔어." 다들 골랐으면 "뽑았어".'],['붙었어',0,'붙다는 종이가 벽에 있을 때야. 투표로 고르면 "뽑았어".']]},
  ],
  jung:[
@@ -113,7 +113,7 @@ const Q={ // NPC questions, kept here so review can reuse them. who:'나' = the 
  chanR:[
   {w:'엿듣다',who:'나',ask:'너, 구름이 전화를 ___?',opts:[['엿들었어',1],['엿봤어',0,'엿보다는 몰래 보는 거야. 전화는 귀로 들으니까 "엿들었어".']]},
   {w:'엿듣다',own:1,ask:'큰일이야. 구름이가 방송부 그만___!',opts:[['둔대',1],['둘게',0,'"-ㄹ게"는 내가 약속하는 말이야. 남한테 들은 말은 "그만둔대".'],['뒀대',0,'"뒀대"는 벌써 그만둔 거야. 구름은 아직 방송실에 있어. 그러니까 "그만둔대".']]},
-  {w:'오해하다',who:'나',ask:'다 안 들었잖아. 네가 ___ 수도 있어.',opts:[['오해했을',1],['이해했을',0,'이해는 바르게 아는 거야. 다 안 듣고 잘못 알면 "오해했을".'],['오래했을',0,'오래는 시간이 길 때야. 잘못 알면 "오해했을".']]},
+  {w:'오해하다',who:'나',ask:'다 안 들었잖아. 네가 ___ 수도 있어.',opts:[['오해했을',1],['이해했을',0,'이해는 바르게 아는 거야. 다 안 듣고 잘못 알면 "오해했을".'],['오래 했을',0,'오래는 시간이 길 때야. 잘못 알면 "오해했을".']]},
  ],
  lib:[
   {w:'댓글',ask:'선배도 ___ 하나 써요. "거짓말이에요!" 하고요.',opts:[['댓글',1],['답장',0,'답장은 편지나 문자에 다시 보내는 거예요. 앱 글 밑에 쓰는 건 "댓글".'],['대답',0,'대답은 질문에 말로 하는 거예요. 글 밑에 쓰는 건 "댓글".']]},
@@ -276,7 +276,7 @@ const LOOK={
  daon:{hair:'#2A2024',skin:'#EBC3A2',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#B8433A',style:'bun',lashes:1,lips:'#C9707A'},
  chan:{hair:'#6B4A2E',skin:'#D9A57E',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#B8433A',style:'spiky'},
  hari:{hair:'#1F1A1E',skin:'#F0CDAF',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#3F7D5A',style:'long',lashes:1,lips:'#D27C86'},
- jung:{hair:'#3A2A28',skin:'#E6BE9C',shirt:'#C98F6A',pants:'#3E4350',style:'bob',lashes:1,lips:'#B85F68'},
+ jung:{hair:'#3A2A28',skin:'#E6BE9C',shirt:'#3F8A80',pants:'#3E4350',style:'bob',lashes:1,lips:'#B85F68'},
  imo:{hair:'#4A3A34',skin:'#D9A882',shirt:'#F2E6C8',pants:'#6B5B4B',style:'bun',lashes:1,lips:'#C06A6A'},
  guard:{hair:'#8C8C90',skin:'#C9926C',shirt:'#3E5A46',pants:'#33403A',style:'bald',cap:'#3E5A46'},
  jimin:{hair:'#2E2226',skin:'#ECC6A6',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#3F7D5A',style:'short',lashes:1,lips:'#C97A80'},
@@ -289,7 +289,7 @@ const LOOK={
  xB2:{hair:'#2E2420',skin:'#EAC2A0',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#B8433A',style:'long',lashes:1,lips:'#C9707A'},
  xW:{hair:'#4A3428',skin:'#D6A27C',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#B8433A',style:'short'},
  xN1:{hair:'#241E20',skin:'#F2CEAE',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#3F7D5A',style:'spiky'},
- xN2:{hair:'#332824',skin:'#E0B28C',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#B8433A',style:'bun',lashes:1,lips:'#C46E78'},
+ xN2:{hair:'#6B4630',skin:'#E0B28C',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#B8433A',style:'long',lashes:1,lips:'#C46E78'},
  xN3:{hair:'#2C2422',skin:'#ECC4A2',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#B8433A',style:'short'},
  xN4:{hair:'#18181B',skin:'#CF9A74',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#C9A13A',style:'bob',lashes:1,lips:'#B86A72'},
  xL1:{hair:'#3A2824',skin:'#E8BE9A',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#3F7D5A',style:'long',lashes:1,lips:'#D88A92'},
@@ -359,7 +359,7 @@ const NPC={
    if(!F.aired)return [{say:'오늘 사연은 내가 뽑았어. 하리가 읽어.'},{say:'주스? 좋지. 매점 거?',face:'happy'}];
    return null},
   talk:()=>[
-   {who:'…',say:'방송이 끝났어요. 구름 핸드폰이 계속 울려요.'},
+   {who:'…',say:'사연 코너가 끝났어요. 구름 핸드폰이 계속 울려요.'},
    {say:'톡이 엄청 왔어. "울었어요." "최고예요."',face:'surprised'},
    Q.gureumF[0],
    {who:'오다온',say:'학교 앱 댓글도 다 바뀌었어.',face:'happy'},
@@ -391,7 +391,7 @@ const NPC={
    {say:'느티고 여러분, 점심 맛있게 드세요.'},
    {say:'오늘의 사연입니다. "제 짝이 전학을 갔어요."'},
    {say:'"보고 싶다고, 꼭 전해 주세요."'},
-   {who:'…',say:'복도가 조용해요. 누가 {훌쩍여요|훌쩍이다}.',award:['창피하다']}]},
+   {who:'…',say:'방송실 밖 복도가 조용해요. 누가 {훌쩍여요|훌쩍이다}.',award:['창피하다']}]},
 
  chanEnd:{name:'남궁찬',zone:'bcast',x:3,y:6,dir:'right',look:LOOK.chan,banmal:1,
   hide:()=>!f().juice,
@@ -433,6 +433,7 @@ const NPC={
     {who:'남궁찬',say:'어른… 복숭아… 아! 매점 이모다!',face:'surprised'},
     {who:'남궁찬',say:'매점에 복숭아 주스 있잖아. 딱 맞아!',face:'happy'},
     {who:'남궁찬',say:'매점은 급식실 안에 있어. 가 보자!'},
+    {who:'남궁찬',say:'급식실은 1층 복도 아래쪽, 주황색 문이야.'},
     {say:'…찬, {탐정|탐정} 놀이는 쉬는 시간에만 해요.',face:'think',set:()=>{f().oldSpelling=1}}];
    return null},
   talk:()=>[
@@ -492,19 +493,19 @@ const NPC={
    {say:'좋아. 이제 정식 동아리네. 축하해.',face:'happy'},
    {say:'이거, 사연 코너 포스터. 내가 만들었어.'},
    {say:'"여러분의 사연을 보내 주세요!" 어때?'},
-   {say:'게시판 한가운데 붙이자.'},
+   {say:'게시판에 붙이자.'},
    {who:'…',say:'둘이 같이 포스터를 테이프로 붙였어요.',set:()=>{f().posted=1}},
    Q.daonBd[0],
    {who:'…',say:'포스터 밑에 작은 {사연함|사연함}도 놓았어요.'},
    {say:'…으, 근데 내 신발 밑에 이거 뭐야?',face:'angry'},
    Q.daonBd[1],
-   {say:'됐다. 사연이 많이 오면 좋겠다.',award:['붙다']}]},
+   {say:'됐다. 사연이 많이 오면 좋겠다.',award:['붙다'],walk:{npc:'chanRumor',from:[9,8]}}]},
 
- box:{name:'사연함',zone:'hall',x:18,y:1,dir:'down',look:BOX,still:1,
+ box:{name:'사연함',zone:'hall',x:19,y:1,dir:'down',look:BOX,still:1,
   hide:()=>!f().posted,
   script:()=>f().letter?[{who:'…',say:'사연함이에요. 오늘도 편지가 오면 좋겠어요.'}]
    :f().secret?[{who:'…',say:'사연함 안에 편지가 있어요! 하리가 열쇠를 가지고 있어요.'}]
-   :[{who:'…',say:'사연함이에요. 아직 비어 있어요.'},{who:'…',say:'구멍에 "방송부"라고 예쁘게 써 있어요.'}],
+   :[{who:'…',say:'사연함이에요. 아직 비어 있어요.'},{who:'…',say:'상자에 "방송부"라고 예쁘게 쓰여 있어요.'}],
   talk:()=>[]},
 
  chanRumor:{name:'남궁찬',zone:'hall',x:22,y:7,dir:'left',look:LOOK.chan,banmal:1,badge:['엿듣다','오해하다'],
@@ -535,11 +536,11 @@ const NPC={
    {say:'하나는 "찬 선배, 수업 시간에 조용히 해요."'},
    {who:'남궁찬',say:'뭐? 누구야! …{인정|인정}.',face:'surprised'},
    {say:'그리고 이거… 냄새 맡아 보세요.'},
-   {who:'…',say:'분홍 편지예요. 달콤한 냄새가 나요.',give:'복숭아 편지'},
+   {who:'…',say:'분홍 편지예요. 달콤한 냄새가 나요.'},
    Q.hariB[1],
    {who:'남궁찬',say:'음~ 내 신발장 냄새랑 완전 달라!',face:'happy'},
    Q.hariB[0],
-   {who:'…',say:'"방송 잘 들었읍니다. 반가웠읍니다. —복숭아"'},
+   {who:'…',say:'"방송 잘 들었읍니다. 반가웠읍니다. —복숭아"',give:'복숭아 편지'},
    {say:'"들었읍니다"? 맞춤법이 좀 이상해요.',face:'think'},
    {who:'남궁찬',say:'선생님한테 물어보자. 국어 선생님이잖아!',face:'happy'},
    {who:'…',say:'찬이 따라와요. {탐정|탐정} 눈빛이에요.',award:['향기'],set:()=>{f().letter=1}}]},
@@ -592,7 +593,7 @@ const NPC={
    return pick([['구름 선배 괜찮아요? 방송실에 가 보세요.'],['선배, 비밀은 비밀이에요. 쉿.']])},
   status:()=>{if(!has('댓글'))return f().rumor?'todo':null},
   script:()=>{const F=f();
-   if(!F.rumor)return [{say:'선배, 도서관에서는 조용히 해 주세요.'},{say:'…찬 선배 말고요. 그 선배는 늘 시끄러워요.',face:'think'}];
+   if(!F.rumor)return [{say:'선배, 도서관에서는 조용히 해 주세요.'},{say:'…아, 선배 말고 찬 선배요. 그 선배는 늘 시끄러워요.',face:'think'}];
    return null},
   talk:()=>[
    {say:'선배, 혹시 방송부예요? 이거 봤어요?',face:'surprised'},
@@ -609,15 +610,15 @@ const NPC={
    {say:'구름 선배 괜찮을까요? 방송실에 가 보세요.',award:['댓글','비밀'],set:()=>{f().sawComments=1}}]},
 
  reader:{name:'1학년 학생',zone:'library',x:9,y:7,dir:'up',look:LOOK.reader,sit:1,chair:CHAIR_N,
-  talk:()=>[{say:'쿨쿨…'},{say:'…독후감… 내일 제출… 쿨…'},{who:'…',say:'책을 베개처럼 베고 자요.'}]},
+  talk:()=>[{say:'쿨쿨…',face:'sleep'},{say:'…독후감… 내일 제출… 쿨…',face:'sleep'},{who:'…',say:'책을 베개처럼 베고 자요.'}]},
 
  /* ---------- 학교 앞 ---------- */
  guard:{name:'박 경비 아저씨',zone:'street',x:13,y:8,dir:'up',look:LOOK.guard,
   script:()=>{const q=Q.cafe[Math.random()*Q.cafe.length|0];
    const hi=f().aired?[{say:'오늘 사연, 경비실에서도 들었어요.'},{say:'옛날 생각이 나네요. 참 좋았어요.'}]
     :f().secret?[{say:'사연 코너요? 옛날 방송부도 했지요.'},{say:'그때 디제이가 편지를 참 좋아했어요.'}]
-    :[{say:'학생들, 노래방 가요? 좋지요.'},{say:'옛날 방송부도 여기서 많이 놀았어요.'}];
-   return [...hi,{say:'자, 아저씨랑 옛날 단어 하나 해요.'},{...q,old:1},{say:'잘했어요. 차 조심해요!'}]},
+    :[{say:'학생, 노래방 가요? 좋지요.'},{say:'옛날 방송부도 여기서 많이 놀았어요.'}];
+   return [...hi,{say:'자, 아저씨가 문제 하나 낼게요.'},{...q,old:1},{say:'잘했어요. 차 조심해요!'}]},
   talk:()=>[]},
 
  /* ---------- 코인 노래방 ---------- */
@@ -642,7 +643,8 @@ const NPC={
    Q.chanNR[1],
    {say:'구름아, 너 그만둔다며? 마지막 노래야?',face:'happy'},
    {who:'백구름',say:'…',face:'sad'},
-   {who:'…',say:'방 안이 갑자기 조용해졌어요.',award:['끼어들다'],set:()=>{f().interrupt=1}}]},
+   {who:'…',say:'방 안이 갑자기 조용해졌어요.',award:['끼어들다'],set:()=>{f().interrupt=1}},
+   {who:'…',say:'구석에서 다온이 손짓해요.',cam:[2,6]}]},
 
  daonNR:{name:'오다온',zone:'nr',x:2,y:6,dir:'up',look:LOOK.daon,banmal:1,badge:['눈치','사과하다'],
   hide:()=>!!f().secret,
@@ -747,7 +749,7 @@ const FOLLOW={name:'남궁찬',look:LOOK.chan,when:()=>!!f().letter&&!f().juice,
  talk:()=>f().oldSpelling?[{say:'매점! 급식실 안에! 범인은 이모야!',face:'happy'}]:[{say:'복숭아… 복숭아… 누굴까?',face:'think'},{say:'일단 정 선생님한테 가자.'}]};
 
 const INTRO=[{who:'…',say:'하리의 첫 방송 뒤, 방송실이 밝아졌어요.'},{who:'…',say:'월요일 아침. 구름이 벌써 기계 앞에 있어요.',cam:[5,3]}];
-const DONE=['3교시 끝!','방송이 끝나자 교장 선생님 방송이 나와요.','"축제가 끝나면 방송실은 심화반 교실이 됩니다."','그 순간, 방송 기계에서 펑! 연기가 나요.','방송실 노트북에서 단어를 다시 볼 수 있어요.'];
+const DONE=['3교시 끝!','방송이 끝나자 교장 선생님 방송이 나와요.','"축제가 끝나면 방송실은 심화반 교실이 됩니다."',{say:'그 순간, 방송 기계에서 펑! 연기가 나요.',set:()=>{f().smoke=1}},'방송실 노트북에서 단어를 다시 볼 수 있어요.'];
 
 function questText(){
  const F=f();
@@ -757,7 +759,7 @@ function questText(){
  if(!F.signed5)return '도서관 · 찬 이름 받기';
  if(!F.submitted)return '교무실 · 신청서 제출하기';
  if(!F.posted)return '복도 게시판 · 포스터 붙이기';
- if(!F.rumor)return '복도 · 찬이 뛰어와요';
+ if(!F.rumor)return '복도 · 찬 만나기';
  if(!F.sawComments)return '도서관 · 댓글 확인하기';
  if(!F.toNR)return '방송실 · 다온, 구름 만나기';
  if(!F.interrupt)return '학교 앞 · 코인 노래방 연습';
@@ -798,7 +800,7 @@ const VARIANTS={
   if(L){r(X+7,Y+3,4,5,'#5A5F6E');r(X+8,Y+4,2,3,'#8E94A0');r(X+8,Y+8,2,3,'#5A5F6E')}else{r(X+1,Y+3,9,1,'#C49A6C');r(X+1,Y+5,7,1,'#C49A6C');r(X+8,Y+8,3,3,'#F2A3B8');r(X+9,Y+7,1,1,'#3F8F4A')}},  // a small peach drawn in the corner
  mixer:(X,Y,x,y,t)=>{oldF(X,Y,x,y);r(X,Y+3,16,10,'#3A3E48');r(X,Y+3,16,2,'#535866');r(X,Y+12,16,1,'#22252C');
   for(let i=0;i<4;i++){r(X+2+i*4,Y+6,1,5,'#1E2128');r(X+1+i*4,Y+7+(hash(x+i,y)%3),3,2,'#B9C1C9');const lit=Math.floor(t/300+i+x)%3!==0;r(X+2+i*4,Y+4,1,1,lit?'#7CF07A':'#2E5A2E')}r(X+3,Y+3,3,1,'#8A8E96');
-  if(state.f.done&&x===5){for(let n=0;n<4;n++){const p=(Math.floor(t/120)+n*5)%20,sz=3+(p>>2),c=p<8?'#E2DFD9':p<14?'#B9B6B0':'#8E8B86';r(X+6+((n*7+p)%7)-(sz>>1),Y+6-p,sz,sz,c)}}  /* 펑! smoke billowing off the mixer */},  // working again
+  if(state.f.smoke&&x===5){for(let n=0;n<4;n++){const p=(Math.floor(t/120)+n*5)%20,sz=3+(p>>2),c=p<8?'#E2DFD9':p<14?'#B9B6B0':'#8E8B86';r(X+6+((n*7+p)%7)-(sz>>1),Y+6-p,sz,sz,c)}}  /* 펑! smoke billowing off the mixer */},  // working again
  notebook:(X,Y,x,y,t)=>{oldF(X,Y,x,y);r(X,Y+6,16,8,'#6B4A2E');r(X,Y+6,16,2,'#8A6040');r(X,Y+13,16,1,'#4A3220');
   r(X+3,Y,10,8,'#2B2E36');r(X+4,Y+1,8,6,'#3E5E8C');r(X+5,Y+2,4,1,'#C9D6F0');r(X+5,Y+4,6,1,'#9AB0D8');r(X+5,Y+5,3,1,'#9AB0D8');r(X+2,Y+8,12,3,'#B9C1C9');r(X+2,Y+8,12,1,'#D3D8DB');r(X+4,Y+9,8,1,'#8A8E96');
   r(X+10,Y+2,2,2,'#F2A3B8');const due=state&&dueWords().length>0;if(due){const on=Math.floor(t/350)%2;r(X+12,Y,4,4,on?'#F2C46B':'#E8962A');r(X+13,Y+1,2,2,on?'#FFF3C4':'#F2C46B')}},  // the club's laptop

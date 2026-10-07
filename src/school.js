@@ -104,7 +104,10 @@ const TILES={
   exitDoor:(X,Y,x,y)=>{if(ZID==='bcast')oldF(X,Y,x,y);else checkF(X,Y,x,y);r(X,Y,16,16,'#6E7B88');r(X+1,Y+1,14,15,'#BFE3F0');r(X+2,Y+2,3,1,'#E6F6FC');const L=at(x-1,y)!==at(x,y);r(L?X+15:X,Y,1,16,'#6E7B88');r(L?X+12:X+3,Y+8,1,3,'#3A4046')},
   stairs:(X,Y,x,y)=>{r(X,Y,16,16,'#B8BCB0');for(let j=0;j<16;j+=4){r(X,Y+j,16,1,'#8E9286');r(X,Y+j+1,16,1,'#D2D6CA')}if(at(x-1,y)!=='S')r(X,Y,2,16,'#7A5A3A');if(at(x+1,y)!=='S')r(X+14,Y,2,16,'#7A5A3A')},
   cafDoor:(X,Y,x,y)=>{face(X,Y);const L=at(x-1,y)!==at(x,y);r(X+(L?2:0),Y+2,14,14,'#C27A4A');r(X+(L?2:0),Y+2,14,1,'#D9925E');r(X+(L?5:4),Y+5,6,4,'#BFE3F0');r(L?X+14:X+1,Y+9,1,3,'#5A3E26');if(L)r(X+10,Y,6,2,'#F2C46B');else r(X,Y,6,2,'#F2C46B')},
-  bcDoor:(X,Y,x,y)=>{face(X,Y);r(X+2,Y+1,12,15,'#5A3E26');r(X+3,Y+2,10,14,'#8E5E3A');r(X+3,Y+2,10,1,'#A87448');
+  bcDoor:(X,Y,x,y)=>{face(X,Y);const c=at(x,y),L=at(x-1,y)!==c,R=at(x+1,y)!==c;
+   if(!(L&&R)){r(X+(L?2:0),Y+1,14,15,'#5A3E26');r(X+(L?3:0),Y+2,13,14,'#8E5E3A');r(X+(L?3:0),Y+2,13,1,'#A87448');r(L?X+15:X,Y+2,1,14,'#5A3E26');  /* a leaf of the same wooden door, two tiles wide (the 방송실 from inside) */
+    r(X+(L?6:4),Y+3,6,4,'#2B2E36');r(X+(L?7:5),Y+4,2,1,'#5A6478');r(X+(L?6:4),Y+9,6,5,'#7A4E2E');r(L?X+13:X+1,Y+9,2,2,'#E8B93A');return}
+   r(X+2,Y+1,12,15,'#5A3E26');r(X+3,Y+2,10,14,'#8E5E3A');r(X+3,Y+2,10,1,'#A87448');
   r(X+5,Y+3,6,4,'#2B2E36');r(X+6,Y+4,2,1,'#5A6478');r(X+5,Y+9,6,5,'#7A4E2E');r(X+6,Y+10,4,3,'#8E5E3A');
   r(X+11,Y+9,2,2,'#E8B93A');r(X+11,Y+9,2,1,'#F7D98C')},
   classSign:(X,Y,x,y)=>{face(X,Y);r(X+2,Y+1,12,9,'#8A8E96');r(X+3,Y+2,10,7,'#F4F1E6');r(X+3,Y+2,10,1,'#3E7A5A');
@@ -185,7 +188,7 @@ const TILES={
   mixer:(X,Y,x,y,t)=>{r(X,Y+3,16,10,'#3A3E48');r(X,Y+3,16,2,'#535866');r(X,Y+12,16,1,'#22252C');const live=state.f.ready&&!state.f.done;
   for(let i=0;i<4;i++){r(X+2+i*4,Y+6,1,5,'#1E2128');r(X+1+i*4,Y+7+(hash(x+i,y)%3),3,2,'#B9C1C9');r(X+2+i*4,Y+4,1,1,live&&(Math.floor(t/200)+i)%3?'#7CF07A':'#4A2A2A')}r(X+3,Y+3,3,1,'#8A8E96');r(X+10,Y+4,2,1,'#8A8E96');
   if(x===3)r(X+1,Y+9,6,2,'#F2C46B')},
-  musicDoor:(X,Y,x,y)=>{face(X,Y);const L=at(x-1,y)!=='U';r(X+(L?2:0),Y+2,14,14,'#A9794A');r(X+(L?2:0),Y+2,14,1,'#C4925F');r(X+(L?5:3),Y+5,6,4,'#BFE3F0');r(X+(L?6:4),Y+6,2,1,'#E6F6FC');
+  musicDoor:(X,Y,x,y)=>{face(X,Y);const L=at(x-1,y)!==at(x,y);r(X+(L?2:0),Y+2,14,14,'#A9794A');r(X+(L?2:0),Y+2,14,1,'#C4925F');r(X+(L?5:3),Y+5,6,4,'#BFE3F0');r(X+(L?6:4),Y+6,2,1,'#E6F6FC');
   r(L?X+14:X+1,Y+10,1,3,'#5A3E26');if(L){r(X+10,Y,6,2,'#E86D8A')}else{r(X,Y,6,2,'#E86D8A');r(X+8,Y+12,2,2,'#3E2A1A');r(X+9,Y+9,1,4,'#3E2A1A');r(X+10,Y+9,2,1,'#3E2A1A')}},
   staffBoard:(X,Y,x,y)=>{face(X,Y);const L=at(x-1,y)!=='M',R=at(x+1,y)!=='M',a=L?2:0,w=16-a-(R?2:0);r(X,Y+1,16,11,'#8A5E36');r(X+a,Y+2,w,9,'#F7F3E8');
   for(let i=0;i<5;i++)r(X+a,Y+3+i*2,w,1,'#AEB6C6');const h=hash(x,y);if(L){r(X+4,Y+2,2,9,'#2B2E36');r(X+6,Y+4,1,2,'#2B2E36')}else{r(X+2+h%9,Y+6+(h%3),3,2,'#2B2E36');r(X+4+h%9,Y+2+(h%3),1,5,'#2B2E36');if(h%2)r(X+9,Y+4,2,2,'#2B2E36')}
@@ -337,7 +340,7 @@ const base=()=>({
 "#,,,,,,,,,,,,,,,,,,,,,,,,,,#",
 "#,,,,,,,,,,,,,tttt,,,,,,,,,#",
 "#,,,,,,,,,,,,,,,,,,,,,,,,,,#",
-"#p,,,,,,,,,,,,w,,,,,,,,,,,p#",
+"#p,,,,,,,,,,,,,,,,,,,,,,,wp#",
 "#WWWWWWWSSSWWWWWWWWWWWWWWWW#"],
   rooms:[[1,1,26,8,'2층 복도'],[1,1,6,3,'2층 복도 · 음악실 앞'],[12,3,19,7,'2층 복도 · 자습 책상'],[19,1,26,3,'2층 복도 · 도서관 앞']],
   warps:{'2,0':{to:'music',x:8,y:9,dir:'up'},'3,0':{to:'music',x:9,y:9,dir:'up'},'21,0':{to:'library',x:9,y:10,dir:'up'},'22,0':{to:'library',x:10,y:10,dir:'up'},'8,0':{to:'hall2',x:8,y:1,dir:'down',lock:()=>'3학년 1반이에요. 수업 중이에요.'},'13,0':{to:'hall2',x:13,y:1,dir:'down',lock:()=>'3학년 2반이에요. 수업 중이에요.'},'8,9':{to:'hall',x:8,y:8,dir:'up'},'9,9':{to:'hall',x:9,y:8,dir:'up'},'10,9':{to:'hall',x:10,y:8,dir:'up'}},
@@ -408,7 +411,7 @@ const base=()=>({
    't':['식판에 밥이 반쯤 남았어요.','긴 식탁이에요. 반찬 냄새가 나요.','누가 우유를 쏟았어요. 하필 여기에.','누가 밥을 다 먹었어요. 식판이 깨끗해요.']}},
 
  bcast:{name:'방송실',reg:'BROADCAST ROOM',floor:'oldFloor',
-  legend:{'#':{tile:'wall'},'.':{tile:'oldFloor',walk:1},'D':{tile:'exitDoor',walk:1},'r':{tile:'rack'},'A':{tile:'onair'},'O':{tile:'poster'},'W':{tile:'streetWin'},
+  legend:{'#':{tile:'wall'},'.':{tile:'oldFloor',walk:1},'D':{tile:'bcDoor',walk:1},'r':{tile:'rack'},'A':{tile:'onair'},'O':{tile:'poster'},'W':{tile:'streetWin'},
    'M':{tile:'mixer'},'i':{tile:'micStand',over:1},'s':{tile:'oldSofa'},'c':{tile:'tapeCart'},'x':{tile:'boxes'},'T':{tile:'notebook',term:1},'b':{tile:'sayeon'}},
   map:[
 "##rrrrADD#OO####",
@@ -436,7 +439,7 @@ const base=()=>({
    'x':['상자에 "축제 1998"이라고 쓰여 있어요.','상자 안에 전선이 가득해요.','상자가 무거워요. 안 움직여요.']}},
 
  music:{name:'음악실',reg:'MUSIC ROOM',floor:'wood',
-  legend:{'#':{tile:'wall'},'.':{tile:'wood',walk:1},'D':{tile:'exitDoor',walk:1},'M':{tile:'staffBoard'},'J':{tile:'portraits'},'W':{tile:'sideWin'},
+  legend:{'#':{tile:'wall'},'.':{tile:'wood',walk:1},'D':{tile:'musicDoor',walk:1},'M':{tile:'staffBoard'},'J':{tile:'portraits'},'W':{tile:'sideWin'},
    'P':{tile:'piano'},'s':{tile:'mstand'},'h':{tile:'chair'},'d':{tile:'drums'},'x':{tile:'mShelf'}},
   map:[
 "####MMMMMM##JJ####",
@@ -489,7 +492,7 @@ const base=()=>({
    'b':['나무 관람석이에요. 계단처럼 높아져요.','관람석에 누가 물병을 두고 갔어요.','관람석 밑에 배드민턴 공이 숨어 있어요.']}},
 
  library:{name:'도서관',reg:'LIBRARY',floor:'carpet',
-  legend:{'#':{tile:'wall'},'.':{tile:'carpet',walk:1},'D':{tile:'exitDoor',walk:1},'B':{tile:'bookWall'},'W':{tile:'libWin'},'b':{tile:'libShelf'},
+  legend:{'#':{tile:'wall'},'.':{tile:'carpet',walk:1},'D':{tile:'libDoor',walk:1},'B':{tile:'bookWall'},'W':{tile:'libWin'},'b':{tile:'libShelf'},
    'K':{tile:'libDesk',over:1},'t':{tile:'readTable'},'n':{tile:'magRack'},'c':{tile:'pc'},'r':{tile:'bookCart'},'p':{tile:'plant'}},
   map:[
 "#BBBBBBBBWWBBBBBBBB#",
