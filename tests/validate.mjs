@@ -59,6 +59,10 @@ for(const CH of ctx.CHAPTERS){
 // the engine is generated from the shared walk-engine: the copy here must match it
 {const shared=new URL('../../walk-engine/engine.js',import.meta.url);if(fs.existsSync(shared)){const mine=fs.readFileSync(new URL('../src/engine.js',import.meta.url),'utf8').replace(/^\/\*[^\n]*\*\/\n/,'');
  if(mine!==fs.readFileSync(shared,'utf8')){errs.push('src/engine.js differs from walk-engine/engine.js — edit walk-engine and run its sync.sh')}}}
+// the page's stylesheet: one <style> block, and nothing CSS-like after it in the head (a stray </style> once printed CSS as page text)
+{const sh=fs.readFileSync('src/shell.html','utf8'),o=(sh.match(/<style/g)||[]).length,c=(sh.match(/<\/style>/g)||[]).length;
+ if(o!==c)errs.push(`src/shell.html: ${o} <style> but ${c} </style>`);
+ const head=sh.slice(sh.lastIndexOf('</style>')+8,sh.indexOf('</head>'));if(/[{}]/.test(head.replace(/<[^>]*>/g,'')))errs.push('src/shell.html: CSS-looking text after the last </style> (it would show on the page)')}
 // 문화 노트: every line cites real sources (numbers into src), every source is a link, every culture:'id' a chapter uses exists
 {const N=ctx.CULTURE_NOTES||{};
  for(const [k,n] of Object.entries(N)){
