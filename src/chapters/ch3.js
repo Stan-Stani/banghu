@@ -1,5 +1,6 @@
 CHAPTERS.push({id:'ch3',n:'3교시',title:'비밀 사연',place:'방송실 · 복도 · 도서관 · 학교 앞 · 코인 노래방',words:20,save:'banghu-ch3',color:'#C97A8E',
  start:{zone:'bcast',x:8,y:6,dir:'up'},introWho:'…',
+ migrate:st=>{const F=st.f||{};if(F.posted&&!F.boxed)F.boxed=1},  // saves from before the 사연함 had its own flag (2026-10-07)
  make:()=>{
 /* =====================================================================
    3교시 · 비밀 사연 — story: notes/story.md (3교시). Original story; nothing from the webtoon but the word list.
@@ -312,7 +313,7 @@ const NPC={
   script:()=>{const F=f();
    if(F.rumor)return [{say:'…들었어. 내가 방송부 그만둔대.',face:'sad'},{say:'나 그런 말 한 적 없는데.',face:'sad'},{who:'…',say:'구름이 마이크만 쳐다봐요.'}];
    if(!has('뽑다'))return null;
-   if(!F.formGot)return [{say:'교무실은 복도 왼쪽 끝이야. 부탁해!'}];
+   if(!F.formGot)return [{say:'교무실은 복도 왼쪽 끝, 교장실 옆이야. 부탁해!'}];
    if(!F.signed5)return [{say:'찬 이름이 없다고? 역시 찬이다…',face:'think'},{say:'도서관은 2층이야. 계단으로 올라가.'}];
    if(!F.submitted)return [{say:'다섯 명! 이제 제출만 하면 돼.',face:'happy'}];
    if(!F.posted)return [{say:'포스터는 다온이가 가지고 있어. 복도 게시판 앞에.'}];
@@ -331,7 +332,7 @@ const NPC={
    {say:'근데 문제가 있어. 우리 아직 {정식|정식} 동아리가 아니야.'},
    {say:'{가입 신청서|가입 신청서}를 내야 돼. 정 선생님한테.'},
    {say:'나는 사람 많은 교무실은 좀… 부탁해.',face:'sad',award:['뽑다'],set:()=>{f().plan=1}},
-   {say:'교무실은 복도 왼쪽 끝이야.'}]},
+   {say:'교무실은 복도 왼쪽 끝, 교장실 옆이야.'}]},
 
  daonB:{name:'오다온',zone:'bcast',x:9,y:5,dir:'left',look:LOOK.daon,banmal:1,badge:['무시하다'],
   hide:()=>!f().sawComments||!!f().toNR,
@@ -498,14 +499,14 @@ const NPC={
    {say:'게시판에 붙이자.'},
    {who:'…',say:'둘이 같이 포스터를 테이프로 붙였어요.',set:()=>{f().posted=1}},
    Q.daonBd[0],
-   {who:'…',say:'포스터 밑에 작은 {사연함|사연함}도 놓았어요.'},
+   {who:'…',say:'포스터 밑에 작은 {사연함|사연함}도 놓았어요.',set:()=>{f().boxed=1}},
    {say:'…으, 근데 내 신발 밑에 이거 뭐야?',face:'angry'},
    Q.daonBd[1],
    {who:'…',say:'한참 뒤에 껌이 겨우 떨어졌어요.'},
    {say:'됐다. 사연이 많이 오면 좋겠다.',award:['붙다'],walk:{npc:'chanRumor',from:[9,8]}}]},
 
  box:{name:'사연함',zone:'hall',x:19,y:1,dir:'down',look:BOX,still:1,
-  hide:()=>!f().posted,
+  hide:()=>!f().boxed,  /* put down two lines after the poster goes up */
   script:()=>f().letter?[{who:'…',say:'사연함이에요. 오늘도 편지가 오면 좋겠어요.'}]
    :f().secret?[{who:'…',say:'사연함 안에 편지가 있어요! 하리가 열쇠를 가지고 있어요.'}]
    :[{who:'…',say:'사연함이에요. 아직 비어 있어요.'},{who:'…',say:'상자에 "방송부"라고 예쁘게 쓰여 있어요.'}],
@@ -799,7 +800,7 @@ const shopOf=x=>x<6?0:x<12?1:x<18?2:3;
 const VARIANTS={
  rack:(X,Y,x,y)=>{face(X,Y);r(X,Y+1,16,14,'#6B4A2E');r(X+1,Y+2,14,5,'#3E2A1A');r(X+1,Y+8,14,5,'#3E2A1A');const h=hash(x,y),C=['#E3ECE4','#F2C46B','#E07A5A','#5A8FB0','#B9C1C9'];
   for(let i=0;i<7;i++){r(X+1+i*2,Y+3,1,4,C[(h+i)%5]);if(!(x===5&&i===3))r(X+1+i*2,Y+9,1,4,C[(h+i*3)%5])}},  // a gap where the 1994 tape was
- onair:(X,Y,x,y,t)=>{face(X,Y);r(X+2,Y+3,12,6,'#2B2E36');const on=!!state.f.aired;r(X+3,Y+4,10,4,on?'#E85A4A':'#5A2E2E');r(X+5,Y+5,6,1,on?'#FFD0C8':'#6E3A3A')},  // lit while the 사연 airs
+ onair:(X,Y,x,y,t)=>{face(X,Y);r(X+2,Y+3,12,6,'#2B2E36');const on=!!state.f.aired&&!state.f.done;r(X+3,Y+4,10,4,on?'#E85A4A':'#5A2E2E');r(X+5,Y+5,6,1,on?'#FFD0C8':'#6E3A3A')},  // lit while the 사연 airs
  poster:(X,Y,x,y)=>{face(X,Y);const L=at(x-1,y)!=='O';r(X+(L?1:0),Y+1,L?15:14,12,'#6B4A2E');r(X+(L?2:0),Y+2,L?14:13,10,'#F2BFA0');r(X+(L?2:0),Y+2,L?14:13,1,'#F7D6C0');
   if(L){r(X+7,Y+3,4,5,'#5A5F6E');r(X+8,Y+4,2,3,'#8E94A0');r(X+8,Y+8,2,3,'#5A5F6E')}else{r(X+1,Y+3,9,1,'#C49A6C');r(X+1,Y+5,7,1,'#C49A6C');r(X+8,Y+8,3,3,'#F2A3B8');r(X+9,Y+7,1,1,'#3F8F4A')}},  // a small peach drawn in the corner
  mixer:(X,Y,x,y,t)=>{oldF(X,Y,x,y);r(X,Y+3,16,10,'#3A3E48');r(X,Y+3,16,2,'#535866');r(X,Y+12,16,1,'#22252C');
