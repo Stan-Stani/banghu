@@ -238,6 +238,13 @@ const TILES={
  hallPlant:(X,Y,x,y)=>{r(X+5,Y+10,6,6,'#B5653A');r(X+5,Y+10,6,1,'#D07E52');r(X+3,Y+3,10,7,'#3F8F4A');r(X+5,Y+1,6,3,'#3F8F4A');r(X+5,Y+3,2,2,'#6CC07A');r(X+10,Y+6,2,2,'#6CC07A')},
  studyTable:(X,Y,x,y)=>{const L=at(x-1,y)!=='t',R=at(x+1,y)!=='t';r(X,Y+3,16,9,'#D9B07A');r(X,Y+3,16,1,'#EBC995');r(X,Y+11,16,1,'#A67E4A');
   if(L)r(X+1,Y+12,2,4,'#8A6040');if(R)r(X+13,Y+12,2,4,'#8A6040');const h=hash(x,y);if(h%3===0){r(X+3,Y+5,10,5,'#F7F3E8');r(X+8,Y+5,1,5,'#C9BFA8');r(X+4,Y+6,3,1,'#9AA3B5');r(X+9,Y+7,3,1,'#9AA3B5')}else if(h%3===1)r(X+4,Y+5,6,4,['#3E5E8C','#B8433A','#3F7D5A'][h%3])},
+ /* the 체육관's "느티고 화이팅!" banner on its back wall, hung across a row of 'Z' tiles (the wall is drawn under it as its floor):
+    hand-drawn 9-pixel Hangul, centred on the cloth */
+ gymBanner:(X,Y,x,y)=>{let a=x,b=x;while(at(a-1,y)===at(x,y))a--;while(at(b+1,y)===at(x,y))b++;
+  const W=(b-a+1)*16,ox=(x-a)*16,s=(gx,gy,w,h,c)=>{const l=Math.max(gx,ox),rr=Math.min(gx+w,ox+16);if(rr>l)r(X+l-ox,Y+gy,rr-l,h,c)};
+  s(0,3,3,1,'#7A5A3A');s(W-3,3,3,1,'#7A5A3A');s(2,2,W-4,13,'#F7F3EA');s(2,2,W-4,1,'#3F7D5A');s(2,14,W-4,1,'#3F7D5A');
+  const GL=[['.#.....','.#.....','.#.....','.#.....','.#####.','.......','.......','#######','.......'],['#####.#','#.....#','#.....#','#####.#','#.....#','#.....#','#####.#','......#','......#'],['######.','.....#.','.....#.','.....#.','.......','...#...','...#...','#######','.......'],['.','.','.','.','.','.','.','.','.'],['..#...#.','#####.#.','.###..#.','#...#.##','.###..#.','..#...#.','#####.#.','......#.','......#.'],['......#','.###..#','#...#.#','#...#.#','#...#.#','.###..#','......#','......#','......#'],['#####.#','#.....#','#####.#','#.....#','#####.#','.......','..###..','.#...#.','..###..'],['#','#','#','#','#','#','.','#','.']],GAP=3,tw=GL.reduce((n,g)=>n+g[0].length,0)+GAP*(GL.length-1);
+  let gx=Math.floor((W-tw)/2);for(const gl of GL){gl.forEach((row,j)=>{for(let i=0;i<row.length;i++)if(row[i]==='#')s(gx+i,4+j,1,1,'#C8443A')});gx+=gl[0].length+GAP}},
  /* the 체육관: its own building across the 운동장, green roof, green double doors (J) facing the yard */
  gymBldg:(X,Y,x,y)=>{if(y<=1){r(X,Y,16,16,'#3E7A5A');r(X,Y+(y?13:0),16,y?3:1,y?'#2E5E44':'#5A9A74');for(let i=3;i<16;i+=4)r(X+i,Y,1,y?13:16,'#356A4E')}
   else{r(X,Y,16,16,'#E8E2D4');r(X,Y,16,1,'#F4F0E6');if(y===2){r(X+2,Y+4,12,5,'#5E7F8E');r(X+3,Y+5,10,3,'#A9D8EC');r(X+8,Y+5,1,3,'#5E7F8E')}
@@ -452,9 +459,9 @@ const base=()=>({
    'x':['악기 선반이에요. 리코더하고 우쿨렐레가 있어요.','탬버린이 하나 있어요. 방울이 하나 빠졌어요.']}},
 
  gym:{name:'체육관',reg:'GYM',floor:'court',
-  legend:{'#':{tile:'wall'},',':{tile:'court',walk:1},'D':{tile:'exitDoor',walk:1},'W':{tile:'sideWin'},'H':{tile:'hoop'},'m':{tile:'mat'},'o':{tile:'ballCart'},'b':{tile:'bleacher'}},
+  legend:{'#':{tile:'wall'},',':{tile:'court',walk:1},'D':{tile:'exitDoor',walk:1},'W':{tile:'sideWin'},'H':{tile:'hoop'},'m':{tile:'mat'},'o':{tile:'ballCart'},'b':{tile:'bleacher'},'Z':{tile:'gymBanner',floor:'wall'}},
   map:[
-"########################",
+"#########ZZZZZZ#########",
 "#bbbbbbbb,,,,,,bbbbbbbb#",
 "#bbbbbbbb,,,,,,bbbbbbbb#",
 "W,,,,,,,,,,,,,,,,,,,,,,W",
@@ -471,6 +478,7 @@ const base=()=>({
   warps:{'11,12':{to:'yard',x:27,y:5,dir:'down'},'12,12':{to:'yard',x:28,y:5,dir:'down'}},
   things:{'#':['체육관 벽이에요. 공 자국이 많아요.','벽에 "느티고 화이팅!" 현수막이 있어요.'],
    'W':['높은 창문이에요. 햇빛이 길게 들어와요.','창문에 그물이 있어요. 공 때문이에요.'],
+   'Z':['"느티고 화이팅!" 현수막이에요. 체육 대회 때 만들었대요.','현수막 글씨가 조금 삐뚤어요. 손으로 썼어요.'],
    'H':['농구 골대예요. 그물이 반쯤 찢어졌어요.','골대가 높아요. 찬은 한 번도 못 넣었대요.'],
    'm':['파란 매트예요. 누우면 바로 잠이 와요.','매트에서 땀 냄새가 나요. 별로예요.'],
    'o':['공 수레예요. 농구공하고 배구공이 가득해요.','공 하나가 바람이 빠졌어요.'],
