@@ -206,6 +206,12 @@ body.talkopen .gloss{position:fixed;top:calc(env(safe-area-inset-top,0px) + 14px
 .pc .pn{font-size:.7rem;color:#7A828C;font-family:var(--mono)}
 .pc .pt{font-size:1rem;font-weight:600;word-break:keep-all}
 .pmore{font-size:.78rem;color:#7A828C;text-align:center;padding:4px}
+/* an album photo on the phone screen (phone photo:): the pixel picture, faded when old, and its caption */
+.pphoto{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:12px;background:#E9E4D8}
+.pphoto canvas{width:min(62%,200px);height:auto;image-rendering:pixelated;image-rendering:crisp-edges;border:6px solid #FBF8F0;box-shadow:0 2px 6px rgba(0,0,0,.25);background:#C9D6E3}
+.pphoto.old canvas{filter:sepia(.55) contrast(.95) brightness(1.03)}
+.pcap{font-family:var(--body);font-weight:700;font-size:.95rem;color:#3B3428;text-align:center;word-break:keep-all}
+.items li[data-k]{cursor:pointer}.items li.sel{outline:2px solid var(--ink)}
 /* 문화 노트 in the journal */
 .notes{display:flex;flex-wrap:wrap;gap:6px}
 .notes .nb{font-family:var(--body);font-weight:600;font-size:.9rem;border:1px solid var(--seam);background:var(--hull);color:var(--ink);border-radius:6px;padding:6px 10px;cursor:pointer}

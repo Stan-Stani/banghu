@@ -520,17 +520,23 @@ const NPC={
   get after(){return pick([['떡볶이는 왜 빨개? …아, 이미 했지.'],['하리 웃었지? 봤지? 나 천재야.']])},
   status:()=>{if(!has('어색하다'))return f().hariGiveUp?'todo':'wait'},
   script:()=>!has('어색하다')&&!f().hariGiveUp?[{say:'떡볶이 나왔다! 하리 얘기부터 들어 봐.'}]:null,
-  talk:()=>[
+  /* you choose how to break the silence (the 목표 asks you to change the mood); every way leads into 찬's joke */
+  talk:()=>{const rest=[
+    {say:'떡볶이가 왜 빨간지 알아?',face:'think'},
+    {say:'…부끄러워서! 하하하!',face:'happy'},
+    {who:'…',say:'…아무도 안 웃어요. 더 어색해요.'},
+    {who:'유하리',say:'…푸흡. 하하!',face:'happy'},
+    {say:'봐! 웃었다! 나 천재야.',face:'happy'},
+    Q.chanB[1],
+    {say:'떡볶이는 긴장 푸는 데 최고야. 먹어!',award:['어색하다'],set:()=>{f().joke=1}}];
+   const then=pre=>()=>openDialog('남궁찬',[...pre,...rest],{npc:NPC.chanB});
+   return [
    {say:'아, 왜 이렇게 조용해.'},
    Q.chanB[0],
-   {say:'내가 웃긴 얘기 하나 할게.'},
-   {say:'떡볶이가 왜 빨간지 알아?',face:'think'},
-   {say:'…부끄러워서! 하하하!',face:'happy'},
-   {who:'…',say:'…아무도 안 웃어요. 더 어색해요.'},
-   {who:'유하리',say:'…푸흡. 하하!',face:'happy'},
-   {say:'봐! 웃었다! 나 천재야.',face:'happy'},
-   Q.chanB[1],
-   {say:'떡볶이는 긴장 푸는 데 최고야. 먹어!',award:['어색하다'],set:()=>{f().joke=1}}]},
+   {who:'…',say:'다들 젓가락만 들고 있어요.',choose:[
+    ['찬아, 웃긴 얘기 좀 해 봐.',then([{say:'오, 나? 좋아. 내가 웃긴 얘기 하나 할게.',face:'happy'}])],
+    ['하리야, 떡볶이 먹어. 진짜 맛있어.',then([{who:'유하리',say:'…네. 하나만요.',face:'think'},{say:'그래, 먹으면서 들어. 내가 웃긴 얘기 하나 할게.'}])],
+    ['괜찮아. 천천히 생각해도 돼.',then([{who:'유하리',say:'…고마워요, 선배.',face:'think'},{say:'그래! 그동안 내가 웃긴 얘기 하나 할게.'}])]]}]}},
 
  daonB:{nomark:1,name:'오다온',zone:'bunsik',x:8,y:7,dir:'up',look:LOOK.daon,sit:1,chair:STOOL_N,badge:['분위기','재촉하다','연락처','데려오다'],banmal:1,
   hide:()=>!f().afterSchool||!!f().hariMaybe,
@@ -589,27 +595,31 @@ const NPC={
   get after(){return pick([['선배, 다음 곡도 연습하고 있어요.'],['저 아직 손이 떨려요. 그래도 좋아요.']])},
   status:()=>{if(!has('효과'))return f().ready?'todo':'wait'},
   script:()=>!has('효과')&&!f().ready?[{say:'선배… 심장이 터질 것 같아요.',face:'sad'},{who:'…',say:'하리가 물병만 꼭 잡고 있어요.'}]:null,
-  talk:()=>[
+  /* you switch the mic on (구름 briefed you on the timing): the song goes on air when you press it at his "지금!" */
+  talk:()=>{const rest=[
+    {who:'…',say:'"방송 중" 램프에 빨간 불이 켜졌어요.',set:()=>{f().onAir=1}},
+    {who:'스피커',say:'♪ …오늘도 나는… ♪'},
+    {who:'…',say:'처음엔 떨려요. 그다음엔 점점 맑아져요.'},
+    {who:'…',say:'방송실 밖 복도가 조용해졌어요. 다들 스피커를 봐요.'},
+    {who:'…',say:'노래가 끝났어요. 하리가 숨을 길게 쉬어요.'},
+    {who:'백구름',say:'…마이크 껐어. 이제 말해도 돼.',set:()=>{f().onAir=0}},
+    {who:'남궁찬',say:'헉, 복도 봐! 다 멈췄어! 대박!',face:'surprised'},
+    {...Q.hariMic[0],ok:'맞아!'},
+    {say:'저… 무서웠는데, 오히려 재밌었어요.',face:'happy'},
+    {...Q.hariMic[1],ok:'맞아!'},
+    {who:'…',say:'하리가 모집 포스터에 이름을 썼어요.',take:['모집 포스터']},
+    {say:'1학년 유하리. 방송부 할게요!',face:'happy',award:['효과','즐기다'],set:()=>{f().crew4=1}},
+    {who:'오다온',say:'…나도 쓸게. 이름만이야. 반장은 바쁘거든.'},
+    {who:'…',say:'다온도 포스터에 이름을 썼어요.'},
+    {who:'백구름',say:'부원 넷! 하리야, 마이크 다시 켤게. 마지막 인사.',face:'happy'},
+    {w:'즐기다',build:['느티고 여러분,','우리 방송을','즐겨','주세요']},
+    {who:'…',say:'복도 여기저기서 박수 소리가 들려요.',set:()=>{f().done=1},finale:1}];
+   return [
    {say:'선배… 심장이 터질 것 같아요.',face:'sad'},
    {who:'백구름',say:'괜찮아. 노래하는 동안 나만 봐.',turn:{npc:'hariMic',dir:'left'}},
-   {who:'백구름',say:'자, 노래 들어간다. 삼, 이, 일…'},
-   {who:'…',say:'"방송 중" 램프에 빨간 불이 켜졌어요.',set:()=>{f().onAir=1}},
-   {who:'스피커',say:'♪ …오늘도 나는… ♪'},
-   {who:'…',say:'처음엔 떨려요. 그다음엔 점점 맑아져요.'},
-   {who:'…',say:'방송실 밖 복도가 조용해졌어요. 다들 스피커를 봐요.'},
-   {who:'…',say:'노래가 끝났어요. 하리가 숨을 길게 쉬어요.'},
-   {who:'백구름',say:'…마이크 껐어. 이제 말해도 돼.',set:()=>{f().onAir=0}},
-   {who:'남궁찬',say:'헉, 복도 봐! 다 멈췄어! 대박!',face:'surprised'},
-   {...Q.hariMic[0],ok:'맞아!'},
-   {say:'저… 무서웠는데, 오히려 재밌었어요.',face:'happy'},
-   {...Q.hariMic[1],ok:'맞아!'},
-   {who:'…',say:'하리가 모집 포스터에 이름을 썼어요.',take:['모집 포스터']},
-   {say:'1학년 유하리. 방송부 할게요!',face:'happy',award:['효과','즐기다'],set:()=>{f().crew4=1}},
-   {who:'오다온',say:'…나도 쓸게. 이름만이야. 반장은 바쁘거든.'},
-   {who:'…',say:'다온도 포스터에 이름을 썼어요.'},
-   {who:'백구름',say:'부원 넷! 하리야, 마이크 다시 켤게. 마지막 인사.',face:'happy'},
-   {w:'즐기다',build:['느티고 여러분,','우리 방송을','즐겨','주세요']},
-   {who:'…',say:'복도 여기저기서 박수 소리가 들려요.',set:()=>{f().done=1},finale:1}]},
+   {who:'백구름',say:'마이크는 네가 켜. 내가 신호 줄게.'},
+   {who:'백구름',say:'노래 들어간다. 삼, 이, 일…'},
+   {who:'백구름',say:'지금!',choose:[['🎙️ 마이크 켜기',()=>openDialog('유하리',rest,{npc:NPC.hariMic})]]}]}},
 
  daonL:{name:'오다온',zone:'bcast',x:13,y:5,dir:'left',look:LOOK.daon,badge:['분위기','재촉하다','연락처','데려오다'],banmal:1,
   hide:()=>!f().nextDay,

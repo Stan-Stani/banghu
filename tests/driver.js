@@ -54,6 +54,7 @@ window.__play=async function(steps){
     let target=want(ci),label='> '+s.opts[ci][0];
     if(opts.wrong&&wi>=0&&!wrongDone.has(s.ask)){wrongDone.add(s.ask);target=want(wi);label='> (wrong) '+s.opts[wi][0]}
     if(opts.shotChoice&&!shotN++){await shot(opts.shotChoice)}
+    await until(()=>performance.now()-choicesAt>=470,1000);  // like a person: fresh choices ignore keys for 0.45 s (else a wrong:true press is dropped)
     for(let n=0;sel!==target&&n<6;n++)await key('ArrowDown');
     log('  '+label);await key('Enter');await wait(40);continue;
    }

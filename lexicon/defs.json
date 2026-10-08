@@ -19558,5 +19558,117 @@
 "존댓말": {
 "k": "윗사람이나 모르는 사람한테 쓰는 높임말. \"-요\", \"-습니다\".",
 "e": "polite speech, honorifics"
+},
+"대접하다": {
+"k": "손님한테 음식을 주거나 잘해 줘요.",
+"e": "to treat, entertain (someone)"
+},
+"승진": {
+"k": "회사에서 더 높은 자리로 올라가는 것.",
+"e": "promotion"
+},
+"승진하다": {
+"k": "회사에서 더 높은 자리로 올라가요.",
+"e": "to be promoted"
+},
+"한턱": {
+"k": "다른 사람한테 음식을 크게 대접하는 일.",
+"e": "a treat (on me)"
+},
+"한턱내다": {
+"k": "다른 사람한테 음식이나 술을 크게 대접해요.",
+"e": "to treat (people) to food or drinks"
+},
+"피시방": {
+"k": "돈을 내고 컴퓨터 게임을 하는 가게. PC방.",
+"e": "PC bang (internet and game café)"
+},
+"국립국어원": {
+"k": "한국어를 연구하고 사전을 만드는 나라 기관.",
+"e": "National Institute of Korean Language — name"
+},
+"우리말샘": {
+"k": "국립국어원이 만든 인터넷 사전이에요.",
+"e": "Urimalsaem — an online dictionary (name)"
+},
+"한겨레": {
+"k": "한국 신문 이름이에요.",
+"e": "The Hankyoreh — a newspaper (name)"
+},
+"한국민족문화대백과사전": {
+"k": "한국 문화를 설명하는 큰 백과사전이에요.",
+"e": "Encyclopedia of Korean Culture — name"
+},
+"기초": {
+"k": "가장 처음이고 쉬운 단계.",
+"e": "basics, foundation"
+},
+"내맡기다": {
+"k": "모든 일을 다른 사람한테 맡겨요.",
+"e": "to leave (something) entirely to someone"
+},
+"수줍다": {
+"k": "다른 사람 앞에서 부끄러워서 말을 잘 못 해요.",
+"e": "shy, bashful"
+},
+"체질": {
+"k": "몸이나 성격이 원래 어떤지. 예: 라디오 체질.",
+"e": "constitution; a natural for (something)"
+},
+"과외": {
+"k": "학교 밖에서 선생님한테 따로 배우는 공부.",
+"e": "private tutoring"
+},
+"교육부": {
+"k": "나라의 교육을 맡은 정부 기관.",
+"e": "Ministry of Education"
+},
+"교육청": {
+"k": "한 지역의 학교들을 맡은 기관.",
+"e": "(regional) office of education"
+},
+"사교육": {
+"k": "학교 밖에서 돈을 내고 받는 공부. 학원, 과외.",
+"e": "private education (cram schools, tutoring)"
+},
+"사이버폭력": {
+"k": "인터넷이나 휴대폰으로 다른 사람을 괴롭히는 것.",
+"e": "cyberbullying, cyber-violence"
+},
+"학생증": {
+"k": "학생이라는 것을 보여 주는 카드.",
+"e": "student ID card"
+},
+"페이스북": {
+"k": "사람들이 글과 사진을 올리는 SNS 이름.",
+"e": "Facebook (name)"
+},
+"폭력": {
+"k": "때리거나 괴롭혀서 다치게 하는 것.",
+"e": "violence"
+},
+"학년도": {
+"k": "학교의 한 해. 예: 2026학년도.",
+"e": "school (academic) year"
+},
+"학력평가": {
+"k": "교육청이 하는 고등학생 시험. 모의고사라고도 해요.",
+"e": "(regional) achievement test, mock exam"
+},
+"해결하다": {
+"k": "문제를 풀어서 끝내요.",
+"e": "to solve, resolve"
+},
+"모의평가": {
+"k": "수능 전에 보는 연습 시험.",
+"e": "mock (practice) exam for the 수능"
+},
+"학교폭력": {
+"k": "학교에서나 학생한테 생기는 폭력. 괴롭힘도 포함해요.",
+"e": "school violence (incl. bullying)"
+},
+"학력": {
+"k": "공부한 실력이나 학교를 다닌 정도.",
+"e": "academic ability; education level"
 }
 }

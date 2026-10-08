@@ -33,6 +33,7 @@
  {shot:'06d-cafeteria-from-right-door'},
  {check:()=>ZID==='cafe'&&player.x===11&&player.y===1&&player.dir==='down',msg:'the right cafeteria door tile opens too; you arrive at the top, facing down'},
  {talk:'chan',wrong:true,shotBefore:'07-cafeteria',shotBuild:'07b-sentence-build'},
+ {check:()=>cultureSeen.includes('teok'),msg:'찬\'s 생일턱 line adds the 생일 턱 문화 노트'},
  {check:()=>state.items.includes('바나나우유'),msg:'banana milk'},
  {check:()=>player.sit&&player.x===10&&player.y===6,msg:'sitting across the table from 찬'},
  {talk:'imo',wrong:true,shotBefore:'08-school-store'},

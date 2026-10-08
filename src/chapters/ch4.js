@@ -164,7 +164,16 @@ const f=()=>state.f;
 const hasItem=i=>state.items.includes(i);
 const has=w=>state.badges.includes(w);
 const POS='광고 포스터',PART='부품',PHOTO='앨범 사진';
+/* the 1994 album photo (the principal at eighteen: black hair, school uniform, a microphone), shown when 찬 opens the album and again
+   from the bag */
+const DJ_PHOTO={app:'졸업 앨범 · 1994',time:'13:42',battery:64,photo:{look:{hair:'#2A2224',skin:'#E3B898',shirt:'#2C3E63',pants:'#3A3340',style:'bob',lashes:1,lips:'#C46E78'},face:'happy',caption:'1994 방송부 · 디제이 한복순 (복숭아)',mic:1,old:1}};
+const PHOTOS={[PHOTO]:DJ_PHOTO};
 const shops=()=>(f().shopM?1:0)+(f().shopB?1:0)+(f().shopP?1:0);
+/* the third shop: 하리 crosses the road and says the poster line herself (she hid at the first two); the owner is kind to her */
+const third=()=>shops()===2;
+const hariJoins=(x,side)=>({who:'유하리',say:'선배, 마지막 가게는… 제가 말해 볼게요.',face:'sad',move:{npc:'hariT',to:[x+side,3],dir:side>0?'left':'right'},when:third});  // beside the owner on the shop-side row: on the other row the two of them walled off the sidewalk (and the 학원)
+const hariSays=line=>({who:'유하리',say:line,face:'sad',when:third});
+const kindTo=line=>({say:line,face:'happy',when:third});
 const ads=()=>shops()===3;
 
 /* 느티고 (src/school.js): the 방송실, the 2층 and the 운동장 (festival stage, tents) are open; the 정문 leads to the 동네 상가 after the 상담. */
@@ -287,7 +296,7 @@ const LOOK={
  hari:{hair:'#6E3F2C',skin:'#F0CDAF',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#3F7D5A',style:'long',lashes:1,lips:'#D27C86'},
  taesik:{hair:'#1C1C1F',skin:'#C89672',shirt:'#1E2228',pants:'#5A5F6E',belt:'#C9A13A',style:'short',coat:1},
  jung:{hair:'#3A2A28',skin:'#E6BE9C',shirt:'#3F8A80',pants:'#3E4350',style:'bob',lashes:1,lips:'#B85F68'},
- principal:{hair:'#C9C6C2',skin:'#E3B898',shirt:'#7A3E54',pants:'#3A3340',style:'bun',coat:1,lashes:1,lips:'#A8505E'},
+ principal:{hair:'#3A3436',hairHi:'#A9A5A8',skin:'#E3B898',shirt:'#7A3E54',pants:'#3A3340',style:'bun',coat:1,lashes:1,lips:'#A8505E'},
  guard:{hair:'#8C8C90',skin:'#C9926C',shirt:'#3E5A46',pants:'#33403A',style:'bald',cap:'#3E5A46'},
  owner:{hair:'#3A2E2A',skin:'#D6A07A',shirt:'#E8833A',pants:'#4A4038',style:'short'},
  mun:{hair:'#5A4A42',skin:'#E0B48E',shirt:'#5A8FB0',pants:'#4A4038',style:'bob',lashes:1,lips:'#B8606A'},
@@ -363,6 +372,7 @@ const NPC={
    {say:'3학년 마태식 선배. 전에 로봇부였어.',face:'think'},
    {say:'뭐든 고친대. 무지 무섭지만.'},
    {say:'지금 교무실에서 상담 중이야.'},
+   {say:'정 선생님은 3학년 국어도 가르치거든.'},  // why our 담임 counsels a 3학년
    {say:'교무실은 복도 왼쪽 끝이야.'},
    Q.daon[2],
    {w:'방법',who:'나',build:['그게','제일 좋은','방법이야']},
@@ -394,7 +404,7 @@ const NPC={
    Q.jung[1],
    {who:'마태식',say:'…{공대|공대}요. 기계 만드는 거 배우고 싶어요.'},
    Q.jung[2],
-   {who:'마태식',say:'근데 이번 모의고사 점수가 별로예요.',face:'sad'},
+   {who:'마태식',say:'근데 이번 모의고사 점수가 별로예요.',face:'sad',culture:'go3'},  // 문화 노트: 고3, 수능, 학원
    Q.jung[3],
    {say:'괜찮아요. 열심히 하다 보면 점수도 올라요.',face:'happy'},
    {who:'마태식',say:'…네. 저 이제 가 볼게요.'},
@@ -447,7 +457,7 @@ const NPC={
    {say:'"1994 방송 대회" 트로피. 옆에 앨범도 있어.'},
    {who:'…',say:'찬이 오래된 {졸업 앨범|졸업 앨범}을 꺼내요.'},
    {say:'남의 앨범을 막… 나 간이 크지? 하하.',face:'happy'},
-   {who:'…',say:'"1994 방송부" 사진. 여학생이 마이크를 잡고 웃어요.'},
+   {who:'…',say:'"1994 방송부" 사진. 여학생이 마이크를 잡고 웃어요.',phone:DJ_PHOTO},  // the photo itself, so the reveal doesn't rest on reading the caption
    {who:'…',say:'사진 밑에: "{디제이|디제이} 한복순 (복숭아)"'},
    {say:'한복순… 복순… 복숭아?! 헐, 대박.',face:'surprised'},
    {say:'매점 이모 아니었어? 내 추리가 틀렸어?',face:'sad'},
@@ -488,8 +498,11 @@ const NPC={
   status:()=>!f().shopM?(hasItem(POS)?'todo':null):undefined,
   script:()=>!f().shopM&&!hasItem(POS)?[{say:'어서 와요. 공책 사러 왔어요?'},{say:'…그냥 구경해도 돼요. 괜찮아요.'}]:null,
   talk:()=>[
+   hariJoins(3,1),
    {say:'어머, 느티고 학생들이네. 무슨 일이에요?'},
-   {who:'나',say:'저희 방송부 포스터예요. 축제 생방송이요.'},
+   {who:'나',say:'저희 방송부 포스터예요. 축제 생방송이요.',when:()=>!third()},
+   hariSays('저, 저희 방송부 포스터예요… 축제 생방송이요.'),
+   kindTo('어머, 목소리가 참 예쁘네요. 꼭 들으러 갈게요.'),
    Q.mun[0],
    {say:'우리 가게 창문에 붙여요. 제일 잘 보여요.'},
    Q.mun[1],
@@ -502,7 +515,10 @@ const NPC={
   status:()=>!f().shopB?(hasItem(POS)?'todo':null):undefined,
   script:()=>!f().shopB&&!hasItem(POS)?[{say:'어, 떡볶이 학생! 오늘도 왔어요?',face:'happy'},{say:'오늘은 바빠 보이네. 다음에 와요.'}]:null,
   talk:()=>[
+   hariJoins(11,1),
    {say:'어, 떡볶이 학생들! 또 왔어요?',face:'happy'},
+   hariSays('아, 안녕하세요… 방송부 포스터예요.'),
+   kindTo('아이고, 수줍은 학생이네. 괜찮아요, 천천히 말해요.'),
    {say:'포스터? 줘 봐요. 나 여기서 이십 년 장사했어요.'},
    Q.bun[0],
    Q.bun[1],
@@ -516,8 +532,12 @@ const NPC={
    if(f().shopP)return [{say:'퓨즈는 그냥 가져가요. 대신 방송 잘해요.'},{say:'나도 라디오 듣는 거 무척 좋아해요.',face:'happy'}];
    if(!hasItem(POS))return [{say:'어서 오세요. 컵라면은 저쪽이에요.'}];
    return [
+    hariJoins(18,-1),  // left of the 편의점 owner: on the right she'd stand in the only way past the lamp post
     {say:'어서 오세요. …포스터요? 방송부?'},
-    {who:'나',say:'네! 축제 생방송이요. 근데 방송 기계가 탔어요.'},
+    {who:'나',say:'네! 축제 생방송이요. 근데 방송 기계가 탔어요.',when:()=>!third()},
+    hariSays('네, 네! 방송부 포스터예요… 축제 생방송이요.'),
+    kindTo('오, 목소리 좋네요. 라디오 체질이에요.'),
+    {who:'나',say:'근데 방송 기계가 탔어요.',when:third},
     {say:'탔다고요? 펑 소리 나고 연기?',face:'surprised'},
     {say:'그럼 {퓨즈|퓨즈}가 나간 거예요.',face:'think'},
     Q.pyeon[0],
@@ -718,8 +738,9 @@ const NPC={
    {who:'백구름',say:'그, 그럼요! 여기요!',face:'surprised'},
    {who:'…',say:'교장 선생님이 무대에 올라가서 마이크 앞에 서요.',move:{npc:'principalS',to:[19,5],dir:'down'}},
    {say:'느티고 여러분, 교장 한복순입니다.'},
+   {say:'학부모회도 오늘 방송을 들었어요.'},  // why she can change her mind: the parents who wanted the room heard the show
    {say:'방송실은 그대로 둡니다.'},
-   {say:'심화반은 다른 교실에서 합니다.'},
+   {say:'심화반은 3층 빈 교실에서 합니다.'},
    {who:'…',say:'운동장에서 "와아!" 소리가 터져요.'},
    {who:'…',say:'교장 선생님 표정이 소녀처럼 환해요.'},
    Q.prS[2],
@@ -789,10 +810,11 @@ const NPC={
   hide:()=>!f().clue,
   talk:()=>[{say:'학생들, 무대 앞에서 밀지 마요!'},{say:'뒤에서도 잘 들려요. 스피커가 커요.'}]},
 
- xT1:{name:'2학년 학생',zone:'town',x:18,y:8,dir:'up',look:LOOK.xT1,banmal:1,
+ xT1:{name:'2학년 학생',zone:'town',x:21,y:8,dir:'up',  // past the bus stop: under it the pair sealed off the sidewalk's right end
+look:LOOK.xT1,banmal:1,
   hide:()=>!f().counsel||!!f().promise,
   talk:()=>[{say:'버스 언제 와? 학원 늦겠다.'}]},
- xT2:{chat:'xT1',name:'2학년 학생',zone:'town',x:19,y:8,dir:'up',look:LOOK.xT2,banmal:1,
+ xT2:{chat:'xT1',name:'2학년 학생',zone:'town',x:22,y:8,dir:'up',look:LOOK.xT2,banmal:1,
   hide:()=>!f().counsel||!!f().promise,
   talk:()=>[{say:'이 동네 버스는 원래 느려.'},{say:'그냥 걸어갈까?',face:'think'}]},
  xT3:{name:'3학년 선배',zone:'town',x:22,y:3,dir:'right',look:LOOK.xT3,banmal:1,
@@ -805,8 +827,9 @@ const FOLLOW={name:'마태식',look:LOOK.taesik,when:()=>!!f().taesikCome&&!f().
 function fixTalk(){return NPC.gureumF.talk().map(s=>s.who?s:{...s,who:'백구름'})}
 
 const INTRO=[{who:'…',say:'축제 사흘 전. 방송실에 탄 냄새가 나요.'},{who:'…',say:'방송 기계에서 아직 연기가 조금 나요.'}];
-const DONE=[{say:'겨울. 태식 선배가 대학에 합격했어요.',set:()=>{f().quiet=1}},'그 소식은 점심 방송으로 들었어요.','봄. 사연함에 새 쪽지가 있어요.',
- '교장 선생님 글씨가 아니에요.','"새 학기 사연 있어요. —복숭아 2호"','4교시 끝!','방송실 복습 노트북에서 단어를 다시 볼 수 있어요.'];
+const DONE=[{say:'구름 엄마도 축제 방송을 들었대요.',set:()=>{f().quiet=1}},  // the epilogue: festival night, then a time cut over black (winter, spring)
+ {say:'겨울. 태식 선배가 대학에 합격했어요.',black:1},'그 소식은 점심 방송으로 들었어요.','봄. 사연함에 새 쪽지가 있어요.',
+ '교장 선생님 글씨가 아니에요.','"새 학기 사연 있어요. —복숭아 2호"','4교시 끝!',{say:'방송실 복습 노트북에서 단어를 다시 볼 수 있어요.',black:0}];
 
 function questText(){
  const F=f();
@@ -972,5 +995,5 @@ const TILES={...SCHOOL_TILES,...VARIANTS,
 };
 const PLAYER=LOOK.player;
 const term={name:'복습 노트북'};  // the 방송실 laptop (1교시 reviews in a paper 복습 노트)
-return {WORDS,DICT,CONFUSE,BANK,Q,ITEMS,ZONES,NPC,FOLLOW,INTRO,DONE,questText,TILES,VARIANTS,PLAYER,term};
+return {WORDS,DICT,CONFUSE,BANK,Q,ITEMS,PHOTOS,ZONES,NPC,FOLLOW,INTRO,DONE,questText,TILES,VARIANTS,PLAYER,term};
 }});

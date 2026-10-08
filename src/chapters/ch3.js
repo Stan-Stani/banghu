@@ -409,7 +409,8 @@ const NPC={
  /* two more teachers at their desks: the 교무실 구름 calls 사람 많은 */
  kimT:{name:'김 선생님',zone:'hall',x:3,y:4,dir:'left',look:LOOK.kimT,
   talk:()=>[{say:'시험지를 보고 있어요. 빨간 펜이 모자라요.'},{say:'정 선생님 자리는 화분 옆이에요.'}]},
- hanT:{name:'한 선생님',zone:'hall',x:7,y:3,dir:'left',look:LOOK.hanT,
+ hanT:{name:'한 선생님',zone:'hall',x:3,y:3,dir:'right',  // beside the aisle: at 7,3 the desks and 정 선생님 sealed her in
+look:LOOK.hanT,
   talk:()=>[{say:'방송부? 점심 방송 잘 듣고 있어요.',face:'happy'},{say:'교무실에서는 조용히 해 주세요.'}]},
 
  jung:{name:'정 선생님',zone:'hall',x:6,y:2,dir:'down',look:LOOK.jung,badge:['가입하다','제출하다','독후감','맞춤법'],
@@ -460,7 +461,7 @@ const NPC={
    {who:'…',say:'신청서를 받았어요. 이름이 벌써 네 개 있어요.',give:'동아리 등록 신청서'},
    {who:'…',say:'…찬 이름만 없어요.'},
    {say:'남궁찬 이름이 없네요. 지금 도서관에 있어요. 2층이요.'},
-   {say:'어제 국어 시간에 잤거든요. 그래서 벌을 받았어요.',face:'angry'},
+   {say:'지난주 금요일 국어 시간에 잤거든요. 그래서 벌을 받았어요.',face:'angry'},  // the 교시 starts on a Monday
    Q.jung[2],
    Q.jung[3],
    {say:'빨간 펜이 모자라요. 하하.'},
@@ -498,7 +499,7 @@ const NPC={
   after:'포스터 비뚤어지면 벌금이야. 농담 아니야.',
   status:()=>{if(!has('붙다'))return f().submitted?'todo':null},
   script:()=>{const F=f();
-   if(!F.submitted)return [{say:'게시판? 반장 허락 없이는 안 돼.'},{say:'{정식|정식} 동아리만 붙일 수 있어. 규칙이야.',face:'angry'}];
+   if(!F.submitted)return [{say:'방송부? 먼저 교무실에 신청서부터 내.'},{say:'{정식|정식} 동아리만 게시판에 포스터를 붙일 수 있어. 규칙이야.',face:'angry'}];  // nobody has said 게시판 yet
    if(F.rumor)return [{say:'거짓 소문이야. 근데 다들 믿네.',face:'angry'},{say:'댓글? 도서관 서지민한테 물어봐. 도서부야.'}];
    if(F.posted)return [{say:'포스터 예쁘지? 내가 만들었어.',face:'happy'}];
    return null},
@@ -579,7 +580,7 @@ const NPC={
   status:()=>{if(!has('답답하다'))return f().formGot?'todo':null},
   script:()=>{const F=f();
    if(!F.formGot)return [{say:'쉿. 나 지금 엄청 바빠.'},{say:'독후감… 으, 세 줄 썼어.',face:'sad'}];
-   if(F.signed5)return [{say:'신청서 빨리 제출해. 내 이름 잘 보이지?',face:'happy'}];
+   if(F.signed5&&!F.submitted)return [{say:'신청서 빨리 제출해. 내 이름 잘 보이지?',face:'happy'}];
    return null},
   talk:()=>[
    {who:'…',say:'찬이 책을 펴고 있어요. 근데 책이 거꾸로예요.'},
@@ -719,11 +720,11 @@ const NPC={
   talk:()=>[{say:'자판기에서 뭐 뽑을까?'},{say:'다 맛있어 보여. 고민된다.',face:'think'}]},
  xB1:{name:'2학년 학생',zone:'hall',x:24,y:3,dir:'right',look:LOOK.xB1,banmal:1,
   hide:()=>!!f().toNR,
-  script:()=>f().rumor?[{say:'방송부 그만둔대. 찬이가 앱에 올렸어.'}]:null,
+  script:()=>f().rumor?[{say:'방송부 그만둔대. 학교 앱에 올라왔어.'}]:null,  // the writer is anonymous: only 서지민 and you work out it was 찬
   talk:()=>[{say:'중간고사 언제야? 다음 주?'}]},
  xB2:{chat:'xB1',name:'2학년 학생',zone:'hall',x:25,y:3,dir:'left',look:LOOK.xB2,banmal:1,
   hide:()=>!!f().toNR,
-  script:()=>f().rumor?[{say:'찬이 말은 반만 믿어.'},{say:'또 오해한 거 아니야?',face:'think'}]:null,
+  script:()=>f().rumor?[{say:'앱에 올라온 말은 반만 믿어.'},{say:'또 누가 오해한 거 아니야?',face:'think'}]:null,
   talk:()=>[{say:'몰라. 알고 싶지 않아.',face:'sad'}]},
  xW:{name:'2학년 학생',zone:'hall',x:13,y:8,dir:'down',look:LOOK.xW,banmal:1,
   hide:()=>!!f().toNR,
@@ -753,10 +754,11 @@ const NPC={
   script:()=>f().rumor&&!f().secret?[{say:'쉿. 학교 앱 댓글 봤어? 다 방송부 얘기야.'}]:null,
   talk:()=>[{say:'쉿. 숙제 자료 찾는 중이야.'},{say:'도서관 컴퓨터는 진짜 느려.'}]},
 
- xT1:{name:'1학년 학생',zone:'street',x:3,y:2,dir:'right',look:LOOK.xT1,
+ xT1:{name:'1학년 학생',zone:'street',x:5,y:2,dir:'right',  // with the tree at 2,3 the pair at 3–4 sealed off the 분식집 door
+look:LOOK.xT1,
   hide:()=>!f().toNR||!!f().secret,
   talk:()=>[{say:'떡볶이 먹을까, 순대 먹을까?',face:'think'}]},
- xT2:{chat:'xT1',name:'1학년 학생',zone:'street',x:4,y:2,dir:'left',look:LOOK.xT2,
+ xT2:{chat:'xT1',name:'1학년 학생',zone:'street',x:6,y:2,dir:'left',look:LOOK.xT2,
   hide:()=>!f().toNR||!!f().secret,
   talk:()=>[{say:'둘 다! 오늘은 내가 쏠게.',face:'happy'}]},
  xT3:{name:'2학년 학생',zone:'street',x:9,y:3,dir:'left',look:LOOK.xT3,banmal:1,
