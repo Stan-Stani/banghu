@@ -358,7 +358,7 @@ const NPC={
    {w:'놓치다',who:'나',build:['이번 기회는','절대','안 놓칠게']},
    {say:'좋아! 음악실은 2층이야. 계단으로 올라가.',face:'happy',award:['기회','놓치다'],set:()=>{f().poster=1}}]},
 
- hariM:{name:'유하리',zone:'music',x:7,y:2,dir:'up',look:LOOK.hari,badge:['얼다','심장','곡'],
+ hariM:{name:'유하리',zone:'music',x:7,y:2,dir:'up',look:LOOK.hari,badge:['얼다','심장','곡'],sing:()=>!dlg,  // singing alone until you speak to her
   hide:()=>!!f().metHari,
   talk:()=>[
    {who:'노랫소리',say:'♪ 라라… 오늘도 나는… ♪'},
@@ -567,7 +567,7 @@ const NPC={
    {who:'…',say:'하리 연락처를 구름한테도 보냈어요.',take:['하리 연락처']},
    {say:'고마워. 내일 점심에 봐.',face:'happy'},
    {who:'…',say:'그리고 다음 날 점심시간.',set:()=>{f().nextDay=1}},
-   {who:'…',say:'방송실이 북적북적해요. 다온이 진짜 하리를 데려왔어요.',cam:[12,4]},
+   {who:'…',say:'방송실이 북적북적해요. 다온이 진짜 하리를 데려왔어요. 찬은 구경하러 왔어요.',cam:[12,4]},
    {say:'자, 방송 순서 알려 줄게.',cam:null},
    {say:'노래 먼저. 삼 초 뒤에 마이크.'},
    Q.gureumL[0],
@@ -580,7 +580,8 @@ const NPC={
    Q.gureumL[3],
    {say:'하리는 마이크 앞에 있어. 말 좀 걸어 줘.',award:['타이밍','챙기다'],set:()=>{f().ready=1}}]},
 
- hariMic:{name:'유하리',zone:'bcast',x:11,y:3,dir:'up',look:LOOK.hari,badge:['얼다','심장','곡','긴장하다','포기하다','효과','즐기다'],
+ hariMic:{name:'유하리',zone:'bcast',x:11,y:3,dir:'up',look:LOOK.hari,sing:()=>!!f().onAir,  // notes while her song is on air
+  badge:['얼다','심장','곡','긴장하다','포기하다','효과','즐기다'],
   hide:()=>!f().nextDay,
   get after(){return pick([['선배, 다음 곡도 연습하고 있어요.'],['저 아직 손이 떨려요. 그래도 좋아요.']])},
   status:()=>{if(!has('효과'))return f().ready?'todo':'wait'},
@@ -617,7 +618,7 @@ const NPC={
   hide:()=>!f().nextDay,
   after:'다음 방송 땐 내 농담 코너도 있어. 진짜야.',
   script:()=>f().done?[{say:'나 구경만 한다고 했지?'},{say:'…근데 이제 그냥 부원 할까?',face:'think'}]
-   :[{say:'쉿! 방송 전이야. 나 오늘 장난 안 쳐.'},{say:'…진짜야. 하리가 웃어야 하니까.'}],
+   :[{say:'쉿! 나는 구경만 하러 왔어. 부원 아니야.'},{say:'오늘 장난 안 쳐. 하리가 웃어야 하니까.'}],  // "구경만 한다고 했지?" after the song points back here
   talk:()=>[]},
 
  /* ---------- extras: one-off students and staff so the school feels lived-in. No badges, no teaching.

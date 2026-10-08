@@ -189,8 +189,7 @@ const TILES={
   sayeon:(X,Y,x,y)=>{face(X,Y);r(X+3,Y+1,10,10,'#C98F5A');r(X+3,Y+1,10,2,'#E3B07A');r(X+5,Y+4,6,1,'#3E2A1A');r(X+5,Y+6,6,3,'#F4F1E6');r(X+6,Y+7,4,1,'#E86D8A');
   if(state.f.done){r(X+6,Y+2,4,2,'#2B2E36');r(X+7,Y+2,2,1,'#F2A38A')}},
   notebook:(X,Y,x,y,t)=>{r(X+1,Y+9,14,3,'#6E4A2E');r(X+1,Y+9,14,1,'#8A6040');r(X+2,Y+12,2,4,'#4A3020');r(X+12,Y+12,2,4,'#4A3020');
-  r(X+2,Y+3,12,6,'#3E6B8A');r(X+3,Y+4,5,4,'#F4F1E6');r(X+8,Y+4,5,4,'#F4F1E6');r(X+8,Y+3,1,6,'#2B4D66');  // the 복습 노트, open: blue cover, two pages
-  r(X+4,Y+5,3,1,'#9AA3AD');r(X+4,Y+7,3,1,'#9AA3AD');r(X+9,Y+5,3,1,'#9AA3AD');r(X+9,Y+7,3,1,'#9AA3AD');r(X+12,Y+2,1,4,'#E8962A');
+  r(X+3,Y+1,10,8,'#3A3E48');r(X+4,Y+2,8,6,'#2F5A7A');r(X+5,Y+3,4,1,'#9FD0E8');r(X+5,Y+5,6,1,'#6FA8C8');r(X+2,Y+8,12,2,'#9AA3AD');r(X+3,Y+8,10,1,'#C9D2DA');r(X+10,Y+2,2,2,'#F2A38A');  // the club's laptop (노트북): screen up, keyboard on the desk (1교시's paper 복습 노트 is the class 'terminal')
   const due=state&&dueWords().length>0;if(due){const on=Math.floor(t/350)%2;r(X+11,Y,4,4,on?'#F2C46B':'#E8962A');r(X+12,Y+1,2,2,on?'#FFF3C4':'#F2C46B')}},
   onair:(X,Y,x,y,t)=>{face(X,Y);r(X+2,Y+3,12,6,'#2B2E36');const on=(state.f.done&&Math.floor(t/700)%3===0)||(!!state.f.onAir&&!state.f.done);r(X+3,Y+4,10,4,on?'#E85A4A':'#5A2E2E');r(X+5,Y+5,6,1,on?'#FFD0C8':'#6E3A3A')},
   mixer:(X,Y,x,y,t)=>{r(X,Y+3,16,10,'#3A3E48');r(X,Y+3,16,2,'#535866');r(X,Y+12,16,1,'#22252C');const live=state.f.ready&&!state.f.done;
