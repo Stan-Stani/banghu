@@ -411,7 +411,8 @@ const NPC={
  student:{name:'1학년 학생',zone:'hall',x:7,y:8,dir:'right',look:LOOK.student,
   script:()=>{
    if(f().done)return [{say:'선배! 점심 방송 들었어요! 하리 대박!',face:'happy'},{say:'우리 반이 다 울었어요. 진짜로요.'}];
-   if(f().metHari)return [{say:'하리요? 우리 반이에요. 착해요.'},{say:'근데 말이 별로 없어요. 노래도 혼자만 해요.'}];
+   if(f().knowHari)return [{say:'하리요? 우리 반이에요. 착해요.'},{say:'근데 말이 별로 없어요. 노래도 혼자만 해요.'}];
+   if(f().metHari)return [{say:'음악실에서 노래하는 애요? 우리 반 애예요. 착해요.'},{say:'근데 말이 별로 없어요. 노래도 혼자만 해요.'}];  // her name only once 정 선생님 reads the 명찰
    return null},
   talk:()=>[
    {say:'선배, 그 소문 들었어요?'},
@@ -638,7 +639,8 @@ const NPC={
   talk:()=>[{say:'…모의고사 끝나면 잘 거야.'},{say:'삼 일 동안. 아무도 깨우지 마.'}]},
  xWin:{name:'2학년 학생',zone:'hall',x:20,y:8,dir:'down',look:LOOK.xWin,banmal:1,
   hide:()=>!!f().afterSchool,
-  talk:()=>[{say:'점심시간에 체육관은 잠겨 있어.'},{say:'근데 안에서 공 소리가 나. 이상하지?',face:'think'}]},
+  talk:()=>f().knowHari?[{say:'체육관 문 열렸어? 아까는 잠겨 있었는데.'},{say:'안에서 누가 소리 지르는 것 같았어.',face:'think'}]  // the gym opens when you go looking for 하리
+   :[{say:'점심시간에 체육관은 잠겨 있어.'},{say:'근데 안에서 공 소리가 나. 이상하지?',face:'think'}]},
  xClean:{name:'청소 아주머니',zone:'hall',x:22,y:7,dir:'left',look:LOOK.cleaner,
   hide:()=>!f().afterSchool||!!f().nextDay,
   talk:()=>[{say:'학생, 아직 집에 안 갔어요?'},{say:'방송실은 늦게까지 불이 켜져 있네요.'}]},
@@ -676,10 +678,11 @@ const NPC={
   hide:()=>!f().afterSchool||!!f().nextDay,
   talk:()=>[{say:'야, 너도 한 번 던져 볼래?'},{say:'못 넣으면 아이스크림 쏘기. 하하, 장난이야.'}]},
 
- xS1:{name:'1학년 학생',zone:'street',x:4,y:3,dir:'right',look:LOOK.xS1,
+ xS1:{name:'1학년 학생',zone:'street',x:3,y:3,dir:'right',  // one square left of the lamp post, so the sidewalk stays open
+look:LOOK.xS1,
   hide:()=>!f().afterSchool||!!f().nextDay,
   talk:()=>[{say:'선배, 문구점 닫았어요. 은행 갔대요.'}]},
- xS2:{chat:'xS1',name:'1학년 학생',zone:'street',x:5,y:3,dir:'left',look:LOOK.xS2,
+ xS2:{chat:'xS1',name:'1학년 학생',zone:'street',x:4,y:3,dir:'left',look:LOOK.xS2,
   hide:()=>!f().afterSchool||!!f().nextDay,
   talk:()=>[{say:'펜 사야 되는데… 기다릴까요?',face:'think'},{say:'아니면 편의점 갈까요?'}]},
  xS3:{name:'2학년 학생',zone:'street',x:19,y:8,dir:'up',look:LOOK.xS3,banmal:1,
