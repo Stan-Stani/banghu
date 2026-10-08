@@ -58,4 +58,6 @@ defs=json.loads((here/'defs.json').read_text(encoding='utf-8')) if (here/'defs.j
 used=sorted({l for ls in mp.values() for l in ls})
 missing=[l for l in used if l not in defs]
 (repo/'src/lexicon-missing.txt').write_text(''.join(f'{l}\t{example[l][0]}\t{example[l][1]}\n' for l in missing),encoding='utf-8')
-print(f'{repo.name}: {len(texts)} strings, {len(mp)} distinct words, {len(used)} lemmas, {len(missing)} without a definition')
+empty=[e for e,ls in mp.items() if ls and all(defs.get(l) is None for l in ls)]   # every lemma null: the tap falls back to a prefix or "사전에 없는 말이에요"
+(repo/'src/lexicon-empty.txt').write_text(''.join(f'{e}\t{",".join(mp[e])}\n' for e in empty),encoding='utf-8')
+print(f'{repo.name}: {len(texts)} strings, {len(mp)} distinct words, {len(used)} lemmas, {len(missing)} without a definition · {len(empty)} words tap to an empty entry (src/lexicon-empty.txt; mostly bare particles after a blank)')

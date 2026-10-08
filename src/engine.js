@@ -1,4 +1,4 @@
-/* GENERATED from walk-engine/engine.js (1f53cb4) — do not edit here; edit walk-engine and run its sync.sh. */
+/* GENERATED from walk-engine/engine.js (373951d) — do not edit here; edit walk-engine and run its sync.sh. */
 /* =====================================================================
    Engine: tiles, movement, zones, dialogue, spaced review, speech, saving.
    ===================================================================== */
@@ -411,7 +411,7 @@ function arrive(){
 }
 function goZone(id,x,y,dir){
  warping=true;sfx('door');$('fade').classList.add('on');
- setTimeout(()=>{loadZone(id,x,y,dir);save();$('fade').classList.remove('on');if(held&&held!==dir)held=null;setTimeout(()=>{warping=false;if(!greet())tryMove()},120)},230);  // turned around by the warp: let go of the held direction
+ setTimeout(()=>{loadZone(id,x,y,dir);updateQuest();save();$('fade').classList.remove('on');if(held&&held!==dir)held=null;setTimeout(()=>{warping=false;if(!greet())tryMove()},120)},230);  // turned around by the warp: let go of the held direction
 }
 function loadZone(id,x,y,dir){
  ZID=id;Z=C.ZONES[id];state.zone=id;
