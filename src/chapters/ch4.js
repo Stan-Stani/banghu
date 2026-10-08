@@ -1,4 +1,5 @@
 CHAPTERS.push({id:'ch4',n:'4교시',title:'축제 생방송',place:'방송실 · 교무실 · 동네 상가 · 학원 · 교장실 · 축제 무대',words:20,save:'banghu-ch4',color:'#E0884A',
+ migrate:st=>{const F=st.f||{};if(F.done)F.quiet=1},  // saves past the ending: the hall speaker has stopped
  start:{zone:'bcast',x:8,y:7,dir:'up'},introWho:'…',
  make:()=>{
 /* =====================================================================
@@ -604,7 +605,7 @@ const NPC={
     :f().promise?[{say:'오늘 축제네요. 방송, 나도 들을게요.',face:'happy'}]
     :f().counsel?[{say:'방과 후예요? 동네 상가는 정문 밖이에요.'}]
     :[{say:'어이구, 학생. 축제 준비로 바쁘죠?'}];
-   return [...open,{say:'잠깐, 옛날 단어 하나 해요.'},{...q,old:1},{say:'잘했어요. 조심히 다녀요.'}]},
+   return [...open,{say:'잠깐, 전에 배운 단어 하나 복습해요.'},{...q,old:1},{say:'잘했어요. 조심히 다녀요.'}]},
   talk:()=>[]},
 
  setup:{name:'1학년 학생',zone:'yard',x:17,y:8,dir:'up',look:LOOK.setup,
@@ -804,7 +805,7 @@ const FOLLOW={name:'마태식',look:LOOK.taesik,when:()=>!!f().taesikCome&&!f().
 function fixTalk(){return NPC.gureumF.talk().map(s=>s.who?s:{...s,who:'백구름'})}
 
 const INTRO=[{who:'…',say:'축제 사흘 전. 방송실에 탄 냄새가 나요.'},{who:'…',say:'방송 기계에서 아직 연기가 조금 나요.'}];
-const DONE=['겨울. 태식 선배가 대학에 합격했어요.','그 소식은 점심 방송으로 들었어요.','봄. 사연함에 새 쪽지가 있어요.',
+const DONE=[{say:'겨울. 태식 선배가 대학에 합격했어요.',set:()=>{f().quiet=1}},'그 소식은 점심 방송으로 들었어요.','봄. 사연함에 새 쪽지가 있어요.',
  '교장 선생님 글씨가 아니에요.','"새 학기 사연 있어요. —복숭아 2호"','4교시 끝!','방송실 복습 노트북에서 단어를 다시 볼 수 있어요.'];
 
 function questText(){

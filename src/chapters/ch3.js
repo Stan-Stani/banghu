@@ -1,6 +1,6 @@
 CHAPTERS.push({id:'ch3',n:'3교시',title:'비밀 사연',place:'방송실 · 복도 · 도서관 · 학교 앞 · 코인 노래방',words:20,save:'banghu-ch3',color:'#C97A8E',
  start:{zone:'bcast',x:8,y:6,dir:'up'},introWho:'…',
- migrate:st=>{const F=st.f||{};if(F.posted&&!F.boxed)F.boxed=1;  // saves from before the 사연함 had its own flag (2026-10-07)
+ migrate:st=>{const F=st.f||{};if(F.done)F.quiet=1;if(F.posted&&!F.boxed)F.boxed=1;  // saves from before the 사연함 had its own flag (2026-10-07)
   const it=st.items||[],i=it.indexOf('가입 신청서');if(i>=0)it[i]='동아리 등록 신청서'},  // …and from before the form was renamed
  make:()=>{
 /* =====================================================================
@@ -770,7 +770,7 @@ const FOLLOW={name:'남궁찬',look:LOOK.chan,when:()=>!!f().letter&&!f().juice,
  talk:()=>f().oldSpelling?[{say:'매점! 급식실 안에! 범인은 이모야!',face:'happy'}]:[{say:'복숭아… 복숭아… 누굴까?',face:'think'},{say:'일단 정 선생님한테 가자.'}]};
 
 const INTRO=[{who:'…',say:'하리의 첫 방송 뒤, 방송실이 밝아졌어요.'},{who:'…',say:'월요일 아침. 구름이 벌써 기계 앞에 있어요.',cam:[5,3]}];
-const DONE=['방송이 끝나자 교무실 마이크로 교장 선생님 방송이 나와요.','"축제가 끝나면 방송실은 심화반 교실이 됩니다."',{say:'그 순간, 방송 기계에서 펑! 연기가 나요.',set:()=>{f().smoke=1}},'다섯 명이 아무 말도 못 하고 서로 쳐다봐요.','3교시 끝!','방송실 복습 노트북에서 단어를 다시 볼 수 있어요.'];
+const DONE=[{say:'방송이 끝나자 교무실 마이크로 교장 선생님 방송이 나와요.',set:()=>{f().quiet=1}},'"축제가 끝나면 방송실은 심화반 교실이 됩니다."',{say:'그 순간, 방송 기계에서 펑! 연기가 나요.',set:()=>{f().smoke=1}},'다섯 명이 아무 말도 못 하고 서로 쳐다봐요.','3교시 끝!','방송실 복습 노트북에서 단어를 다시 볼 수 있어요.'];
 
 function questText(){
  const F=f();

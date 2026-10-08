@@ -3,6 +3,7 @@ CHAPTERS.push({id:'ch1',n:'1교시',title:'전학생',place:'운동장 · 교무
  /* round 2: f.seated (sitting at your desk starts class) is new; old saves already past it get it here. The classroom door moved
     from the right wall to the back wall, so a save standing in the old door column is moved to the new door. */
  migrate:st=>{const F=st.f||(st.f={}),it=st.items||[],b=st.badges||[];
+  if(F.done)F.quiet=1;  // saves past the ending: the hall speaker has stopped
   if(F.paidFine&&!F.seated&&(it.includes('복숭아 쪽지')||b.includes('지우개')||b.includes('일부러')||F.lunch))F.seated=1;
   if(st.zone==='class'&&st.x===19)Object.assign(st,{x:18,y:11,dir:'up'});
   /* round 3: the seats moved below their desks (facing the board), and 찬 sits at a lunch table */
@@ -207,7 +208,7 @@ const ZONES=SCHOOL({open:['class','cafe','bcast'],zones:{
    'J':'시간표예요. 오늘 점심 다음은 수학이에요.',
    'W':['창밖에 느티나무가 보여요.','창문이 열려 있어요. 바람이 시원해요.','창가에 작은 화분이 있어요.'],
    'k':'교탁이에요. 분필하고 출석부가 있어요.',
-   'd':(x,y)=>x===11&&y===10?(f().seated?'내 자리예요. 가방이 의자 옆에 있어요.':'내 자리예요. 의자는 책상 아래쪽에 있어요.'):x===12&&y===10?'다온의 자리예요. 필통이 아주 깔끔해요.':['책상 위에 수학 문제집이 있어요.','책상에 작은 낙서: "졸려…"','책상 위에 필통하고 물병이 있어요.','책상 서랍에 과자가 숨어 있어요.'][x%4],
+   'd':(x,y)=>x===11&&y===10?(f().deal&&!f().crew3?'내 자리예요. 다들 자리에 앉았어요. 나도 앉아야 해요.':f().seated?'내 자리예요. 가방이 의자 옆에 있어요.':'내 자리예요. 의자는 책상 아래쪽에 있어요.'):x===12&&y===10?'다온의 자리예요. 필통이 아주 깔끔해요.':['책상 위에 수학 문제집이 있어요.','책상에 작은 낙서: "졸려…"','책상 위에 필통하고 물병이 있어요.','책상 서랍에 과자가 숨어 있어요.'][x%4],
    'b':()=>f().paidFine?'벌금 저금통이에요. 내 오백 원도 들어 있어요.':'분홍색 돼지 저금통. 배에 "벌금"이라고 써 있어요.',
    'L':['사물함이에요. 이름표가 다 붙어 있어요.','사물함 하나가 안 닫혀요. 체육복이 보여요.','"오다온" 사물함. 아주 깔끔해요.']},
   npcs:['daon','daonSeat','seat','eraser','mate','mate2','jongnye','chanC','xC1','xC2','xC3','xC4','xC5']},
@@ -548,7 +549,7 @@ const NPC={
     :F.deal?[{say:'종례 시간 아니에요? 쉿, 빨리 먹고 가요.'}]
     :F.gotNotice?[{say:'또 왔어요? 이거 먹어요. 공짜예요.'}]
     :[{say:'학생, 어서 와요. 점심 먹었어요?'},{say:'후식으로 이거 먹어요. 공짜예요.'}];
-   return [...hi,{say:'먹으면서 옛날 단어 하나 해요.'},{...q,old:1},{say:'잘했어요. 또 와요!'}]},
+   return [...hi,{say:'먹으면서 전에 배운 단어 하나 복습해요.'},{...q,old:1},{say:'잘했어요. 또 와요!'}]},
   talk:()=>[]},
 
  gureum:{name:'백구름',zone:'bcast',x:14,y:9,dir:'left',look:LOOK.gureum,badge:['구석','당황하다','마주치다','전하다'],
@@ -674,7 +675,7 @@ const FOLLOW=null;
 
 /* the first line is one word, so nothing is lost if it goes by before the player is ready */
 const INTRO=[{who:'…',say:'봄.'},{who:'…',say:'전학 첫날이에요.'},{who:'…',say:'그런데 버스가 십오 분 늦었어요.'},{who:'…',say:'여기가 느티고등학교. 진짜 큰 나무가 있어요.'}];
-const DONE=['노래는 곧 멈췄어요. 복도가 다시 조용해요.','저쪽 신발장에 분홍색 종이가 보여요.','1교시 끝!','교실 교탁 위에 {복습 노트|복습 노트}가 있어요.'];
+const DONE=[{say:'노래는 곧 멈췄어요. 복도가 다시 조용해요.',set:()=>{f().quiet=1}},'저쪽 신발장에 분홍색 종이가 보여요.','1교시 끝!','교실 교탁 위에 {복습 노트|복습 노트}가 있어요.'];
 
 function questText(){
  const F=f();

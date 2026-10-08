@@ -1,6 +1,6 @@
 CHAPTERS.push({id:'ch2',n:'2교시',title:'노래 한 곡',place:'방송실 · 음악실 · 체육관 · 학교 앞 분식집',words:20,save:'banghu-ch2',color:'#5A8FB0',
  start:{zone:'bcast',x:9,y:6,dir:'up'},introWho:'…',
- migrate:st=>{const F=st.f||{};if((F.ready||F.done)&&!F.nextDay)F.nextDay=1;  // saves from before the day break (2026-10-04)
+ migrate:st=>{const F=st.f||{};if(F.done)F.quiet=1;if((F.ready||F.done)&&!F.nextDay)F.nextDay=1;  // saves from before the day break (2026-10-04)
   if(!st.school){if(st.zone==='gym')st.y=12-st.y;if(st.zone==='hall')Object.assign(st,{x:5,y:8,dir:'up'});st.school=1}},  // saves from before the shared school (2026-10-06): gym flipped, 1층 redrawn
  make:()=>{
 /* =====================================================================
@@ -155,7 +155,7 @@ const hasItem=i=>state.items.includes(i);
 const has=w=>state.badges.includes(w);
 
 /* school exit: closed in class time and during the next day's lunch until the broadcast is done */
-const outLock=()=>!f().afterSchool?'아직 수업 시간이에요. 밖에 못 나가요.':f().nextDay&&!f().done?'점심시간이에요. 학교 밖에 나가면 안 돼요.':false;
+const outLock=()=>!f().afterSchool?'아직 하교 시간이 아니에요. 밖에 못 나가요.':f().nextDay&&!f().done?'점심시간이에요. 학교 밖에 나가면 안 돼요.':false;
 /* 느티고 (src/school.js): the 방송실, the 2층 음악실 and the 체육관 across the 운동장 are open; the 정문 leads to 학교 앞. */
 const ZONES={...SCHOOL({open:['hall2','music','gym','bcast'],gate:{to:'street',x:10,y:8,dir:'up',lock:outLock},zones:{
  bcast:{paint:[[13,0,'b'],[7,2,'T']],
@@ -500,7 +500,7 @@ const NPC={
  owner:{name:'분식집 아저씨',zone:'bunsik',x:4,y:1,dir:'down',look:LOOK.owner,
   script:()=>{const q=Q.owner[Math.random()*Q.owner.length|0];
    const hi=f().done?{say:'방송 잘했다면서요? 학생들이 다 얘기해요.',face:'happy'}:{say:'어서 와요! 오늘 떡볶이 맛있어요.'};
-   return [hi,{say:'먹으면서 옛날 단어 하나 해요.'},{...q,old:1},{say:'잘했어요. 또 와요!',face:'happy'}]},
+   return [hi,{say:'먹으면서 전에 배운 단어 하나 복습해요.'},{...q,old:1},{say:'잘했어요. 또 와요!',face:'happy'}]},
   talk:()=>[]},
 
  hariB:{nomark:1,name:'유하리',zone:'bunsik',x:9,y:5,dir:'down',look:LOOK.hari,sit:1,chair:STOOL,badge:['포기하다'],
@@ -564,7 +564,7 @@ const NPC={
   get after(){return pick([['하리 목소리 들었지? 복도가 다 멈췄어.'],['타이밍. 노래 먼저, 그다음 마이크.'],['부원 넷! 이제 한 명만 더.']])},
   script:()=>has('타이밍')&&!f().done?[{say:'하리한테 가 봐. 마이크 앞에 있어.'},{say:'긴장 풀리게 말 좀 걸어 줘.'}]:null,
   talk:()=>[
-   {say:'어, 왔어? 나는 아직 기계 고쳐.'},
+   {say:'어, 왔어? 나 아직 기계 고치고 있어.'},
    {who:'…',say:'분식집 이야기를 다 해 줬어요.'},
    {say:'진짜? 하리가 한 곡 한대? 대박.',face:'surprised'},
    {who:'…',say:'하리 연락처를 구름한테도 보냈어요.',take:['하리 연락처']},
@@ -685,7 +685,8 @@ look:LOOK.xS1,
  xS2:{chat:'xS1',name:'1학년 학생',zone:'street',x:4,y:3,dir:'left',look:LOOK.xS2,
   hide:()=>!f().afterSchool||!!f().nextDay,
   talk:()=>[{say:'펜 사야 되는데… 기다릴까요?',face:'think'},{say:'아니면 편의점 갈까요?'}]},
- xS3:{name:'2학년 학생',zone:'street',x:19,y:8,dir:'up',look:LOOK.xS3,banmal:1,
+ xS3:{name:'2학년 학생',zone:'street',x:20,y:7,dir:'up',  // beside the bus stop, not under the bench: the lower sidewalk is the only way past it
+look:LOOK.xS3,banmal:1,
   hide:()=>!f().afterSchool||!!f().nextDay,
   talk:()=>[{say:'버스 또 늦어. 여기 버스는 항상 늦어.',face:'sad'}]},
  xS4:{name:'3학년 선배',zone:'street',x:21,y:3,dir:'up',look:LOOK.xS4,banmal:1,
@@ -695,7 +696,7 @@ look:LOOK.xS1,
 const FOLLOW=null;
 
 const INTRO=[{who:'…',say:'다음 날 점심시간. 방송실.'},{who:'…',say:'구름이 큰 종이를 들고 기다려요.'}];
-const DONE=['사연함에 카세트가 하나 들어 있어요.','"1994 방송부 · 복숭아" 쪽지: "목소리 좋다. 다음은 이야기."','구름이 쪽지를 오래 봐요. "1994년…? 우리 방송부 선배?"','2교시 끝!','방송실 책상 위 복습 노트북에서 단어를 다시 볼 수 있어요.'];
+const DONE=[{say:'사연함에 카세트가 하나 들어 있어요.',set:()=>{f().quiet=1}},'"1994 방송부 · 복숭아" 쪽지: "목소리 좋다. 다음은 이야기."','구름이 쪽지를 오래 봐요. "1994년…? 우리 방송부 선배?"','2교시 끝!','방송실 책상 위 복습 노트북에서 단어를 다시 볼 수 있어요.'];
 
 function questText(){
  const F=f();
