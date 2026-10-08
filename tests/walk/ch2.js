@@ -13,8 +13,7 @@
  {check:()=>state.f.metHari&&state.items.includes('하리 명찰'),msg:'name tag dropped'},
  {talk:'jung',wrong:true,shotBefore:'04-teachers-office',shotTap:'04b-tap-word'},
  {check:()=>state.f.knowHari,msg:'teacher names her'},
- {talk:'teaser'},
- {talk:'chanG',wrong:true,shotBefore:'05-gym'},
+ {greet:'chanG',wrong:true,shotBefore:'05-gym'},  // walking into the gym, 찬 talks first
  {talk:'teaser2'},
  {talk:'teaser',wrong:true,shotChoice:'06-stand-up',shotSay:{text:'공을 들고 나갔어요',name:'06b-seniors-last-line'}},
  {check:()=>ghosts.length===2,msg:'both 선배 walk out of the gym'},

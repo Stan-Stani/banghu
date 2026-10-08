@@ -118,6 +118,8 @@ window.__play=async function(steps){
   try{
    if(s.intro){log('== intro');await until(()=>!!dlg,1500);if(s.shot)await shot(s.shot);await finishDialog()}
    else if(s.talk)await talk(s.talk,s);
+   else if(s.greet){const n=C.NPC[s.greet];await goZone(n.zone);await until(()=>!!dlg,1500);  // a room's greeting: they talk first, as you walk in
+    check(!!dlg&&dlg.npc===n,`${s.greet} greets you walking into ${n.zone}`);log(`== ${n.name} greets you [${C.questText()}]`);if(s.shotBefore)await shot(s.shotBefore);await finishDialog(s)}
    else if(s.inspect)await inspect(...s.inspect,s);
    else if(s.bump)await bump(...s.bump);
    else if(s.look){ // walk to the nearest object that says something (things or spots) in that zone, A → its blurb

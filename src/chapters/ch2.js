@@ -197,7 +197,7 @@ const ZONES={...SCHOOL({open:['hall2','music','gym','bcast'],gate:{to:'street',x
    'd':['드럼이에요. 치고 싶지만… 쉿.','심벌이 반짝반짝해요.'],
    'x':['악기 선반이에요. 리코더하고 우쿨렐레가 있어요.','탬버린이 하나 있어요. 방울이 하나 빠졌어요.']},
   npcs:['hariM','tagM']},
- gym:{
+ gym:{greet:()=>!f().chanGym&&'chanG',  // 찬 at the door opens the gym scene as you walk in (the 선배 and 하리 can't be met first)
   things:{'#':['체육관 벽이에요. 공 자국이 많아요.','벽에 "느티고 화이팅!" 현수막이 있어요.'],
    'W':['높은 창문이에요. 햇빛이 길게 들어와요.','창문에 그물이 있어요. 공 때문이에요.'],
    'H':()=>['농구 골대예요. 그물이 반쯤 찢어졌어요.',f().chanGym?'골대가 높아요. 찬은 한 번도 못 넣었대요.':'골대가 아주 높아요. 공이 저기까지 갈까요?'],  // 찬 only once you've talked to him here

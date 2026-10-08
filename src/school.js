@@ -549,7 +549,7 @@ globalThis.SCHOOL=function(spec){
   for(const c in z.things)if(!z.map.some(row=>row.includes(c)))delete z.things[c];  /* painted over */
   if(o.rooms)z.rooms=o.rooms;
   z.things={...z.things,...(o.things||{})};z.spots=o.spots||{};z.npcs=o.npcs||[];
-  for(const k of ['dark','slow','outdoor'])if(k in o)z[k]=o[k];
+  for(const k of ['dark','slow','outdoor','greet'])if(k in o)z[k]=o[k];
   out[id]=z;
  }
  return out;
