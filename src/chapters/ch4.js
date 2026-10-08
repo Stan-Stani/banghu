@@ -19,7 +19,7 @@ const DICT={
  '합격하다':{k:'시험을 잘 봐서 그 학교에 들어갈 수 있어요. 떨어지다의 반대.',e:'to pass (an exam), to get accepted',ex:'누나가 대학에 합격했어요.',hj:'合格 · 合 = 맞다 · 조합(組合)의 합'},
  '목표':{k:'앞으로 꼭 하고 싶은 일. 예: "올해 목표는 책 열 권!"',e:'goal, target',ex:'올해 목표는 책 열 권 읽기예요.',hj:'目標 · 目 = 눈 · 標 = 표시(標示)의 표'},
  '꿈':{k:'자면서 보는 것. 또, 나중에 정말 하고 싶은 일.',e:'dream',ex:'제 꿈은 라디오 디제이예요.'},
- '이루다':{k:'원하던 일이 진짜가 되게 해요. 예: 꿈을 이뤘어요.',e:'to achieve, to make (a dream) come true',ex:'열심히 해서 꿈을 이뤘어요.'},
+ '이루다':{k:'원하던 일이 진짜가 되게 해요.',e:'to achieve, to make (a dream) come true',ex:'열심히 해서 꿈을 이뤘어요.'},
  '방법':{k:'어떻게 하는지. 예: 라면 끓이는 방법.',e:'way, method',ex:'좋은 방법이 생각났어!',hj:'方法 · 法 = 맞춤법(法)의 법'},
  '회로':{k:'기계 안에서 전기가 지나가는 길.',e:'(electric) circuit',ex:'회로가 타서 라디오가 안 켜져요.',hj:'回路 · 路 = 길 · 도로(道路)의 로'},
  '기술':{k:'무엇을 잘 만들거나 고치는 힘.',e:'skill, technique; technology',ex:'삼촌은 차 고치는 기술이 있어요.',hj:'技術 · 術 = 미술(美術)의 술'},
@@ -531,6 +531,8 @@ const NPC={
  silJang:{name:'학원 실장님',zone:'hagwon',x:2,y:2,dir:'down',look:LOOK.sil,
   script:()=>{
    if(!ads())return [{say:'어서 와요. 상담 왔어요?'},{who:'나',say:'아니요. 저, 마태식 선배 있어요?'},{say:'마태식 학생? 지금 수업 중이에요.'},{say:'조금 이따 와요. 쉬는 시간에요.'}];
+   if(f().promise)return [{say:'마태식 학생은 오늘 쉬는 날이에요.'},{say:'요즘 얼굴이 밝아졌어요. 좋은 일 있나?'}];
+   if(f().fixed)return [{say:'마태식 학생 왔어요. 지금 수업 중이에요.'},{say:'딱 이십 분이었어요. 대단해요.'}];
    if(f().taesikCome)return [{say:'마태식 학생, 이십 분 뒤에 꼭 와야 해요!',face:'angry'}];
    return [{who:'나',say:'저, 마태식 선배 있어요?'},{say:'지금 쉬는 시간이에요. 저쪽이요.'},{say:'십 분이에요. 딱 십 분.'}]},
   talk:()=>[]},
@@ -649,7 +651,8 @@ const NPC={
     {who:'…',say:'하리 노래가 시작돼요. 이번엔 목소리가 안 떨려요.',set:()=>{f().singing=1}},
     {who:'…',say:'구름이 마이크를 끄고 작게 말해요.'},
     Q.live[0],
-    {who:'…',say:'노래가 끝났어요. 박수 소리가 끝이 없어요.',set:()=>{f().singing=0}},
+    {who:'…',say:'한 곡이 끝나요. 하리가 웃고, 바로 두 번째 곡!'},
+    {who:'…',say:'두 곡이 다 끝났어요. 박수 소리가 끝이 없어요.',set:()=>{f().singing=0}},
     {who:'…',say:'그때, 교장 선생님이 무대 앞으로 와요.',set:()=>{f().live=1}}];
    return null},
   talk:()=>[]},
@@ -683,7 +686,7 @@ const NPC={
 
  crowd2:{name:'3학년 학생',zone:'yard',x:15,y:10,dir:'up',look:LOOK.crowd2,banmal:1,
   hide:()=>!f().clue,
-  script:()=>f().done?[{say:'고3인데 오늘 하루는 웃었어. 고마워.',face:'happy'}]:[{say:'고3이라 잠깐만 구경할 거야.'},{say:'…근데 노래 좋으면 끝까지 볼 거야.'}],
+  script:()=>f().done?[{say:'고3인데 오늘 하루는 웃었어. 고마워.',face:'happy'}]:f().live?[{say:'노래 좋았어. 그래서 끝까지 볼 거야.'}]:[{say:'고3이라 잠깐만 구경할 거야.'},{say:'…근데 노래 좋으면 끝까지 볼 거야.'}],
   talk:()=>[]},
 
  jungY:{name:'정 선생님',zone:'yard',x:8,y:11,dir:'up',look:LOOK.jung,
@@ -763,7 +766,7 @@ const NPC={
   talk:()=>[{say:'무대 근처는 위험해요. 조심해요.'},{say:'축제 날 비만 안 오면 좋겠네요.'}]},
  xY3:{name:'2학년 학생',zone:'yard',x:3,y:10,dir:'down',look:LOOK.xY3,banmal:1,
   hide:()=>!f().promise,
-  script:()=>f().clue?[{say:'떡볶이 다 팔렸어! 대박!',face:'happy'},{say:'이제 방송 들으러 가야지.'}]:null,
+  script:()=>f().live?[{say:'떡볶이 다 팔렸어! 대박!',face:'happy'},{say:'방송은 여기서도 다 들렸어.'}]:f().clue?[{say:'떡볶이 다 팔렸어! 대박!',face:'happy'},{say:'이제 방송 들으러 가야지.'}]:null,
   talk:()=>[{say:'떡볶이 부스 준비 중!'},{say:'점심때 열어. 줄 서.'}]},
  xY4:{name:'2학년 학생',zone:'yard',x:6,y:10,dir:'down',look:LOOK.xY4,banmal:1,
   hide:()=>!f().promise,
@@ -775,7 +778,7 @@ const NPC={
   talk:()=>[{say:'여기 자리 좋다. 무대가 잘 보여.'}]},
  xY6:{name:'2학년 학생',zone:'yard',x:20,y:10,dir:'up',look:LOOK.xY6,banmal:1,
   hide:()=>!f().clue,
-  script:()=>f().done?[{say:'월요일 점심 방송도 들을 거야.'}]:null,
+  script:()=>f().done?[{say:'월요일 점심 방송도 들을 거야.'}]:f().live?[{say:'그 1학년 노래 들었어? 진짜 좋았어.',face:'happy'}]:null,
   talk:()=>[{say:'방송부 노래한대. 그 1학년!'},{say:'목소리 진짜 좋아. 기대해.',face:'happy'}]},
  xY7:{name:'1학년 학생',zone:'yard',x:22,y:10,dir:'up',look:LOOK.xY7,
   hide:()=>!f().clue,
