@@ -8983,8 +8983,8 @@
 "k": "몰래 밖으로 나가요."
 },
 "빠지다": {
-"e": "to come out / come off (air out of a ball, a part off something); to fall into (water, a hole)",
-"k": "① 안에 있던 것이 나가요. 붙어 있던 것이 떨어져요. (공에 바람이 빠졌어요. 방울이 빠졌어요.) ② 물이나 구멍 속으로 떨어져요."
+"e": "to come out / come off (air out of a ball, a part off something); to fall into (water, a hole); to skip, miss (a class, a meeting)",
+"k": "① 안에 있던 것이 나가요. 붙어 있던 것이 떨어져요. (공에 바람이 빠졌어요. 방울이 빠졌어요.) ② 물이나 구멍 속으로 떨어져요. ③ 수업이나 모임에 안 가요. (오늘 수업은 빠질게.)"
 },
 "빡빡하다": {
 "e": "to be tight, strict, demanding",
@@ -19492,5 +19492,17 @@
 "킥킥": {
 "e": "(giggling, snickering — a stifled laugh)",
 "k": "웃음을 참으면서 작게 웃는 소리."
+},
+"꾸벅": {
+"e": "(bowing the head quickly, a small bow)",
+"k": "고개를 앞으로 숙였다가 드는 모양. 꾸벅 인사해요."
+},
+"입장": {
+"e": "position, standpoint, situation (one is in)",
+"k": "그 사람이 서 있는 자리나 형편. 제 입장이 어려워요."
+},
+"조그맣다": {
+"e": "small, tiny",
+"k": "아주 작아요. 조그만 가방."
 }
 }

@@ -117,11 +117,11 @@ const Q={ // NPC questions, kept here so review can reuse them. who:'나' = the 
  ],
  tae:[
   {w:'생초보',ask:'그때는 선 하나 붙이는 것도 못 했어. 완전 ___였어.',opts:[['생초보',1],['생일',0,'하하, 생일은 태어난 날이야. 아무것도 모르면 "생초보".'],['선배',0,'선배는 나보다 먼저 시작한 사람이야. 아무것도 모르면 "생초보".']]},
-  {w:'기술',gram:1,ask:'근데 매일 ___ 늘었어.',opts:[['고치다 보니까',1],['고치면 돼서',0,'"-면 되다"는 그것만 하면 될 때야. 하다가 늘었으면 "고치다 보니까".'],['고치해 보니까',0,'"고치다"에 "하다"는 안 붙어. 하다가 늘었으면 "고치다 보니까".']]},
+  {w:'기술',gram:1,ask:'근데 매일 ___ 늘었어.',opts:[['고치다 보니까',1],['고치면 돼서',0,'"-면 되다"는 그것만 하면 될 때야. 하다가 늘었으면 "고치다 보니까".'],['고치기 전에',0,'"-기 전에"는 하기 전이야. 하다가 늘었으면 "고치다 보니까".']]},
   {w:'기술',who:'나',ask:'선배는 고치는 ___이 있잖아요. 부탁드려요.',opts:[['기술',1],['미술',0,'미술은 그림 그리는 과목이야. 잘 고치는 힘은 "기술".'],['기숙사',0,'기숙사는 학생들이 사는 집이야. 잘 고치는 힘은 "기술".']]},
  ],
  fix:[
-  {w:'회로',who:'마태식',ask:'…역시. ___가 까맣게 탔어. 전기가 못 지나가.',opts:[['회로',1],['회의',0,'회의는 사람들이 모여서 이야기하는 거야. 전기가 지나가는 길은 "회로".'],['도로',0,'도로는 차가 다니는 길이야. 기계 안의 전기 길은 "회로".']]},
+  {w:'회로',who:'마태식',ask:'…역시. 퓨즈가 타서 ___가 끊겼어. 전기가 못 지나가.',opts:[['회로',1],['회의',0,'회의는 사람들이 모여서 이야기하는 거야. 전기가 지나가는 길은 "회로".'],['도로',0,'도로는 차가 다니는 길이야. 기계 안의 전기 길은 "회로".']]},
   {w:'회로',gram:1,who:'나',ask:'퓨즈만 ___? 진짜 그게 다예요?',opts:[['바꾸면 돼요',1],['바꾸다 보니',0,'"-다 보니"는 하다가 알게 된 일이야. 그것만 하면 될 때는 "바꾸면 돼요".'],['바꿀게요',0,'"-ㄹ게요"는 내가 약속할 때야. 그것만 하면 될 때는 "바꾸면 돼요".']]},
  ],
  phone:[
@@ -152,12 +152,12 @@ const Q={ // NPC questions, kept here so review can reuse them. who:'나' = the 
   {ask:'이번 ___는 놓치면 안 돼요!',opts:[['기회',1],['기억',0,'기억은 머릿속에 남은 거예요. 딱 좋은 때는 "기회".']]},
   {ask:'지각했어요. 반장이 ___을 걷어요.',opts:[['벌금',1],['용돈',0,'용돈은 부모님이 주는 돈이에요. 규칙을 어기면 "벌금".']]},
   {ask:'오늘 떡볶이는 내가 ___!',opts:[['쏠게',1],['쓸게',0,'쓰다는 글씨를 쓰는 거예요. 사 주면 "쏠게".']]},
-  {ask:'고장 난 마이크는 선배가 ___ 돼요.',opts:[['고쳐야',1],['고치해야',0,'"고치다"에 "하다"는 없어요. 고치다 → "고쳐야 돼요".']]},
+  {ask:'고장 난 마이크는 선배가 ___ 돼요.',opts:[['고쳐야',1],['고치러',0,'"-러"는 "가다, 오다" 앞에 써요. 해야 하면 "고쳐야 돼요".']]},
   {ask:'숙제는 내일까지 ___하세요.',opts:[['제출',1],['출발',0,'출발은 떠나는 거예요. 숙제를 내면 "제출".']]},
  ],
 };
 
-const ITEMS={'광고 포스터':'"축제 생방송! 토요일 두 시, 운동장 무대. —방송부"','부품':'편의점 사장님이 준 퓨즈 두 개. 쪼그맣고 은색이에요.',
+const ITEMS={'광고 포스터':'"축제 생방송! 토요일 두 시, 운동장 무대. —방송부"','부품':'편의점 사장님이 준 퓨즈 두 개. 조그맣고 은색이에요.',
  '앨범 사진':'찬이 폰으로 찍은 사진. "1994 방송부 · 디제이 한복순 (복숭아)"'};
 const f=()=>state.f;
 const hasItem=i=>state.items.includes(i);
@@ -214,7 +214,7 @@ const ZONES={...SCHOOL({open:['bcast','hall2','music','library'],gate:{to:'town'
    'm':()=>f().clue?'무대용 기계예요. 선이 방송실까지 길게 가요.':'빈 탁자예요. "방송부 자리"라고 써 있어요.',
    'k':x=>x<4?(f().clue?'1반 떡볶이 부스예요. 줄이 길어요.':'부스를 세우는 중이에요. 천막이 노래요.'):(f().clue?'3반 복숭아 주스 부스예요. 매점 이모 작품이래요.':'부스예요. "2학년 3반"이라고 써 있어요.')},
   npcs:['guard','setup','daonS','gureumS','hariS','chanS','taesikS','principalS','crowd1','crowd2','jungY','xY1','xPE','xY3','xY4','xY5','xY6','xY7','xPE2']}}}),
- town:{name:'동네 상가',reg:'NEIGHBORHOOD SHOPS',outdoor:1,
+ town:{name:'동네 상가',reg:'LOCAL SHOPS',outdoor:1,
   legend:{'R':{tile:'roof'},'K':{tile:'sign'},'O':{tile:'shopWin'},'e':{tile:'shopDoor'},'h':{tile:'brick'},'A':{tile:'acad'},'H':{tile:'acadDoor',walk:1},
    ',':{tile:'pave',walk:1},'r':{tile:'road'},'z':{tile:'crosswalk',walk:1},'l':{tile:'lamp'},'t':{tile:'streetTree'},'B':{tile:'busStop'},
    'f':{tile:'sfence'},'G':{tile:'sgate',walk:1}},
@@ -309,7 +309,7 @@ const LOOK={
  xY3:{hair:'#332824',skin:'#E0B28C',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#B8433A',style:'bun',lashes:1,lips:'#C9707A'},
  xY4:{hair:'#3B2C24',skin:'#F0C8A6',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#B8433A',style:'short'},
  xY5:{hair:'#241E20',skin:'#DDAE88',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#B8433A',style:'long',lashes:1,lips:'#CC7680'},
- xY6:{hair:'#4A382E',skin:'#D29C76',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#B8433A',style:'spiky'},
+ xY6:{hair:'#1C1A1C',skin:'#D29C76',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#B8433A',style:'short'},  // not spiky brown: that's 찬
  xY7:{hair:'#2A2426',skin:'#F2CEAE',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#3F7D5A',style:'bob',lashes:1,lips:'#D27C86'},
  xT1:{hair:'#2E2420',skin:'#E4B894',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#B8433A',style:'short'},
  xT2:{hair:'#1E1A1C',skin:'#EAC2A0',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#B8433A',style:'long',lashes:1,lips:'#C46E78'},
@@ -338,6 +338,7 @@ const NPC={
    {say:'어젯밤에 잠도 못 잤어. 계속 생각했어.'},
    Q.gureum[1],
    {say:'근데 나는 기계를 몰라. 노래만 알아.',face:'sad'},
+   {who:'…',say:'구름 눈이 빨개요. 금방 울 것 같아요.'},
    {say:'다온이가 무슨 방법이 있대. 저기.',award:['절박하다'],set:()=>{f().metG=1}}]},
 
  daonA:{name:'오다온',zone:'bcast',x:9,y:5,dir:'left',look:LOOK.daon,badge:['방법','쫓겨나다'],banmal:1,
@@ -363,14 +364,14 @@ const NPC={
    Q.daon[2],
    {w:'방법',who:'나',build:['그게','제일 좋은','방법이야']},
    {who:'백구름',say:'3학년 선배? 무, 무서운데…',face:'surprised'},
-   {say:'요컨대 네가 가서 부탁하면 돼. 가.',face:'happy',award:['방법','쫓겨나다'],set:()=>{f().needFix=1}}]},
+   {say:'구름이는 안 되겠다. 그러니까 네가 가서 부탁해.',face:'happy',award:['방법','쫓겨나다'],set:()=>{f().needFix=1}}]},
 
  /* ---------- 복도 · 교무실 · 교장실 ---------- */
- taesikO:{name:'마태식',zone:'hall',x:2,y:2,dir:'right',look:LOOK.taesik,banmal:1,
-  hide:()=>!!f().counsel,
+ taesikO:{name:'마태식',zone:'hall',x:3,y:2,dir:'right',look:LOOK.taesik,banmal:1,  // in 상담 right beside 정 선생님; walks out mid-scene
+  hide:()=>!!f().counsel||!!f().taesikOut,
   talk:()=>[{say:'…지금 상담 중이야. 나중에.'},{who:'…',say:'까만 롱패딩. 눈 밑이 까매요. 엄청 피곤해 보여요.'}]},
 
- jung:{name:'정 선생님',zone:'hall',x:6,y:2,dir:'left',look:LOOK.jung,badge:['상담','대학','목표','평가','빡빡하다'],
+ jung:{name:'정 선생님',zone:'hall',x:4,y:2,dir:'left',look:LOOK.jung,badge:['상담','대학','목표','평가','빡빡하다'],
   hide:()=>!!f().clue, // festival afternoon: she is at the stage (jungY)
   get after(){const F=f();   // the review line follows the days: after school, the fix, festival morning
    if(F.warned)return ['교장 선생님 얘기 들었어요. 방송 잘하면 돼요.','저도 맨 앞에서 들을게요.'];
@@ -381,10 +382,10 @@ const NPC={
   status:()=>!f().needFix?null:undefined,
   script:()=>{
    if(!f().needFix)return [{say:'방송실 기계가 고장 났다면서요? 큰일이네요.',face:'sad'},{say:'구름 학생이 아침부터 울상이에요.'}];
-   if(has('상담')&&!ads())return [{say:'학원은 동네 상가에 있어요.'},{say:'운동장으로 나가서 정문 밖이요.'}];
+   if(has('상담')&&!ads())return [{say:'학원은 동네 상가에 있어요.'},{say:'운동장으로 나가서 정문 밖에 있어요.'}];
    return null},
   talk:()=>[
-   {who:'…',say:'교무실. 정 선생님이 3학년 선배랑 앉아 있어요.'},
+   {who:'…',say:'교무실. 정 선생님이 3학년 선배랑 이야기하고 있어요.'},
    {say:'아, 왔어요? 잠깐만 기다려요.'},
    Q.jung[0],
    Q.jung[1],
@@ -394,11 +395,11 @@ const NPC={
    Q.jung[3],
    {say:'괜찮아요. 열심히 하다 보면 올라요.',face:'happy'},
    {who:'마태식',say:'…네. 저 이제 가 볼게요.'},
-   {who:'…',say:'선배가 일어나서 나가요. 말할 틈이 없어요.'},
+   {who:'…',say:'선배가 꾸벅 인사하고 나가요. 말할 틈이 없어요.',set:()=>{f().taesikOut=1},leave:{npc:'taesikO',to:[4,5]}},
    {say:'방송실 기계 때문에 왔죠? 다온이한테 들었어요.'},
    Q.jung[4],
    {say:'{방과 후|방과 후}에는 바로 학원에 가요.'},
-   {say:'학원은 동네 {상가|상가}에 있어요. 운동장 정문 밖이요.'},
+   {say:'학원은 동네 {상가|상가}에 있어요. 정문 밖이에요.'},
    {say:'수업 끝나고 가 봐요. 무리하지 말고요.'},
    {who:'…',say:'오후 수업이 다 끝났어요. 딩동댕동!',award:['상담','대학','목표','평가','빡빡하다'],set:()=>{f().counsel=1}},
     {who:'…',say:'찬한테 문자가 왔어요. "포스터 들고 동네 상가 왔어! 하리도 있어. 빨리 와!"'}]},
@@ -429,7 +430,7 @@ const NPC={
    {say:'오늘 축제 방송, 저도 들을 거예요.'},
    {say:'잘하면 방송실은 그대로예요. 못하면…',face:'think'},
    {who:'남궁찬',say:'…방송실에서 쫓겨나는 거죠?',face:'sad'},
-   {say:'그래요. 미안해요. 아시다시피 저도 어려워요.',face:'sad'},
+   {say:'그래요. 미안해요. 저도 입장이 어려워요.',face:'sad'},
    Q.pr[1],
    {say:'자, 저는 무대에 먼저 가 볼게요.'},
    {who:'…',say:'교장 선생님이 나갔어요. 교장실이 조용해요.',award:['심화반','표정'],set:()=>{f().warned=1},leave:{npc:'principal',to:[9,8]}}]},
@@ -457,12 +458,12 @@ const NPC={
   status:()=>!f().gotPosters?'todo':null,
   script:()=>{
    if(!f().gotPosters)return null;
-   if(!ads())return [{say:'문구점, 분식집, 편의점! 세 곳이야.'},{say:'하나 붙일 때마다 하리가 인사해. 귀엽지?'}];
+   if(!ads())return [{say:'문구점, 분식집, 편의점! 세 곳이야.'},{say:'나는 하리 옆에 있을게. 얘 또 숨어.'}];
    if(f().fixed)return [{say:'기계 고쳤어? 역시 태식 선배!',face:'happy'},{say:'축제 날 동네 사람 다 올 거야.'}];
    if(f().taesikCome)return [{say:'헉, 태식 선배다! 진짜 데려왔어?',face:'surprised'},{say:'빨리 학교 가. 쉬는 시간 짧대.'}];
    return [{say:'끝? 대박. 이제 동네가 다 알겠다.',face:'happy'},{say:'태식 선배? 학원 건물은 저기 오른쪽 끝이야.'}]},
   talk:()=>[
-   {say:'왔다! 광고 포스터 백 장 뽑았어.',face:'happy'},
+   {say:'왔다! 광고 포스터 세 장 뽑았어.',face:'happy'},
    {say:'다온이가 동네 가게마다 붙이래.'},
    {say:'근데 사장님한테 말 걸면 하리가 자꾸 숨어.',face:'think'},
    {who:'유하리',say:'저, 저는 사장님들한테 말을 못 걸겠어요…',face:'sad'},
@@ -473,10 +474,10 @@ const NPC={
   hide:()=>!f().counsel||!!f().promise,
   script:()=>{
    if(!f().gotPosters)return [{say:'선배, 저 진짜 못 하겠어요…',face:'sad'},{say:'…포스터는 찬 선배가 가지고 있어요.'}];
-   if(!ads())return [{say:'사장님들 무서워요. 그래도 인사는 할게요.'}];
+   if(!ads())return [{say:'사장님들 무서워요. 저는 여기서 응원할게요.'}];
    if(f().fixed)return [{say:'기계 고쳤어요? 다행이다…',face:'happy'},{say:'축제 날 저 두 곡 할 거예요.'}];
    if(f().taesikCome)return [{say:'선배, 기계 꼭 고쳐 주세요.'},{say:'저희도 곧 학교에 갈게요.'}];
-   return [{say:'다 붙였어요! 말하다 보니까 안 무서웠어요.',face:'happy'}]},
+   return [{say:'다 붙였어요? 보다 보니까 저도 할 수 있을 것 같아요.',face:'happy'}]},
   talk:()=>[]},
 
  mun:{name:'문구점 사장님',zone:'town',x:3,y:3,dir:'down',look:LOOK.mun,badge:['광고'],
@@ -485,13 +486,13 @@ const NPC={
   script:()=>!f().shopM&&!hasItem(POS)?[{say:'어서 와요. 공책 사러 왔어요?'},{say:'…그냥 구경해도 돼요. 괜찮아요.'}]:null,
   talk:()=>[
    {say:'어머, 느티고 학생들이네. 무슨 일이에요?'},
-   {who:'유하리',say:'저, 저희 방송부 포스터예요…',face:'sad'},
+   {who:'나',say:'저희 방송부 포스터예요. 축제 생방송이요.'},
    Q.mun[0],
    {say:'우리 가게 창문에 붙여요. 제일 잘 보여요.'},
    Q.mun[1],
-   {who:'…',say:'문구점 창문에 포스터를 붙였어요.',set:()=>{f().shopM=1}},
+   {who:'…',say:'문구점 창문에 포스터를 붙였어요.'},
    {who:'…',say:'세 곳 다 붙였어요! 포스터가 이제 없어요.',take:[POS],when:()=>shops()===2},
-   {say:'축제 날 우리 딸도 보러 갈 거예요.',face:'happy',award:['광고']}]},
+   {say:'축제 날 우리 딸도 보러 갈 거예요.',face:'happy',award:['광고'],set:()=>{f().shopM=1}}]},
 
  bun:{name:'분식집 아저씨',zone:'town',x:11,y:3,dir:'down',look:LOOK.owner,badge:['동네'],
   after:'떡볶이 먹고 가요. 동네 학생 할인!',
@@ -502,9 +503,9 @@ const NPC={
    {say:'포스터? 줘 봐요. 나 여기서 이십 년 장사했어요.'},
    Q.bun[0],
    Q.bun[1],
-   {who:'…',say:'분식집 창문에 포스터를 붙였어요.',set:()=>{f().shopB=1}},
+   {who:'…',say:'분식집 창문에 포스터를 붙였어요.'},
    {who:'…',say:'세 곳 다 붙였어요! 포스터가 이제 없어요.',take:[POS],when:()=>shops()===2},
-   {say:'축제 날 떡볶이 들고 구경 갈게요!',face:'happy',award:['동네']}]},
+   {say:'축제 날 떡볶이 들고 구경 갈게요!',face:'happy',award:['동네'],set:()=>{f().shopB=1}}]},
 
  pyeon:{name:'편의점 사장님',zone:'town',x:18,y:3,dir:'down',look:LOOK.pyeon,
   status:()=>!f().shopP&&hasItem(POS)?'todo':null,
@@ -513,15 +514,15 @@ const NPC={
    if(!hasItem(POS))return [{say:'어서 오세요. 컵라면은 저쪽이에요.'}];
    return [
     {say:'어서 오세요. …포스터요? 방송부?'},
-    {who:'남궁찬',say:'네! 축제 생방송이요! 근데 기계가 탔어요.'},
+    {who:'나',say:'네! 축제 생방송이요. 근데 방송 기계가 탔어요.'},
     {say:'탔다고요? 펑 소리 나고 연기?',face:'surprised'},
     {say:'그럼 {퓨즈|퓨즈}가 나간 거예요.',face:'think'},
     Q.pyeon[0],
     {say:'나 옛날에 {전파상|전파상} 했어요. 이거 가져가요.',face:'happy',give:PART},
-    {who:'…',say:'쪼그만 퓨즈 두 개. 은색이에요.'},
-    {who:'…',say:'편의점 창문에 포스터를 붙였어요.',set:()=>{f().shopP=1}},
+    {who:'…',say:'조그만 퓨즈 두 개. 은색이에요.'},
+    {who:'…',say:'편의점 창문에 포스터를 붙였어요.'},
     {who:'…',say:'세 곳 다 붙였어요! 포스터가 이제 없어요.',take:[POS],when:()=>shops()===2},
-    {say:'근데 끼우는 건 기술이 필요해요. 조심해요.'}]},
+    {say:'근데 끼우는 건 기술이 필요해요. 조심해요.',set:()=>{f().shopP=1}}]},
   talk:()=>[]},
 
  /* ---------- 학원 ---------- */
@@ -550,7 +551,7 @@ const NPC={
    {say:'나 이제 생초보 아니야.',face:'happy'},
    Q.tae[2],
    {say:'…공대 가고 싶은 것도 그래서야.'},
-   {say:'좋아. 대신 이십 분이야. 쓸데없는 말 하지 마.'},
+   {say:'좋아. 다음 수업은 빠질게. 대신 이십 분이야.'},
    {say:'가자. 앞장서.',award:['생초보','기술'],set:()=>{f().taesikCome=1}}]},
 
  /* ---------- 방송실, the fix and the phone call ---------- */
@@ -570,10 +571,10 @@ const NPC={
     Q.phone[1],
     Q.phone[2],
     {who:'…',say:'그리고 토요일. 축제 날 아침.'},
-    {who:'스피커',say:'방송부 학생들은 교장실로 오세요.'},
+    {who:'스피커',say:'방송부 학생들은 교장실로 오세요. 교무실 옆입니다.'},
     {say:'…교장실? 우리 뭐 잘못했어?',face:'surprised',award:['부모님','약속'],set:()=>{f().promise=1}}];
    if(f().warned)return [{say:'교장 선생님이 그랬어? …그럼 잘하면 돼.',face:'think'},{say:'나 무대 준비할게. 너도 와.'}];
-   if(has('부모님'))return [{say:'교장실… 너 먼저 가. 찬이는 벌써 갔대.',face:'sad'}];
+   if(has('부모님'))return [{say:'교장실… 교무실 옆이야. 너 먼저 가. 찬이는 벌써 갔대.',face:'sad'}];
    return null},
   talk:()=>[
    {who:'…',say:'방송실. 태식 선배가 기계 뚜껑을 열어요.'},
@@ -584,11 +585,12 @@ const NPC={
    {who:'마태식',say:'응. 그게 다야.'},
    {who:'…',say:'퓨즈를 선배한테 드렸어요.',take:[PART]},
    {who:'마태식',say:'이 쪼그만 게 기계를 살려. 웃기지?',face:'happy'},
+   {who:'…',say:'남은 퓨즈 하나는 기계 옆에 둬요. 다음에 또 쓸 거예요.'},
    {who:'…',say:'딸깍. …지지직. 램프에 빨간 불이 들어와요!'},
    {say:'켜, 켜졌어요! 선배, 대박이에요!',face:'surprised'},
    {w:'회로',who:'나',build:['회로를','고쳐 주셔서','고맙습니다']},
    {who:'마태식',say:'됐어. 나 학원 간다. …축제 날 올게.',face:'happy'},
-   {say:'축제 날 꼭 와요! 맨 앞자리예요!',face:'happy',award:['회로'],set:()=>{f().fixed=1}}]},
+   {say:'축제 날 꼭 오세요! 맨 앞자리예요!',face:'happy',award:['회로'],set:()=>{f().fixed=1}}]},
 
  /* ---------- 운동장 · 축제 ---------- */
  guard:{name:'박 경비 아저씨',zone:'yard',x:17,y:12,dir:'left',look:LOOK.guard,
@@ -636,7 +638,10 @@ const NPC={
     {who:'…',say:'구름 목소리가 운동장 끝까지 퍼져요.'},
     {who:'남궁찬',say:'오늘의 농담! 교장 선생님 최애 과일은?',face:'happy'},
     {who:'남궁찬',say:'…복숭아! 하하하!',face:'happy'},
-    {who:'…',say:'운동장이 한바탕 웃음바다예요.'},
+    {who:'…',say:'운동장이 한바탕 웃음바다가 돼요.'},
+    {say:'다음은 사연 코너! 오늘은 하리가 읽어요.',face:'happy'},  // the 사연 코너 from 3교시 (owner's call, review k3)
+    {who:'유하리',say:'"방송부 선배들, 점심 방송 매일 잘 듣고 있어요."',face:'think'},
+    {who:'유하리',say:'"오늘은 노래 꼭 들려주세요. —1학년 3반"',face:'happy'},
     {who:'유하리',say:'다음 곡… 제가 부를게요.',face:'think'},
     {who:'…',say:'하리 노래가 시작돼요. 이번엔 안 떨려요.'},
     {who:'…',say:'구름이 마이크를 끄고 작게 말해요.'},
@@ -698,7 +703,7 @@ const NPC={
    {say:'쪽지도, 카세트도, 편지도 다 저였어요.'},
    Q.prS[0],
    Q.prS[1],
-   {say:'이 방송실이 다시 살아나는 거. 그게 새 꿈이었어요.',face:'sad'},
+   {say:'방송실이 다시 살아나는 거. 그게 새 꿈이었어요.',face:'sad'},
    {say:'폐부 안내문은 미안해요. 학부모회 때문이었어요.',face:'sad'},
    {say:'그래서 몰래 쪽지를 썼어요. 여러분이 이기라고.'},
    {who:'…',say:'교장 선생님이 마이크 앞에 서요.'},
@@ -709,7 +714,7 @@ const NPC={
    {who:'…',say:'교장 선생님 표정이 소녀처럼 환해요.'},
    Q.prS[2],
    Q.prS[3],
-   {who:'마태식',say:'…네. 합격하면 방송으로 말할게요.',face:'happy'},
+   {who:'마태식',say:'…네. 합격하면 방송으로 말씀드릴게요.',face:'happy'},
    {say:'여기는 느티고 방송부. 삼십 년 만이네요.',face:'happy',award:['꿈','이루다','합격하다']},
    {who:'백구름',say:'내일 점심에도 들어 주세요.',face:'happy',set:()=>{f().done=1},finale:1}]},
 
@@ -802,10 +807,10 @@ function questText(){
  if(!F.fixed)return '방송실 · 기계 고치기';
  if(!F.promise)return '방송실 · 구름이랑 얘기하기';
  if(!F.warned)return '교장실 · 교장 선생님 만나기';
- if(!F.clue)return '교장실 · 찬이 뭘 찾았어요';
+ if(!F.clue)return '교장실 · 찬이랑 얘기하기';
  if(!F.ready)return '축제 무대 · 다온 만나기';
  if(!F.live)return '축제 무대 · 생방송 시작';
- return '축제 무대 · 교장 선생님';
+ return '축제 무대 · 교장 선생님 만나기';
 }
 
 /* ---------- school + neighbourhood tiles (shared look with 1–3교시) ---------- */
@@ -854,7 +859,7 @@ const VARIANTS={
  classWin:(X,Y,x,y)=>{face(X,Y);r(X+1,Y+1,14,9,'#F8F2E6');r(X+2,Y+2,12,7,'#C9D6CC');r(X+3,Y+6,4,2,'#C99A62');r(X+9,Y+6,4,2,'#C99A62');r(X+8,Y+2,1,7,'#F8F2E6');r(X+3,Y+3,3,2,BUNT[x%5])},  // festival bunting
  speaker:(X,Y,x,y,t)=>{face(X,Y);r(X+4,Y+1,8,7,'#D8D4CA');r(X+4,Y+1,8,1,'#ECE9E1');r(X+4,Y+8,8,1,'#9A968C');for(let i=0;i<3;i++)for(let j=0;j<2;j++)r(X+5+i*2,Y+3+j*2,1,1,'#7A766C');
   if(state.f.fixed){const p=Math.floor(t/250)%3;r(X+13,Y+3,1,3,p>0?'#E8962A':'#EDE3CF');r(X+14+(p>1?1:0),Y+2,1,5,p>1?'#E8962A':'#EDE3CF');r(X+2,Y+3,1,3,p>0?'#E8962A':'#EDE3CF')}},  // on air at the festival
- trophy:(X,Y,x,y)=>{checkF(X,Y,x,y);r(X+1,Y,14,16,'#7A5230');r(X+2,Y+1,12,6,'#5A3A20');r(X+2,Y+8,12,6,'#5A3A20');r(X+4,Y+3,3,4,'#E8B93A');r(X+5,Y+2,1,1,'#F7D98C');r(X+9,Y+4,3,3,'#C9C6C2');
+ trophy:(X,Y,x,y)=>{checkF(X,Y,x,y);r(X+1,Y,14,16,'#7A5230');r(X+2,Y+1,12,6,'#5A3A20');r(X+2,Y+8,12,6,'#5A3A20');r(X+4,Y+2,4,2,'#E8B93A');r(X+3,Y+2,1,2,'#C9982A');r(X+8,Y+2,1,2,'#C9982A');r(X+5,Y+4,2,1,'#E8B93A');r(X+5,Y+5,2,1,'#C9982A');r(X+4,Y+6,4,1,'#B88A2A');r(X+4,Y+2,1,1,'#F7D98C');r(X+10,Y+3,3,2,'#C9C6C2');r(X+11,Y+5,1,1,'#A8A6A2');r(X+10,Y+6,3,1,'#8E8C88');r(X+10,Y+3,1,1,'#ECEAE6');r(X+13,Y+1,1,3,'#8FA6B4');
   r(X+3,Y+10,2,4,'#3E5E8C');r(X+5,Y+10,2,4,'#B8433A');r(X+7,Y+11,2,3,'#7CB46A');if(x===14&&!state.f.clue)r(X+10,Y+9,3,5,'#E8DCC0');else r(X+10,Y+10,3,4,'#F4F1E6')},  // the 1994 trophy
  shoes:(X,Y,x,y)=>{face(X,Y);r(X,Y,16,16,'#B9905E');r(X,Y,16,1,'#D2A970');const h=hash(x,y);
   for(let i=0;i<3;i++)for(let j=0;j<2;j++){r(X+1+j*8,Y+1+i*5,6,4,'#7E5A34');if((h+i+j)%4)r(X+2+j*8,Y+3+i*5,4,2,(h+i)%3?'#F2F0EA':'#5A8FB0')}},  // festival flyers
@@ -927,7 +932,7 @@ const TILES={...SCHOOL_TILES,...VARIANTS,
   for(let i=5;i<14;i+=3)r(X+i,Y+1,1,5,d);r(X+11,Y+9,1,3,'#2B2E36')},
  brick:(X,Y,x,y)=>{r(X,Y,16,16,'#A8644A');for(let j=3;j<16;j+=4){r(X,Y+j,16,1,'#8E5038');const o=(j>>2)%2?4:0;r(X+o,Y+j-3,1,3,'#8E5038');r(X+o+8,Y+j-3,1,3,'#8E5038')}},
  acad:(X,Y,x,y,t)=>{r(X,Y,16,16,'#B9BEC8');r(X,Y,16,1,'#D2D6DE');if(x===22)r(X,Y,1,16,'#8E94A0');if(x===27)r(X+15,Y,1,16,'#8E94A0');
-  if(y===0){r(X,Y+2,16,9,'#2E5A9A');r(X,Y+2,16,1,'#4A78B8');r(X,Y+10,16,1,'#1E3E6E');if(x===24||x===25){r(X+3,Y+4,10,1,'#F7F3E8');r(X+3,Y+6,7,1,'#F7F3E8');r(X+3,Y+8,9,1,'#F2C46B')}else{r(X+5,Y+4,6,5,'#F7F3E8');r(X+7,Y+5,2,3,'#2E5A9A')}r(X,Y+12,16,1,'#8E94A0')}
+  if(y===0){r(X,Y+1,16,11,'#2E5A9A');r(X,Y+1,16,1,'#4A78B8');r(X,Y+11,16,1,'#1E3E6E');SIGN_TEXT(X,Y,x,22,27,2,'느티 수학 학원','#F7F3E8');r(X,Y+12,16,1,'#8E94A0')}  // the 학원's name, like the shops'
   else{r(X+2,Y+2,12,9,'#3E4A6E');const on=(hash(x,y)+Math.floor(t/3000))%5;r(X+3,Y+3,10,7,on?'#F7E7B0':'#8E9AB8');r(X+8,Y+3,1,7,'#3E4A6E');r(X+3,Y+6,10,1,'#3E4A6E');
    if(y===2)r(X,Y+13,16,3,'#8E94A0')}},
  acadDoor:(X,Y,x,y)=>{paveF(X,Y,x,y);r(X,Y,16,16,'#B9BEC8');r(X+1,Y+1,14,15,'#3E4A5E');r(X+2,Y+2,12,14,'#A9C8E0');r(X+3,Y+3,2,8,'#D8EAF6');const L=at(x-1,y)!=='H';r(L?X+15:X,Y+1,1,15,'#3E4A5E');r(L?X+12:X+3,Y+8,1,3,'#2B2E36')},
