@@ -39,7 +39,7 @@ const STREET={pal:{L:'rgba(60,66,72,.55)',k:'#3C4248',Q:'#6E8FB0',b:'#7E3E2E',B:
 /* a name plate on the wall beside a door, spread over the run of plate tiles (2 tiles: room for 3 syllables) */
 function roomPlate(X,Y,x,y,text){face(X,Y);const c=at(x,y);let a=x,b=x;while(at(a-1,y)===c)a--;while(at(b+1,y)===c)b++;const L=x===a,R=x===b;
  r(X+(L?2:0),Y+3,16-(L?2:0)-(R?2:0),12,'#8A8E96');r(X+(L?3:0),Y+4,16-(L?3:0)-(R?3:0),10,'#F4F1E6');SIGN_TEXT(X,Y,x,a,b,4,text,'#2F3A44')}
-const WALLISH=new Set(['wall','board','timetable','sideWin','streetWin','hallWin','classWin','notice','speaker','classDoor','exitDoor','cafDoor','bcDoor','bcSign','classSign','officePlate','princPlate','stairSign','menu','snacks','rack','onair','poster','lockers','shoes','stairs','musicDoor','libDoor','sayeon','staffBoard','portraits','gymWin','hoop','bookWall','libWin']);
+const WALLISH=new Set(['sayeonSlot','wall','board','timetable','sideWin','streetWin','hallWin','classWin','notice','speaker','classDoor','exitDoor','cafDoor','bcDoor','bcSign','classSign','officePlate','princPlate','stairSign','menu','snacks','rack','onair','poster','lockers','shoes','stairs','musicDoor','libDoor','sayeon','staffBoard','portraits','gymWin','hoop','bookWall','libWin']);
 const wallish=(x,y)=>{const c=at(x,y);if(c==null)return true;const L=Z.legend[c];return !!L&&WALLISH.has(L.tile)};
 const TILES={
  wall:(X,Y,x,y)=>{if(!wallish(x,y+1)||(y===MH-1&&!wallish(x,y-1)))face(X,Y);else cap(X,Y,x,y)},
@@ -186,6 +186,7 @@ const TILES={
   if(H){r(X,Y+6,16,2,'#3E5A46');r(X,Y+11,16,2,'#3E5A46');for(let i=1;i<16;i+=4){r(X+i,Y+2,2,13,'#4F7A5E');r(X+i,Y+2,2,1,'#6E9A7A')}}
   else{r(X+7,Y,2,16,'#4F7A5E');r(X+6,Y,1,16,'#3E5A46');for(let j=2;j<16;j+=5)r(X+5,Y+j,6,2,'#3E5A46')}},
   gate:(X,Y,x,y)=>{sandF(X,Y,x,y);r(X,Y+3,16,2,'#2B2E36');r(X,Y+13,16,2,'#2B2E36');for(let i=1;i<16;i+=3)r(X+i,Y+3,1,12,'#3E4350');const L=at(x-1,y)!=='G';r(L?X:X+13,Y,3,16,'#9AA3AD');r(L?X:X+13,Y,3,1,'#C9D2DA')},
+  sayeonSlot:(X,Y,x,y)=>{face(X,Y);r(X+3,Y+2,10,8,'#C98F5A');r(X+3,Y+2,10,1,'#E3B07A');r(X+5,Y+3,6,2,'#F4F1E6');r(X+6,Y+4,4,1,'#E86D8A');r(X+5,Y+6,6,2,'#3E2A1A')},  // the 사연함's slot on the 1층 hall wall: letters drop into the box on the 방송실 side
   sayeon:(X,Y,x,y)=>{face(X,Y);r(X+3,Y+1,10,10,'#C98F5A');r(X+3,Y+1,10,2,'#E3B07A');r(X+5,Y+4,6,1,'#3E2A1A');r(X+5,Y+6,6,3,'#F4F1E6');r(X+6,Y+7,4,1,'#E86D8A');
   if(state.f.done){r(X+6,Y+2,4,2,'#2B2E36');r(X+7,Y+2,2,1,'#F2A38A')}},
   notebook:(X,Y,x,y,t)=>{r(X+1,Y+9,14,3,'#6E4A2E');r(X+1,Y+9,14,1,'#8A6040');r(X+2,Y+12,2,4,'#4A3020');r(X+12,Y+12,2,4,'#4A3020');
