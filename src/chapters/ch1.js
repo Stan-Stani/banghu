@@ -121,7 +121,7 @@ const BANK=[
 
 const Q={ // NPC questions, kept here so review can reuse them. who:'나' = the player says it; who:'…' = narration.
  jung:[
-  {w:'동갑',ask:'반 친구들도 열여덟 살, 나도 열여덟 살. 우리는 다 ___이에요.',opts:[['동갑',1],['동네',0,'동네는 사는 곳이에요. 나이가 같으면 "동갑".'],['동생',0,'동생은 나보다 어린 사람이에요. 다 열여덟 살이면 "동갑".']]},
+  {w:'동갑',who:'나',ask:'저도 열여덟 살이에요. 반 친구들하고 다 ___이에요.',opts:[['동갑',1],['동네',0,'동네는 사는 곳이에요. 나이가 같으면 "동갑".'],['동생',0,'동생은 나보다 어린 사람이에요. 다 열여덟 살이면 "동갑".']]},
   {w:'평범하다',ask:'그냥 아주 ___ 반이에요. 걱정 마요.',opts:[['평범한',1],['평평한',0,'평평하다는 땅이 판판할 때예요. 특별하지 않으면 "평범한".'],['평범해',0,'"반" 같은 말 앞에서는 "평범한"이에요.']]},
   {w:'반장',ask:'모르는 게 있으면 ___한테 물어보세요. 오다온이에요.',opts:[['반장',1],['교장',0,'교장 선생님은 학교에서 제일 높은 분이에요. 다온은 학생이에요. "반장".'],['반찬',0,'하하, 반찬은 밥하고 먹는 음식이에요! "반장".']]},
   {w:'교장',ask:'옆방은 ___ 선생님 방이에요. 지나갈 때 인사해요.',opts:[['교장',1],['교실',0,'교실은 공부하는 방이에요. 사람이 아니에요. "교장" 선생님.'],['반장',0,'반장은 학생이에요. 선생님이 아니에요. "교장" 선생님.']]},
@@ -397,7 +397,9 @@ const NPC={
     {who:'…',say:'교장 선생님이 살짝 웃은 것 같아요.'}];
    if(!F.metPr)return null;   // the welcome (talk) comes once
    if(!F.metTeacher)return [{say:'담임 선생님은 만났어요? 교무실은 바로 옆이에요.'}];
-   if(F.lunch)return [{say:'점심은 먹었어요? 오늘 급식, 맛있죠?'},{say:'운동장 느티나무 밑도 가 봐요. 시원해요.'}];
+   if(F.metChan)return [{say:'점심 먹었어요? 오늘 급식, 맛있었죠?'},{say:'운동장 느티나무 밑도 가 봐요. 시원해요.'}];  // 찬's table is where you eat
+   if(F.lunch)return [{say:'점심시간이에요. 아직 안 먹었어요?'},{say:'오늘은 불고기예요. 얼른 급식실에 가요.'}];
+   if(F.seated)return [{say:'쉬는 시간이에요? 복도에서 뛰지 마요.'},{say:'곧 다음 수업이에요. 늦지 마요.'}];  // the bell after the eraser
    return [{say:'또 왔어요? 지금은 수업 시간이에요.'},{say:'얼른 교실에 가요. 수업 시작했어요.'}]},
   talk:()=>[
    {say:'전학생이군요. 느티고에 온 걸 환영해요.'},
@@ -472,7 +474,9 @@ const NPC={
    if(F.crew3)return pick([['구경만이야. 진짜 구경만.'],['종례 끝. 내일 지각하면 벌금 또 걷어.']]);
    if(F.deal)return ['종례 시작해. 빨리 앉아.'];
    if(F.gotNotice)return ['방송실 갔다 왔어? …아니, 안 궁금해.'];
-   return pick([['밥 안 먹어? 급식실은 복도 가운데야.'],['벌금은 내가 걷어. 규칙은 규칙이야.']])},
+   if(F.metChan)return pick([['찬이랑 먹었어? 귀 안 아파?'],['벌금은 내가 걷어. 규칙은 규칙이야.']]);  // you've eaten
+   if(F.lunch)return pick([['밥 안 먹어? 급식실은 복도 가운데야.'],['벌금은 내가 걷어. 규칙은 규칙이야.']]);
+   return ['벌금은 내가 걷어. 규칙은 규칙이야.']},
   status:()=>{if(!has('일부러'))return hasItem(NOTE)?'todo':null},
   script:()=>{
    if(has('일부러'))return null;
@@ -495,7 +499,7 @@ const NPC={
   talk:()=>[{say:'쿨쿨…'},{say:'…오백 원 없어… 반장, 제발…'},{who:'…',say:'자고 있어요. 깨우지 마요.'}]},
  mate2:{name:'반 친구',zone:'class',x:15,y:5,dir:'up',look:LOOK.mate2,sit:1,chair:CHAIR_N,banmal:1,
   script:()=>f().crew3?[{say:'방송부? 대박. 부럽다.'},{say:'축제 때 구경 갈게.'}]:null,
-  talk:()=>[{say:'안녕! 너 전학생이지? 반가워.'},{say:'다온이 무섭지? 그래도 착해.'},{say:'다들 학원 때문에 바빠. 나도 그래.'},{say:'어제 모의고사 망했어. 엄청 어려웠거든.'}]},
+  talk:()=>[{say:'안녕! 너 전학생이지? 반가워.'},{say:'반장 무섭지? 그래도 착해.'},{say:'다들 학원 때문에 바빠. 나도 그래.'},{say:'어제 모의고사 망했어. 엄청 어려웠거든.'}]},
 
  jongnye:{name:'정 선생님',zone:'class',x:8,y:1,dir:'down',look:LOOK.jung,
   hide:()=>!f().deal||!!f().crew3,
@@ -661,7 +665,7 @@ const NPC={
   talk:()=>[{say:'너 3반 전학생이지? 소문 다 났어.'},{say:'방송실 귀신 봤다며? 진짜야?',face:'surprised'}]},
  xK5:{name:'2학년 학생',zone:'cafe',x:9,y:10,dir:'up',look:LOOK.xK5,sit:1,chair:STOOL_N,banmal:1,
   hide:()=>!lunchT(),
-  talk:()=>[{say:'귀신 얘기는 찬이가 만든 거야.'},{say:'걔 원래 그래. 사실대로 말하는 날이 없어.'}]},
+  talk:()=>[{say:'귀신 얘기는 너네 반 찬이가 만든 거야.'},{say:'걔 원래 그래. 사실대로 말하는 날이 없어.'}]},
  xK6:{name:'3학년 선배',zone:'cafe',x:15,y:6,dir:'up',look:LOOK.xK6,sit:1,chair:STOOL_N,banmal:1,
   hide:()=>!lunchT(),
   talk:()=>[{say:'…혼자 먹는 게 편해.'},{say:'고3은 밥 먹을 시간도 아까워.'}]},
