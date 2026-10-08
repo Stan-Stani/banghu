@@ -357,7 +357,7 @@ const NPC={
    {say:'안에서 노래가 들렸어. 목소리가 진짜 좋았어.'},
    {say:'누군지는 몰라. 가서 말을 걸어 볼래?'},
    {say:'나는… 모르는 사람은 좀 무서워.',face:'sad'},
-   {w:'놓치다',who:'나',build:['이번 기회는','절대','안 놓칠게']},
+   {w:'놓치다',who:'나',build:['이번 기회는','절대','안 놓칠게'],alts:[['절대','이번 기회는','안 놓칠게']]},
    {say:'좋아! 음악실은 2층이야. 계단으로 올라가.',face:'happy',award:['기회','놓치다'],set:()=>{f().poster=1}}]},
 
  hariM:{name:'유하리',zone:'music',x:7,y:2,dir:'up',look:LOOK.hari,badge:['얼다','심장','곡'],sing:()=>!dlg,  // singing alone until you speak to her
