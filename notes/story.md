@@ -98,7 +98,7 @@ Steps:
 2. 찬 is at the 도서관 writing a punishment 독후감; his 맞춤법 is a disaster. Help fix it (choice questions on spelling) → he signs → flag `signed5`.
 3. 복도: the poster for the 사연 segment must 붙다 on the 게시판 → item `사연함` placed.
 4. 찬 엿듣다 구름 on the phone ("그만둘까…" — about 학원, not the club), 오해하다, and the school SNS fills with 댓글 "방송부 끝났대". 다온 says 무시하다; 구름 hurt.
-5. 노래방: whole crew practicing; 찬 끼어들다 every song; player reads the 눈치 and gets 찬 to 사과하다 to 구름; 구름 admits it's a 비밀 he was 고민하다 about (parents want him at 학원 at lunch).
+5. 노래방: whole crew practicing; 찬 끼어들다 every song; player reads the 눈치 and gets 찬 to 사과하다 to 구름; 구름 admits it's a 비밀 he was 고민하다 about (parents want him at one more 학원 after school).
 6. 사연함: one letter smells of peach 향기 and is spelled "했읍니다" — 정 선생님: "옛날 맞춤법이에요." 찬: "매점 이모다!" → 매점 이모 laughs, sells 복숭아 주스 to everyone (뽑다 from the 자판기) → item `복숭아 주스`.
 7. 하리 reads the first 사연 on air despite feeling 창피하다; the school is 감동 → flag `sayeonAired`.
 Finale idea: 구름 on air: "보내 주신 사연, 잘 읽었어요. 복숭아 님, 누구세요?" (finale)

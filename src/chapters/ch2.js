@@ -200,7 +200,7 @@ const ZONES={...SCHOOL({open:['hall2','music','gym','bcast'],gate:{to:'street',x
  gym:{
   things:{'#':['체육관 벽이에요. 공 자국이 많아요.','벽에 "느티고 화이팅!" 현수막이 있어요.'],
    'W':['높은 창문이에요. 햇빛이 길게 들어와요.','창문에 그물이 있어요. 공 때문이에요.'],
-   'H':['농구 골대예요. 그물이 반쯤 찢어졌어요.','골대가 높아요. 찬은 한 번도 못 넣었대요.'],
+   'H':()=>['농구 골대예요. 그물이 반쯤 찢어졌어요.',f().chanGym?'골대가 높아요. 찬은 한 번도 못 넣었대요.':'골대가 아주 높아요. 공이 저기까지 갈까요?'],  // 찬 only once you've talked to him here
    'm':['파란 매트예요. 누우면 바로 잠이 와요.','매트에서 땀 냄새가 나요. 별로예요.'],
    'o':['공 수레예요. 농구공하고 배구공이 가득해요.','공 하나가 바람이 빠졌어요.'],
    'b':['나무 관람석이에요. 계단처럼 높아져요.','관람석에 누가 물병을 두고 갔어요.','관람석 밑에 배드민턴 공이 숨어 있어요.']},
@@ -321,6 +321,8 @@ const LOOK={
  xS4:{hair:'#2E2622',skin:'#D09A72',shirt:'#2C3E63',pants:'#5A5F6E',belt:'#C9A13A',style:'short'},
 };
 const NOTAG='하리 명찰';
+/* met the seniors or 하리 before 찬: point at him by the door (he starts the stand-up scene) */
+const toChan=()=>({who:'…',say:'체육관 입구에 찬이 있어요. 이쪽을 보고 있어요.',cam:[12,10],set:()=>{f().sawG=1}});
 const TAG={art:{pal:{O:'#1B1E2B',g:'#3E8E5A',w:'#F4F1E6'},down:['OOOOOOOO','OgwwwwgO','OgwwwwgO','OOOOOOOO']}};  // 하리's 명찰 on the floor
 const pick=a=>a[Math.random()*a.length|0];  // a repeat line picked at random, so a character talked to often doesn't say the same thing
 
@@ -441,7 +443,7 @@ const NPC={
  teaser:{name:'3학년 선배',zone:'gym',x:20,y:7,dir:'right',look:LOOK.teaser,badge:['괴롭히다'],banmal:1,
   hide:()=>!!f().stoodUp,
   status:()=>f().chanGym?undefined:'wait',
-  script:()=>!f().chanGym?[{say:'뭐야, 2학년? 우리한테 볼일 있어?',face:'angry'}]:null,
+  script:()=>!f().chanGym?[{say:'뭐야, 2학년? 우리한테 볼일 있어?',face:'angry'},toChan()]:null,
   talk:()=>[
    {say:'야, 1학년. 화장실에서 노래했다며?',face:'happy',turn:[{npc:'teaser',dir:'right'},{npc:'teaser2',dir:'right'}]},
    {who:'갈색 머리 선배',say:'하하! 화장실 가수! 한 곡 불러 봐!',face:'happy'},
@@ -457,12 +459,14 @@ const NPC={
 
  teaser2:{name:'갈색 머리 선배',zone:'gym',x:21,y:6,dir:'down',look:LOOK.teaser2,banmal:1,
   hide:()=>!!f().stoodUp,
-  talk:()=>[{say:'뭐야. 우리 고3이야. 공부 때문에 힘들어.'},{say:'그래서 좀 웃자는 거야. 별거 아니야.'}]},
+  talk:()=>f().chanGym?[{say:'뭐야, 왜 그렇게 봐?',face:'angry'},{say:'우리 고3이야. 공부 때문에 힘들어.'},{say:'그래서 좀 웃자는 거야. 별거 아니야.'}]
+   :[{say:'하하, 저 1학년 진짜 웃겨.',face:'happy'},{say:'…뭐야, 2학년? 저리 가.',face:'angry'},toChan()]},
 
  hariG:{name:'유하리',zone:'gym',x:22,y:7,dir:'left',look:LOOK.hari,badge:['긴장하다'],
   hide:()=>!!f().afterSchool,
   status:()=>{if(!has('긴장하다'))return f().stoodUp?'todo':'wait'},
-  script:()=>!f().stoodUp?[{say:'…',face:'sad'},{who:'…',say:'하리가 고개를 푹 숙이고 있어요.'}]:null,
+  script:()=>!f().chanGym?[{say:'…',face:'sad'},{who:'…',say:'하리가 고개를 푹 숙이고 있어요. 선배들이 옆에서 킥킥 웃어요.'},toChan()]
+   :!f().stoodUp?[{say:'…',face:'sad'},{who:'…',say:'하리가 고개를 푹 숙이고 있어요.'}]:null,
   talk:()=>[
    {say:'서, 선배… 고맙습니다.',face:'sad'},
    {who:'남궁찬',say:'괜찮아? 저 선배들 원래 저래.'},
@@ -693,7 +697,7 @@ function questText(){
  if(!F.poster)return '방송실 · 구름이랑 얘기하기';
  if(!F.metHari)return '음악실 · 노래하는 사람 찾기';
  if(!F.knowHari)return '교무실 · 명찰 보여 드리기';
- if(!F.chanGym)return '체육관 · 명찰 주인 찾기';
+ if(!F.chanGym)return F.sawG?'체육관 · 찬이랑 얘기하기':'체육관 · 명찰 주인 찾기';
  if(!F.stoodUp)return '체육관 · 선배들 말리기';
  if(!F.afterSchool)return '체육관 · 하리한테 명찰 주기';
  if(!F.hariGiveUp)return '분식집 · 하리 얘기 듣기';

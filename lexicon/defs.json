@@ -8983,8 +8983,8 @@
 "k": "몰래 밖으로 나가요."
 },
 "빠지다": {
-"e": "to fall in",
-"k": "물이나 구멍 속으로 떨어져요."
+"e": "to come out / come off (air out of a ball, a part off something); to fall into (water, a hole)",
+"k": "① 안에 있던 것이 나가요. 붙어 있던 것이 떨어져요. (공에 바람이 빠졌어요. 방울이 빠졌어요.) ② 물이나 구멍 속으로 떨어져요."
 },
 "빡빡하다": {
 "e": "to be tight, strict, demanding",
@@ -19488,5 +19488,9 @@
 "절약하다": {
 "e": "to save, economize",
 "k": "돈이나 물건을 아껴 써요."
+},
+"킥킥": {
+"e": "(giggling, snickering — a stifled laugh)",
+"k": "웃음을 참으면서 작게 웃는 소리."
 }
 }
