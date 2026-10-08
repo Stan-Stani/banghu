@@ -53,6 +53,24 @@ for(const CH of ctx.CHAPTERS){
  for(const q of qs){if(q.w&&!C.WORDS.includes(q.w))E(`question w "${q.w}" not a chapter word`);if(q.opts&&!q.opts.some(o=>o[1]))E('question without a right answer: '+q.ask);if(q.opts)q.opts.filter(o=>!o[1]).forEach(o=>{if(!o[2])E('wrong option without explanation: '+o[0])})}
  const badge=new Set(Object.values(C.NPC).flatMap(n=>n.badge||[]));
  for(const w of C.WORDS){if(!hasQ.has(w))E('no question for '+w);if(!C.DICT[w])E('no DICT for '+w);else for(const k of ['k','e','ex'])if(!C.DICT[w][k])E(`DICT ${w} missing ${k}`);if(!badge.has(w))E('no NPC teaches '+w)}
+ // in-character review (C.REVIEW): people use a learned word again in their own voice. Every word: a line by someone who
+ // teaches it, and lines from at least two people; the notebook (복습 노트) asks a generic BANK sentence for every word.
+ if(C.REVIEW){const ids=new Set(Object.keys(C.NPC)),names=new Set(Object.values(C.NPC).map(n=>n.name));
+  const speaks=(r,k)=>[].concat(r.by).some(b=>b===k||b===C.NPC[k].name);
+  for(const r of C.REVIEW){const tag=`REVIEW ${r.w} "${r.ask}"`;
+   if(!C.WORDS.includes(r.w))E(`${tag}: not a chapter word`);
+   if(!r.by)E(`${tag}: no by`);else for(const b of [].concat(r.by))if(!ids.has(b)&&!names.has(b))E(`${tag}: by "${b}" is no NPC id or name`);
+   if(typeof r.ask!=='string'||(r.ask.match(/___/g)||[]).length!==1)E(`${tag}: needs exactly one ___`);
+   if(/[A-Za-z]/.test(r.ask)||r.ask.length>52)E(`${tag}: English or longer than 52`);
+   if(r.scene||r.gram)E(`${tag}: scene/gram don't apply to review lines`);
+   if(!r.opts||r.opts.filter(o=>o[1]).length!==1)E(`${tag}: needs exactly one right option`);
+   else r.opts.filter(o=>!o[1]).forEach(o=>{if(!o[2])E(`${tag}: wrong option without explanation: ${o[0]}`)});
+   if(r.when&&typeof r.when!=='function')E(`${tag}: when must be a function`)}
+  for(const w of C.WORDS){const L=C.REVIEW.filter(r=>r.w===w),teach=Object.keys(C.NPC).filter(k=>(C.NPC[k].badge||[]).includes(w));
+   if(!L.some(r=>teach.some(k=>speaks(r,k))))E(`REVIEW: no line for "${w}" by anyone who teaches it (${teach.join(', ')})`);
+   const who=new Set(L.flatMap(r=>Object.keys(C.NPC).filter(k=>speaks(r,k)).map(k=>C.NPC[k].name)));
+   if(who.size<2)E(`REVIEW: "${w}" is reviewed by ${who.size} person (want 2+)`);
+   if(!(C.BANK||[]).some(q=>q.w===w&&!q.scene&&!q.gram))E(`BANK: no generic sentence for "${w}" (the 복습 노트 asks those)`)}}
  const src=CH.make.toString();for(const m of src.matchAll(/\{([^|{}'"`]+)\|([^}'"`]+)\}/g))if(/[가-힣]/.test(m[1])&&!C.DICT[m[2]])E('gloss key missing: '+m[2]);
  if(typeof C.questText()!=='string')E('questText must return a string');
 }
