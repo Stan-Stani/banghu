@@ -10,7 +10,7 @@
  {talk:'student'},
  {talk:'hariM',wrong:true,shotBefore:'03-music-room',shotSay:{text:'얼었어요',name:'03b-hari-freezes'}},
  {check:()=>ghosts.length===1,msg:'하리 runs out of the music room'},
- {check:()=>state.f.metHari&&state.items.includes('하리 명찰'),msg:'name tag dropped'},
+ {check:()=>state.f.metHari&&state.items.includes('명찰'),msg:'name tag dropped'},
  {talk:'jung',wrong:true,shotBefore:'04-teachers-office',shotTap:'04b-tap-word'},
  {check:()=>state.f.knowHari,msg:'teacher names her'},
  {greet:'chanG',wrong:true,shotBefore:'05-gym'},  // walking into the gym, 찬 talks first
@@ -20,7 +20,7 @@
  {pause:0,shot:'06c-seniors-leave'},
  {check:()=>state.f.stoodUp,msg:'stood up for her'},
  {talk:'hariG',shotSay:{text:'긴장해서',name:'07-hari-gym'}},
- {check:()=>state.f.afterSchool&&!state.items.includes('하리 명찰'),msg:'tag returned, after school'},
+ {check:()=>state.f.afterSchool&&!state.items.includes('명찰'),msg:'tag returned, after school'},
  {walkTo:['street',12,3],then:'08-street'},
  {inspect:['street',10,2]},
  {talk:'chanB'},

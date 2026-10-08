@@ -16,7 +16,7 @@
  {inspect:['class',17,10],shot:'05b-piggy-bank'},
  {check:()=>C.questText().includes('내 자리'),msg:'objective: find my seat'},
  {talk:'seat',shotBefore:'05c-my-seat'},
- {check:()=>state.f.seated&&C.questText().includes('지우개'),msg:'sat down; class started; eraser fell'},
+ {check:()=>state.f.seated&&C.questText().includes('떨어졌'),msg:'sat down; class started; eraser fell'},
  {check:()=>player.sit&&player.sit.npc===C.NPC.seat&&player.dir==='up',msg:'sitting on my chair, facing the board'},
  {talk:'eraser',shotBefore:'06-eraser'},
  {bump:['hall','F']},
