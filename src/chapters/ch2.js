@@ -236,7 +236,7 @@ const ZONES={...SCHOOL({open:['hall2','music','gym','bcast'],gate:{to:'street',x
   npcs:['xS1','xS2','xS3','xS4']},
  bunsik:{name:'엄마손 분식',reg:'SNACK BAR',floor:'tileFloor',
   legend:{'#':{tile:'bWall'},'.':{tile:'tileFloor',walk:1},'D':{tile:'exitDoor',walk:1},'M':{tile:'bMenu'},'W':{tile:'bWin'},
-   'k':{tile:'pan'},'=':{tile:'bcounter',over:1},'t':{tile:'btable',over:1},'j':{tile:'water'},'p':{tile:'bPlant'},'u':{tile:'fridge'}},
+   'k':{tile:'pan'},'=':{tile:'bcounter',over:1},'t':{tile:'btable'},'j':{tile:'water'},'p':{tile:'bPlant'},'u':{tile:'fridge'}},  // tables aren't counters (no over): A on the upper one reached 하리 behind it
   map:[
 "#MMMM##WWWW##WW#",
 "#kkk...........#",
