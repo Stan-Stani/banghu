@@ -1,4 +1,4 @@
-/* GENERATED from walk-engine/engine.js (fcaad69) — do not edit here; edit walk-engine and run its sync.sh. */
+/* GENERATED from walk-engine/engine.js (b80c79b) — do not edit here; edit walk-engine and run its sync.sh. */
 /* =====================================================================
    Engine: tiles, movement, zones, dialogue, spaced review, speech, saving.
    ===================================================================== */
@@ -75,9 +75,11 @@ function wrapUp(){
  const bank=w=>(C.BANK||[]).filter(q=>q.w===w&&!q.scene&&!q.gram);
  const said=w=>(C.REVIEW||[]).filter(r=>r.w===w&&r.who!=='나'),pick=a=>a[Math.random()*a.length|0];
  const nameOf=r=>{const b=[].concat(r.by)[0];return (C.NPC[b]&&C.NPC[b].name)||b};
- const line=w=>{const R=said(w);if(R.length){const h=R.filter(r=>!unheard(r)),r=pick(h.length?h:R),q={...r,who:nameOf(r),review:true};delete q.by;delete q.pre;delete q.when;return q}  // what someone in this chapter said with it (heard first), under their name
+ const metBy=r=>[].concat(r.by).some(b=>metIds().includes(b));
+ const now_=r=>(!r.when||r.when())&&[].concat(r.by).every(b=>{const n=C.NPC[b];return !n||!n.hide||!n.hide()});  // its moment holds and its speaker is still here (no one speaks after they've died or gone, no "look out!" after the danger)
+ const line=w=>{const R=said(w).filter(now_),f=R.filter(r=>unheard(r)&&metBy(r)),h=R.filter(r=>!unheard(r)),P=f.length?f:h.length?h:R;if(P.length){const r=pick(P),q={...r,who:nameOf(r),review:true};delete q.by;delete q.pre;delete q.when;return q}  // a line with it from someone in this chapter, under their name: one you haven't heard yet from someone you've met first (a word-for-word repeat felt stale), else one you heard — only lines whose moment holds (`when`) from someone still here — else the generic sentence
   const b=bank(w);return b.length?{...pick(b),who:'…',review:true}:null};
- const qs=C.WORDS.filter(w=>has(w)&&lv(w).b<3&&(said(w).length||bank(w).length)).sort((a,b)=>lv(a).b-lv(b).b).slice(0,4).map(line);
+ const qs=C.WORDS.filter(w=>has(w)&&lv(w).b<3&&(said(w).length||bank(w).length)).sort((a,b)=>lv(a).b-lv(b).b).slice(0,4).map(line).filter(Boolean);
  carryDue().slice(0,Math.max(0,4-qs.length)).forEach(w=>{const q=carryQ(w);if(q)qs.push({...q,who:'…',review:true})});
  return qs.length?[{who:'…',say:TERM.wrap},...qs]:[];
 }
@@ -429,8 +431,11 @@ function status(n){
  if(!n.badge)return null;
  if(!n.badge.every(has))return 'todo';
  if(!C.REVIEW&&n.badge.some(isDue))return n.script&&n.script()?null:'review';  // a ? only when talking reviews (their script lines come first and skip it)
- return n.badge.every(w=>lv(w).b>=3)?'star':null;
+ return n.badge.every(w=>lv(w).b>=3)&&!(state.starDone||{})[npcId(n)]?'star':null;  // ★: all their words mastered — shown a while, then it fades for good (starFade)
 }
+/* the ★ over someone whose words you've all mastered: on screen for STAR_MS, or until you talk to them, then it fades out and stays gone */
+const STAR_MS=18000,STAR_FADE=2000,starAcc={};let starT=0,starDt=0;
+function starFade(n){const id=npcId(n),a=starAcc[id]=(starAcc[id]||0)+starDt,al=a<STAR_MS?1:1-(a-STAR_MS)/STAR_FADE;if(al<=0){(state.starDone=state.starDone||{})[id]=1;save();return 0}return al}
 
 /* ---------- player, movement, zones ---------- */
 const D={up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]};
@@ -537,6 +542,7 @@ function singNotes(x,y,t,seed){
   const note=(c,o)=>{r(X+o,Y+o+4,3,2,c);r(X+o+2,Y+o,1,5,c);r(X+o+3,Y+o+1,1,1,c);r(X+o+4,Y+o+2,1,1,c)};note('#2B2E36',1);note('#FFF3C4',0)}  // shadow, then the note
  g.globalAlpha=1}
 function render(t){
+ starDt=starT?Math.min(100,t-starT):0;starT=t;
  const px=player.moving?player.fx+(player.x-player.fx)*player.t:player.x;
  const py=player.moving?player.fy+(player.y-player.fy)*player.t:player.y;
  const [fx,fy]=camT||[px,py];
@@ -560,7 +566,7 @@ function render(t){
    if(n.sleep)for(let i=0;i<2;i++){const p=(t/900+i/2)%1,zx=X+11+Math.round(p*4),zy=Y-2-Math.round(p*10),c='#2E3550';g.globalAlpha=1-p*.7;r(zx,zy,4,1,c);r(zx+2,zy+1,1,1,c);r(zx+1,zy+2,1,1,c);r(zx,zy+3,4,1,c);g.globalAlpha=1}  // asleep: z's drifting up
    // no marker over the player standing just above, over the one you're talking to (or whoever a proxy stands for), or when nomark says so
    const talking=dlg&&(dlg.npc===n||(n.proxy&&dlg.npc===n.proxy())),off=typeof n.nomark==='function'?n.nomark():n.nomark;
-   if(!(player.x===nx&&player.y===ny-1)&&!talking&&!off)marker(X+(n.markDx||0),Y-artLift(n.look)+(n.markDy||0),t,status(n))}}});
+   if(!(player.x===nx&&player.y<ny&&player.y>=ny-1-Math.ceil(artLift(n.look)/TS))&&!talking&&!off){const st=status(n),al=st==='star'?starFade(n):1;if(al>0){g.globalAlpha=al;marker(X+(n.markDx||0),Y-artLift(n.look)+(n.markDy??(n.look?0:7)),t,st);g.globalAlpha=1}}}}});  // no look (a stand-in for an object: a chair, a shelf, embers): the mark sits on its own tile, not over whatever is above it
  ghosts=ghosts.filter(gh=>{const wk=walkAt(gh,t);if(!wk)return false;const [wx,wy,wd,wf]=wk;ents.push({y:wy,f:()=>drawChar(gh.look,Math.round(wx*TS-cx),Math.round(wy*TS-cy-2),wd,wf)});return true});
  const walk=player.moving?(player.t<.5?player.step:0):0;
  if(petOn()){
@@ -571,7 +577,8 @@ function render(t){
   if(player.moving||pet.x!==player.x||pet.y!==player.y)ents.push({y:qy-.01,f:()=>drawChar(C.FOLLOW.look,Math.round(qx*TS-cx),Math.round(qy*TS-cy-2),pet.dir,walk?3-walk:0)});  // not while it shares your square
  }else pet.on=false;
  const plook=typeof C.PLAYER==='function'?(C.PLAYER()||myLook()):player.look; // PLAYER may be a function → the look can change mid-chapter (disguises)
- ents.push({y:py,f:()=>{const X=Math.round(px*TS-cx),Y=Math.round(py*TS-cy-2);player.sit?drawSeated(plook,X,Y,player.dir,player.sit.chair):drawChar(plook,X,Y,player.dir,walk)}});
+ const overTall=live().some(n=>{const [nx,ny]=npcPos(n);return nx===player.x&&ny===player.y+1&&artLift(n.look)>=6});  // just above someone tall: drawn over their head, never hidden behind them
+ ents.push({y:overTall?py+1.02:py,f:()=>{const X=Math.round(px*TS-cx),Y=Math.round(py*TS-cy-2);player.sit?drawSeated(plook,X,Y,player.dir,player.sit.chair):drawChar(plook,X,Y,player.dir,walk)}});
  ents.sort((a,b)=>a.y-b.y).forEach(e=>e.f());
  // a legend entry's `front` tile (tree canopies) draws after the characters, unclipped: it overhangs and covers whoever walks behind it
  for(let y=y0-4;y<=y0+VH;y++)for(let x=x0-4;x<=x0+VW;x++){const c=at(x,y),L=c!=null&&Z.legend[c];if(L&&L.front&&TILES[L.front])TILES[L.front](x*TS-cx,y*TS-cy,x,y,t)}
@@ -775,7 +782,9 @@ function typeText(text,done){
  const esc=x=>x.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));  // the whole line is laid out from the start: words never jump down a line
  typing.id=setInterval(()=>{i++;el.innerHTML=esc(seg.slice(0,i).join(''))+'<span style="visibility:hidden">'+esc(seg.slice(i).join(''))+'</span>';if(i>=seg.length)fin()},26);
 }
-function showGloss(k){const d=C.DICT[k];if(d){noteTap([[k,d]]);popGloss([[k,d]])}}
+let allDicts=null;
+const otherDict=k=>{if(!allDicts){allDicts={};for(const ch of CHAPTERS)if(ch!==CH)try{Object.assign(allDicts,ch.make().DICT||{})}catch(e){}}return allDicts[k]};
+function showGloss(k){const d=C.DICT[k]||otherDict(k),rows=d?[[k,d]]:lexLookup(k);if(rows.length){noteTap(rows);popGloss(rows)}}  // {form|lemma}: this chapter's entry, else another chapter's (a review asked out of its chapter), else the lexicon
 function showWord(w){const rows=lexLookup(w);noteTap(rows);popGloss(rows);lastWord=(w+(rows.length?' → '+rows.map(([h,d])=>h+': '+d.k).join(' / '):' (사전에 없음)')).slice(0,400)}
 /* ---------- 찾아본 말: every tap that finds a definition — how many times, and when last (all chapters, one list) ---------- */
 const TAPS_KEY=KEY('taps');let taps={},tapSort='t';
@@ -862,7 +871,7 @@ function moveSel(d){if(performance.now()-choicesAt<450)return;  // keys still he
  const n=(choosing()?choiceBtns():tileBtns()).length;if(!n)return;sel=sel<0?(d>0?0:n-1):(sel+d+n)%n;markSel();sfx('move')}
 let choicesAt=0,lastA=0;
 function confirmSel(){const t=performance.now();if(t-choicesAt<450)return;
- if(choosing()){const quick=t-lastA<500;lastA=t;if(quick)return}  // mashing A through talk never answers: in a question, presses under 0.5 s apart do nothing (pause, then A picks)
+ if(choosing()||(building()&&!dlg.cur.got)){const quick=lastA>choicesAt&&t-lastA<500;lastA=t;if(quick)return}  // mashing A through talk never answers: in a question (or word tiles before the first is placed), presses under 0.5 s apart do nothing (pause, then A picks)
  if(sel<0){sel=0;markSel();return}  // nothing selected: A selects the first one (never does nothing); A again picks it
  const b=(choosing()?choiceBtns():tileBtns())[sel];if(b)b.click()}
 
@@ -1058,7 +1067,7 @@ function talkWith(n){
   if(n.badge&&n.badge.every(has)){const due=n.badge.some(isDue);steps=due?[...says(n.after),reviewFor(n.badge)]:says(n.after);isReview=due}  // a review question only when one of their words is due
   else steps=n.talk();
  }
- {const id=npcId(n);if(id&&!metIds().includes(id)){metIds().push(id);save()}}  // met: from now on they can review and chat
+ {const id=npcId(n);if(id&&!metIds().includes(id)){metIds().push(id);save()}if(id&&status(n)==='star')starAcc[id]=Math.max(starAcc[id]||0,STAR_MS)}  // met: from now on they can review and chat; a ★ over them starts to fade once you've talked
  if(pair&&!isReview){const said=m=>(m===n?steps:(m.script&&m.script())||m.talk()).map(s=>s.who?s:{...s,who:m.name,look:m.look});steps=[...said(pair[0]),...said(pair[1])]}
  openDialog(n.name,steps,{npc:n,review:isReview});
 }
@@ -1081,11 +1090,12 @@ function award(words){
  const nw=words.filter(w=>!has(w));if(!nw.length)return;
  state.badges.push(...nw);
  const perfect=nw.filter(w=>!dlg.missed.has(w));
- nw.forEach(w=>{state.lv[w]=perfect.includes(w)?spaced(2):{b:0,due:now()}});
+ const L0=SRS().start??2;  // srs.start: the level of a word answered right every time it was taught (★ is level 3)
+ nw.forEach(w=>{state.lv[w]=perfect.includes(w)?spaced(L0):{b:0,due:now()}});
  save();updateHud();sfx('badge');
  toast((G.gotToast||'일지에 추가')+': '+nw.join(', '));  // GAME.gotToast: the game's word for it (단어 마을: 배지 획득)
  const note=perfect.length===nw.length
-  ?{who:LOGNAME,say:`한 번도 안 틀렸어요! "${nw.join('", "')}" 기억 레벨 2/5.`}
+  ?{who:LOGNAME,say:`한 번도 안 틀렸어요! "${nw.join('", "')}" 기억 레벨 ${L0}/5.`}
   :{who:LOGNAME,say:`일지에 적었어요. 틀린 단어는 곧 다시 나와요. 머리 위의 ?를 찾아요.`};
  if(firstTime(perfect.length===nw.length?'awardPerfect':'awardMissed'))dlg.steps.splice(dlg.i+1,0,note);
  if(state.badges.length>=C.WORDS.length&&!state.f.allWords){state.f.allWords=1;save();const all=TERM.allWords(C.WORDS.length);if(all&&all.length)pending=says(all)}  // term.allWords(n): the note when the last word is in ([] = none)
