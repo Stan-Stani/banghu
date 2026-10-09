@@ -1,4 +1,4 @@
-/* GENERATED from walk-engine/engine.js (ecd39cb) — do not edit here; edit walk-engine and run its sync.sh. */
+/* GENERATED from walk-engine/engine.js (6081a12) — do not edit here; edit walk-engine and run its sync.sh. */
 /* =====================================================================
    Engine: tiles, movement, zones, dialogue, spaced review, speech, saving.
    ===================================================================== */
@@ -1104,7 +1104,7 @@ function updateSound(){$('sndBtn').setAttribute('aria-pressed',soundOn?'true':'f
 let logSel=null,showEn=false;
 function pips(w){const L=lv(w);return `<span class="pips${isDue(w)?' due':''}">${[1,2,3,4,5].map(i=>`<i class="${L.b>=i?'on':''}"></i>`).join('')}</span>`}
 function openPanel(){
- renderNotes();
+ renderNotes();if($('itemCard'))$('itemCard').hidden=true;
  const got=C.WORDS.filter(has);
  $('logCount').textContent=`${got.length}/${C.WORDS.length} · 복습 ${dueWords().length}`;
  if(!logSel||!has(logSel))logSel=got[got.length-1]||null;
@@ -1123,7 +1123,8 @@ function openPanel(){
  $('items').querySelectorAll('li[data-k]').forEach(li=>li.addEventListener('click',()=>{const name=state.items[+li.dataset.k],ph=(C.PHOTOS||{})[name];
   if(ph){$('panel').hidden=true;openPhone(ph);return}
   $('items').querySelectorAll('li').forEach(x=>x.classList.toggle('sel',x===li));
-  $('card').innerHTML=`<div class="top"><span class="big">${String(name).replace(/</g,'&lt;')}</span></div><span class="def txt">${glossHTML(String(C.ITEMS[name]||''))}</span>`}));
+  let ic=$('itemCard');if(!ic){ic=document.createElement('div');ic.id='itemCard';ic.className='card';$('items').after(ic)}  // right under the bag, not in the word card at the top (out of view)
+  ic.innerHTML=`<div class="top"><span class="big">${String(name).replace(/</g,'&lt;')}</span></div><span class="def txt">${glossHTML(String(C.ITEMS[name]||''))}</span>`;ic.hidden=false;ic.scrollIntoView({block:'nearest'})}));
  $('panel').hidden=false;
 }
 
