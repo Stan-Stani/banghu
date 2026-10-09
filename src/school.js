@@ -599,18 +599,24 @@ globalThis.SIGN_TEXT=(X,Y,x,x0,x1,top,text,c)=>{const gs=[...text].map(ch=>GLYPH
 globalThis.SCHOOL_TILES=TILES;globalThis.SCHOOL_WALLISH=[...WALLISH];globalThis.SCHOOL_BASE=base;
 })();
 
-/* Someone who quizzes you on purpose ("문제 하나 낼게요": 매점 이모, 경비 아저씨, 분식집 아저씨): a word of yours that's due, from this
-   교시 or an earlier one, in the notebook's sentence and graded like a review; with nothing due, one of their own general questions
-   (never the one they asked last). Once per story beat each (id): asked again before the story moves on, they only say hello — null,
-   and the caller leaves the quiz out. The question is made, and the quiz noted (state.quizAt[id] = beats()), when its step is
-   reached: a script is also asked for status marks, and that mustn't use the quiz up. */
+/* Someone who quizzes you on purpose ("문제 하나 낼게요": 매점 이모, 경비 아저씨, 분식집 아저씨): a word of yours that's due, graded like a
+   review — one of their own C.REVIEW lines (by their id) first, in their voice; else from this 교시 or an earlier one, in the
+   notebook's sentence; with nothing due, one of their own general questions (never the one they asked last). A word asked in this
+   conversation or the two before it (the notebook's round, someone else's quiz) waits (engine: askedIn[w], talkN). Once per story
+   beat each (id): asked again before the story moves on, they only say hello — null, and the caller leaves the quiz out. The
+   question is made, and the quiz noted (state.quizAt[id] = beats()), when its step is reached: a script is also asked for status
+   marks, and that mustn't use the quiz up. */
 function quizLine(fallback,id){
  const at=state.quizAt||{},last=id&&at[id];
  if(last&&last.b===beats())return null;
  return {expand:()=>{
-  let q;const due=dueWords();
-  if(due.length){q={...reviewFor([due[Math.random()*due.length|0]])};delete q.who}  // their voice, not the narrator's
-  else{const fb=fallback.filter(o=>!last||o.ask!==last.ask),pool=fb.length?fb:fallback;q={...pool[Math.random()*pool.length|0],old:1}}
+  const fresh=w=>!(askedIn[w]>=talkN-2);
+  let q,pre=[];const due=dueWords().filter(fresh);
+  const own=id?(C.REVIEW||[]).filter(r=>[].concat(r.by).includes(id)&&known(r.w)&&isDue(r.w)&&fresh(r.w)&&(!r.when||r.when())):[];
+  if(own.length){const lo=Math.min(...own.map(r=>lv(r.w).b)),p=own.filter(r=>lv(r.w).b===lo),r=p[Math.random()*p.length|0];  // the weakest word first
+   hear(r);pre=says(r.pre||[]);q={...r,review:true};delete q.by;delete q.pre;delete q.when}
+  else if(due.length){q={...reviewFor([due[Math.random()*due.length|0]])};delete q.who}  // their voice, not the narrator's
+  else{const fb=fallback.filter(o=>(!last||o.ask!==last.ask)&&(!o.w||fresh(o.w))),pool=fb.length?fb:fallback;q={...pool[Math.random()*pool.length|0],old:1}}
   if(id){(state.quizAt||(state.quizAt={}))[id]={b:beats(),ask:q.ask};save()}
-  return [q]}};
+  return [...pre,q]}};
 }
