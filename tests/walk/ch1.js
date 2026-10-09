@@ -31,7 +31,7 @@
  // 다온's "밥부터 먹어" adds the 부터 문법 노트: it waits on the chip like a 문화 노트, opens in the 일지 with its examples under it, every word tappable
  {check:()=>grammarSeen.includes('buteo'),msg:'다온\'s "밥부터 먹어" adds the 부터 문법 노트'},
  {pause:500},
- {check:()=>!$('noteChip').hidden&&$('noteChip').textContent.includes('문법 노트 · N부터'),msg:'the new 문법 노트 waits on the screen as a chip'},
+ {check:()=>!$('noteChip').hidden&&$('noteChip').textContent.includes('문법 노트 · 부터'),msg:'the new 문법 노트 waits on the screen as a chip'},
  {check:()=>{$('noteChip').click();const c=$('gnoteCard');return !$('panel').hidden&&!c.hidden&&c.textContent.includes('밥부터 먹어')&&!!c.querySelector('.nex li')},msg:'tapping it opens the 일지 on the 부터 note, its examples under the lines'},
  {pause:300,shot:'06b2-grammar-note'},
  {check:()=>{$('gnoteCard').querySelector('.nex .w').click();return !$('gloss').hidden},msg:'a word in the note opens the dictionary'},
