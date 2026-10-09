@@ -933,7 +933,7 @@ const DONE=[{say:'방송이 끝나자 교무실 마이크로 교장 선생님 �
 
 function questText(){
  const F=f();
- if(F.done)return '3교시 끝 · 방송실 복습 노트북';
+ if(F.done)return dueWords().length?'3교시 끝 · 방송실 복습 노트북':'3교시 끝! · 4교시로 가요';
  if(!F.plan)return '방송실 · 구름이랑 얘기하기';
  if(!F.formGot)return '교무실 · 등록 신청서 받기';
  if(!F.signed5)return '도서관 · 찬 이름 받기';

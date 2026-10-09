@@ -55,6 +55,7 @@
  {talk:'gureum'},
  {talk:'principal'},
  {check:()=>state.f.deal&&!state.items.includes('폐부 안내문'),msg:'the deal'},
+ {check:()=>!$('fade').classList.contains('on'),msg:'the afternoon (수학) passed over black, and the room is back'},
  {walkTo:['class',18,11]},
  {check:()=>ZID==='class'&&player.y===11,msg:'classroom entered at its back door'},
  {talk:'chanC'},

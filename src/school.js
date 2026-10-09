@@ -297,8 +297,8 @@ const base=()=>({
    '*':['화단에 노란 꽃이 피었어요.','꽃 이름표: "2학년 3반이 심었어요."','벌이 꽃 사이를 날아다녀요.'],
    'Y':['아주 큰 느티나무예요. 학교 이름도 이 나무예요.','나뭇잎 사이로 햇빛이 반짝여요.','나무에 작은 이름표: "오백 살"','바람이 불어요. 나뭇잎이 사락사락.'],
    'n':'나무 벤치예요. 누가 이름을 새겼어요.',
-   'g':['축구 골대예요. 그물에 구멍이 있어요.','골대 옆에 공이 하나 있어요.'],
-   'b':['경비실이에요. 라디오 소리가 작게 들려요.','창문에 열쇠가 많이 걸려 있어요.'],
+   'g':['축구 골대예요. 그물에 구멍이 있어요.','골대 앞 모래에 발자국이 많아요.'],
+   'b':(x,y)=>x===19&&y===12?'경비실 문이에요. 안에서 라디오 소리가 들려요.':x===18&&y===11?'창문에 열쇠가 많이 걸려 있어요.':'경비실이에요. 라디오 소리가 작게 들려요.',  // the booth: big window top left, door bottom right
    'f':['초록색 울타리예요.','울타리 밖에 버스 정류장이 보여요.'],
    'G':'정문이에요. 밖은 학교 앞 길이에요.',
    'K':['체육관 건물이에요. 지붕이 초록색이에요.','체육관 안에서 공 소리가 들려요.']}},
@@ -322,7 +322,8 @@ const base=()=>({
 "#ssssEE#SSSuWWW#FF#WWWWqQQ##"],
   rooms:[[1,1,7,4,'교무실'],[9,1,15,4,'교장실'],[17,1,26,4,'복도 · 2학년 3반 앞'],[1,5,26,8,'1층 복도'],[15,7,18,8,'1층 복도 · 급식실 앞'],[22,6,26,8,'복도 끝 · 방송실 앞']],
   warps:{'5,9':{to:'yard',x:11,y:4,dir:'down'},'6,9':{to:'yard',x:12,y:4,dir:'down'},'22,0':{to:'class',x:18,y:11,dir:'up'},'16,9':{to:'cafe',x:10,y:1,dir:'down'},'17,9':{to:'cafe',x:11,y:1,dir:'down'},'24,9':{to:'bcast',x:7,y:1,dir:'down'},'25,9':{to:'bcast',x:8,y:1,dir:'down'},'8,9':{to:'hall2',x:8,y:8,dir:'up'},'9,9':{to:'hall2',x:9,y:8,dir:'up'},'10,9':{to:'hall2',x:10,y:8,dir:'up'}},
-  things:{'#':['하얀 벽이에요. 아래쪽은 초록색이에요.','벽에 "복도에서 뛰지 마세요" 종이가 있어요.','누가 벽에 작게 낙서했어요.'],
+  things:{'#':(x,y)=>y===0&&x<16?['하얀 벽이에요. 아래쪽은 초록색이에요.','깨끗한 벽이에요. 먼지 하나 없어요.']  // inside the 교무실 and the 교장실: no graffiti there
+    :['하얀 벽이에요. 아래쪽은 초록색이에요.','벽에 "복도에서 뛰지 마세요" 종이가 있어요.','누가 벽에 작게 낙서했어요.'],
    'N':['게시판: "축제 다음 달! 반마다 하나씩 준비해요."','게시판: "중간고사 등수는 교무실 앞에."','게시판 구석에 "방송부 부원 모집" 종이가 찢어져 있어요.'],
    'V':['창문으로 2학년 3반 교실이 보여요.','교실 안에서 웃음소리가 들려요.'],
    'P':'낡은 스피커예요. 가끔 지지직 소리가 나요.',
@@ -550,6 +551,11 @@ globalThis.SCHOOL=function(spec){
   for(const c in z.things)if(!z.map.some(row=>row.includes(c)))delete z.things[c];  /* painted over */
   if(o.rooms)z.rooms=o.rooms;
   z.things={...z.things,...(o.things||{})};z.spots=o.spots||{};z.npcs=o.npcs||[];
+  /* a wall tile drawn as its dark top (TILES.wall: the tile below is wall too, e.g. between two rooms or along the edge) isn't the
+     painted face that the zone's wall lines describe */
+  const wl=z.things['#'];
+  if(wl&&z.legend['#']&&z.legend['#'].tile==='wall'){const M=z.map,isW=(x,y)=>{const c=M[y]&&M[y][x];if(c==null)return true;const L=z.legend[c];return !!L&&WALLISH.has(L.tile)};
+   z.things['#']=(x,y)=>isW(x,y+1)&&!(y===M.length-1&&!isW(x,y-1))?'두꺼운 회색 벽이에요.':typeof wl==='function'?wl(x,y):wl}
   for(const k of ['dark','slow','outdoor','greet'])if(k in o)z[k]=o[k];
   out[id]=z;
  }

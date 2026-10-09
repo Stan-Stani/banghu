@@ -849,7 +849,7 @@ const DONE=[{say:'사연함에 카세트가 하나 들어 있어요.',set:()=>{f
 
 function questText(){
  const F=f();
- if(F.done)return '2교시 끝 · 방송실 복습 노트북';
+ if(F.done)return dueWords().length?'2교시 끝 · 방송실 복습 노트북':'2교시 끝! · 3교시로 가요';
  if(!F.poster)return '방송실 · 구름이랑 얘기하기';
  if(!F.metHari)return '음악실 · 노래하는 사람 찾기';
  if(!F.knowHari)return '1층 교무실 · 선생님한테 명찰 보여 드리기';
