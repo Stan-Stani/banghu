@@ -14708,6 +14708,10 @@
 "e": "transfer student",
 "k": "다른 학교에서 옮겨 온 학생."
 },
+"전학하다": {
+"e": "to transfer (to another school)",
+"k": "다른 학교로 옮겨요. 봄에 전학했어."
+},
 "전함": {
 "e": "battleship",
 "k": "싸우는 큰 배."
