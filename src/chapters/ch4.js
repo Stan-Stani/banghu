@@ -1110,8 +1110,8 @@ const NPC={
    {say:'방송부 문 닫는다는 안내문은 미안해요. 학부모회 때문이었어요.',face:'sad'},
    {say:'그래서 몰래 쪽지를 썼어요. 여러분 힘내라고.'},
    {say:'마이크… 저도 잠깐 써도 될까요?',face:'think'},
-   {who:'백구름',say:'그, 그럼요! 여기요!',face:'surprised'},
-   {who:'…',say:'교장 선생님이 무대에 올라가서 마이크 앞에 서요.',move:{npc:'principalS',to:[19,5],dir:'down'}},
+   {who:'백구름',say:'그, 그럼요! 여기요!',face:'surprised',move:{npc:'principalS',to:[19,5],dir:'down'}},  // she starts up the steps to the mic (center of the stage) on this line: the walk takes ~1 s, so by the narration below she is there, not still on the stairs
+   {who:'…',say:'교장 선생님이 무대에 올라가서 마이크 앞에 서요.'},
    {say:'느티고 여러분, 교장 한복순입니다.'},
    {say:'학부모회도 오늘 방송을 들었어요.'},  // why she can change her mind: the parents who wanted the room heard the show
    {say:'방송실은 그대로 둡니다.'},
