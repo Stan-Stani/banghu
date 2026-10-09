@@ -47,7 +47,10 @@ window.__play=async function(steps){
   while(dlg&&guard++<300){
    if(typing&&!typing.finished){await key('z');continue}
    const who=$('who').textContent,txt=$('txt').textContent;if(LOG[LOG.length-1]!==`  ${who}: ${txt}`)log(`  ${who}: ${txt}`);
-   if(choosing()&&dlg.cur.choose){const bs=choiceBtns();log('  ? '+dlg.cur.choose.map(c=>c[0]).join(' / ')+' > '+bs[bs.length-1].textContent);bs[bs.length-1].click();await wait(250);continue}  // a plain choice (e.g. next chapter?): stay
+   if(choosing()&&dlg.cur.choose){const bs=choiceBtns();let b=bs[bs.length-1];  // a plain choice (e.g. next chapter?): the last one (stay)…
+    if(opts.pick&&opts.pick.length){const p=opts.pick.shift(),hit=bs.find(x=>x.textContent===p)||bs.find(x=>x.textContent.includes(p));  // …or the walk's next pick:[label,…] (a timing moment, a wrong try first)
+     check(!!hit,`no choice "${p}" among ${bs.map(x=>x.textContent).join(' / ')}`);if(hit)b=hit}
+    log('  ? '+dlg.cur.choose.map(c=>c[0]).join(' / ')+' > '+b.textContent);b.click();await wait(250);continue}
    if(choosing()){
     const s=dlg.cur,btns=choiceBtns();const want=i=>btns.findIndex(b=>+b.dataset.i===i);
     const ci=s.opts.findIndex(o=>o[1]),wi=s.opts.findIndex(o=>!o[1]);

@@ -998,9 +998,34 @@ const NPC={
   hide:()=>!f().clue,
   get after(){return pick([['월요일 점심에도 방송할 거야. 매일.'],['교장 선생님이 복숭아… 아직도 꿈 같아.']])},
   status:()=>!f().ready?'wait':!f().live?'todo':undefined,
+  /* the show. You cue 하리's song yourself, as 구름 taught you at her first broadcast (2교시: the mic goes on as the 전주 ends):
+     아직 · 조금 더 · 지금. A late cue gets a gentle beat and the 반주 again; 지금 plays on. */
   script:()=>{
    if(!f().ready)return [{say:'다온이가 시간 재고 있어. 먼저 가 봐.',face:'sad'},{say:'…나 손이 떨려.'}];
-   if(!f().live)return [
+   if(!f().live){
+    const song=[
+     {who:'…',say:'딸깍. 하리 노래가 시작돼요. 이번엔 목소리가 안 떨려요.',set:()=>{f().singing=1}},
+     {who:'…',say:'구름이 마이크를 끄고 작게 말해요.'},
+     {say:'타이밍 완벽. 첫 방송 때처럼.',face:'happy'},
+     Q.live[0],
+     {who:'…',say:'한 곡이 끝나요. 하리가 웃고, 바로 두 번째 곡!'},
+     {who:'…',say:'두 곡이 다 끝났어요. 박수 소리가 끝이 없어요.',set:()=>{f().singing=0}},
+     {who:'…',say:'그때, 교장 선생님이 무대 앞으로 와요.',set:()=>{f().live=1}}];
+    const on=steps=>()=>openDialog('백구름',steps(),{npc:NPC.gureumS});
+    const cue=again=>[
+     {who:'…',say:again?'반주가 처음부터 다시 흘러요.':'태식 선배가 반주를 틀어요. 피아노 전주가 흘러요.'},
+     {who:'…',say:'♪ …전주가 끝나요. 하리가 나를 봐요.',choose:[['아직',on(still)],['조금 더',on(bit)],['🎙️ 지금!',on(()=>song)]]}];
+    const bit=()=>[  // a beat late: her first line is lost
+     {who:'…',say:'하리 노래 첫 부분이 마이크 없이 지나가요.'},
+     {who:'유하리',say:'…어? 선배?',face:'surprised'},
+     {who:'오다온',say:'괜찮아. 시간 있어. 한 번 더!',face:'think'},
+     ...cue(1)];
+    const still=()=>[  // far too late: the yard hears only the 반주
+     {who:'…',say:'운동장에 반주만 들려요. 하리 입만 움직여요.'},
+     {who:'남궁찬',say:'여러분, 하리 목소리는 마음으로 들으세요!',face:'happy'},
+     {who:'…',say:'운동장에 웃음이 터져요. 하리도 웃어요.'},
+     ...cue(1)];
+    return [
     {who:'…',say:'오후 두 시. 운동장에 사람이 가득해요.'},
     {who:'오다온',say:'삼, 이, 일… 시작!'},
     {who:'…',say:'스피커가 켜져요. 운동장이 조용해져요.'},
@@ -1014,12 +1039,8 @@ const NPC={
     {who:'유하리',say:'"방송부 선배들, 점심 방송 매일 잘 듣고 있어요."',face:'think'},
     {who:'유하리',say:'"오늘은 노래 꼭 들려주세요. —1학년 3반"',face:'happy'},
     {who:'유하리',say:'다음 곡… 제가 부를게요.',face:'think'},
-    {who:'…',say:'하리 노래가 시작돼요. 이번엔 목소리가 안 떨려요.',set:()=>{f().singing=1}},
-    {who:'…',say:'구름이 마이크를 끄고 작게 말해요.'},
-    Q.live[0],
-    {who:'…',say:'한 곡이 끝나요. 하리가 웃고, 바로 두 번째 곡!'},
-    {who:'…',say:'두 곡이 다 끝났어요. 박수 소리가 끝이 없어요.',set:()=>{f().singing=0}},
-    {who:'…',say:'그때, 교장 선생님이 무대 앞으로 와요.',set:()=>{f().live=1}}];
+    {who:'…',say:'구름이 나를 보고 하리 마이크를 가리켜요.'},
+    ...cue(0)]}
    return null},
   talk:()=>[]},
 

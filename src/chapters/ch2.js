@@ -49,6 +49,7 @@ const DICT={
  '사연함':{k:'라디오에 보낼 이야기를 넣는 상자.',e:'story (letter) box'},
  '벌점':{k:'규칙을 안 지키면 받는 나쁜 점수.',e:'penalty point'},
  '반주':{k:'노래하는 사람 뒤에서 나오는 음악.',e:'accompaniment, backing track'},
+ '전주':{k:'노래 앞에 나오는 음악. 전주가 끝나면 노래가 시작돼요.',e:'(song) intro, prelude'},
 };
 /* sounds-alike / looks-alike words, used when a listening question is built */
 const CONFUSE={'괴롭히다':['괴롭다','고르다'],'긴장하다':['건강하다','진정하다'],'얼다':['열다','알다'],'심장':['시장','심판'],'분위기':['분야','위기'],
@@ -726,7 +727,7 @@ const NPC={
    {who:'…',say:'그리고 다음 날 점심시간.',set:()=>{f().nextDay=1}},
    {who:'…',say:'방송실이 북적북적해요. 다온이 진짜 하리를 데려왔어요. 찬은 구경하러 왔어요.',cam:[12,4]},
    {say:'자, 방송 순서 알려 줄게.',cam:null},
-   {say:'{반주|반주} 먼저. 삼 초 뒤에 마이크.'},
+   {say:'{반주|반주} 먼저. {전주|전주} 끝나면 마이크.'},
    Q.gureumL[0],
    {say:'첫 방송이니까 타이밍이 진짜 중요해.'},
    Q.gureumL[1],
@@ -743,7 +744,8 @@ const NPC={
   get after(){return pick([['선배, 다음 곡도 연습하고 있어요.'],['저 아직 손이 떨려요. 그래도 좋아요.']])},
   status:()=>{if(!has('효과'))return f().ready?'todo':'wait'},
   script:()=>!has('효과')&&!f().ready?[{say:'선배… 심장이 터질 것 같아요.',face:'sad'},{who:'…',say:'하리가 물병만 꼭 잡고 있어요.'}]:null,
-  /* you switch the mic on (구름 briefed you on the timing): the song goes on air when you press it at his "지금!" */
+  /* you switch the mic on yourself, at the moment 구름 named ("전주 끝나면"): the 반주 plays and you choose when. Too early, her
+     breathing (and 찬's laugh) go out on air; too late, she sings into a dead mic. Either way 구름 starts the 반주 again: never a fail. */
   talk:()=>{const rest=[
     {who:'…',say:'"방송 중" 램프에 빨간 불이 켜졌어요.',set:()=>{f().onAir=1}},
     {who:'스피커',say:'♪ …오늘도 나는… ♪'},
@@ -762,12 +764,28 @@ const NPC={
     {who:'백구름',say:'부원 넷! 하리야, 마이크 다시 켤게. 마지막 인사.',face:'happy'},
     {w:'즐기다',build:['느티고 여러분,','우리 방송을','즐겨','주세요']},
     {who:'…',say:'복도 여기저기서 박수 소리가 들려요.',set:()=>{f().done=1},finale:1}];
+   const on=steps=>()=>openDialog('유하리',steps(),{npc:NPC.hariMic});
+   const intro=again=>[  // the 전주 plays: the mic now is too early
+    {who:'…',say:again?'반주가 처음부터 다시 나와요.':'반주가 나와요. 피아노 {전주|전주}가 흘러요.'},
+    {who:'…',say:'♪ 띵, 띵… 하리가 눈을 감고 숨을 쉬어요.',choose:[['🎙️ 마이크 켜기',on(early)],['기다리기',on(end)]]}];
+   const end=()=>[  // the 전주 ends: now (waiting is too late)
+    {who:'…',say:'♪ …{전주|전주}가 끝나요. 하리가 입을 열어요.',choose:[['🎙️ 마이크 켜기',on(()=>rest)],['기다리기',on(late)]]}];
+   const early=()=>[
+    {who:'…',say:'딸깍. 스피커에서 하리 숨소리가 나와요. "후우…"'},
+    {who:'남궁찬',say:'푸흡! 숨소리 생방송!',face:'happy'},
+    {who:'오다온',say:'…찬, 네 웃음도 생방송이야.',face:'angry'},
+    {who:'백구름',say:'아직 {전주|전주}야. 끄고… 처음부터!',face:'think'},
+    ...intro(1)];
+   const late=()=>[
+    {who:'…',say:'하리가 노래를 시작해요. 근데 마이크가 꺼져 있어요!'},
+    {who:'유하리',say:'…선배? 제 목소리 나가요?',face:'surprised'},
+    {who:'백구름',say:'괜찮아, 한 번 더. 반주 처음부터!',face:'happy'},
+    ...intro(1)];
    return [
    {say:'선배… 심장이 터질 것 같아요.',face:'sad'},
    {who:'백구름',say:'괜찮아. 노래하는 동안 나만 봐.',turn:{npc:'hariMic',dir:'left'}},
-   {who:'백구름',say:'마이크는 네가 켜. 내가 신호 줄게.'},
-   {who:'백구름',say:'반주 들어간다. 삼, 이, 일…'},
-   {who:'백구름',say:'지금!',choose:[['🎙️ 마이크 켜기',()=>openDialog('유하리',rest,{npc:NPC.hariMic})]]}]}},
+   {who:'백구름',say:'마이크는 네가 켜. {전주|전주} 끝나면 바로.'},
+   ...intro(0)]}},
 
  daonL:{name:'오다온',zone:'bcast',x:13,y:5,dir:'left',look:LOOK.daon,badge:['분위기','재촉하다','연락처','데려오다'],banmal:1,
   hide:()=>!f().nextDay,

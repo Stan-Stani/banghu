@@ -47,7 +47,8 @@
  {talk:'crowd2'},
  {talk:'jungY'},
  {talk:'guard'},
- {talk:'gureumS',wrong:true,shotSay:{text:'방송부예요',name:'17-live'}},
+ // you cue 하리's song: a beat late, then far too late (each a gentle beat and the 반주 again), then 지금 as the 전주 ends
+ {talk:'gureumS',wrong:true,pick:['조금 더','아직','지금'],shotSay:{text:'방송부예요',name:'17-live'}},
  {check:()=>state.f.live,msg:'on air'},
  {check:()=>state.badges.length===C.WORDS.length-3,msg:'all but the finale words'},
  {talk:'principalS',wrong:true,shotSay:{text:'제가 복숭아',name:'18-reveal'}},

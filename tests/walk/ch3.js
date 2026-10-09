@@ -12,8 +12,10 @@
  {talk:'reader'},
  {talk:'chanLib',wrong:true,shotBefore:'05-library-chan'},
  {check:()=>state.f.signed5,msg:'찬 signed'},
- {talk:'jung'},
- {check:()=>state.f.submitted&&!state.items.includes('동아리 등록 신청서'),msg:'form submitted'},
+ {check:()=>!C.NPC.jungLib.hide()&&C.NPC.jung.hide(),msg:'정 선생님 comes to the 도서관 (not in the 교무실)'},
+ {talk:'jungLib'},  // she takes the form right there: no walk back to the 교무실
+ {check:()=>state.f.submitted&&!state.items.includes('동아리 등록 신청서')&&!state.items.includes('찬 독후감'),msg:'form submitted in the 도서관'},
+ {check:()=>C.NPC.jungLib.hide()&&!C.NPC.jung.hide(),msg:'…and she is back at her desk'},
  {talk:'daonBoard',shotBefore:'06-notice-board'},
  {check:()=>state.f.posted,msg:'poster posted'},
  {talk:'box'},

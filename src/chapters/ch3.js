@@ -405,7 +405,7 @@ const ZONES={...SCHOOL({open:['cafe','hall2','music','library','bcast'],gate:{to
    'c':x=>f().rumor&&!f().sawComments?'학생용 컴퓨터예요. 댓글 얘기는 오른쪽 위 책상, 도서부 학생한테 물어봐요.':['학생용 컴퓨터예요. 학교 앱 게시판이 떠 있어요.','컴퓨터 화면에 "게임 금지" 종이가 붙어 있어요.'][x%2],
    'r':'반납 수레예요. 책이 높이 쌓였어요.',
    'p':'화분이에요. 도서부가 매일 물을 줘요.'},
-  npcs:['chanLib','lib','reader','xL1','xL2']}}}),
+  npcs:['chanLib','jungLib','lib','reader','xL1','xL2']}}}),
  street:{name:'학교 앞',reg:'IN FRONT OF SCHOOL',outdoor:1,
   legend:{'S':{tile:'shopSign'},'F':{tile:'shopFront'},'d':{tile:'shopDoor'},'O':{tile:'nrDoor',walk:1},'.':{tile:'streetSidewalk',walk:1},
    't':{tile:'streetTree'},'b':{tile:'busStop'},'R':{tile:'road'},'Z':{tile:'crosswalk',walk:1},'n':{tile:'planter'},'f':{tile:'streetFence'},'G':{tile:'streetGate',walk:1}},
@@ -618,20 +618,13 @@ look:LOOK.hanT,
    if(F.posted)return ['게시판 포스터 봤어요. 예쁘네요.'];
    if(F.submitted)return ['정식 동아리, 축하해요.','포스터는 반장한테 말해요.','다온이는 복도 게시판 앞에 있어요.'];
    return ['맞춤법이 헷갈리면 언제든지 물어봐요.']},
-  status:()=>{const F=f();if(!F.plan)return null;if(!F.formGot)return 'todo';if(!F.signed5)return null;if(!F.submitted)return 'todo';if(F.letter&&!F.oldSpelling)return 'todo'},
+  hide:()=>f().signed5&&!f().submitted,  // from 찬's signature until she has the form, she is at the 도서관 (jungLib)
+  status:()=>{const F=f();if(!F.plan)return null;if(!F.formGot)return 'todo';if(!F.submitted)return null;if(F.letter&&!F.oldSpelling)return 'todo'},
   script:()=>{const F=f();
    if(!F.plan)return [{say:'어, 일찍 왔네요. 방송부는 요즘 어때요?'},{say:'구름이가 아침부터 방송실에 있던데요.'}];
    if(!F.formGot)return null;
    if(!F.signed5)return [{say:'찬은 도서관 왼쪽 구석에 있어요. 2층, 파란 문이에요.'}];
-   if(!F.submitted)return [
-    {who:'…',say:'신청서를 정 선생님한테 냈어요.',take:['동아리 등록 신청서']},
-    {who:'…',say:'다섯 번째 이름: 남궁찬. 글씨가 삐뚤삐뚤해요.'},
-    {say:'다섯 명! 좋아요. 제출 완료예요.',face:'happy'},
-    Q.jungS[0],
-    {say:'네, 주세요. …오, 맞춤법이 많이 좋아졌네요.',take:['찬 독후감']},
-    {say:'이제 방송부는 정식 동아리예요. 축하해요!',face:'happy'},
-    {say:'게시판에 포스터 붙여도 돼요. 반장한테 말해요.'},
-    {say:'다온이는 복도 게시판 앞에 있어요.',set:()=>{f().submitted=1}}];
+   if(!F.submitted)return [{say:'신청서는 도서관에서 받을게요.'}];  // (she is there then: hidden here)
    if(F.letter&&!F.oldSpelling)return [
     {who:'…',say:'정 선생님한테 복숭아 편지를 보여 줬어요.'},
     {say:'"들었읍니다"? 하하, 이거 옛날 맞춤법이에요.',face:'surprised'},
@@ -661,7 +654,7 @@ look:LOOK.hanT,
    Q.jung[2],
    Q.jung[3],
    {say:'빨간 펜이 모자라요. 하하.'},
-   {say:'좀 도와줘요. 다 쓰면 이름도 받아 와요.',award:['가입하다','제출하다','독후감','맞춤법'],set:()=>{f().formGot=1}}]},
+   {say:'좀 도와줘요. 저도 이따 도서관에 들를게요.',award:['가입하다','제출하다','독후감','맞춤법'],set:()=>{f().formGot=1}}]},
 
  imo:{name:'매점 이모',zone:'cafe',x:18,y:1,dir:'down',look:LOOK.imo,badge:['복숭아'],
   get after(){return f().aired?pick([['사연 잘 들었어요. 이모 눈물 났어요.'],['이모가 복숭아? 하하, 아직도 웃겨요.']])
@@ -781,7 +774,7 @@ look:LOOK.hanT,
   status:()=>{if(!has('답답하다'))return f().formGot?'todo':null},
   script:()=>{const F=f();
    if(!F.formGot)return [{say:'쉿. 나 지금 엄청 바빠.'},{say:'독후감… 으, 세 줄 썼어.',face:'sad'}];
-   if(F.signed5&&!F.submitted)return [{say:'신청서 빨리 제출해. 내 이름 잘 보이지?',face:'happy'}];
+   if(F.signed5&&!F.submitted)return [{say:'선생님 저기 계셔. 빨리 내. 내 이름 잘 보이지?',face:'happy'}];
    return null},
   talk:()=>[
    {who:'…',say:'찬이 책을 펴고 있어요. 근데 책이 거꾸로예요.'},
@@ -803,7 +796,25 @@ look:LOOK.hanT,
    {say:'당연하지! 이름 크게 쓸게.',face:'happy'},
    {who:'…',say:'신청서에 다섯 번째 이름이 생겼어요.'},
    {say:'이 독후감도 선생님한테 같이 내 줘.',give:'찬 독후감'},
-   {say:'이제 답답한 거 없다! 시원하다!',face:'happy',award:['답답하다'],set:()=>{f().signed5=1}}]},
+   {say:'이제 답답한 거 없다! 시원하다!',face:'happy'},
+   {who:'…',say:'그때 도서관 문이 열려요. 정 선생님이에요!',award:['답답하다'],set:()=>{f().signed5=1},walk:{npc:'jungLib',from:[9,10]}}]},
+
+ /* 정 선생님 comes by the 도서관 as 찬 signs and takes the form there: no walk back to the 교무실 (owner's call, 2026-10-09) */
+ jungLib:{name:'정 선생님',zone:'library',x:6,y:7,dir:'left',look:LOOK.jung,
+  hide:()=>!f().signed5||!!f().submitted,
+  status:()=>'todo',
+  talk:()=>[
+   {say:'찬, 다 썼어요? 소리가 복도까지 들려요.',face:'think'},
+   {who:'남궁찬',say:'헉, 선생님! 두 장 다 썼어요!',face:'surprised'},
+   {say:'잘했어요. 신청서도 여기서 받을게요.',face:'happy'},
+   {who:'…',say:'신청서를 정 선생님한테 냈어요.',take:['동아리 등록 신청서']},
+   {who:'…',say:'다섯 번째 이름: 남궁찬. 글씨가 삐뚤삐뚤해요.'},
+   {say:'다섯 명! 좋아요. 제출 완료예요.',face:'happy'},
+   Q.jungS[0],
+   {say:'네, 주세요. …오, 맞춤법이 많이 좋아졌네요.',take:['찬 독후감']},
+   {say:'이제 방송부는 정식 동아리예요. 축하해요!',face:'happy'},
+   {say:'게시판에 포스터 붙여도 돼요. 반장한테 말해요.'},
+   {say:'다온이는 복도 게시판 앞에 있어요.',set:()=>{f().submitted=1},leave:{npc:'jungLib',to:[9,11]}}]},
 
  lib:{name:'서지민',zone:'library',x:14,y:2,dir:'down',look:LOOK.jimin,badge:['댓글','비밀'],hold:()=>f().rumor&&!f().sawComments?'phone':null,
   get after(){const F=f();
@@ -987,7 +998,7 @@ function questText(){
  if(!F.plan)return '방송실 · 구름이랑 얘기하기';
  if(!F.formGot)return '교무실 · 등록 신청서 받기';
  if(!F.signed5)return '도서관 · 찬 이름 받기';
- if(!F.submitted)return '교무실 · 신청서 제출하기';
+ if(!F.submitted)return '도서관 · 정 선생님한테 제출하기';
  if(!F.posted||!has('붙다'))return '복도 게시판 · 포스터 붙이기';  // until 다온's scene at the board ends
  if(!F.rumor)return '복도 · 찬 만나기';
  if(!F.sawComments)return '도서관 · 댓글 확인하기';
