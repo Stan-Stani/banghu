@@ -39,7 +39,7 @@ globalThis.GRAMMAR_NOTES={
    ['표준국어대사전 「-거든」 (국립국어원)','https://stdict.korean.go.kr/search/searchView.do?word_no=390313&searchKeywordTo=3'],  /*nolex*/
    ['한국어교수학습샘터 문법·표현 「-거든2」 (국립국어원)','https://kcenter.korean.go.kr/kcenter/search/dgrammar/view.do?mode=view&id=216'],  /*nolex*/
    ['한국어교수학습샘터 문법·표현 「-거든1」 (국립국어원)','https://kcenter.korean.go.kr/kcenter/search/dgrammar/view.do?mode=view&id=96']]},  /*nolex*/
- buteo:{t:'N부터: 이것 먼저 해요',
+ buteo:{t:'부터: 이것 먼저 해요',
   lines:[
    ['"부터"는 보통 시작을 말해요. "아홉 시부터", "내일부터"처럼요.',"부터 usually marks where something starts: 아홉 시부터 (from nine o'clock), 내일부터 (from tomorrow).",[1,2,3]],
    ['"밥부터 먹어"의 "부터"는 순서예요. 다른 일보다 밥을 먼저 먹으라는 말이에요.',"In 밥부터 먹어 it is about order: eat before you do anything else.",[2,3]],
