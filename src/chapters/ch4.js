@@ -313,7 +313,7 @@ const ZONES={...SCHOOL({open:['bcast','hall2','music','library'],gate:{to:'town'
   things:{'#':['벽에 먼지가 많아요.','구름이 벽을 닦았어요. 거기만 하얘요.','벽에 지난 방송 순서표가 붙어 있어요.'],
    'r':['카세트테이프가 가득해요. 다 옛날 노래예요.','테이프 이름이 다 손글씨예요.','테이프 하나에 "1994 축제"라고 써 있어요.'],
    'A':()=>f().done?'"방송 중" 램프. 아직 따뜻해요.':f().fixed?'"방송 중" 램프. 이제 불이 들어와요.':'"방송 중" 램프예요. 불이 꺼졌어요.',
-   'b':()=>f().done?'사연함에 새 쪽지! 글씨가 처음 보는 글씨예요.':'사연함이에요. 복도 구멍으로 사연이 벌써 열 통 들어왔어요.',
+   'b':()=>f().done?'사연함에 벌써 사연이 많아요. 방송 듣고 쓴 사연이에요.':'사연함이에요. 복도 구멍으로 사연이 벌써 열 통 들어왔어요.',
    'O':['빛바랜 포스터예요. 아주 옛날 거예요.','포스터에 마이크 그림이 있어요.'],
    'W':['창문이 먼지 때문에 뿌예요.','창밖에 학교 앞 길이 보여요.'],
    'M':()=>f().fixed?'방송 기계예요. 초록 불이 깜빡깜빡해요.':f().taesikCome?{steps:fixTalk()}:'방송 기계예요. 까맣게 탔어요. 탄 냄새가 나요.',  // with 태식 here, the mixer starts the fix
@@ -324,7 +324,7 @@ const ZONES={...SCHOOL({open:['bcast','hall2','music','library'],gate:{to:'town'
   npcs:['gureumA','gureumF','daonA']},
  hall:{locks:{class:()=>'2학년 3반 교실이에요. 다들 축제 준비로 바빠요.'},
   legend:{'b':{tile:'sayeonSlot'}},paint:[[26,9,'b']],  // the 사연함's slot, right of the 방송실 door (the box is behind the wall)
-  things:{'b':()=>f().done?'방송실 사연함 구멍이에요. 봄에 여기로 새 쪽지가 들어왔어요.':'방송실 사연함 구멍이에요. "축제 사연도 환영!"',
+  things:{'b':()=>f().done?'방송실 사연함 구멍이에요. 오늘 사연이 많이 들어왔어요.':'방송실 사연함 구멍이에요. "축제 사연도 환영!"',
    '#':['하얀 벽이에요. 아래쪽은 초록색이에요.','벽에 "복도에서 뛰지 마세요" 종이가 있어요.','벽에 축제 풍선이 하나 붙어 있어요.'],
    'N':x=>f().gotPosters?'게시판에도 방송부 광고가! "토요일 두 시"':['게시판: "축제 이번 주 토요일!"','게시판: "심화반 신청은 교무실로."'][x%2],
    'V':['창문으로 2학년 3반 교실이 보여요.','교실에서 축제 준비 소리가 들려요.'],
@@ -551,6 +551,7 @@ const NPC={
  kid:{name:'1학년 학생',zone:'hall',x:20,y:7,dir:'up',look:LOOK.kid,
   script:()=>{
    if(f().done)return [{say:'선배! 교장 선생님이 복숭아였어요?!',face:'surprised'},{say:'우리 반 단톡방 지금 난리 났어요.'}];
+   if(f().live)return [{say:'선배! 하리 선배 노래 들었어요!',face:'happy'},{say:'근데 교장 선생님이 왜 무대에 오셨어요?'}];
    if(f().clue)return [{say:'축제다! 선배, 방송 몇 시예요?',face:'happy'},{say:'두 시요? 맨 앞에서 들을게요!'}];
    if(f().promise)return [{say:'선배! 편의점에서 방송부 포스터 봤어요!'},{say:'우리 엄마도 보러 온대요.',face:'happy'}];
    return null},
@@ -660,6 +661,8 @@ const NPC={
  pyeon:{name:'편의점 사장님',zone:'town',x:18,y:3,dir:'down',look:LOOK.pyeon,
   status:()=>!f().shopP&&hasItem(POS)?'todo':null,
   script:()=>{
+   if(f().live)return [{say:'방송, 여기서도 다 들렸어요!',face:'happy'},{say:'나도 라디오 듣는 거 무척 좋아해요.'}];
+   if(f().fixed)return [{say:'퓨즈 잘 맞았어요? 다행이에요.',face:'happy'},{say:'축제 날 방송 꼭 들을게요.'}];
    if(f().shopP)return [{say:'퓨즈는 그냥 가져가요. 대신 방송 잘해요.'},{say:'나도 라디오 듣는 거 무척 좋아해요.',face:'happy'}];
    if(!hasItem(POS))return [{say:'어서 오세요. 컵라면은 저쪽이에요.'}];
    return [
@@ -833,7 +836,7 @@ const NPC={
 
  crowd1:{name:'2학년 학생',zone:'yard',x:9,y:8,dir:'right',look:LOOK.crowd1,banmal:1,
   hide:()=>!f().clue,
-  script:()=>f().done?[{say:'교장 선생님 디제이였대! 끝내준다!',face:'happy'}]:[{say:'방송부 생방송 언제 해? 두 시?'},{say:'찬이 농담만 안 하면 좋겠다.',face:'think'}],
+  script:()=>f().done?[{say:'교장 선생님 디제이였대! 끝내준다!',face:'happy'}]:f().live?[{say:'찬이 농담, 생각보다 웃겼어.',face:'happy'},{say:'근데 교장 선생님은 왜 무대 앞에 있어?',face:'think'}]:[{say:'방송부 생방송 언제 해? 두 시?'},{say:'찬이 농담만 안 하면 좋겠다.',face:'think'}],
   talk:()=>[]},
 
  crowd2:{name:'3학년 학생',zone:'yard',x:15,y:10,dir:'up',look:LOOK.crowd2,banmal:1,
@@ -846,6 +849,7 @@ const NPC={
   hide:()=>!f().clue,
   status:()=>f().jungBye?undefined:null,
   script:()=>f().done?(f().jungBye?null:[{say:'교장 선생님 그런 표정, 처음 봤어요.',face:'happy'},{say:'수고했어요. 다음 주 독후감은… 농담이에요.',set:()=>{f().jungBye=1}}])
+   :f().live?[{say:'방송 잘 들었어요. 맨 앞에서요.',face:'happy'},{say:'교장 선생님이 기다리시네요. 어서 가 봐요.'}]
    :[{say:'드디어 오늘이네요. 떨려요?'},{say:'떨려도 괜찮아요. 맨 앞에서 들을게요.',face:'happy'}],
   talk:()=>[]},
 
@@ -854,7 +858,7 @@ const NPC={
   get after(){return pick([['여기는 느티고 방송부. 다음 주에도 들을게요.'],['삼십 년 만에 마이크를 잡았어요. 떨렸어요.']])},
   talk:()=>[
    {say:'복숭아 농담, 잘 들었어요. 하하.',face:'happy',cam:[20,6]},  // the stage and her, above the box
-   {who:'…',say:'앨범 사진을 보여 드렸어요.',take:[PHOTO]},
+   {who:'…',say:'앨범 사진을 보여 드렸어요.'},  // shown, not handed over: it stays in the bag
    {say:'…어머. 그 사진을 찾았어요?',face:'surprised'},
    {say:'네. 제가 복숭아예요. 1994년 디제이.',face:'happy'},
    {who:'남궁찬',say:'헉! 진짜 교장 선생님이었어!',face:'surprised'},
@@ -958,9 +962,9 @@ const FOLLOW={name:'마태식',look:LOOK.taesik,when:()=>!!f().taesikCome&&!f().
 function fixTalk(){return NPC.gureumF.talk().map(s=>s.who?s:{...s,who:'백구름'})}
 
 const INTRO=[{who:'…',say:'축제 사흘 전. 방송실에 탄 냄새가 나요.'},{who:'…',say:'방송 기계에서 아직 연기가 조금 나요.'}];
-const DONE=[{say:'구름 엄마도 축제 방송을 들었대요.',set:()=>{f().quiet=1}},  // the epilogue: festival night, then a time cut over black (winter, spring)
+const DONE=[{say:'구름 엄마도 축제 방송을 들었대요.',set:()=>{f().quiet=1}},'"목소리 좋더라." 구름이 그 말을 세 번 했어요.',  // the epilogue: festival night, then a time cut over black (winter, spring)
  {say:'겨울. 태식 선배가 대학에 합격했어요.',black:1},'그 소식은 점심 방송으로 들었어요.','봄. 사연함에 새 쪽지가 있어요.',
- '교장 선생님 글씨가 아니에요.','"새 학기 사연 있어요. —복숭아 2호"','4교시 끝!',{say:'방송실 복습 노트북에서 단어를 다시 볼 수 있어요.',black:0}];
+ '교장 선생님 글씨가 아니에요.','"새 학기 사연 있어요. —복숭아 2호"','4교시 끝!',{say:'다시 축제 날, 오후 네 시예요.',black:0},'방송실 복습 노트북에서 단어를 다시 볼 수 있어요.'];
 
 function questText(){
  const F=f();

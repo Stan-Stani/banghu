@@ -61,7 +61,7 @@ canvas{display:block;width:100%;height:auto;image-rendering:pixelated;image-rend
 .spk.on{color:var(--cyan);border-color:var(--cyan)}
 .txt{font-family:var(--body);font-size:1.12rem;font-weight:600;min-height:1.5em;word-break:keep-all}
 .gl{color:var(--amber-soft);text-decoration:underline dotted var(--amber);text-underline-offset:3px;cursor:help}
-.more{align-self:flex-end;font-size:.7rem;color:var(--amber);animation:blink 1s steps(2) infinite;line-height:1}
+.more{position:absolute;right:10px;bottom:1px;font-size:.7rem;color:var(--amber);animation:blink 1s steps(2) infinite;line-height:1}  /* in the box's bottom padding: no row of its own, so the box doesn't grow when it appears */
 @keyframes blink{50%{opacity:0}}
 .choices{display:flex;flex-direction:row;flex-wrap:wrap;gap:4px}  /* side by side when they fit (three short answers on one line), else two per row; a leftover keeps its column's width */
 .choice{font-family:var(--body);font-size:1rem;font-weight:600;text-align:center;background:var(--glass-2);color:var(--glass-ink);border:1px solid var(--glass-edge);border-radius:5px;padding:5px 8px;cursor:pointer;word-break:keep-all;display:flex;flex-wrap:wrap;gap:0 6px;justify-content:center;align-items:center;flex:1 1 30%;max-width:calc(50% - 2px);box-sizing:border-box}

@@ -39,7 +39,7 @@ globalThis.CULTURE_NOTES={
   lines:[
    ['수능은 대학에 가려고 보는 시험이에요. 해마다 11월에 봐요.','The 수능 is the exam you take to get into university. It is held every year in November.',[1,2]],
    ['2026학년도 수능에는 약 49만 명이 시험을 봤어요.','About 494,000 people sat the 수능 for the 2026 school year.',[3]],
-   ['6월하고 9월에는 수능 연습 시험인 "모의평가"가 있어요. 고3 학생하고 졸업생이 봐요.','In June and September there are 수능 practice exams (모의평가) for 고3 students and graduates.',[4,5]],
+   ['6월하고 9월에는 수능 연습 시험인 "모의평가"가 있어요. 고등학교 3학년(고3) 학생하고 졸업생이 봐요.','In June and September there are 수능 practice exams (모의평가) for 고3 (third-year high-school) students and graduates.',[4,5]],
    ['교육청이 하는 "학력평가"도 있어요. "모의고사"라고도 해요.','There are also 학력평가 exams run by the education offices; they are called 모의고사 too.',[6,7]],
    ['2025년에 고등학생 63%가 사교육을 받았어요. 학원이나 과외 같은 거예요.','In 2025, 63% of high-school students took private education, such as 학원 classes or tutoring.',[8]],
    ['서울에서는 학원 수업이 밤 10시까지만 돼요.','In Seoul, 학원 classes may run only until 10 p.m.',[9,10]],
