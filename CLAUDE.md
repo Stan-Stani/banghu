@@ -39,3 +39,4 @@ several times in one 교시; review right after a word is taught; the sleeper si
 **문화 노트** (`src/culture.js`): the real-world culture behind a story moment, unlocked by a step's or phone's `culture:'id'`, read in
 the journal. Fact-check every line against the sources themselves (open pages that block plain fetches in a real browser), cite each
 line by source number, and drop or soften any claim no source supports. `validate.mjs` checks the citations and links.
+The **문법 노트** (`src/grammar.js`) follow the same rule (fact-check, cite, soften), and `validate.mjs` checks theirs too.

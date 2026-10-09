@@ -86,17 +86,21 @@ for(const CH of ctx.CHAPTERS){
 {const sh=fs.readFileSync('src/shell.html','utf8'),o=(sh.match(/<style/g)||[]).length,c=(sh.match(/<\/style>/g)||[]).length;
  if(o!==c)errs.push(`src/shell.html: ${o} <style> but ${c} </style>`);
  const head=sh.slice(sh.lastIndexOf('</style>')+8,sh.indexOf('</head>'));if(/[{}]/.test(head.replace(/<[^>]*>/g,'')))errs.push('src/shell.html: CSS-looking text after the last </style> (it would show on the page)')}
-// 문화 노트: every line cites real sources (numbers into src), every source is a link, every culture:'id' a chapter uses exists
+// 문화 노트 and 문법 노트 cite their sources the same way: every source has a title and an https link, and every explanation line
+// cites at least one of them (numbers into src)
+const citations=(kind,k,n)=>{
+ if(!Array.isArray(n.src)||!n.src.length)errs.push(`${kind} ${k}: no sources`);
+ (n.src||[]).forEach(([t,u],i)=>{if(!t||!/^https:\/\//.test(u||''))errs.push(`${kind} ${k}: source ${i+1} needs a title and an https link`)});
+ (n.lines||[]).forEach(([,,s],i)=>{if(!Array.isArray(s)||!s.length||s.some(x=>!(x>=1&&x<=(n.src||[]).length)))errs.push(`${kind} ${k} line ${i+1}: must cite sources 1–${(n.src||[]).length}`)})};
+// 문화 노트: every line cites real sources, every source is a link, every culture:'id' a chapter uses exists
 {const N=ctx.CULTURE_NOTES||{};
  for(const [k,n] of Object.entries(N)){
   if(!n.t||!Array.isArray(n.lines)||!n.lines.length)errs.push(`culture ${k}: needs a title and lines`);
-  if(!Array.isArray(n.src)||!n.src.length)errs.push(`culture ${k}: no sources`);
-  (n.src||[]).forEach(([t,u],i)=>{if(!t||!/^https:\/\//.test(u||''))errs.push(`culture ${k}: source ${i+1} needs a title and an https link`)});
-  (n.lines||[]).forEach(([ko,en,s],i)=>{if(!ko||!en)errs.push(`culture ${k} line ${i+1}: needs Korean and English`);
-   if(!Array.isArray(s)||!s.length||s.some(x=>!(x>=1&&x<=(n.src||[]).length)))errs.push(`culture ${k} line ${i+1}: must cite sources 1–${(n.src||[]).length}`)})}
+  (n.lines||[]).forEach(([ko,en],i)=>{if(!ko||!en)errs.push(`culture ${k} line ${i+1}: needs Korean and English`)});
+  citations('culture',k,n)}
  for(const f of fs.readdirSync('src/chapters'))for(const m of fs.readFileSync('src/chapters/'+f,'utf8').matchAll(/culture:'([^']+)'/g))if(!N[m[1]])errs.push(`${f}: culture:'${m[1]}' has no note in src/culture.js`)}
-// 문법 노트: every note has a title, a few lines and a few examples (Korean and English), every grammar:'id' a chapter uses exists,
-// and every note is unlocked by some step (the story line whose grammar it explains)
+// 문법 노트: every note has a title, a few lines and a few examples (Korean and English), its lines cite its sources like a 문화 노트's,
+// every grammar:'id' a chapter uses exists, and every note is unlocked by some step (the story line whose grammar it explains)
 {const N=ctx.GRAMMAR_NOTES||{},used=new Set();
  for(const f of fs.readdirSync('src/chapters'))for(const m of fs.readFileSync('src/chapters/'+f,'utf8').matchAll(/grammar:'([^']+)'/g)){used.add(m[1]);if(!N[m[1]])errs.push(`${f}: grammar:'${m[1]}' has no note in src/grammar.js`)}
  for(const [k,n] of Object.entries(N)){
@@ -104,5 +108,6 @@ for(const CH of ctx.CHAPTERS){
   if(!Array.isArray(n.ex)||!n.ex.length)errs.push(`grammar ${k}: needs examples (the game's line first)`);
   if((n.lines||[]).length>4||(n.ex||[]).length>3)errs.push(`grammar ${k}: keep it short (at most 4 lines and 3 examples)`);
   for(const [what,a] of [['line',n.lines||[]],['example',n.ex||[]]])a.forEach(([ko,en],i)=>{if(!ko||!en)errs.push(`grammar ${k} ${what} ${i+1}: needs Korean and English`);else if(/[A-Za-z]/.test(ko))errs.push(`grammar ${k} ${what} ${i+1}: English in the Korean`)});
+  citations('grammar',k,n);
   if(!used.has(k))errs.push(`grammar ${k}: no step unlocks it (add grammar:'${k}' to the story line it explains)`)}}
 console.log(errs.length?errs.join('\n'):`ok · ${ctx.CHAPTERS.length} chapter(s), ${allWords.size} words`);process.exit(errs.length?1:0);

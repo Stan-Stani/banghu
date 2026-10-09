@@ -1,9 +1,11 @@
 # 문법 노트 (grammar notes)
 
 Twelve short notes, about three per 교시. Each one explains the grammar of one story line and unlocks when that line is said. The
-step carries `grammar:'id'`, and the note's text is in `src/grammar.js` as `{t, lines:[[ko,en]…], ex:[[ko,en]…]}`. A note gets the
-same chip as a 문화 노트 ("📖 문법 노트 · title"). It has its own list under the 문법 노트 heading in the 일지, and its card shows the lines
-first, then the examples under 예문. English is behind ?, and every Korean word can be tapped. Seen and read notes are saved under
+step carries `grammar:'id'`, and the note's text is in `src/grammar.js` as `{t, lines:[[ko,en,[source numbers]]…], ex:[[ko,en]…],
+src:[[title,url]…]}`. A note gets the same chip as a 문화 노트 ("📖 문법 노트 · title"). It has its own list under the 문법 노트 heading
+in the 일지, and its card shows the lines (with their source numbers) first, then the examples under 예문, then the sources under 출처.
+English is behind ?, and every Korean word can be tapped. The sources and every change the fact-check made are in
+`notes/grammar-sources.md`. Seen and read notes are saved under
 `banghu-grammar` and `banghu-grammarRead`. The 문화 노트 keys are not changed.
 
 Every note follows the same layout: a title (the pattern and a short gist), 2–4 lines of simple 해요체, and 2–3 examples. The

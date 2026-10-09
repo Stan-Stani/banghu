@@ -220,7 +220,8 @@ body.talkopen .gloss{position:fixed;top:calc(env(safe-area-inset-top,0px) + 14px
 .pphoto.old canvas{filter:sepia(.55) contrast(.95) brightness(1.03)}
 .pcap{font-family:var(--body);font-weight:700;font-size:.95rem;color:#3B3428;text-align:center;word-break:keep-all}
 .items li[data-k]{cursor:pointer}.items li.sel{outline:2px solid var(--ink)}
-/* 문화 노트 and 문법 노트 in the journal: one look for both cards; a 문법 노트 lists its examples (예문) under its lines */
+/* 문화 노트 and 문법 노트 in the journal: one look for both cards; a 문법 노트 lists its examples (예문) under its lines; both show
+   each line's source numbers and the sources (출처) as links */
 .notes{display:flex;flex-wrap:wrap;gap:6px}
 .notes .nb{font-family:var(--body);font-weight:600;font-size:.9rem;border:1px solid var(--seam);background:var(--hull);color:var(--ink);border-radius:6px;padding:6px 10px;cursor:pointer}
 .notes .none{font-size:.85rem;color:var(--muted);margin:0}
@@ -230,9 +231,9 @@ body.talkopen .gloss{position:fixed;top:calc(env(safe-area-inset-top,0px) + 14px
 :is(#noteCard,#gnoteCard) .en{display:block;font-family:var(--body);font-weight:400;font-size:.85rem;color:var(--glass-muted);margin-top:2px}
 #gnoteCard .nex{display:flex;flex-direction:column;gap:4px;margin-top:2px}
 #gnoteCard .nex>b{font-size:.75rem;color:var(--glass-muted)}
-#noteCard .src{font-size:.75rem;color:var(--glass-muted);line-height:1.45;display:flex;flex-direction:column;gap:3px}
-#noteCard .src a{color:var(--amber-soft)}
-#noteCard sup{font-family:var(--mono);font-size:.62rem;color:var(--amber);margin-left:2px}
+:is(#noteCard,#gnoteCard) .src{font-size:.75rem;color:var(--glass-muted);line-height:1.45;display:flex;flex-direction:column;gap:3px}
+:is(#noteCard,#gnoteCard) .src a{color:var(--amber-soft)}
+:is(#noteCard,#gnoteCard) sup{font-family:var(--mono);font-size:.62rem;color:var(--amber);margin-left:2px}
 </style>
 </head><body>
 <div class="wrap">
