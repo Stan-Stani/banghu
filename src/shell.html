@@ -96,6 +96,14 @@ canvas{display:block;width:100%;height:auto;image-rendering:pixelated;image-rend
 .dlg.attop{top:6px;bottom:auto}  /* near the bottom of the map the box sits at the top (the camera stays in the room); toasts and word help move down */
 .screen:has(.dlg.attop) .toast{top:auto;bottom:10px}.screen:has(.dlg.attop) .gloss{top:auto;bottom:10px}
 .toast{position:absolute;left:50%;top:6px;transform:translateX(-50%);line-height:1.3;background:var(--amber);color:var(--amber-ink);font-family:var(--body);font-weight:600;font-size:.88rem;padding:4px 12px;border-radius:5px;white-space:nowrap;max-width:90%;overflow:hidden;text-overflow:ellipsis;z-index:3;box-shadow:0 3px 0 #9A5E14}
+/* a new 문화 노트: stays up until read, bobs a little, › says tap me; hidden while someone is talking (it comes up when they finish) */
+.notechip{position:absolute;left:50%;top:6px;transform:translateX(-50%);z-index:6;display:flex;align-items:center;gap:8px;max-width:92%;font-family:var(--body);font-weight:700;font-size:.86rem;line-height:1.3;color:var(--amber-ink);background:var(--amber);border:2px solid var(--amber-ink);border-radius:999px;padding:5px 10px 5px 13px;box-shadow:0 2px 0 rgba(0,0,0,.35);cursor:pointer;animation:chipBob 1.6s ease-in-out infinite}
+.notechip span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.notechip b{font-size:1.1rem;line-height:1}
+.notechip[hidden]{display:none}
+@keyframes chipBob{50%{transform:translateX(-50%) translateY(2px)}}
+.screen:has(.dlg:not([hidden])) .notechip{display:none}
+.screen:has(.notechip:not([hidden])) .toast{top:44px}
 
 .pad{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:6px;touch-action:none}
 .dpad{display:grid;grid-template-columns:repeat(3,56px);grid-template-rows:repeat(3,56px);filter:drop-shadow(0 3px 0 var(--pad-sh))}
@@ -181,7 +189,7 @@ canvas{display:block;width:100%;height:auto;image-rendering:pixelated;image-rend
 .tl-empty{color:var(--glass-muted);margin:0}
 body.talkopen .gloss{position:fixed;top:calc(env(safe-area-inset-top,0px) + 14px);left:50%;transform:translateX(-50%);width:min(440px,calc(100% - 32px));z-index:20;box-sizing:border-box}
 @media (max-width:370px){.dpad{grid-template-columns:repeat(3,48px);grid-template-rows:repeat(3,48px)}.ab button{width:56px;height:56px}.wlist{grid-template-columns:repeat(3,1fr)}h1{font-size:1.35rem}}
-@media (prefers-reduced-motion: reduce){.more{animation:none}.fade{transition:none}.tile.bad{animation:none}.tile.hint{animation:none}}
+@media (prefers-reduced-motion: reduce){.notechip{animation:none}.more{animation:none}.fade{transition:none}.tile.bad{animation:none}.tile.hint{animation:none}}
 /* the phone screen: an app filling the game view (status bar + app header say "phone"); the D-pad and A/B stay below */
 #phonePanel{position:absolute;inset:0;z-index:4;display:flex;line-height:1.3}
 .screen:has(#phonePanel:not([hidden])) .gloss{z-index:6}

@@ -35,6 +35,13 @@
  {check:()=>ZID==='cafe'&&player.x===11&&player.y===1&&player.dir==='down',msg:'the right cafeteria door tile opens too; you arrive at the top, facing down'},
  {talk:'chan',wrong:true,shotBefore:'07-cafeteria',shotBuild:'07b-sentence-build'},
  {check:()=>cultureSeen.includes('teok'),msg:'찬\'s 생일턱 line adds the 생일 턱 문화 노트'},
+ // the new note waits as a tappable chip until it's read; tapping it opens the 일지 on that note
+ {pause:500},
+ {check:()=>!$('noteChip').hidden&&$('noteChip').textContent.includes('턱'),msg:'a new 문화 노트 waits on the screen as a chip'},
+ {pause:0,shot:'08a-note-chip'},
+ {check:()=>{$('noteChip').click();return !$('panel').hidden&&!$('noteCard').hidden&&$('noteCard').textContent.includes('턱')&&$('noteChip').hidden},msg:'tapping the chip opens the 일지 on that note, and the chip goes away'},
+ {pause:300,shot:'08b-note-open'},
+ {check:()=>{cancel();return $('panel').hidden},msg:'B closes the 일지'},
  {check:()=>state.items.includes('바나나우유'),msg:'banana milk'},
  {check:()=>player.sit&&player.x===10&&player.y===6,msg:'sitting across the table from 찬'},
  {talk:'imo',wrong:true,shotBefore:'08-school-store'},

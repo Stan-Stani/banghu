@@ -96,6 +96,14 @@ canvas{display:block;width:100%;height:auto;image-rendering:pixelated;image-rend
 .dlg.attop{top:6px;bottom:auto}  /* near the bottom of the map the box sits at the top (the camera stays in the room); toasts and word help move down */
 .screen:has(.dlg.attop) .toast{top:auto;bottom:10px}.screen:has(.dlg.attop) .gloss{top:auto;bottom:10px}
 .toast{position:absolute;left:50%;top:6px;transform:translateX(-50%);line-height:1.3;background:var(--amber);color:var(--amber-ink);font-family:var(--body);font-weight:600;font-size:.88rem;padding:4px 12px;border-radius:5px;white-space:nowrap;max-width:90%;overflow:hidden;text-overflow:ellipsis;z-index:3;box-shadow:0 3px 0 #9A5E14}
+/* a new 문화 노트: stays up until read, bobs a little, › says tap me; hidden while someone is talking (it comes up when they finish) */
+.notechip{position:absolute;left:50%;top:6px;transform:translateX(-50%);z-index:6;display:flex;align-items:center;gap:8px;max-width:92%;font-family:var(--body);font-weight:700;font-size:.86rem;line-height:1.3;color:var(--amber-ink);background:var(--amber);border:2px solid var(--amber-ink);border-radius:999px;padding:5px 10px 5px 13px;box-shadow:0 2px 0 rgba(0,0,0,.35);cursor:pointer;animation:chipBob 1.6s ease-in-out infinite}
+.notechip span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.notechip b{font-size:1.1rem;line-height:1}
+.notechip[hidden]{display:none}
+@keyframes chipBob{50%{transform:translateX(-50%) translateY(2px)}}
+.screen:has(.dlg:not([hidden])) .notechip{display:none}
+.screen:has(.notechip:not([hidden])) .toast{top:44px}
 
 .pad{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:6px;touch-action:none}
 .dpad{display:grid;grid-template-columns:repeat(3,56px);grid-template-rows:repeat(3,56px);filter:drop-shadow(0 3px 0 var(--pad-sh))}
@@ -181,7 +189,7 @@ canvas{display:block;width:100%;height:auto;image-rendering:pixelated;image-rend
 .tl-empty{color:var(--glass-muted);margin:0}
 body.talkopen .gloss{position:fixed;top:calc(env(safe-area-inset-top,0px) + 14px);left:50%;transform:translateX(-50%);width:min(440px,calc(100% - 32px));z-index:20;box-sizing:border-box}
 @media (max-width:370px){.dpad{grid-template-columns:repeat(3,48px);grid-template-rows:repeat(3,48px)}.ab button{width:56px;height:56px}.wlist{grid-template-columns:repeat(3,1fr)}h1{font-size:1.35rem}}
-@media (prefers-reduced-motion: reduce){.more{animation:none}.fade{transition:none}.tile.bad{animation:none}.tile.hint{animation:none}}
+@media (prefers-reduced-motion: reduce){.notechip{animation:none}.more{animation:none}.fade{transition:none}.tile.bad{animation:none}.tile.hint{animation:none}}
 /* the phone screen: an app filling the game view (status bar + app header say "phone"); the D-pad and A/B stay below */
 #phonePanel{position:absolute;inset:0;z-index:4;display:flex;line-height:1.3}
 .screen:has(#phonePanel:not([hidden])) .gloss{z-index:6}
@@ -4853,7 +4861,7 @@ globalThis.CULTURE_NOTES={
 };
 </script>
 <script>
-/* GENERATED from walk-engine/engine.js (7224642) — do not edit here; edit walk-engine and run its sync.sh. */
+/* GENERATED from walk-engine/engine.js (0c302d7) — do not edit here; edit walk-engine and run its sync.sh. */
 /* =====================================================================
    Engine: tiles, movement, zones, dialogue, spaced review, speech, saving.
    ===================================================================== */
@@ -5447,9 +5455,15 @@ function closePhone(){if(!phoneOpen)return;phoneOpen=false;$('phonePanel').hidde
 if($('phonePanel'))$('phonePanel').addEventListener('click',e=>{const w=e.target.closest('.w');if(w){e.stopPropagation();showWord(w)}});
 const CULTURE=globalThis.CULTURE_NOTES||{};  // a game's notes (its own file sets globalThis.CULTURE_NOTES)
 let cultureSeen=[];try{cultureSeen=JSON.parse(store.get(KEY('culture'))||'[]')}catch(e){}
+/* A new note waits on the screen as a tappable chip (#noteChip, made here when the shell has the notes section) until you
+   read it: tapping it opens the 일지 on that note. Notes seen before this existed count as read. */
+let cultureRead;try{cultureRead=JSON.parse(store.get(KEY('cultureRead'))||'null')}catch(e){}if(!Array.isArray(cultureRead))cultureRead=cultureSeen.slice();
+function noteChip(){const el=$('noteChip');if(!el)return;const un=cultureSeen.filter(k=>CULTURE[k]&&!cultureRead.includes(k));
+ el.hidden=!un.length;if(un.length){const k=un[un.length-1];el.dataset.k=k;el.innerHTML=`<span>📖 문화 노트 · ${CULTURE[k].t}</span><b>›</b>`}}
+function readNote(k){if(!cultureRead.includes(k)){cultureRead.push(k);store.set(KEY('cultureRead'),JSON.stringify(cultureRead))}noteChip()}
 function unlockCulture(k){
  if(!CULTURE[k]||cultureSeen.includes(k))return;cultureSeen.push(k);store.set(KEY('culture'),JSON.stringify(cultureSeen));
- setTimeout(()=>{toast('문화 노트에 추가: '+CULTURE[k].t);sfx('badge')},350);
+ setTimeout(()=>{sfx('badge');noteChip()},350);
 }
 function renderNotes(){
  if(!$('notes'))return;const ks=cultureSeen.filter(k=>CULTURE[k]);
@@ -5462,10 +5476,12 @@ function showNote(k){
   +`<ol>${n.lines.map(([ko,e,s])=>`<li><span class="txt">${glossHTML(ko)}</span><sup>${s.join(',')}</sup>${en?`<span class="en">${e}</span>`:''}</li>`).join('')}</ol>`
   +`<div class="src"><b>출처</b>${n.src.map(([t,u],i)=>`<span>${i+1}. <a href="${u}" target="_blank" rel="noopener">${t}</a></span>`).join('')}</div>`;
   c.querySelector('.enb').addEventListener('click',e=>{e.stopPropagation();en=!en;draw()})};
- draw();c.hidden=false;c.scrollIntoView({block:'nearest'});
+ draw();c.hidden=false;c.scrollIntoView({block:'nearest'});readNote(k);
 }
 if($('notes')){
  $('notes').addEventListener('click',e=>{const b=e.target.closest('.nb');if(b)showNote(b.dataset.k)});
+ {const b=document.createElement('button');b.id='noteChip';b.className='notechip';b.type='button';b.hidden=true;$('toast').after(b);
+  b.addEventListener('click',e=>{e.stopPropagation();const k=b.dataset.k;openPanel();showNote(k)});noteChip()}
  $('noteCard').addEventListener('click',e=>{const w=e.target.closest('.w');if(w){e.stopPropagation();document.body.classList.add('talkopen');showWord(w)}});  // word help above the journal
  for(const id of ['closePanel','panel'])$(id).addEventListener('click',e=>{if(id==='closePanel'||e.target.id==='panel')document.body.classList.remove('talkopen')});
 }
