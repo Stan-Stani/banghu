@@ -1,4 +1,4 @@
-/* GENERATED from walk-engine/engine.js (6081a12) — do not edit here; edit walk-engine and run its sync.sh. */
+/* GENERATED from walk-engine/engine.js (fcaad69) — do not edit here; edit walk-engine and run its sync.sh. */
 /* =====================================================================
    Engine: tiles, movement, zones, dialogue, spaced review, speech, saving.
    ===================================================================== */
@@ -62,12 +62,12 @@ const carryQ=w=>{const qs=carryBank()[w]||[];return qs[Math.random()*qs.length|0
    wrapUp(): the end of a chapter: one more go at this chapter's words not yet ★ (weakest first) and due words from other chapters, at
    most four, in BANK sentences, after TERM.wrap, so a word taught late isn't left at one review. {expand:()=>wrapUp()} in DONE. */
 function classTime(CLASS,parts){
- const out=[],used=new Set();
+ const out=[],used=new Set();let said=0;
  for(const k of parts){const c=CLASS[k];if(!c)continue;out.push({who:'…',say:c.say});
   const ok=c.lines.filter(l=>has(l.w)&&!used.has(l.w)),due=ok.filter(l=>isDue(l.w));
   if(due.length){const lo=Math.min(...due.map(l=>lv(l.w).b)),p=due.filter(l=>lv(l.w).b===lo),l=p[Math.random()*p.length|0];used.add(l.w);out.push({...l,review:true});continue}
   const cw=carryDue().find(w=>!used.has(w)),q=cw&&carryQ(cw);
-  if(q){used.add(cw);out.push({who:'…',say:TERM.carry},{...q,who:'…',review:true});continue}
+  if(q){used.add(cw);if(!said)out.push({who:'…',say:TERM.carry});said=1;out.push({...q,who:'…',review:true});continue}  // TERM.carry once per stretch, not before every earlier word
   if(ok.length){const l=ok[Math.random()*ok.length|0];used.add(l.w);out.push({...l,review:true})}}
  return out;
 }
@@ -564,7 +564,9 @@ function render(t){
  ghosts=ghosts.filter(gh=>{const wk=walkAt(gh,t);if(!wk)return false;const [wx,wy,wd,wf]=wk;ents.push({y:wy,f:()=>drawChar(gh.look,Math.round(wx*TS-cx),Math.round(wy*TS-cy-2),wd,wf)});return true});
  const walk=player.moving?(player.t<.5?player.step:0):0;
  if(petOn()){
-  if(!pet.on){petReset();const n=dlg&&dlg.npc;if(n&&n.name===C.FOLLOW.name){const [x,y]=npcPos(n);pet.x=pet.fx=x;pet.y=pet.fy=y;pet.dir=n.dir}pet.on=true}  // joining you in a talk ("앞장서"): from where they stood, not from your square
+  if(!pet.on){petReset();const n=dlg&&dlg.npc;if(n&&n.name===C.FOLLOW.name){const [x,y]=npcPos(n);pet.x=pet.fx=x;pet.y=pet.fy=y;pet.dir=n.dir}  // joining you in a talk ("앞장서"): from where they stood, not from your square
+   else{const [dx,dy]=D[player.dir],b=[[-dx,-dy],[dy,dx],[-dy,-dx]].map(([ax,ay])=>[player.x+ax,player.y+ay]).find(([x,y])=>walkable(x,y)&&!npcAt(x,y));if(b){pet.x=pet.fx=b[0];pet.y=pet.fy=b[1]}}  // after a door: one step behind you (or beside), not hidden on your square until you move
+   pet.on=true}
   const qx=player.moving?pet.fx+(pet.x-pet.fx)*player.t:pet.x,qy=player.moving?pet.fy+(pet.y-pet.fy)*player.t:pet.y;
   if(player.moving||pet.x!==player.x||pet.y!==player.y)ents.push({y:qy-.01,f:()=>drawChar(C.FOLLOW.look,Math.round(qx*TS-cx),Math.round(qy*TS-cy-2),pet.dir,walk?3-walk:0)});  // not while it shares your square
  }else pet.on=false;
@@ -858,8 +860,10 @@ function nextChapterAsk(line){
 function markSel(){const bs=choosing()?choiceBtns():tileBtns();bs.forEach((b,i)=>b.classList.toggle('sel',i===sel));bs[sel]?.focus({preventScroll:true});bs[sel]?.scrollIntoView({block:'nearest'})}
 function moveSel(d){if(performance.now()-choicesAt<450)return;  // keys still held from walking don't move a fresh question's selection
  const n=(choosing()?choiceBtns():tileBtns()).length;if(!n)return;sel=sel<0?(d>0?0:n-1):(sel+d+n)%n;markSel();sfx('move')}
-let choicesAt=0;
-function confirmSel(){if(performance.now()-choicesAt<450)return;if(sel<0){sel=0;markSel();return}  // nothing selected: A selects the first one (never does nothing); A again picks it
+let choicesAt=0,lastA=0;
+function confirmSel(){const t=performance.now();if(t-choicesAt<450)return;
+ if(choosing()){const quick=t-lastA<500;lastA=t;if(quick)return}  // mashing A through talk never answers: in a question, presses under 0.5 s apart do nothing (pause, then A picks)
+ if(sel<0){sel=0;markSel();return}  // nothing selected: A selects the first one (never does nothing); A again picks it
  const b=(choosing()?choiceBtns():tileBtns())[sel];if(b)b.click()}
 
 function renderBuild(s){
