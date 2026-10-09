@@ -24,6 +24,8 @@
  {talk:'mate',shotSay:{text:'오백 원 없어',name:'06b-sleeper-talks'}},  // asleep: z's over him, eyes shut in the portrait
  {talk:'mate2'},
  {check:()=>state.items.includes('복숭아 쪽지'),msg:'note found in the eraser sleeve'},
+ // spaced review counts story beats too: two beats after class time (sitting down, the eraser), its words are due again, no clock needed
+ {check:()=>{const L=Object.entries(state.lv).filter(([w,L])=>has(w)&&L.b===1);return L.length>0&&L.every(([w])=>isDue(w))},msg:'two story beats after class time, the words practised there are due again'},
  {talk:'daonSeat'},
  {check:()=>state.f.lunch,msg:'lunch bell'},
  {bump:['hall','Q']},
@@ -82,4 +84,6 @@
  {walkTo:['yard',27,7],then:'21-gym-outside'},
  // in-character review: with every word due, everyone who has a line asks it in their own voice, and it grades
  {reviewTour:Object.keys(C.ZONES),shotChoice:'99-review-in-voice'},
+ // …and with nothing due, people with a line you haven't heard say it as plain talk (the word filled in, ungraded)
+ {hearTour:Object.keys(C.ZONES)},
 ]

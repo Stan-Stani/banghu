@@ -58,7 +58,7 @@ for(const CH of ctx.CHAPTERS){
  if(C.REVIEW){const ids=new Set(Object.keys(C.NPC)),names=new Set(Object.values(C.NPC).map(n=>n.name));
   const speaks=(r,k)=>[].concat(r.by).some(b=>b===k||b===C.NPC[k].name);
   for(const r of C.REVIEW){const tag=`REVIEW ${r.w} "${r.ask}"`;
-   if(!C.WORDS.includes(r.w))E(`${tag}: not a chapter word`);
+   if(!allWords.has(r.w))E(`${tag}: not a word of this or an earlier 교시`);  // earlier 교시' words come back when due (GAME.srs.shared)
    if(!r.by)E(`${tag}: no by`);else for(const b of [].concat(r.by))if(!ids.has(b)&&!names.has(b))E(`${tag}: by "${b}" is no NPC id or name`);
    if(typeof r.ask!=='string'||(r.ask.match(/___/g)||[]).length!==1)E(`${tag}: needs exactly one ___`);
    if(/[A-Za-z]/.test(r.ask)||r.ask.length>52)E(`${tag}: English or longer than 52`);

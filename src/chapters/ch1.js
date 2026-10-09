@@ -171,8 +171,7 @@ const Q={ // NPC questions, kept here so review can reuse them. who:'나' = the 
 };
 
 /* in-character review (engine: reviewLines): what people say, in their own voice, when one of your words is due. By speaker, in story order. */
-/* class time between the bells: a beat of narration per subject, then one line someone in the room says with a word you've
-   learned (the weakest of yours that the subject has a line for), graded like a review. Only words you have are picked. */
+/* class time between the bells (classTime in school.js): what happens in each subject, and lines that use a word you've learned */
 const CLASS={
  '국어':{say:'국어 시간. 정 선생님이 {시를|시(詩)} 읽어요.',lines:[
   {w:'반장',who:'정 선생님',ask:'다온 학생은 ___이니까 출석부 좀 가져와요.',opts:[['반장',1],['교장',0,'교장 선생님은 학생이 아니에요. 출석부는 "반장"이 가져와요.'],['반찬',0,'하하, 반찬은 밥하고 먹는 거예요. "반장".']]},
@@ -195,14 +194,6 @@ const CLASS={
   {w:'걷다',who:'음악 선생님',ask:'반장, 악보 좀 ___ 줄래요?',opts:[['걷어',1],['걸어',0,'걸어는 발로 가는 거예요. 종이를 모으면 "걷어".'],['걸려',0,'걸려는 감기예요. 종이를 모으면 "걷어".']]},
   {w:'줍다',who:'음악 선생님',ask:'바닥에 악보가 떨어졌어요. 좀 ___ 줄래요?',opts:[['주워',1],['줍어',0,'줍다는 "주워"가 돼요.'],['추워',0,'추워는 날씨예요. 손으로 들면 "주워".']]}]},
 };
-function classTime(subjects){  // the steps for one stretch of class: narration, and one practice line per subject
- const out=[],used=new Set(),lvl=w=>(state.lv[w]||{b:0}).b;
- for(const k of subjects){const c=CLASS[k];out.push({who:'…',say:c.say});
-  const ok=c.lines.filter(l=>has(l.w)&&!used.has(l.w));if(!ok.length)continue;
-  const lo=Math.min(...ok.map(l=>lvl(l.w))),best=ok.filter(l=>lvl(l.w)===lo),l=best[Math.random()*best.length|0];
-  used.add(l.w);out.push({...l,review:true})}
- return out;
-}
 const REVIEW=[
  // 정 선생님: in the 교무실 after 종례 (crew3), and after the hall speaker (done)
  {w:'반장',by:'jung',ask:'내일 늦으면 ___이 또 벌금 걷어요. 하하.',opts:[['반장',1],['교장',0,'교장 선생님은 벌금 안 걷어요. 벌금 걷는 사람은 "반장".'],['반찬',0,'하하, 반찬은 밥하고 먹는 거예요. 벌금 걷는 사람은 "반장".']]},
@@ -566,7 +557,7 @@ const NPC={
    {who:'…',say:'내 자리. 다온 옆, 넷째 줄이에요.'},
    {who:'…',say:'의자에 앉았어요. 가방을 내려놓아요.',sit:{npc:'seat'}},
    {who:'…',sfx:'bell',say:'수업이 시작됐어요.'},
-   ...classTime(['국어','영어']),
+   {expand:()=>classTime(CLASS,['국어','영어'])},
    {who:'학교 종',say:'딩동댕동… 쉬는 시간이에요.'},
    {who:'오다온',say:'아, 떨어졌다! 하필 지금…'},
    {who:'…',say:'다온의 지우개가 내 의자 옆으로 굴러왔어요.',set:()=>{f().seated=1}}]}},
@@ -605,7 +596,7 @@ const NPC={
    Q.daonS[0],
    Q.daonS[1],
    {who:'…',sfx:'bell',say:'다시 수업이에요.',sit:{npc:'seat'}},
-   ...classTime(['과학','음악']),
+   {expand:()=>classTime(CLASS,['과학','음악'])},
    {who:'학교 종',say:'딩동댕동… 점심시간이에요!'},
    {say:'점심시간이네. 밥부터 먹어. 급식실은 복도 가운데야.'},
    {say:'방송실은 복도 오른쪽 끝이야. 나는 안 가.'},
@@ -790,7 +781,7 @@ const FOLLOW=null;
 
 /* the first line is one word, so nothing is lost if it goes by before the player is ready */
 const INTRO=[{who:'…',say:'봄.'},{who:'…',say:'전학 첫날이에요.'},{who:'…',say:'그런데 버스가 십오 분 늦었어요.'},{who:'…',say:'여기가 느티고등학교. 진짜 큰 나무가 있어요.'}];
-const DONE=[{say:'노래는 곧 멈췄어요. 복도가 다시 조용해요.',set:()=>{f().quiet=1}},'저쪽 신발장에 분홍색 종이가 보여요.','1교시 끝!','교실 교탁 위에 {복습 노트|복습 노트}가 있어요.'];
+const DONE=[{say:'노래는 곧 멈췄어요. 복도가 다시 조용해요.',set:()=>{f().quiet=1}},'저쪽 신발장에 분홍색 종이가 보여요.','1교시 끝!',{expand:()=>wrapUp()},'교실 교탁 위에 {복습 노트|복습 노트}가 있어요.'];
 
 function questText(){
  const F=f();

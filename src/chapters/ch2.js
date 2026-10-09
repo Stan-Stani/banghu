@@ -150,6 +150,22 @@ const Q={ // NPC questions, kept here so review can reuse them. who:'나' = the 
 };
 
 /* in-character review: people use a learned word again in their own voice, while they're around (engine: reviewLines) */
+/* class time between the bells (classTime in school.js): what happens in each subject, and lines that use a word you've learned */
+const CLASS={
+ '수학':{say:'수학 시간. 다온이 문제를 보고 한숨을 쉬어요.',lines:[
+  {w:'긴장하다',who:'오다온',ask:'수학 시험 전에는 늘 ___ 손에 땀이 나.',opts:[['긴장해서',1],['장난해서',0,'장난은 재미로 하는 거야. 떨리면 "긴장해서".'],['놀려서',0,'놀리는 건 남을 웃으려고 하는 거야. 떨리면 "긴장해서".']]},
+  {w:'놓치다',who:'수학 선생님',ask:'이 설명 ___ 사람? 한 번 더 할게요.',opts:[['놓친',1],['놀린',0,'놀린 게 아니라 못 들은 거예요. "놓친".'],['얼린',0,'얼리다는 차갑게 만드는 거예요. 못 들었으면 "놓친".']]},
+  {w:'기회',who:'수학 선생님',ask:'틀려도 괜찮아요. 다음 시험이 또 ___예요.',opts:[['기회',1],['기억',0,'기억은 잊지 않는 거예요. 다시 해 볼 때는 "기회".'],['곡',0,'곡은 노래예요. 다시 해 볼 때는 "기회".']]},
+  {w:'얼다',who:'남궁찬',ask:'헉, 선생님이 나 불렀어. 몸이 딱 ___.',opts:[['얼었어',1],['열었어',0,'열었어? 문이야? 몸이 안 움직이면 "얼었어".'],['놀렸어',0,'놀린 거 아니야! 몸이 멈췄다고. "얼었어".']]},
+  {w:'장난',who:'오다온',ask:'찬, 수업 시간엔 ___ 금지. 벌금이야.',opts:[['장난',1],['장소',0,'장소는 곳이야. 재미로 하는 건 "장난".'],['기회',0,'기회는 좋은 때야. 재미로 하는 건 "장난".']]}]},
+ '영어':{say:'영어 시간. 찬이 영어 노래 가사를 읽어요.',lines:[
+  {w:'곡',who:'영어 선생님',ask:'오늘은 팝송 한 ___으로 공부해요.',opts:[['곡',1],['권',0,'권은 책을 셀 때예요. 노래는 "곡".'],['장',0,'장은 종이를 셀 때예요. 노래는 "곡".']]},
+  {w:'심장',who:'영어 선생님',ask:'이 노래 제목은 "두근두근 ___"이에요.',opts:[['심장',1],['시장',0,'시장은 물건을 사는 곳이에요. 두근두근 뛰는 건 "심장".'],['명찰',0,'명찰은 이름표예요. 두근두근 뛰는 건 "심장".']]},
+  {w:'놀리다',who:'오다온',ask:'찬 발음 이상하다고 ___ 마. 걔 열심히 하는 거야.',opts:[['놀리지',1],['놓치지',0,'놓치는 건 잡지 못하는 거야. 웃음거리로 만들면 "놀리지".'],['얼지',0,'얼지 마? 아니, 웃음거리로 만들지 말라고. "놀리지".']]},
+  {w:'명찰',who:'영어 선생님',ask:'이름이 생각 안 나요. ___ 좀 보여 줄래요?',opts:[['명찰',1],['연필',0,'연필은 쓰는 거예요. 이름이 있는 건 "명찰".'],['심장',0,'심장은 몸 안에 있어요. 이름이 있는 건 "명찰".']]},
+  {w:'괴롭히다',who:'남궁찬',ask:'영어 단어가 나를 ___. 진짜야.',opts:[['괴롭혀',1],['놀려',0,'놀리는 건 웃기려고 하는 거잖아. 힘들게 하면 "괴롭혀".'],['얼려',0,'얼리는 건 차갑게 하는 거야. 힘들게 하면 "괴롭혀".']]},
+  {w:'긴장하다',who:'영어 선생님',ask:'발표할 때 ___ 괜찮아요. 천천히 해요.',opts:[['긴장해도',1],['장난해도',0,'발표할 때 장난하면 안 돼요. 떨리면 "긴장해도".'],['포기해도',0,'포기하면 발표를 못 해요. 떨리면 "긴장해도".']]}]},
+};
 const REVIEW=[
  /* day one, lunch: the 1층 hall (until 하교) */
  {w:'기회',by:'student',pre:['선배, 방송부 포스터 봤어요?'],ask:'음악실 노래 귀신한테 딱 좋은 ___ 같아요!',opts:[['기회',1],['기억',0,'기억은 머릿속에 남은 거예요. 딱 좋은 때는 "기회".'],['기분',0,'기분은 마음 상태예요. 딱 좋은 때는 "기회".']]},
@@ -562,8 +578,10 @@ const NPC={
    {who:'남궁찬',say:'학교 앞, 길 건너편 빨간 가게. 다온이도 부를게.'},
    {say:'네? 저, 저도요…?',face:'surprised'},
    {who:'남궁찬',say:'당연하지! 떡볶이는 다 같이 먹어야 맛있어.',face:'happy'},
-   {say:'…네. 갈게요.',face:'happy'},
-   {who:'…',sfx:'bell',say:'그리고 오후 수업이 다 끝났어요.',award:['긴장하다'],set:()=>{f().afterSchool=1}}]},
+   {say:'…네. 갈게요.',face:'happy',award:['긴장하다']},
+   {who:'…',say:'오후 수업이 시작됐어요.'},
+   {expand:()=>classTime(CLASS,['수학','영어'])},
+   {who:'학교 종',say:'딩동댕동… 오후 수업이 다 끝났어요.',set:()=>{f().afterSchool=1}}]},
 
  /* the 분식집 table: one ! in its middle (markDx: between its two tiles), and A at the table, even from your seat, talks to
     whoever's turn it is (proxy); their own markers are off (nomark) */
@@ -782,7 +800,7 @@ look:LOOK.xS3,banmal:1,
 const FOLLOW=null;
 
 const INTRO=[{who:'…',say:'다음 날 점심시간. 방송실.'},{who:'…',say:'구름이 큰 종이를 들고 기다려요.'}];
-const DONE=[{say:'사연함에 카세트가 하나 들어 있어요.',set:()=>{f().quiet=1}},'"1994 방송부 · 복숭아" 쪽지: "목소리 좋다. 다음은 이야기."','구름이 쪽지를 오래 봐요. "1994년…? 우리 방송부 선배?"','2교시 끝!','방송실 책상 위 복습 노트북에서 단어를 다시 볼 수 있어요.'];
+const DONE=[{say:'사연함에 카세트가 하나 들어 있어요.',set:()=>{f().quiet=1}},'"1994 방송부 · 복숭아" 쪽지: "목소리 좋다. 다음은 이야기."','구름이 쪽지를 오래 봐요. "1994년…? 우리 방송부 선배?"','2교시 끝!',{expand:()=>wrapUp()},'방송실 책상 위 복습 노트북에서 단어를 다시 볼 수 있어요.'];
 
 function questText(){
  const F=f();
@@ -898,5 +916,5 @@ const TILES={...SCHOOL_TILES,...VARIANTS,
 };
 const PLAYER=LOOK.player;
 const term={name:'복습 노트북'};  // the 방송실 laptop (1교시 reviews in a paper 복습 노트)
-return {WORDS,DICT,CONFUSE,BANK,Q,REVIEW,ITEMS,ZONES,NPC,FOLLOW,INTRO,DONE,questText,TILES,VARIANTS,PLAYER,seatPulled,seatPulledN,term};  // the school's desks and tables ask these whether a chair is pulled out
+return {WORDS,DICT,CONFUSE,BANK,Q,REVIEW,CLASS,ITEMS,ZONES,NPC,FOLLOW,INTRO,DONE,questText,TILES,VARIANTS,PLAYER,seatPulled,seatPulledN,term};  // the school's desks and tables ask these whether a chair is pulled out
 }});

@@ -1,6 +1,9 @@
 // 2교시 walkthrough: order a player would follow. wrong:true answers one question wrong first.
 [
  {intro:1,shot:'01-intro'},
+ // words carry over between 교시: a 1교시 save with 벌금 due (반장 not) → 벌금 can come back here, in 1교시's own sentences
+ {check:()=>{store.set(CHAPTERS[0].save,JSON.stringify({badges:['벌금','반장'],lv:{'벌금':{b:1,due:0},'반장':{b:4,due:Date.now()+9e9}}}));refreshCarry();return carryDue().join()==='벌금'&&dueWords().includes('벌금')},msg:'a due 1교시 word comes along into 2교시 (and one that isn\'t due stays put)'},
+ {check:()=>{const q=reviewFor(['벌금']);return q.w==='벌금'||q.listen==='벌금'},msg:'…and the notebook asks it with 1교시\'s sentences'},
  {look:true},
  {talk:'gureum',wrong:true,shotBefore:'02-broadcast-room',shotBuild:'02b-sentence-build'},
  {check:()=>state.f.poster&&state.items.includes('모집 포스터'),msg:'recruiting poster'},
@@ -59,5 +62,7 @@
  {walkTo:['yard',27,7],then:'25-gym-outside'},
  {walkTo:['hall2',10,4],then:'26-second-floor'},
  // in-character review: with every word due, everyone who has a line asks it in their own voice, and it grades
- {reviewTour:Object.keys(C.ZONES),shotChoice:'99-review-in-voice'},
+ {reviewTour:Object.keys(C.ZONES),carry:1,shotChoice:'99-review-in-voice'},  // carry: earlier 교시' words too
+ // …and with nothing due, people with a line you haven't heard say it as plain talk (the word filled in, ungraded)
+ {hearTour:Object.keys(C.ZONES)},
 ]

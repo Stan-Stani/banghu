@@ -67,5 +67,7 @@
  {bump:['street','O']},
  {walkTo:['bcast',10,4],then:'27-bcast-end'},
  // in-character review: with every word due, everyone who has a line asks it in their own voice, and it grades
- {reviewTour:Object.keys(C.ZONES),shotChoice:'99-review-in-voice'},
+ {reviewTour:Object.keys(C.ZONES),carry:1,shotChoice:'99-review-in-voice'},  // carry: earlier 교시' words too
+ // …and with nothing due, people with a line you haven't heard say it as plain talk (the word filled in, ungraded)
+ {hearTour:Object.keys(C.ZONES)},
 ]

@@ -592,3 +592,27 @@ globalThis.SIGN_TEXT=(X,Y,x,x0,x1,top,text,c)=>{const gs=[...text].map(ch=>GLYPH
  for(const g of gs){if(g)g.forEach((row,j)=>{for(let i=0;i<row.length;i++)if(row[i]==='#'){const px=gx+i;if(px>=ox&&px<ox+16)r(X+px-ox,Y+top+j,1,1,c)}});gx+=(g?g[0].length:3)+GAP}};
 globalThis.SCHOOL_TILES=TILES;globalThis.SCHOOL_WALLISH=[...WALLISH];globalThis.SCHOOL_BASE=base;
 })();
+
+/* Class time between the bells. A 교시's CLASS = {subject:{say, lines:[{w, who, ask, opts}]}}: each subject narrates a beat, then
+   someone in the room says one of its lines with a word you've learned, graded like a review: a due word of this 교시 (weakest
+   first), else a due word from an earlier 교시 (the notebook's sentence for it), else any of yours at random. Use it as a step
+   that expands when it's reached, so words taught just before count: {expand:()=>classTime(CLASS,['국어','영어'])}. */
+function classTime(CLASS,subjects){
+ const out=[],used=new Set(),mine=w=>state.badges.includes(w),L=w=>state.lv[w]||{b:0,due:0};
+ for(const k of subjects){const c=CLASS[k];if(!c)continue;out.push({who:'…',say:c.say});
+  const ok=c.lines.filter(l=>mine(l.w)&&!used.has(l.w)),due=ok.filter(l=>isDue(l.w));
+  if(due.length){const lo=Math.min(...due.map(l=>L(l.w).b)),p=due.filter(l=>L(l.w).b===lo),l=p[Math.random()*p.length|0];used.add(l.w);out.push({...l,review:true});continue}
+  const cw=carryDue().find(w=>!used.has(w)),q=cw&&carryQ(cw);
+  if(q){used.add(cw);out.push({who:'…',say:'지난번에 배운 말도 다시 나와요.'},{...q,who:'…',review:true});continue}
+  if(ok.length){const l=ok[Math.random()*ok.length|0];used.add(l.w);out.push({...l,review:true})}}
+ return out;
+}
+/* The end of a 교시: one more go at this 교시's words not yet ★ (weakest first) and any earlier word that's due, at most four, in the
+   notebook's sentences, so a word taught late isn't left at one review. {expand:()=>wrapUp()} in DONE. */
+function wrapUp(){
+ const L=w=>state.lv[w]||{b:0,due:0},bank=w=>(C.BANK||[]).filter(q=>q.w===w&&!q.scene&&!q.gram);
+ const qs=C.WORDS.filter(w=>state.badges.includes(w)&&L(w).b<3&&bank(w).length).sort((a,b)=>L(a).b-L(b).b).slice(0,4)
+  .map(w=>{const b=bank(w);return {...b[Math.random()*b.length|0],who:'…',review:true}});
+ carryDue().slice(0,Math.max(0,4-qs.length)).forEach(w=>{const q=carryQ(w);if(q)qs.push({...q,who:'…',review:true})});
+ return qs.length?[{who:'…',say:'오늘 배운 말, 한 번 더 떠올려요.'},...qs]:[];
+}

@@ -158,6 +158,21 @@ const Q={ // NPC questions, kept here so review can reuse them. who:'나' = the 
  ],
 };
 /* in-character review: lines people say that use a learned word again, in their own voice, at the times they fit (engine: reviewLines) */
+/* class time between the bells (classTime in school.js): what happens in each subject, and lines that use a word you've learned */
+const CLASS={
+ '국어':{say:'국어 시간. 정 선생님이 수행평가 얘기를 해요.',lines:[
+  {w:'평가',who:'정 선생님',ask:'다음 주에 발표 수행___가 있어요.',opts:[['평가',1],['평화',0,'평화는 싸움이 없는 거예요. 점수를 주는 건 "평가".'],['평일',0,'평일은 주말이 아닌 날이에요. 점수를 주는 건 "평가".']]},
+  {w:'목표',who:'정 선생님',ask:'이번 학기 ___를 하나씩 써 봐요.',opts:[['목표',1],['목소리',0,'목소리는 말하는 소리예요. 이루고 싶은 건 "목표".'],['방법',0,'방법은 하는 길이에요. 이루고 싶은 건 "목표".']]},
+  {w:'상담',who:'정 선생님',ask:'고민 있으면 방과 후에 ___하러 와요.',opts:[['상담',1],['상자',0,'상자는 물건을 넣는 거예요. 고민을 이야기하는 건 "상담".'],['평가',0,'평가는 점수를 주는 거예요. 고민을 이야기하는 건 "상담".']]},
+  {w:'대학',who:'정 선생님',ask:'3학년들은 요즘 ___ 얘기만 해요.',opts:[['대학',1],['대답',0,'대답은 묻는 말에 하는 말이에요. 3학년이 가려는 곳은 "대학".'],['대회',0,'대회는 실력을 겨루는 거예요. 3학년이 가려는 곳은 "대학".']]},
+  {w:'빡빡하다',who:'오다온',ask:'태식 선배 학원 시간표, 엄청 ___. 하루에 세 개래.',opts:[['빡빡해',1],['심심해',0,'심심하면 할 게 없는 거야. 시간이 꽉 차면 "빡빡해".'],['깜깜해',0,'깜깜한 건 어두운 거야. 시간이 꽉 차면 "빡빡해".']]}]},
+ '수학':{say:'수학 시간. 다온이 문제를 풀다가 자꾸 시계를 봐요.',lines:[
+  {w:'방법',who:'수학 선생님',ask:'이 문제는 푸는 ___이 두 가지예요.',opts:[['방법',1],['방학',0,'방학은 학교를 쉬는 때예요. 푸는 길은 "방법".'],['방송',0,'방송은 라디오나 텔레비전이에요. 푸는 길은 "방법".']]},
+  {w:'쫓겨나다',who:'남궁찬',ask:'우리가 방송실에서 ___ 진짜 끝이야.',opts:[['쫓겨나면',1],['쫓아가면',0,'쫓아가는 건 뒤를 따라 뛰는 거야. 우리가 나가야 되면 "쫓겨나면".'],['쫓아내면',0,'우리가 내보내는 게 아니잖아. 우리가 나가야 되면 "쫓겨나면".']]},
+  {w:'절박하다',who:'오다온',ask:'구름이 지금 엄청 ___. 아침부터 울상이야.',opts:[['절박해',1],['절약해',0,'절약은 돈을 아끼는 거야. 너무 급하고 힘들면 "절박해".'],['심심해',0,'심심한 게 아니야. 너무 급하고 힘들면 "절박해".']]},
+  {w:'평가',who:'수학 선생님',ask:'내일 수학 수행___ 있는 거 알죠?',opts:[['평가',1],['평화',0,'평화는 싸움이 없는 거예요. 점수를 주는 건 "평가".'],['평일',0,'평일은 주말이 아닌 날이에요. 점수를 주는 건 "평가".']]},
+  {w:'대학',who:'수학 선생님',ask:'___ 가서도 이 공식은 계속 써요.',opts:[['대학',1],['대답',0,'대답은 묻는 말에 하는 말이에요. 고등학교 다음에 가는 곳은 "대학".'],['대회',0,'대회는 실력을 겨루는 거예요. 고등학교 다음에 가는 곳은 "대학".']]}]},
+};
 const REVIEW=[
  /* 1층, day one to the fix: the 1학년 kid; the break-time talk in the hall (until the 상담 ends) */
  {w:'절박하다',by:'kid',when:()=>!f().fixed,pre:['방송실 기계 진짜 죽었어요?'],ask:'구름 선배가 엄청 ___. 찬 선배가 그랬어요.',
@@ -544,8 +559,10 @@ const NPC={
    Q.jung[4],
    {say:'{방과 후|방과 후}에는 바로 학원에 가요.'},
    {say:'학원은 동네 {상가|상가}에 있어요. 정문 밖이에요.'},
-   {say:'수업 끝나고 가 봐요. 무리하지 말고요.'},
-   {who:'…',say:'오후 수업이 다 끝났어요. 딩동댕동!',award:['상담','대학','목표','평가','빡빡하다'],set:()=>{f().counsel=1}},
+   {say:'수업 끝나고 가 봐요. 무리하지 말고요.',award:['상담','대학','목표','평가','빡빡하다']},
+   {who:'…',sfx:'bell',say:'오후 수업이 시작됐어요.'},
+   {expand:()=>classTime(CLASS,['국어','수학'])},
+   {who:'학교 종',say:'딩동댕동… 오후 수업이 다 끝났어요.',set:()=>{f().counsel=1}},
     {who:'…',say:'찬한테 문자가 왔어요. "포스터 들고 동네 상가 왔어! 하리도 있어. 빨리 와!"'}]},
 
  kid:{name:'1학년 학생',zone:'hall',x:20,y:7,dir:'up',look:LOOK.kid,
@@ -964,7 +981,7 @@ function fixTalk(){return NPC.gureumF.talk().map(s=>s.who?s:{...s,who:'백구름
 const INTRO=[{who:'…',say:'축제 사흘 전. 방송실에 탄 냄새가 나요.'},{who:'…',say:'방송 기계에서 아직 연기가 조금 나요.'}];
 const DONE=[{say:'구름 엄마도 축제 방송을 들었대요.',set:()=>{f().quiet=1}},'"목소리 좋더라." 구름이 그 말을 세 번 했어요.',  // the epilogue: festival night, then a time cut over black (winter, spring)
  {say:'겨울. 태식 선배가 대학에 합격했어요.',black:1},'그 소식은 점심 방송으로 들었어요.','봄. 사연함에 새 쪽지가 있어요.',
- '교장 선생님 글씨가 아니에요.','"새 학기 사연 있어요. —복숭아 2호"','4교시 끝!',{say:'다시 축제 날, 오후 네 시예요.',black:0},'방송실 복습 노트북에서 단어를 다시 볼 수 있어요.'];
+ '교장 선생님 글씨가 아니에요.','"새 학기 사연 있어요. —복숭아 2호"','4교시 끝!',{say:'다시 축제 날, 오후 네 시예요.',black:0},{expand:()=>wrapUp()},'방송실 복습 노트북에서 단어를 다시 볼 수 있어요.'];
 
 function questText(){
  const F=f();
@@ -1130,5 +1147,5 @@ const TILES={...SCHOOL_TILES,...VARIANTS,
 };
 const PLAYER=LOOK.player;
 const term={name:'복습 노트북'};  // the 방송실 laptop (1교시 reviews in a paper 복습 노트)
-return {WORDS,DICT,CONFUSE,BANK,Q,REVIEW,ITEMS,PHOTOS,ZONES,NPC,FOLLOW,INTRO,DONE,questText,TILES,VARIANTS,PLAYER,term};
+return {WORDS,DICT,CONFUSE,BANK,Q,REVIEW,CLASS,ITEMS,PHOTOS,ZONES,NPC,FOLLOW,INTRO,DONE,questText,TILES,VARIANTS,PLAYER,term};
 }});
