@@ -964,8 +964,6 @@ const TILES={...SCHOOL_TILES,...VARIANTS,
   r(X+12,Y+14,2,1,Math.floor(t/700)%2?'#7CF07A':'#2E5A2E')},
 };
 const PLAYER=LOOK.player;
-const term={name:'복습 노트북',  // the 방송실 laptop (1교시 reviews in a paper 복습 노트)
- /* the engine shows `empty` until this 교시's first word, even with earlier words due (the 일지's 복습 count): it's 구름's, still locked */
- get empty(){const n=dueWords().length;return n?'복습할 단어가 '+n+'개 있어요. 근데 구름 노트북이라 아직 잠겨 있어요.':'구름 노트북이에요. 아직 잠겨 있어요.'}};
+const term={name:'복습 노트북'};  // the 방송실 laptop (1교시 reviews in a paper 복습 노트); earlier 교시' due words show from the start (walk-engine aff7b40)
 return {WORDS,DICT,CONFUSE,BANK,Q,REVIEW,CLASS,ITEMS,ZONES,NPC,FOLLOW,INTRO,DONE,questText,TILES,VARIANTS,PLAYER,seatPulled,seatPulledN,term};  // the school's desks and tables ask these whether a chair is pulled out
 }});
