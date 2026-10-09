@@ -364,7 +364,7 @@ const base=()=>({
    'W':['창밖에 운동장하고 느티나무가 보여요.','2층이라 운동장이 다 보여요.'],
    'p':'화분이에요. 누가 물을 너무 많이 줬어요.',
    'w':'정수기예요. 컵이 하나도 없어요.',
-   't':['복도 자습 책상이에요. 3학년 선배들 자리예요.','책상 위에 단어장이 펼쳐져 있어요.','누가 책상에 "수능까지 백 일!"이라고 썼어요.']}},
+   't':['복도 자습 책상이에요. 3학년 선배들 자리예요.','책상 위에 단어장이 펼쳐져 있어요.','누가 책상에 "3학년 화이팅!"이라고 썼어요.']}},
 
  class:{name:'2학년 3반 교실',reg:'CLASS 2-3',floor:'wood',
   legend:{'#':{tile:'wall'},'.':{tile:'wood',walk:1},'B':{tile:'board'},'J':{tile:'timetable'},'W':{tile:'sideWin'},'k':{tile:'tdesk',over:1},'T':{tile:'terminal'},
@@ -599,10 +599,18 @@ globalThis.SIGN_TEXT=(X,Y,x,x0,x1,top,text,c)=>{const gs=[...text].map(ch=>GLYPH
 globalThis.SCHOOL_TILES=TILES;globalThis.SCHOOL_WALLISH=[...WALLISH];globalThis.SCHOOL_BASE=base;
 })();
 
-/* Someone who quizzes you on purpose ("문제 하나 낼게요": 매점 이모, 경비 아저씨): a word of yours that's due, from this 교시 or an
-   earlier one, in the notebook's sentence and graded like a review; with nothing due, one of their own general questions. */
-function quizLine(fallback){
- const due=dueWords();
- if(due.length){const q={...reviewFor([due[Math.random()*due.length|0]])};delete q.who;return q}  // their voice, not the narrator's
- return {...fallback[Math.random()*fallback.length|0],old:1};
+/* Someone who quizzes you on purpose ("문제 하나 낼게요": 매점 이모, 경비 아저씨, 분식집 아저씨): a word of yours that's due, from this
+   교시 or an earlier one, in the notebook's sentence and graded like a review; with nothing due, one of their own general questions
+   (never the one they asked last). Once per story beat each (id): asked again before the story moves on, they only say hello — null,
+   and the caller leaves the quiz out. The question is made, and the quiz noted (state.quizAt[id] = beats()), when its step is
+   reached: a script is also asked for status marks, and that mustn't use the quiz up. */
+function quizLine(fallback,id){
+ const at=state.quizAt||{},last=id&&at[id];
+ if(last&&last.b===beats())return null;
+ return {expand:()=>{
+  let q;const due=dueWords();
+  if(due.length){q={...reviewFor([due[Math.random()*due.length|0]])};delete q.who}  // their voice, not the narrator's
+  else{const fb=fallback.filter(o=>!last||o.ask!==last.ask),pool=fb.length?fb:fallback;q={...pool[Math.random()*pool.length|0],old:1}}
+  if(id){(state.quizAt||(state.quizAt={}))[id]={b:beats(),ask:q.ask};save()}
+  return [q]}};
 }

@@ -26,7 +26,7 @@ const DICT={
  '기회':{k:'무엇을 해 볼 수 있는 좋은 때. 놓치면 다시 안 올 수도 있어요. 예: 마지막 기회.',e:'chance, opportunity',ex:'이번 기회에 방송을 해 봐요.',hj:'機會 · 會 = 모이다, 회의(會議)의 회'},
  '놓치다':{k:'잡아야 하는 것을 못 잡아요. 버스, 기회, 공…',e:'to miss (a chance, a bus), to let slip',ex:'버스를 놓쳐서 지각했어요.'},
  '타이밍':{k:'무엇을 하기에 딱 맞는 순간. 너무 빨라도, 너무 늦어도 안 돼요. 영어 timing.',e:'timing',ex:'노래가 시작되는 순간 마이크를 켜요. 타이밍이 중요해요.'},
- '효과':{k:'무엇을 해서 생기는 좋은 변화.',e:'effect',ex:'이 약은 효과가 빨라요.',hj:'效果 · 果 = 열매, 결과(結果)의 과'},
+ '효과':{k:'무엇을 해서 생기는 좋은 변화.',e:'effect',ex:'이 약은 효과가 빨리 나타나요.',hj:'效果 · 果 = 열매, 결과(結果)의 과'},
  '포기하다':{k:'하던 일을 끝까지 안 하고 그만둬요.',e:'to give up',ex:'어려워도 포기하지 마요.',hj:'抛棄'},
  '즐기다':{k:'무엇을 재미있게 해요. 예: 음악을 즐겨요.',e:'to enjoy',ex:'주말에 음악을 즐겨요.'},
  '챙기다':{k:'필요한 것을 잊지 않고 가져가요. 남을 잘 돌봐요.',e:'to pack, to take along; to look after',ex:'우산 꼭 챙겨요.'},
@@ -78,7 +78,7 @@ const BANK=[
  {w:'챙기다',ask:'수학여행 가요. 칫솔 꼭 ___.',opts:[['챙겨요',1],['생겨요',0,'생기다는 없던 게 새로 나타나는 거예요. 가져가면 "챙겨요".']]},
  {w:'재촉하다',ask:'빨리 오라고 친구가 문자로 계속 ___.',opts:[['재촉해요',1],['재채기해요',0,'재채기는 "에취!"예요. 빨리 하라고 하면 "재촉해요".']]},
  {w:'연락처',ask:'새 친구한테 전화하려고 ___부터 물어봤어요.',opts:[['연락처',1],['연습장',0,'연습장은 공부하는 공책이에요. 전화번호는 "연락처".']]},
- {w:'데려오다',ask:'내일 우리 집에 올 때 동생도 ___ 돼.',opts:[['데려와도',1],['데려가도',0,'우리 집으로 "오는" 거니까 "데려와도". 다른 곳으로 같이 가면 "데려가도".'],['내려와도',0,'내려오다는 위에서 아래로 오는 거예요. 같이 오면 "데려와도".']]},
+ {w:'데려오다',ask:'내일 우리 집에 올 때 동생도 ___ 돼.',opts:[['데려와도',1],['데려와서',0,'"-아도 돼"는 해도 된다는 말이에요. 그래서 "데려와도 돼".'],['내려와도',0,'내려오다는 위에서 아래로 오는 거예요. 같이 오면 "데려와도".']]},
  /* grammar: -(으)ㄹ까(요) (shall we? / should I?) · -지 마 (don't) */
  {w:'곡',gram:1,ask:'노래방이다! 내가 먼저 한 곡 ___?',opts:[['부를까',1],['부르지 마',0,'"-지 마"는 하지 말라는 거야. 물어볼 때는 "부를까?"']]},
  {w:'놀리다',ask:'동생한테: "내 머리 보고 웃지 마. ___!"',opts:[['놀리지 마',1],['놀릴까',0,'"-ㄹ까"는 물어보는 말이에요. 하지 말라고 할 때는 "놀리지 마".']]},
@@ -468,7 +468,6 @@ const NOTAG='명찰';
 const toChan=()=>({who:'…',say:'체육관 입구에 찬이 있어요. 이쪽을 보고 있어요.',cam:[12,10],set:()=>{f().sawG=1}});
 const TAG={art:{pal:{O:'#1B1E2B',g:'#3E8E5A',w:'#F4F1E6'},down:['OOOOOOOO','OgwwwwgO','OgwwwwgO','OOOOOOOO']}};  // 하리's 명찰 on the floor
 const pick=a=>a[Math.random()*a.length|0];  // a repeat line picked at random, so a character talked to often doesn't say the same thing
-let ownerLast=null;  // the 분식집 아저씨's last question (he doesn't ask the same one twice in a row)
 
 const NPC={
  gureum:{name:'백구름',zone:'bcast',x:5,y:3,dir:'up',look:LOOK.gureum,badge:['기회','놓치다'],banmal:1,
@@ -642,12 +641,14 @@ const NPC={
   talk:()=>[]},
 
  owner:{name:'분식집 아저씨',zone:'bunsik',x:4,y:1,dir:'down',look:LOOK.owner,
-  /* a word of yours that's due, in the notebook's sentence; with nothing due, one of his own (never the one he just asked) */
-  script:()=>{const F=f(),q=quizLine(Q.owner.filter(o=>o.ask!==ownerLast)),again=(state.met||[]).includes('owner');ownerLast=q.ask;
+  /* a word of yours that's due, in the notebook's sentence; with nothing due, one of his own (never the one he just asked); one quiz
+     per story beat (quizLine gives null after that: just his hello) */
+  script:()=>{const F=f(),q=quizLine(Q.owner,'owner'),again=(state.met||[]).includes('owner');
    const [hi,bye]=F.done?[[{say:'방송 잘했다면서요? 학생들이 다 얘기해요.',face:'happy'},{say:'자, 아저씨 문제 하나!'}],'또 와요! 학생은 많이 줄게요.']
     :F.hariMaybe?[[{say:'친구들은 먼저 갔어요. 떡볶이 맛있었어요?',face:'happy'},{say:'가기 전에 아저씨 문제 하나!'}],'조심히 가요. 또 와요!']  // everyone has left the table
     :[[...(again?[]:[{say:'어서 와요! 오늘 떡볶이 맛있어요.'}]),{say:'떡볶이 먹기 전에, 아저씨 문제 하나!'}],'자, 얼른 가서 먹어요!'];
-   return [...hi,q,{say:bye,face:'happy'}]},
+   const hello=hi.filter(h=>!h.say.includes('문제'));  // no quiz: his hello without "문제 하나!"
+   return q?[...hi,q,{say:bye,face:'happy'}]:[...(hello.length?hello:[{say:'어서 와요! 오늘 떡볶이 맛있어요.'}]),{say:bye,face:'happy'}]},
   talk:()=>[]},
 
  hariB:{nomark:1,name:'유하리',zone:'bunsik',x:9,y:5,dir:'down',look:LOOK.hari,sit:1,chair:STOOL,badge:['포기하다'],
