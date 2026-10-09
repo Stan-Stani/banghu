@@ -16,13 +16,13 @@
  {inspect:['class',17,10],shot:'05b-piggy-bank'},
  {check:()=>C.questText().includes('내 자리'),msg:'objective: find my seat'},
  {talk:'seat',shotBefore:'05c-my-seat',shotSay:{text:'국어 시간',name:'05d-class-time'}},
- {check:()=>Object.values(state.lv).filter(L=>L.b>=1).length===2,msg:'class time (국어, 영어) practised two of my words before the bell'},
+ {check:()=>{const W=Object.entries(state.lv).filter(([w,L])=>L.b>=1).map(([w])=>w);window.__classW=W;return W.length===2},msg:'class time (국어, 영어) practised two of my words before the bell'},
  {check:()=>state.f.seated&&C.questText().includes('떨어졌'),msg:'sat down; class started; eraser fell'},
  {check:()=>player.sit&&player.sit.npc===C.NPC.seat&&player.dir==='up',msg:'sitting on my chair, facing the board'},
  {talk:'eraser',shotBefore:'06-eraser'},
  {bump:['hall','F']},
  // spaced review counts story beats too: two beats after class time (sitting down, the eraser), its words are due again, no clock needed (checked before the classmates, who'd review them)
- {check:()=>{const L=Object.entries(state.lv).filter(([w,L])=>has(w)&&L.b===1);return L.length>0&&L.every(([w,L])=>dueL(L))},msg:'two story beats after class time, the words practised there are due again'},
+ {check:()=>{const W=window.__classW||[];return W.length>0&&W.every(w=>dueL(state.lv[w]))},msg:'two story beats after class time, the words practised there are due again'},  // only the class-time words: words taught perfectly since then also start at level 1 (srs.start) and aren't due yet
  {talk:'mate',shotSay:{text:'오백 원 없어',name:'06b-sleeper-talks'}},  // asleep: z's over him, eyes shut in the portrait
  {talk:'mate2'},
  {check:()=>state.items.includes('복숭아 쪽지'),msg:'note found in the eraser sleeve'},
