@@ -95,4 +95,14 @@ for(const CH of ctx.CHAPTERS){
   (n.lines||[]).forEach(([ko,en,s],i)=>{if(!ko||!en)errs.push(`culture ${k} line ${i+1}: needs Korean and English`);
    if(!Array.isArray(s)||!s.length||s.some(x=>!(x>=1&&x<=(n.src||[]).length)))errs.push(`culture ${k} line ${i+1}: must cite sources 1–${(n.src||[]).length}`)})}
  for(const f of fs.readdirSync('src/chapters'))for(const m of fs.readFileSync('src/chapters/'+f,'utf8').matchAll(/culture:'([^']+)'/g))if(!N[m[1]])errs.push(`${f}: culture:'${m[1]}' has no note in src/culture.js`)}
+// 문법 노트: every note has a title, a few lines and a few examples (Korean and English), every grammar:'id' a chapter uses exists,
+// and every note is unlocked by some step (the story line whose grammar it explains)
+{const N=ctx.GRAMMAR_NOTES||{},used=new Set();
+ for(const f of fs.readdirSync('src/chapters'))for(const m of fs.readFileSync('src/chapters/'+f,'utf8').matchAll(/grammar:'([^']+)'/g)){used.add(m[1]);if(!N[m[1]])errs.push(`${f}: grammar:'${m[1]}' has no note in src/grammar.js`)}
+ for(const [k,n] of Object.entries(N)){
+  if(!n.t||!Array.isArray(n.lines)||!n.lines.length)errs.push(`grammar ${k}: needs a title and lines`);
+  if(!Array.isArray(n.ex)||!n.ex.length)errs.push(`grammar ${k}: needs examples (the game's line first)`);
+  if((n.lines||[]).length>4||(n.ex||[]).length>3)errs.push(`grammar ${k}: keep it short (at most 4 lines and 3 examples)`);
+  for(const [what,a] of [['line',n.lines||[]],['example',n.ex||[]]])a.forEach(([ko,en],i)=>{if(!ko||!en)errs.push(`grammar ${k} ${what} ${i+1}: needs Korean and English`);else if(/[A-Za-z]/.test(ko))errs.push(`grammar ${k} ${what} ${i+1}: English in the Korean`)});
+  if(!used.has(k))errs.push(`grammar ${k}: no step unlocks it (add grammar:'${k}' to the story line it explains)`)}}
 console.log(errs.length?errs.join('\n'):`ok · ${ctx.CHAPTERS.length} chapter(s), ${allWords.size} words`);process.exit(errs.length?1:0);

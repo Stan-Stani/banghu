@@ -28,6 +28,15 @@
  {check:()=>state.items.includes('복숭아 쪽지'),msg:'note found in the eraser sleeve'},
  {talk:'daonSeat'},
  {check:()=>state.f.lunch,msg:'lunch bell'},
+ // 다온's "밥부터 먹어" adds the 부터 문법 노트: it waits on the chip like a 문화 노트, opens in the 일지 with its examples under it, every word tappable
+ {check:()=>grammarSeen.includes('buteo'),msg:'다온\'s "밥부터 먹어" adds the 부터 문법 노트'},
+ {pause:500},
+ {check:()=>!$('noteChip').hidden&&$('noteChip').textContent.includes('문법 노트 · N부터'),msg:'the new 문법 노트 waits on the screen as a chip'},
+ {check:()=>{$('noteChip').click();const c=$('gnoteCard');return !$('panel').hidden&&!c.hidden&&c.textContent.includes('밥부터 먹어')&&!!c.querySelector('.nex li')},msg:'tapping it opens the 일지 on the 부터 note, its examples under the lines'},
+ {pause:300,shot:'06b2-grammar-note'},
+ {check:()=>{$('gnoteCard').querySelector('.nex .w').click();return !$('gloss').hidden},msg:'a word in the note opens the dictionary'},
+ {check:()=>{cancel();const g=$('gloss').hidden&&!$('panel').hidden;cancel();return g&&$('panel').hidden},msg:'B closes the word help, then the 일지'},
+ {check:()=>{const seen=[];for(let i=0;i<4&&!$('noteChip').hidden;i++){seen.push($('noteChip').dataset.k);$('noteChip').click();cancel()}return seen.join()==='geodeun,lge'&&$('noteChip').hidden},msg:'the other new 문법 노트 (-거든, then -ㄹ게) wait their turn on the chip'},
  {bump:['hall','Q']},
  // both tiles of the two-tile cafeteria door must open (the playthrough found only the left one did)
  {walkTo:['hall',17,8]},

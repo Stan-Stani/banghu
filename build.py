@@ -18,6 +18,7 @@ parts.append(f'<script>\n{(root/"src/school.js").read_text(encoding="utf-8")}</s
 parts+=[f'<script>\n{p.read_text(encoding="utf-8")}</script>' for p in chs]
 parts.append(f'<script>\n{(root/"src/game.js").read_text(encoding="utf-8")}</script>')  # this game's settings for the shared engine
 parts.append(f'<script>\n{(root/"src/culture.js").read_text(encoding="utf-8")}</script>')  # 문화 노트 (window.CULTURE_NOTES)
+parts.append(f'<script>\n{(root/"src/grammar.js").read_text(encoding="utf-8")}</script>')  # 문법 노트 (window.GRAMMAR_NOTES)
 parts.append(f'<script>\n{(root/"src/engine.js").read_text(encoding="utf-8")}</script>')
 out=pathlib.Path(sys.argv[sys.argv.index('--out')+1]) if '--out' in sys.argv else root/'index.html'
 out.write_text(shell.replace('<!--SCRIPTS-->','\n'.join(parts)),encoding='utf-8')

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Tap-any-word dictionary, step 1: map every word players can see to its dictionary form(s).
 Usage: extract.py <repo> → writes <repo>/src/lexicon-map.json  {eojeol: [lemma, …]}  and prints lemmas missing from defs.json.
-Text comes from every quoted string with Hangul in src/chapters/*.js (and src/school.js) (gloss markup {shown|key} → shown)."""
+Text comes from every quoted string with Hangul in src/chapters/*.js (and src/school.js, src/culture.js, src/grammar.js) (gloss markup {shown|key} → shown)."""
 import json,re,sys,pathlib
 from kiwipiepy import Kiwi
 repo=pathlib.Path(sys.argv[1]);here=pathlib.Path(__file__).parent
@@ -24,7 +24,7 @@ for w,v in _defs.items():
     if v and ' — ' in (v.get('e') or '') and re.fullmatch('[가-힣]{2,}',w): names.add((w,'NNP'))
 for w,tag in names: kiwi.add_user_word(w,tag,score=5)
 texts=[]
-for p in sorted((repo/'src/chapters').glob('ch*.js'))+[q for q in [repo/'src/school.js',repo/'src/culture.js'] if q.exists()]:  # school.js: the school every 교시 shares; culture.js: 문화 노트
+for p in sorted((repo/'src/chapters').glob('ch*.js'))+[q for q in [repo/'src/school.js',repo/'src/culture.js',repo/'src/grammar.js'] if q.exists()]:  # school.js: the school every 교시 shares; culture.js: 문화 노트; grammar.js: 문법 노트
     src=p.read_text(encoding='utf-8')
     src='\n'.join(l for l in src.split('\n') if '/*nolex*/' not in l)  # pixel-font tables and the like aren't game text
     for m in re.finditer(r"'((?:[^'\\\n]|\\.)*)'|`([^`]*)`|\"((?:[^\"\\\n]|\\.)*)\"",src):

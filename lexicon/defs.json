@@ -19734,5 +19734,33 @@
 "전주": {
 "e": "(song) intro, prelude",
 "k": "노래 앞에 나오는 음악. 전주가 끝나면 노래가 시작돼요."
+},
+"따지다": {
+"e": "to argue over, to question closely",
+"k": "잘못을 하나하나 묻고 말해요."
+},
+"이때": {
+"e": "at this time; in this case",
+"k": "바로 이 시간이나 이 경우."
+},
+"동사": {
+"e": "verb",
+"k": "움직임을 나타내는 말. 가다, 먹다."
+},
+"형용사": {
+"e": "adjective",
+"k": "모양이나 상태를 나타내는 말. 예쁘다, 크다."
+},
+"-래": {
+"e": "(they) told me/you to … (reported command)",
+"k": "시킨 말을 전할 때. 빨리 오래."
+},
+"-(으)ㄴ 적이 있다": {
+"e": "have done … before (experience)",
+"k": "전에 해 본 일이 있을 때. 가 본 적이 있어."
+},
+"따로": {
+"e": "separately, on its own",
+"k": "같이 하지 않고 혼자, 떨어져서."
 }
 }

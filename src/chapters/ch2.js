@@ -590,7 +590,7 @@ const NPC={
   status:()=>f().chanGym?undefined:'wait',
   script:()=>!f().chanGym?[{say:'뭐야, 2학년? 우리한테 볼일 있어?',face:'angry'},toChan()]:null,
   talk:()=>[
-   {say:'야, 1학년. 화장실에서 노래했다며?',face:'happy',turn:[{npc:'teaser',dir:'right'},{npc:'teaser2',dir:'right'}]},
+   {say:'야, 1학년. 화장실에서 노래했다며?',grammar:'damyeo',face:'happy',turn:[{npc:'teaser',dir:'right'},{npc:'teaser2',dir:'right'}]},
    {who:'갈색 머리 선배',say:'하하! 화장실 가수! 한 곡 불러 봐!',face:'happy'},
    {who:'유하리',say:'…',face:'sad'},
    {who:'남궁찬',say:'서, 선배님들… 1학년 놀리지 마세요.'},
@@ -692,7 +692,7 @@ const NPC={
   status:()=>{if(!has('분위기'))return f().joke?'todo':'wait'},
   script:()=>!has('분위기')&&!f().joke?[{who:'나',say:'다온이도 왔네?'},{say:'나? 찬이한테 끌려왔어.',face:'angry'},{say:'학원 가기 전에 잠깐만이야.'}]:null,
   talk:()=>[
-   {say:'찬이한테 끌려왔는데… 웃기긴 하네.'},
+   {say:'찬이한테 끌려왔는데… 웃기긴 하네.',grammar:'gineun'},
    {say:'그나저나 하리가 웃었다. 다행이야.'},
    Q.daonB[0],
    {say:'유하리. 한 곡만 해. 딱 한 번.'},
@@ -701,7 +701,7 @@ const NPC={
    {who:'남궁찬',say:'야, 다온아… 하리 또 얼잖아.'},
    {...Q.daonB[1],ok:'…'},
    {say:'…알았어. 재촉 안 할게. 미안.',face:'sad'},
-   {say:'근데 하리야, 포기하지 마. 아깝잖아.'},
+   {say:'근데 하리야, 포기하지 마. 아깝잖아.',grammar:'jana'},
    {who:'유하리',say:'…한 곡만이요. 딱 한 곡.',face:'think'},
    {say:'좋아. 자, 내 폰.',face:'happy'},
    Q.daonB[2],

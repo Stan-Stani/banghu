@@ -91,7 +91,7 @@ const BANK=[
 const Q={ // NPC questions, kept here so review can reuse them. who:'나' = the player says it; who:'…' = narration.
  gureum:[
   {w:'절박하다',face:'sad',ask:'방법이 하나도 없어. 나 진짜 ___. 뭐든 할게.',opts:[['절박해',1],['절약해',0,'절약은 돈이나 물건을 아껴 쓰는 거야. 너무 급하고 다른 길이 없으면 "절박해".'],['절반이야',0,'절반은 반이야. 너무 급하고 힘들면 "절박해".']]},
-  {w:'절박하다',gram:1,face:'sad',ask:'밤새 혼자 ___ 점점 더 무서워졌어.',opts:[['고민하다 보니',1],['고민하면 돼서',0,'"-면 되다"는 "그것만 하면 돼"야. 하다가 바뀌었으면 "고민하다 보니".'],['고민할게',0,'"-ㄹ게"는 약속이야. 하다가 바뀐 건 "고민하다 보니".']]},
+  {w:'절박하다',gram:1,grammar:'daboni',face:'sad',ask:'밤새 혼자 ___ 점점 더 무서워졌어.',opts:[['고민하다 보니',1],['고민하면 돼서',0,'"-면 되다"는 "그것만 하면 돼"야. 하다가 바뀌었으면 "고민하다 보니".'],['고민할게',0,'"-ㄹ게"는 약속이야. 하다가 바뀐 건 "고민하다 보니".']]},
  ],
  daon:[
   {w:'쫓겨나다',ask:'이대로면 우리가 방송실에서 ___.',opts:[['쫓겨나',1],['쫓아내',0,'쫓아내다는 내가 누구를 내보내는 거야. 우리가 나가야 되면 "쫓겨나".'],['쫓아가',0,'쫓아가다는 뒤를 따라 뛰어가는 거야. 우리가 나가야 되면 "쫓겨나".']]},
@@ -1108,7 +1108,7 @@ const NPC={
    Q.prS[1],
    {say:'방송실이 다시 살아나는 거. 그게 새 꿈이었어요.',face:'sad'},
    {say:'방송부 문 닫는다는 안내문은 미안해요. 학부모회 때문이었어요.',face:'sad'},
-   {say:'그래서 몰래 쪽지를 썼어요. 여러분 힘내라고.'},
+   {say:'그래서 몰래 쪽지를 썼어요. 여러분 힘내라고.',grammar:'rago'},
    {say:'마이크… 저도 잠깐 써도 될까요?',face:'think'},
    {who:'백구름',say:'그, 그럼요! 여기요!',face:'surprised',move:{npc:'principalS',to:[19,5],dir:'down'}},  // she starts up the steps to the mic (center of the stage) on this line: the walk takes ~1 s, so by the narration below she is there, not still on the stairs
    {who:'…',say:'교장 선생님이 무대에 올라가서 마이크 앞에 서요.'},
@@ -1203,7 +1203,7 @@ const FOLLOW={name:'마태식',look:LOOK.taesik,when:()=>!!f().taesikCome&&!f().
 function fixTalk(){return NPC.gureumF.talk().map(s=>s.who?s:{...s,who:'백구름'})}
 
 const INTRO=[{who:'…',say:'축제 사흘 전. 방송실에 탄 냄새가 나요.'},{who:'…',say:'방송 기계에서 아직 연기가 조금 나요.'}];
-const DONE=[{expand:()=>wrapUp()},{say:'구름 엄마도 축제 방송을 들었대요.',set:()=>{f().quiet=1}},'"목소리 좋더라." 구름이 그 말을 세 번 했어요.',  // the epilogue: festival night, then a time cut over black (winter, spring)
+const DONE=[{expand:()=>wrapUp()},{say:'구름 엄마도 축제 방송을 들었대요.',set:()=>{f().quiet=1}},{say:'"목소리 좋더라." 구름이 그 말을 세 번 했어요.',grammar:'deora'},  // the epilogue: festival night, then a time cut over black (winter, spring)
  {say:'겨울. 태식 선배가 대학에 합격했어요.',black:1},'그 소식은 점심 방송으로 들었어요.','봄. 사연함에 새 쪽지가 있어요.',
  '교장 선생님 글씨가 아니에요.','"새 학기 사연 있어요. —복숭아 2호"','4교시 끝!',{say:'다시 축제 날, 오후 네 시예요.',black:0},'방송실 복습 노트북에서 단어를 다시 볼 수 있어요.'];
 
