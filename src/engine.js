@@ -1,4 +1,4 @@
-/* GENERATED from walk-engine/engine.js (0c302d7) — do not edit here; edit walk-engine and run its sync.sh. */
+/* GENERATED from walk-engine/engine.js (bb60fd0) — do not edit here; edit walk-engine and run its sync.sh. */
 /* =====================================================================
    Engine: tiles, movement, zones, dialogue, spaced review, speech, saving.
    ===================================================================== */
@@ -25,7 +25,8 @@ const lv=w=>state.lv[w]||{b:0,due:0};
 const dueL=L=>L.due<=now()||(L.beat!=null&&beats()>=L.beat);
 let carrySet=new Set(),carryQs=null;  // words learned in other chapters (shared), and their BANK questions (made once, on demand)
 const known=w=>has(w)||(!!SRS().shared&&carrySet.has(w)&&!C.WORDS.includes(w));
-const isDue=w=>known(w)&&dueL(lv(w));
+let talkN=0;const askedIn={};  // conversations opened so far, and the one each word was last asked in
+const isDue=w=>known(w)&&dueL(lv(w))&&!(askedIn[w]>=talkN-1);  // never in the conversation right after it was asked (타이밍, then 타이밍 again)
 function spaced(b){const bg=SRS().beats;return {b,due:now()+gapAt(b),beat:bg&&bg[b]!=null?beats()+bg[b]:null}}
 function grade(w,ok){
  let L={...lv(w)};
@@ -52,6 +53,31 @@ const carryWords=()=>[...carrySet].filter(w=>!C.WORDS.includes(w)&&(carryBank()[
 const dueWords=()=>[...C.WORDS,...(SRS().shared?carryWords():[])].filter(isDue);
 const carryDue=()=>SRS().shared?carryWords().filter(isDue).sort((a,b)=>lv(a).b-lv(b).b):[];  // other chapters' words that are due, weakest first
 const carryQ=w=>{const qs=carryBank()[w]||[];return qs[Math.random()*qs.length|0]};
+/* ---------- practice while time passes (opt-in content) ----------
+   classTime(CLASS,parts): a stretch of time passing (classes between the bells, a shift, a journey). Each part narrates a beat, then
+   someone says one of its lines with a word you've learned, graded like a review: a due word of this chapter (weakest first), else a
+   due word from another chapter (srs.shared: its own BANK sentence, after TERM.carry), else any of yours at random.
+   CLASS={part:{say, lines:[{w, who, ask, opts}]}}. Use it as a step that expands when it's reached, so words taught just before count:
+   {expand:()=>classTime(CLASS,['국어','영어'])}.
+   wrapUp(): the end of a chapter: one more go at this chapter's words not yet ★ (weakest first) and due words from other chapters, at
+   most four, in BANK sentences, after TERM.wrap, so a word taught late isn't left at one review. {expand:()=>wrapUp()} in DONE. */
+function classTime(CLASS,parts){
+ const out=[],used=new Set();
+ for(const k of parts){const c=CLASS[k];if(!c)continue;out.push({who:'…',say:c.say});
+  const ok=c.lines.filter(l=>has(l.w)&&!used.has(l.w)),due=ok.filter(l=>isDue(l.w));
+  if(due.length){const lo=Math.min(...due.map(l=>lv(l.w).b)),p=due.filter(l=>lv(l.w).b===lo),l=p[Math.random()*p.length|0];used.add(l.w);out.push({...l,review:true});continue}
+  const cw=carryDue().find(w=>!used.has(w)),q=cw&&carryQ(cw);
+  if(q){used.add(cw);out.push({who:'…',say:TERM.carry},{...q,who:'…',review:true});continue}
+  if(ok.length){const l=ok[Math.random()*ok.length|0];used.add(l.w);out.push({...l,review:true})}}
+ return out;
+}
+function wrapUp(){
+ const bank=w=>(C.BANK||[]).filter(q=>q.w===w&&!q.scene&&!q.gram);
+ const qs=C.WORDS.filter(w=>has(w)&&lv(w).b<3&&bank(w).length).sort((a,b)=>lv(a).b-lv(b).b).slice(0,4)
+  .map(w=>{const b=bank(w);return {...b[Math.random()*b.length|0],who:'…',review:true}});
+ carryDue().slice(0,Math.max(0,4-qs.length)).forEach(w=>{const q=carryQ(w);if(q)qs.push({...q,who:'…',review:true})});
+ return qs.length?[{who:'…',say:TERM.wrap},...qs]:[];
+}
 function nextDue(){const t=C.WORDS.filter(has).map(w=>lv(w).due).filter(d=>d>now());return t.length?Math.min(...t):null}
 function fmtWait(ms){const m=Math.ceil(ms/60e3);return m<60?`${m}분`:m<1440?`${Math.round(m/60)}시간`:`${Math.round(m/1440)}일`}
 
@@ -59,7 +85,7 @@ function fmtWait(ms){const m=Math.ceil(ms/60e3);return m<60?`${m}분`:m<1440?`${
 /* Per-game settings come from src/game.js (`var GAME={…}`), so one engine serves 성실호, 형제 and 방과 후. */
 const G=typeof GAME!=='undefined'?GAME:{};
 const KEY=k=>(G.prefix||'walk')+'-'+k;
-const TERM_BASE=Object.assign({allWords:n=>[`단어 ${n}개를 다 모았어요!`,`이제 ${TERM.name}에서 복습하면 ★가 생겨요.`],name:'복습 노트',empty:'아직 노트가 비어 있어요.',idle:'지금은 복습할 단어가 없어요.',next:'다음 복습',due:(n,k)=>`복습할 단어가 ${n}개 있어요.`+(k<n?` 이번에는 ${k}개만 해요.`:''),end:'복습 끝! 다음에 또 봐요.'},G.term||{});
+const TERM_BASE=Object.assign({allWords:n=>[`단어 ${n}개를 다 모았어요!`,`이제 ${TERM.name}에서 복습하면 ★가 생겨요.`],name:'복습 노트',empty:'아직 노트가 비어 있어요.',idle:'지금은 복습할 단어가 없어요.',next:'다음 복습',due:(n,k)=>`복습할 단어가 ${n}개 있어요.`+(k<n?` 이번에는 ${k}개만 해요.`:''),end:'복습 끝! 다음에 또 봐요.',carry:'지난번에 배운 말도 다시 나와요.',wrap:'오늘 배운 말, 한 번 더 떠올려요.'},G.term||{});
 const TERM=new Proxy(TERM_BASE,{get:(o,k)=>(typeof C!=='undefined'&&C&&C.term&&k in C.term)?C.term[k]:o[k]});  // a chapter's term:{name,…} overrides the game's (one 교시 reviews on paper, the next on a laptop)
 const LOGNAME=G.log||LOGNAME;
 const store={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
@@ -667,7 +693,7 @@ function greet(){
  talkWith(n);return true}
 function openDialog(name,steps,opts={}){
  steps=steps.filter(s=>!s.when||s.when());
- dlg={name,steps:steps.map(s=>({...s})),i:0,cur:null,next:null,missed:new Set(),npc:opts.npc||null,review:!!opts.review};
+ talkN++;dlg={name,steps:steps.map(s=>({...s})),i:0,cur:null,next:null,missed:new Set(),npc:opts.npc||null,review:!!opts.review};
  $('tag').hidden=!opts.review;$('dlg').hidden=false;$('zone').classList.add('dim');show(dlg.steps[0]);placeBox(talkRows());  // the room label never shows through a box at the top
 }
 function show(s){
@@ -880,7 +906,7 @@ const okWord=s=>s.ok||(dlg.npc&&dlg.npc.banmal?'맞아!':'맞아요!');
 function answered(ask,a){const f=ask.replace('___',a),i=ask.indexOf('___')+a.length;
  const m=f.slice(i).match(/^([^"”]*["”][.!?]?)\s+([^"”]*\?)$/);return m?f.slice(0,i)+m[1]:f}  // only a quoted example's question
 function choose(s,i){
- const o=s.opts[i];
+ const o=s.opts[i];if(s.w)askedIn[s.w]=talkN;
  if(o[1]){
   sfx('ok');
   if(s.review||dlg.review)gradeStep(s);
@@ -937,8 +963,10 @@ function allQuestions(){
    asks it in their own voice (a friend, a teacher, a passer-by), and the answer grades the word as any review does.
    A chapter without C.REVIEW keeps the narrator's review of the person's own badge words. */
 const npcId=n=>Object.keys(C.NPC).find(k=>C.NPC[k]===n);
+const metIds=()=>state.met||(state.met=[]),met=n=>!!n.badge||metIds().includes(npcId(n));  // someone you've talked to (a teacher always counts)
 function linesFor(n){  // their lines for words you have, true right now (when), due or not
  if(!C.REVIEW||(n.badge&&!n.badge.every(has)))return [];  // someone still teaching teaches first
+ if(!met(n))return [];  // the first talk with anyone is their own (an introduction, a cameo), never a review
  const id=npcId(n);
  return C.REVIEW.filter(r=>[].concat(r.by).some(b=>b===id||b===n.name)&&known(r.w)&&(!r.when||r.when()));  // known: this chapter's word you have, or one from another chapter (srs.shared)
 }
@@ -1011,13 +1039,14 @@ function talkWith(n){
  if(!pair&&!n.pos&&!sitting(n)&&!n.fixed){n.dir=OPP[player.dir];n.turnAt=performance.now()+6000}  // fixed: furniture (a chair) never turns to face you
  let steps=n.script?n.script():null,isReview=false;
  if(!steps&&C.REVIEW){const own=usual(n),rv=own&&!own.some(moves)?reviewPick(n):null;  // a talk that moves the story goes first; the review waits for the next talk
-  if(rv){const q=rv[rv.length-1],stem=q.w.replace(/다$/,''),gives=t=>(t.say||'').includes(stem);  // their usual line goes first, unless it says the very word they're about to ask
+  if(rv){const q=rv[rv.length-1],stems=[q.w.replace(/다$/,''),q.w.replace(/하다$/,'')].filter(x=>x),gives=t=>stems.some(x=>(t.say||'').includes(x));  // their usual line goes first, unless it says the very word they're about to ask (흥정해 → 흥정하다)
    steps=[...(n.badge?own.filter(t=>!gives(t)):[]),...rv];isReview=true}
   else{const sl=own&&!own.some(moves)?sayLine(n):null;steps=sl?[...(n.badge?own:[]),...sl]:own||n.talk()}}
  if(!steps){
   if(n.badge&&n.badge.every(has)){const due=n.badge.some(isDue);steps=due?[...says(n.after),reviewFor(n.badge)]:says(n.after);isReview=due}  // a review question only when one of their words is due
   else steps=n.talk();
  }
+ {const id=npcId(n);if(id&&!metIds().includes(id)){metIds().push(id);save()}}  // met: from now on they can review and chat
  if(pair&&!isReview){const said=m=>(m===n?steps:(m.script&&m.script())||m.talk()).map(s=>s.who?s:{...s,who:m.name,look:m.look});steps=[...said(pair[0]),...said(pair[1])]}
  openDialog(n.name,steps,{npc:n,review:isReview});
 }

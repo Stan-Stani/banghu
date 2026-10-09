@@ -593,26 +593,10 @@ globalThis.SIGN_TEXT=(X,Y,x,x0,x1,top,text,c)=>{const gs=[...text].map(ch=>GLYPH
 globalThis.SCHOOL_TILES=TILES;globalThis.SCHOOL_WALLISH=[...WALLISH];globalThis.SCHOOL_BASE=base;
 })();
 
-/* Class time between the bells. A 교시's CLASS = {subject:{say, lines:[{w, who, ask, opts}]}}: each subject narrates a beat, then
-   someone in the room says one of its lines with a word you've learned, graded like a review: a due word of this 교시 (weakest
-   first), else a due word from an earlier 교시 (the notebook's sentence for it), else any of yours at random. Use it as a step
-   that expands when it's reached, so words taught just before count: {expand:()=>classTime(CLASS,['국어','영어'])}. */
-function classTime(CLASS,subjects){
- const out=[],used=new Set(),mine=w=>state.badges.includes(w),L=w=>state.lv[w]||{b:0,due:0};
- for(const k of subjects){const c=CLASS[k];if(!c)continue;out.push({who:'…',say:c.say});
-  const ok=c.lines.filter(l=>mine(l.w)&&!used.has(l.w)),due=ok.filter(l=>isDue(l.w));
-  if(due.length){const lo=Math.min(...due.map(l=>L(l.w).b)),p=due.filter(l=>L(l.w).b===lo),l=p[Math.random()*p.length|0];used.add(l.w);out.push({...l,review:true});continue}
-  const cw=carryDue().find(w=>!used.has(w)),q=cw&&carryQ(cw);
-  if(q){used.add(cw);out.push({who:'…',say:'지난번에 배운 말도 다시 나와요.'},{...q,who:'…',review:true});continue}
-  if(ok.length){const l=ok[Math.random()*ok.length|0];used.add(l.w);out.push({...l,review:true})}}
- return out;
-}
-/* The end of a 교시: one more go at this 교시's words not yet ★ (weakest first) and any earlier word that's due, at most four, in the
-   notebook's sentences, so a word taught late isn't left at one review. {expand:()=>wrapUp()} in DONE. */
-function wrapUp(){
- const L=w=>state.lv[w]||{b:0,due:0},bank=w=>(C.BANK||[]).filter(q=>q.w===w&&!q.scene&&!q.gram);
- const qs=C.WORDS.filter(w=>state.badges.includes(w)&&L(w).b<3&&bank(w).length).sort((a,b)=>L(a).b-L(b).b).slice(0,4)
-  .map(w=>{const b=bank(w);return {...b[Math.random()*b.length|0],who:'…',review:true}});
- carryDue().slice(0,Math.max(0,4-qs.length)).forEach(w=>{const q=carryQ(w);if(q)qs.push({...q,who:'…',review:true})});
- return qs.length?[{who:'…',say:'오늘 배운 말, 한 번 더 떠올려요.'},...qs]:[];
+/* Someone who quizzes you on purpose ("문제 하나 낼게요": 매점 이모, 경비 아저씨): a word of yours that's due, from this 교시 or an
+   earlier one, in the notebook's sentence and graded like a review; with nothing due, one of their own general questions. */
+function quizLine(fallback){
+ const due=dueWords();
+ if(due.length){const q={...reviewFor([due[Math.random()*due.length|0]])};delete q.who;return q}  // their voice, not the narrator's
+ return {...fallback[Math.random()*fallback.length|0],old:1};
 }

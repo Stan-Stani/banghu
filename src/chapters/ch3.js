@@ -751,6 +751,8 @@ look:LOOK.hanT,
    Q.chanL[2],
    Q.chanL[3],
    {say:'오, 빨간 펜 없이 다 고쳤다! 너 천재야?',face:'surprised'},
+   {who:'…',say:'찬이 책을 다시 펴요. 한 시간 동안 열심히 썼어요.'},
+   {say:'다 썼다! 두 장! 맞춤법도 다 맞아.',face:'happy'},
    {who:'나',say:'찬아, 여기 이름 좀 써 줘. 방송부 신청서.'},
    {say:'당연하지! 이름 크게 쓸게.',face:'happy'},
    {who:'…',say:'신청서에 다섯 번째 이름이 생겼어요.'},
@@ -789,11 +791,11 @@ look:LOOK.hanT,
 
  /* ---------- 학교 앞 ---------- */
  guard:{name:'박 경비 아저씨',zone:'street',x:13,y:8,dir:'up',look:LOOK.guard,
-  script:()=>{const q=Q.cafe[Math.random()*Q.cafe.length|0];
+  script:()=>{const q=quizLine(Q.cafe);
    const hi=f().aired?[{say:'오늘 사연, 경비실에서도 들었어요.'},{say:'옛날 생각이 나네요. 참 좋았어요.'}]
     :f().secret?[{say:'사연 코너요? 옛날 방송부도 했지요.'},{say:'그때 디제이가 편지를 참 좋아했어요.'}]
     :[{say:'학생, 노래방 가요? 좋지요.'},{say:'옛날 방송부도 여기서 많이 놀았어요.'}];
-   return [...hi,{say:'자, 아저씨가 문제 하나 낼게요.'},{...q,old:1},{say:'잘했어요. 차 조심해요!'}]},
+   return [...hi,{say:'자, 아저씨가 문제 하나 낼게요.'},q,{say:'잘했어요. 차 조심해요!'}]},
   talk:()=>[]},
 
  /* ---------- 코인 노래방 ---------- */

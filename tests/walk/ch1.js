@@ -21,11 +21,11 @@
  {check:()=>player.sit&&player.sit.npc===C.NPC.seat&&player.dir==='up',msg:'sitting on my chair, facing the board'},
  {talk:'eraser',shotBefore:'06-eraser'},
  {bump:['hall','F']},
+ // spaced review counts story beats too: two beats after class time (sitting down, the eraser), its words are due again, no clock needed (checked before the classmates, who'd review them)
+ {check:()=>{const L=Object.entries(state.lv).filter(([w,L])=>has(w)&&L.b===1);return L.length>0&&L.every(([w,L])=>dueL(L))},msg:'two story beats after class time, the words practised there are due again'},
  {talk:'mate',shotSay:{text:'오백 원 없어',name:'06b-sleeper-talks'}},  // asleep: z's over him, eyes shut in the portrait
  {talk:'mate2'},
  {check:()=>state.items.includes('복숭아 쪽지'),msg:'note found in the eraser sleeve'},
- // spaced review counts story beats too: two beats after class time (sitting down, the eraser), its words are due again, no clock needed
- {check:()=>{const L=Object.entries(state.lv).filter(([w,L])=>has(w)&&L.b===1);return L.length>0&&L.every(([w])=>isDue(w))},msg:'two story beats after class time, the words practised there are due again'},
  {talk:'daonSeat'},
  {check:()=>state.f.lunch,msg:'lunch bell'},
  {bump:['hall','Q']},

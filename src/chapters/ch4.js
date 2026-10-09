@@ -730,9 +730,9 @@ const NPC={
    {say:'{방과 후|방과 후}에는 바로 학원에 가요.'},
    {say:'학원은 동네 {상가|상가}에 있어요. 정문 밖이에요.'},
    {say:'수업 끝나고 가 봐요. 무리하지 말고요.',award:['상담','대학','목표','평가','빡빡하다']},
-   {who:'…',sfx:'bell',say:'오후 수업이 시작됐어요.'},
+   {who:'…',sfx:'bell',say:'오후 수업이 시작됐어요.',black:1},  // class time is a time cut: over black, not over the 교무실
    {expand:()=>classTime(CLASS,['국어','수학'])},
-   {who:'학교 종',say:'딩동댕동… 오후 수업이 다 끝났어요.',set:()=>{f().counsel=1}},
+   {who:'학교 종',say:'딩동댕동… 오후 수업이 다 끝났어요.',black:0,set:()=>{f().counsel=1}},
     {who:'…',say:'찬한테 문자가 왔어요. "포스터 들고 동네 상가 왔어! 하리도 있어. 빨리 와!"'}]},
 
  kid:{name:'1학년 학생',zone:'hall',x:20,y:7,dir:'up',look:LOOK.kid,

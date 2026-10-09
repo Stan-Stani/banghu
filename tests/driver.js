@@ -148,6 +148,7 @@ window.__play=async function(steps){
       log(`   review by ${p.name}: ${q.w} · ${q.ask}`)}
      window.reviewPick=real;check(n>0||s.none,'review tour: somebody reviewed');log(`review tour: ${n} people`)}
    else if(s.hearTour){ // nothing due: people with a line you haven't heard say it as plain talk, the word filled in, ungraded
+     for(const L of Object.values(state.lv)){L.due=Date.now()+1e12;L.beat=null}save();  // nothing due: plain talk, not reviews
      const zones=[].concat(s.hearTour);let n=0;
      for(const z of zones)for(const [k,p] of Object.entries(C.NPC)){
       if(p.zone!==z||(p.hide&&p.hide())||reviewLines(p).length||!linesFor(p).some(unheard))continue;
