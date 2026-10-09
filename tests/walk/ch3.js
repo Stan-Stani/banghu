@@ -66,4 +66,6 @@
  {walkTo:['street',5,6],then:'25-street-shops'},
  {bump:['street','O']},
  {walkTo:['bcast',10,4],then:'27-bcast-end'},
+ // in-character review: with every word due, everyone who has a line asks it in their own voice, and it grades
+ {reviewTour:Object.keys(C.ZONES),shotChoice:'99-review-in-voice'},
 ]

@@ -58,4 +58,6 @@
  {walkTo:['street',20,8],then:'24-bus-stop'},
  {walkTo:['yard',27,7],then:'25-gym-outside'},
  {walkTo:['hall2',10,4],then:'26-second-floor'},
+ // in-character review: with every word due, everyone who has a line asks it in their own voice, and it grades
+ {reviewTour:Object.keys(C.ZONES),shotChoice:'99-review-in-voice'},
 ]

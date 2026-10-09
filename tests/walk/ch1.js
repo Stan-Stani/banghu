@@ -72,4 +72,6 @@
  {walkTo:['class',1,11],then:'19-class-back'},
  {walkTo:['yard',11,5],then:'20-school-front'},
  {walkTo:['yard',27,7],then:'21-gym-outside'},
+ // in-character review: with every word due, everyone who has a line asks it in their own voice, and it grades
+ {reviewTour:Object.keys(C.ZONES),shotChoice:'99-review-in-voice'},
 ]

@@ -132,6 +132,20 @@ window.__play=async function(steps){
       check(!!dlg,'inspecting a thing opens a blurb');log(`== look ${ZID} ${tx},${ty}`);if(s.shot)await shot(s.shot);await finishDialog()}}
    else if(s.walkTo){await goZone(s.walkTo[0]);await reach((x,y)=>x===s.walkTo[1]&&y===s.walkTo[2],'walkTo');if(s.then)await shot(s.then)}
    else if(s.clock){skew+=s.clock;log(`clock +${s.clock/3600e3}h · due ${dueWords().length}`)}
+   else if(s.reviewTour){ // in-character review (C.REVIEW): with every word due, each person here who has a line asks it in their own voice, and it grades
+     skew+=40*24*3600e3;const zones=s.reviewTour===true?[ZID]:[].concat(s.reviewTour);let asked=null,n=0;
+     const real=window.reviewPick;window.reviewPick=p=>(asked=real(p));
+     for(const z of zones)for(const [k,p] of Object.entries(C.NPC)){
+      if(p.zone!==z||(p.hide&&p.hide())||!reviewLines(p).length)continue;
+      const own=usual(p);if(!own||own.some(moves)||(p.script&&p.script()))continue;
+      check(status(p)==='review',`${k} has a due line, so shows the review mark`);
+      asked=null;const lvBefore=JSON.stringify(state.lv);await talk(k,s);
+      const q=asked&&asked[asked.length-1];
+      check(!!q,`${k} (${p.name}) asks a review line`);if(!q)continue;n++;
+      check(!q.who||q.who==='나',`${k}: the line is theirs (or yours), not the narrator's`);
+      check(JSON.stringify(state.lv)!==lvBefore,`${k}: answering "${q.w}" grades it`);
+      log(`   review by ${p.name}: ${q.w} · ${q.ask}`)}
+     window.reviewPick=real;check(n>0||s.none,'review tour: somebody reviewed');log(`review tour: ${n} people`)}
    else if(s.pause){await wait(s.pause);if(s.shot)await shot(s.shot)}
    else if(s.check){check(s.check(),s.msg)}
    else if(s.log){log(s.log())}

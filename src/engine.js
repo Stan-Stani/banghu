@@ -1,4 +1,4 @@
-/* GENERATED from walk-engine/engine.js (fbbc69a) — do not edit here; edit walk-engine and run its sync.sh. */
+/* GENERATED from walk-engine/engine.js (9d7e14b) — do not edit here; edit walk-engine and run its sync.sh. */
 /* =====================================================================
    Engine: tiles, movement, zones, dialogue, spaced review, speech, saving.
    ===================================================================== */
@@ -351,7 +351,7 @@ function petReset(){pet.x=pet.fx=player.x;pet.y=pet.fy=player.y;pet.dir=player.d
 
 function marker(X,Y,t,st){
  if(!st)return;
- if(Y<-12)return;if(Y<11){X+=11;Y=11}  // someone half off the top: the marker beside their head (on screen, not on their face)
+ if(Y+CAM.y<11){X+=11;Y=11-CAM.y}  // no room above them on the map (the top row: no camera can show a marker there): it sits beside their head and moves with them, so it never jumps while the camera scrolls
  if(G.marker){G.marker(X,Y,t,st);return}  // a game's own ! ? ★ (GAME.marker(X,Y,t,state))
  const bob=Math.round(Math.sin(t/220)*1.5);
  if(st==='todo'){r(X+6,Y-9+bob,4,8,'#1B1E2B');r(X+7,Y-8+bob,2,4,'#E8962A');r(X+7,Y-3+bob,2,1,'#E8962A')}
@@ -904,7 +904,7 @@ function reviewPick(n){
  const rank=r=>lv(r.w).b*2+((n.badge||[]).includes(r.w)?0:1);  // the weakest word first; their own word before someone else's
  const lo=Math.min(...L.map(rank)),best=L.filter(r=>rank(r)===lo),r=best[Math.random()*best.length|0];
  const q={...r,review:true};delete q.by;delete q.pre;delete q.when;
- if(q.who!=='나'&&canSpeak()&&soundOn&&listenOn&&Math.random()<.35){q.listen=q.w;q.listenLine=answered(q.ask,q.w)}  // they say it aloud; you pick the word you heard
+ if(q.who!=='나'&&canSpeak()&&soundOn&&listenOn&&Math.random()<.35){const ok=(q.opts||[]).find(o=>o[1]);q.listen=q.w;q.listenLine=answered(q.ask,ok?ok[0]:q.w)}  // they say it aloud (the answer as it fits the line: 주워, not 줍다); you pick the word you heard
  return [...says(r.pre||[]),q];
 }
 function reviewFor(words){ // pick a question for the weakest of these words
@@ -955,7 +955,8 @@ function talkWith(n){
  if(!pair&&!n.pos&&!sitting(n)&&!n.fixed){n.dir=OPP[player.dir];n.turnAt=performance.now()+6000}  // fixed: furniture (a chair) never turns to face you
  let steps=n.script?n.script():null,isReview=false;
  if(!steps&&C.REVIEW){const own=usual(n),rv=own&&!own.some(moves)?reviewPick(n):null;  // a talk that moves the story goes first; the review waits for the next talk
-  if(rv){steps=[...(n.badge?own:[]),...rv];isReview=true}else steps=own||n.talk()}
+  if(rv){const q=rv[rv.length-1],stem=q.w.replace(/다$/,''),gives=t=>(t.say||'').includes(stem);  // their usual line goes first, unless it says the very word they're about to ask
+   steps=[...(n.badge?own.filter(t=>!gives(t)):[]),...rv];isReview=true}else steps=own||n.talk()}
  if(!steps){
   if(n.badge&&n.badge.every(has)){const due=n.badge.some(isDue);steps=due?[...says(n.after),reviewFor(n.badge)]:says(n.after);isReview=due}  // a review question only when one of their words is due
   else steps=n.talk();
