@@ -103,7 +103,7 @@ canvas{display:block;width:100%;height:auto;image-rendering:pixelated;image-rend
 .notechip[hidden]{display:none}
 @keyframes chipBob{50%{transform:translateX(-50%) translateY(2px)}}
 .screen:has(.dlg:not([hidden])) .notechip{display:none}
-.screen:has(.notechip:not([hidden])) .toast{top:44px}
+.screen:has(.notechip:not([hidden])):not(:has(.dlg:not([hidden]))) .toast{top:44px}  /* make room for the chip only when it shows (not during a talk: with the box at the top the toast sits at the bottom, and both rules stretched it tall) */
 
 .pad{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:6px;touch-action:none}
 .dpad{display:grid;grid-template-columns:repeat(3,56px);grid-template-rows:repeat(3,56px);filter:drop-shadow(0 3px 0 var(--pad-sh))}
