@@ -1,4 +1,4 @@
-/* GENERATED from walk-engine/engine.js (5e89bec) — do not edit here; edit walk-engine and run its sync.sh. */
+/* GENERATED from walk-engine/engine.js (aff7b40) — do not edit here; edit walk-engine and run its sync.sh. */
 /* =====================================================================
    Engine: tiles, movement, zones, dialogue, spaced review, speech, saving.
    ===================================================================== */
@@ -1009,7 +1009,7 @@ function reviewFor(words){ // pick a question for the weakest of these words
 }
 function terminal(){
  const due=dueWords();
- if(!state.badges.length)return [{who:TERM.name,say:TERM.empty}];
+ if(!state.badges.length&&!due.length)return [{who:TERM.name,say:TERM.empty}];  // empty only when there's nothing at all: earlier chapters' due words count (srs.shared)
  if(!due.length){const n=nextDue();return [{who:TERM.name,say:TERM.idle+(n?` ${TERM.next}: ${fmtWait(n-now())} 후.`:'')}]}
  const pick=shuffle(due.slice()).slice(0,4);
  const steps=[{who:TERM.name,say:TERM.due(due.length,pick.length)}];  // due(n,k): n words due, k asked this round (at most 4)
