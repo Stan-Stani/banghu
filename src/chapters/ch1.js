@@ -170,6 +170,38 @@ const Q={ // NPC questions, kept here so review can reuse them. who:'나' = the 
 };
 
 /* in-character review (engine: reviewLines): what people say, in their own voice, when one of your words is due. By speaker, in story order. */
+/* class time between the bells: a beat of narration per subject, then one line someone in the room says with a word you've
+   learned (the weakest of yours that the subject has a line for), graded like a review. Only words you have are picked. */
+const CLASS={
+ '국어':{say:'국어 시간. 정 선생님이 시를 읽어요.',lines:[
+  {w:'반장',who:'정 선생님',ask:'다온 학생은 ___이니까 출석부 좀 가져와요.',opts:[['반장',1],['교장',0,'교장 선생님은 학생이 아니에요. 출석부는 "반장"이 가져와요.'],['반찬',0,'하하, 반찬은 밥하고 먹는 거예요. "반장".']]},
+  {w:'동갑',who:'정 선생님',ask:'이 시를 쓴 사람, 그때 여러분하고 ___이었어요.',opts:[['동갑',1],['동생',0,'동생은 나보다 어린 사람이에요. 나이가 같으면 "동갑".'],['동네',0,'동네는 사는 곳이에요. 나이가 같으면 "동갑".']]},
+  {w:'평범하다',who:'정 선생님',ask:'시인은 ___ 하루도 특별하다고 썼어요.',opts:[['평범한',1],['평평한',0,'평평하다는 땅이 판판할 때예요. 보통 하루는 "평범한".'],['평범해',0,'"하루" 앞에서는 "평범한"이에요.']]},
+  {w:'사실대로',who:'정 선생님',ask:'일기는 꾸미지 말고 ___ 쓰세요.',opts:[['사실대로',1],['마음대로',0,'마음대로 쓰면 꾸밀 수도 있어요. 있었던 그대로는 "사실대로".'],['거꾸로',0,'거꾸로 쓰면 못 읽어요. 하하. 있었던 그대로는 "사실대로".']]}]},
+ '영어':{say:'영어 시간. 단어 시험이 있어요.',lines:[
+  {w:'사실대로',who:'영어 선생님',ask:'숙제 안 한 사람? ___ 말하면 괜찮아요.',opts:[['사실대로',1],['마음대로',0,'마음대로 말하면 안 돼요. 거짓말 없이는 "사실대로".'],['거꾸로',0,'거꾸로 말하면 몰라요. 거짓말 없이는 "사실대로".']]},
+  {w:'교장',who:'영어 선생님',ask:'이 단어는 ___ 선생님도 몰라요. 하하.',opts:[['교장',1],['반장',0,'반장은 학생이에요. "선생님" 앞에는 "교장".'],['교실',0,'교실은 공부하는 방이에요. 사람은 "교장" 선생님.']]},
+  {w:'벌금',who:'오다온',ask:'영어 시간에 졸면 ___ 오백 원이야.',opts:[['벌금',1],['용돈',0,'용돈은 부모님이 주는 돈이야. 졸면 내는 건 "벌금".'],['월급',0,'월급은 일하고 받는 돈이잖아. "벌금".']]},
+  {w:'걷다',who:'오다온',ask:'시험지는 내가 ___ 갈게. 반장이니까.',opts:[['걷어',1],['걸어',0,'걸어는 발로 가는 거야. 종이를 모으면 "걷어".'],['걸려',0,'걸려는 감기야. 종이를 모으면 "걷어".']]}]},
+ '과학':{say:'과학 시간. 선생님이 실험 영상을 보여 줘요.',lines:[
+  {w:'줍다',who:'과학 선생님',ask:'깨진 유리는 손으로 ___ 마세요. 선생님을 불러요.',opts:[['줍지',1],['접지',0,'접다는 종이를 반으로 하는 거예요. 손으로 들면 "줍지".'],['춥지',0,'춥다는 날씨예요. 손으로 들면 "줍지".']]},
+  {w:'평범하다',who:'과학 선생님',ask:'물은 ___ 것 같지만 아주 특별해요.',opts:[['평범한',1],['평평한',0,'평평한 건 땅이에요. 보통이면 "평범한".'],['평범해',0,'"것" 앞에서는 "평범한"이에요.']]},
+  {w:'반장',who:'과학 선생님',ask:'___, 영상 끝나면 불 좀 켜 줘요.',opts:[['반장',1],['교장',0,'교장 선생님한테 불을 켜 달라고요? 하하. "반장".'],['반찬',0,'반찬은 먹는 거예요. 하하. "반장".']]}]},
+ '음악':{say:'음악 시간. 다 같이 옛날 노래를 불러요.',lines:[
+  {w:'지우개',who:'오다온',ask:'악보 잘못 썼지? 내 ___ 써. 이번엔 떨어뜨리지 마.',opts:[['지우개',1],['지우기',0,'지우기는 지우는 일이야. 쓰는 물건은 "지우개".'],['지붕',0,'지붕은 집 위에 있잖아. "지우개".']]},
+  {w:'교장',who:'음악 선생님',ask:'이 노래는 ___ 선생님이 좋아하는 노래예요.',opts:[['교장',1],['반장',0,'반장은 학생이에요. "선생님" 앞에는 "교장".'],['교실',0,'교실은 방이에요. 사람은 "교장" 선생님.']]},
+  {w:'동갑',who:'음악 선생님',ask:'이 가수가 처음 노래할 때, 여러분하고 ___이었어요.',opts:[['동갑',1],['동생',0,'동생은 나보다 어린 사람이에요. 나이가 같으면 "동갑".'],['동네',0,'동네는 사는 곳이에요. 나이가 같으면 "동갑".']]},
+  {w:'걷다',who:'음악 선생님',ask:'반장, 악보 좀 ___ 줄래요?',opts:[['걷어',1],['걸어',0,'걸어는 발로 가는 거예요. 종이를 모으면 "걷어".'],['걸려',0,'걸려는 감기예요. 종이를 모으면 "걷어".']]},
+  {w:'줍다',who:'음악 선생님',ask:'바닥에 악보가 떨어졌어요. 좀 ___ 줄래요?',opts:[['주워',1],['줍어',0,'줍다는 "주워"가 돼요.'],['추워',0,'추워는 날씨예요. 손으로 들면 "주워".']]}]},
+};
+function classTime(subjects){  // the steps for one stretch of class: narration, and one practice line per subject
+ const out=[],used=new Set(),lvl=w=>(state.lv[w]||{b:0}).b;
+ for(const k of subjects){const c=CLASS[k];out.push({who:'…',say:c.say});
+  const ok=c.lines.filter(l=>has(l.w)&&!used.has(l.w));if(!ok.length)continue;
+  const lo=Math.min(...ok.map(l=>lvl(l.w))),best=ok.filter(l=>lvl(l.w)===lo),l=best[Math.random()*best.length|0];
+  used.add(l.w);out.push({...l,review:true})}
+ return out;
+}
 const REVIEW=[
  // 정 선생님: in the 교무실 after 종례 (crew3), and after the hall speaker (done)
  {w:'반장',by:'jung',ask:'내일 늦으면 ___이 또 벌금 걷어요. 하하.',opts:[['반장',1],['교장',0,'교장 선생님은 벌금 안 걷어요. 벌금 걷는 사람은 "반장".'],['반찬',0,'하하, 반찬은 밥하고 먹는 거예요. 벌금 걷는 사람은 "반장".']]},
@@ -532,7 +564,8 @@ const NPC={
    return [
    {who:'…',say:'내 자리. 다온 옆, 넷째 줄이에요.'},
    {who:'…',say:'의자에 앉았어요. 가방을 내려놓아요.',sit:{npc:'seat'}},
-   {who:'…',sfx:'bell',say:'수업이 시작됐어요. 국어, 영어…'},
+   {who:'…',sfx:'bell',say:'수업이 시작됐어요.'},
+   ...classTime(['국어','영어']),
    {who:'학교 종',say:'딩동댕동… 쉬는 시간이에요.'},
    {who:'오다온',say:'아, 떨어졌다! 하필 지금…'},
    {who:'…',say:'다온의 지우개가 내 의자 옆으로 굴러왔어요.',set:()=>{f().seated=1}}]}},
@@ -562,7 +595,7 @@ const NPC={
   script:()=>{
    if(has('일부러'))return null;
    if(!f().seated)return [{say:'네 자리는 여기, 내 옆이야. 빨리 앉아.'}];
-   if(!hasItem(NOTE))return [{say:'내 지우개… 네 발 앞에 있어.'}];
+   if(!hasItem(NOTE))return [{say:'내 지우개… 네 의자 옆에 있어.'}];
    return null},
   talk:()=>[
    {say:'그 쪽지? 나도 처음 봐.'},
@@ -570,13 +603,14 @@ const NPC={
    {say:'진짜야. 믿어 줘.'},
    Q.daonS[0],
    Q.daonS[1],
-   {who:'…',sfx:'bell',say:'다시 수업이에요. 과학, 음악…',sit:{npc:'seat'}},
+   {who:'…',sfx:'bell',say:'다시 수업이에요.',sit:{npc:'seat'}},
+   ...classTime(['과학','음악']),
    {who:'학교 종',say:'딩동댕동… 점심시간이에요!'},
    {say:'점심시간이네. 밥부터 먹어. 급식실은 복도 가운데야.'},
    {say:'방송실은 복도 오른쪽 끝이야. 나는 안 가.'},
    {say:'…재밌는 일이면 나중에 얘기해 줘.',award:['일부러','하필'],set:()=>{f().lunch=1}}]},
 
- mate:{name:'반 친구',zone:'class',x:3,y:5,dir:'up',look:LOOK.mate,sit:1,chair:CHAIR_N,
+ mate:{name:'반 친구',zone:'class',x:3,y:5,dir:'up',look:LOOK.mate,sit:1,chair:CHAIR_N,sleep:1,
   talk:()=>[{say:'쿨쿨…'},{say:'…오백 원 없어… 반장, 제발…'},{who:'…',say:'자고 있어요. 깨우지 마요.'}]},
  mate2:{name:'반 친구',zone:'class',x:15,y:5,dir:'up',look:LOOK.mate2,sit:1,chair:CHAIR_N,banmal:1,
   script:()=>f().crew3?[{say:'방송부? 대박. 부럽다.'},{say:'축제 때 구경 갈게.'}]:null,
@@ -798,5 +832,5 @@ const VARIANTS={
 const TILES={...SCHOOL_TILES,...VARIANTS,
 };
 const PLAYER=LOOK.player;
-return {WORDS,DICT,CONFUSE,BANK,Q,REVIEW,ITEMS,ZONES,NPC,FOLLOW,INTRO,DONE,questText,TILES,VARIANTS,PLAYER,seatPulled,seatPulledN};  // the school's desks and tables ask these whether a chair is pulled out
+return {WORDS,DICT,CONFUSE,BANK,Q,REVIEW,CLASS,ITEMS,ZONES,NPC,FOLLOW,INTRO,DONE,questText,TILES,VARIANTS,PLAYER,seatPulled,seatPulledN};  // the school's desks and tables ask these whether a chair is pulled out
 }});

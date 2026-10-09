@@ -692,7 +692,7 @@ const NPC={
    return [{who:'나',say:'저, 마태식 선배 있어요?'},{say:'지금 쉬는 시간이에요. 저쪽이요.'},{say:'십 분이에요. 딱 십 분.'}]},
   talk:()=>[]},
 
- hgStudent:{name:'학원 학생',zone:'hagwon',x:4,y:6,dir:'up',look:LOOK.hgStudent,
+ hgStudent:{name:'학원 학생',zone:'hagwon',x:4,y:6,dir:'up',look:LOOK.hgStudent,sleep:1,
   talk:()=>[{say:'…쿨쿨.'},{say:'…심화반… 숙제… 아직…'},{who:'…',say:'의자 옆에 서서 졸고 있어요. 대단해요.'}]},
 
  taesikH:{name:'마태식',zone:'hagwon',x:10,y:4,dir:'down',look:LOOK.taesik,badge:['빡빡하다','생초보','기술'],banmal:1,

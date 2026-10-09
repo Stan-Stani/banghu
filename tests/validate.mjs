@@ -71,6 +71,11 @@ for(const CH of ctx.CHAPTERS){
    const who=new Set(L.flatMap(r=>Object.keys(C.NPC).filter(k=>speaks(r,k)).map(k=>C.NPC[k].name)));
    if(who.size<2)E(`REVIEW: "${w}" is reviewed by ${who.size} person (want 2+)`);
    if(!(C.BANK||[]).some(q=>q.w===w&&!q.scene&&!q.gram))E(`BANK: no generic sentence for "${w}" (the 복습 노트 asks those)`)}}
+ // class time (C.CLASS): each subject narrates, and its lines are questions on chapter words, said by someone
+ for(const [k,c] of Object.entries(C.CLASS||{})){if(typeof c.say!=='string')E(`CLASS ${k}: no narration`);
+  for(const l of c.lines||[]){const tag=`CLASS ${k} ${l.w} "${l.ask}"`;if(!C.WORDS.includes(l.w))E(`${tag}: not a chapter word`);if(!l.who)E(`${tag}: no speaker`);
+   if((l.ask.match(/___/g)||[]).length!==1)E(`${tag}: needs exactly one ___`);if(l.ask.length>52)E(`${tag}: longer than 52`);
+   if(!l.opts||l.opts.filter(o=>o[1]).length!==1)E(`${tag}: needs exactly one right option`);else l.opts.filter(o=>!o[1]).forEach(o=>{if(!o[2])E(`${tag}: wrong option without explanation: ${o[0]}`)})}}
  const src=CH.make.toString();for(const m of src.matchAll(/\{([^|{}'"`]+)\|([^}'"`]+)\}/g))if(/[가-힣]/.test(m[1])&&!C.DICT[m[2]])E('gloss key missing: '+m[2]);
  if(typeof C.questText()!=='string')E('questText must return a string');
 }
