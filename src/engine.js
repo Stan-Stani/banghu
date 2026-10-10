@@ -1,4 +1,4 @@
-/* GENERATED from walk-engine/engine.js (b9babab) — do not edit here; edit walk-engine and run its sync.sh. */
+/* GENERATED from walk-engine/engine.js (8cdf200) — do not edit here; edit walk-engine and run its sync.sh. */
 /* =====================================================================
    Engine: tiles, movement, zones, dialogue, spaced review, speech, saving.
    ===================================================================== */
@@ -52,7 +52,8 @@ function refreshCarry(){  // other chapters' saves: their words, and their level
 const carryWords=()=>[...carrySet].filter(w=>!C.WORDS.includes(w)&&(carryBank()[w]||[]).length);
 const dueWords=()=>[...C.WORDS,...(SRS().shared?carryWords():[])].filter(isDue);
 const carryDue=()=>SRS().shared?carryWords().filter(isDue).sort((a,b)=>lv(a).b-lv(b).b):[];  // other chapters' words that are due, weakest first
-const carryQ=w=>{const qs=carryBank()[w]||[];return qs[Math.random()*qs.length|0]};
+const freshQ=(w,qs)=>{const last=(state.lastAsk||{})[w],o=qs.length>1?qs.filter(q=>q.ask!==last):qs,q=o[Math.random()*o.length|0];if(q)(state.lastAsk=state.lastAsk||{})[w]=q.ask;return q};  // a word's example sentence: not the one it was asked with last time, when it has another
+const carryQ=w=>freshQ(w,carryBank()[w]||[]);
 /* ---------- practice while time passes (opt-in content) ----------
    classTime(CLASS,parts): a stretch of time passing (classes between the bells, a shift, a journey). Each part narrates a beat, then
    someone says one of its lines with a word you've learned, graded like a review: a due word of this chapter (weakest first), else a
@@ -890,7 +891,7 @@ function openTaps(){
  $('tapSortT').classList.toggle('on',tapSort==='t');$('tapSortN').classList.toggle('on',tapSort==='n');
  $('tapPanel').hidden=false;document.body.classList.add('talkopen');$('tapList').scrollTop=0;
 }
-function closeTaps(){$('tapPanel').hidden=true;document.body.classList.remove('talkopen')}
+function closeTaps(){$('tapPanel').hidden=true;document.body.classList.remove('talkopen');backToMenu()}
 /* 복사: every looked-up word as plain text (word | times | last day | meaning | English), to paste into a chat and practise */
 function tapsText(){
  const d=t=>{const x=new Date(t);return x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0')};
@@ -922,7 +923,9 @@ function openTalk(){
  $('talkPanel').hidden=false;document.body.classList.add('talkopen');
  const L=$('talkList');L.scrollTop=L.scrollHeight;
 }
-function closeTalk(){$('talkPanel').hidden=true;document.body.classList.remove('talkopen');hideGloss()}
+let fromMenu=false;  // the talk log / dictionary was opened from the START menu: closing it goes back there, not to the game
+const backToMenu=()=>{if(fromMenu){fromMenu=false;$('startPanel').hidden=false}};
+function closeTalk(){$('talkPanel').hidden=true;document.body.classList.remove('talkopen');hideGloss();backToMenu()}
 
 const choiceBtns=()=>[...document.querySelectorAll('#choices .choice')];
 const tileBtns=()=>[...document.querySelectorAll('#tiles .tile:not(.used)')];
@@ -1110,7 +1113,7 @@ function reviewFor(words){ // pick a question for the weakest of these words
  const own=all.filter(q=>!q.gram),qs=own.length?own:all;  // gram:1 tests a pattern, not the word: no star for the word from it
  const narr={review:true,who:'…',ok:'맞아요!'};  /* asked by the narrator: the sentences are generic examples, not in the NPC's voice */
  if(canSpeak()&&soundOn&&listenOn&&Math.random()<.35)return {listen:w,...narr};  // a muted phone (or 듣기 문제 off) can't answer a listening question
- return {...qs[Math.random()*qs.length|0],...narr};
+ return {...freshQ(w,qs),...narr};
 }
 function terminal(){
  const due=dueWords();
@@ -1330,7 +1333,7 @@ function toggleStart(){const P=$('startPanel');if(P.hidden&&panelOpen())return;P
  const b=document.createElement('button');b.className=odd?'mi':'mi wide';b.id='repBtn';b.textContent='문제 알리기';b.addEventListener('click',()=>{$('startPanel').hidden=true;openReport()});$('startPanel').querySelector('.mgrid').append(b)}
 $('startBtn').addEventListener('click',toggleStart);$('startClose').addEventListener('click',()=>$('startPanel').hidden=true);
 $('startPanel').addEventListener('click',e=>{if(e.target.id==='startPanel'){$('startPanel').hidden=true;return}
- const mi=e.target.closest('.mi');if(mi&&!mi.classList.contains('toggle'))$('startPanel').hidden=true},true);  // capture: close the menu before the item opens its panel
+ const mi=e.target.closest('.mi');if(mi&&!mi.classList.contains('toggle')){fromMenu=!$('startPanel').hidden&&['talkBtn','tapBtn'].includes(mi.id);$('startPanel').hidden=true}},true);  // capture: close the menu before the item opens its panel (the talk log and dictionary go back to it on 닫기)
 $('tapBtn').addEventListener('click',openTaps);$('tapClose').addEventListener('click',closeTaps);
 $('tapSortT').addEventListener('click',()=>{tapSort='t';openTaps()});$('tapSortN').addEventListener('click',()=>{tapSort='n';openTaps()});
 $('tapPanel').addEventListener('click',e=>{if(e.target.id==='tapPanel'){closeTaps();return}const p=e.target.closest('.tp');if(p){const en=p.querySelector('.tpe');en.hidden=!en.hidden}});$('talkClose').addEventListener('click',closeTalk);

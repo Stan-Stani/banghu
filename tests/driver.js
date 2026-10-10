@@ -175,7 +175,7 @@ window.__play=async function(steps){
    else if(s.start){$('startBtn').click();await wait(200);check(!$('startPanel').hidden,'START opens the menu');
      check($('startPanel').querySelectorAll('.mi').length===9,'menu has 대화 · 사전 · 교시 고르기 · 나 꾸미기 · 읽기 · 소리 · 듣기 문제 · 문제 알리기 · 디버그');if(s.shot)await shot(s.shot);
      await key('x');check($('startPanel').hidden,'B closes the menu');
-     $('startBtn').click();await wait(120);$('tapBtn').click();await wait(200);check($('startPanel').hidden&&!$('tapPanel').hidden,'a menu item closes the menu and opens its panel');await key('x')}
+     $('startBtn').click();await wait(120);$('tapBtn').click();await wait(200);check($('startPanel').hidden&&!$('tapPanel').hidden,'a menu item closes the menu and opens its panel');await key('x');check(!$('startPanel').hidden,'closing it goes back to the menu');await key('x')}
    else if(s.taps){$('tapBtn').click();await wait(250);const rows=[...$('tapList').querySelectorAll('.tp')];
      check(!$('tapPanel').hidden&&rows.length>0,'찾아본 말 lists '+rows.length+' tapped words');log('taps: '+rows.map(r=>r.querySelector('.tph').textContent).join(' | '));
      if(rows[0]){rows[0].click();await wait(80);check(!rows[0].querySelector('.tpe').hidden,'tapping a looked-up word shows its English')}
