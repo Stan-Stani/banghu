@@ -13,7 +13,10 @@ window.__play=async function(steps){
  const shot=async name=>{window.__shotDone=false;console.log('SHOT:'+name);await until(()=>window.__shotDone,8000)};
  let shotN=0;
 
- async function step(d){ // one tile, by key press
+ async function step(d){ // one tile, by key press (the follower in the way: the first press only faces them, a second one swaps, as a player would)
+  let ok=await step1(d);if(!ok){const [dx,dy]=D[d];if(petOn()&&pet.x===player.x+dx&&pet.y===player.y+dy)ok=await step1(d)}return ok;
+ }
+ async function step1(d){
   const x=player.x,y=player.y,z=ZID;
   dispatchEvent(new KeyboardEvent('keydown',{key:ARROW[d],bubbles:true}));
   const moved=await until(()=>player.moving||warping||player.x!==x||player.y!==y,400);
