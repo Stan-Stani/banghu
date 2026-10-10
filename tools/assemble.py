@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Assemble src/data.json = src/words.json + the original example sentences in tools/sentences/out-*.json (방과 후).
+"""Assemble src/data.json = src/words.json + the original example sentences in tools/sentences/out-*.json (점심 방송).
 
 Every sentence is checked: it must use its word (as Kiwi reads it, or the word/stem written in it), stay short, and
 name nothing from after Pewter City (later names, Pokémon outside species_ok). Failures are listed and left out.

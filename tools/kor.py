@@ -4,7 +4,7 @@ import re
 from kiwipiepy import Kiwi
 
 # Things from later in the game (names as they appear in the 2024 Korean translation)
-LATER = []          # (방과 후 has no later-content names to block: only free episodes are used)
+LATER = []          # (점심 방송 has no later-content names to block: only free episodes are used)
 LATER_TOKENS = set()          # single-syllable names: only as whole tokens
 
 

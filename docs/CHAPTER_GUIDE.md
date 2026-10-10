@@ -1,4 +1,4 @@
-# Writing a chapter of 방과 후
+# Writing a chapter of 점심 방송
 
 Read first: `CLAUDE.md`, `notes/story.md` (the story bible: cast, chapters, word lists), and `/var/home/stan/Developer/exodus-a/src/chapters/ch1.js` (a reference chapter from the sister game — copy its shape; once 방과 후's ch1 exists, use that).
 You write exactly two files: `src/chapters/chN.js` and `tests/walk/chN.js`. Never edit `engine.js`, `shell.html`, other chapters, or `index.html`.

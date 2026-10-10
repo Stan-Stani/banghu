@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build src/words.json for 방과 후 from the per-episode vocabulary lists (source/epNN.vocab.tsv, gitignored).
+"""Build src/words.json for 점심 방송 from the per-episode vocabulary lists (source/epNN.vocab.tsv, gitignored).
 
 Only words, glosses and counts leave source/ — never dialogue. A word belongs to the first episode ("교시") that uses it;
 f = its count there, and the most frequent become that period's 핵심 (key) words. Names are excluded twice: the

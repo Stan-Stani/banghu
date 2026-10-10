@@ -1,5 +1,5 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>방과 후</title>
+<title>점심 방송</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbit&family=IBM+Plex+Sans+KR:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
@@ -238,7 +238,7 @@ body.talkopen .gloss{position:fixed;top:calc(env(safe-area-inset-top,0px) + 14px
 </head><body>
 <div class="wrap">
   <header>
-    <div class="id"><span class="reg" id="reg">BANGHU</span><h1>방과 후<span class="lamp"></span></h1></div>
+    <div class="id"><span class="reg" id="reg">LUNCH BROADCAST</span><h1>점심 방송<span class="lamp"></span></h1></div>
     <div class="hbtns">
       <button class="pill log" id="logBtn">일지 0/16</button>
     </div>
@@ -5319,7 +5319,7 @@ return {WORDS,DICT,CONFUSE,BANK,Q,REVIEW,CLASS,ITEMS,PHOTOS,ZONES,NPC,FOLLOW,INT
 </script>
 <script>
 /* Settings for the shared engine (walk-engine): this game's names, storage prefix and default player. */
-var GAME={prefix:'banghu',title:'방과 후',log:'단어 일지',
+var GAME={prefix:'banghu',title:'점심 방송',log:'단어 일지',
  /* spaced review: due again after 2 story beats or 5 minutes, then 5 beats or 20 minutes (★ within one 교시); later levels are
     hours and days, and one shared record lets a later 교시 bring earlier words back (class time, the notebook, the last round) */
  srs:{start:1,gap:[0,5*60e3,20*60e3,4*3600e3,24*3600e3,3*24*3600e3],beats:[0,2,5],shared:1},
@@ -5579,7 +5579,7 @@ globalThis.GRAMMAR_NOTES={
 };
 </script>
 <script>
-/* GENERATED from walk-engine/engine.js (beb629d) — do not edit here; edit walk-engine and run its sync.sh. */
+/* GENERATED from walk-engine/engine.js (d837377) — do not edit here; edit walk-engine and run its sync.sh. */
 /* =====================================================================
    Engine: tiles, movement, zones, dialogue, spaced review, speech, saving.
    ===================================================================== */
@@ -6062,6 +6062,7 @@ const pet={x:0,y:0,fx:0,fy:0,dir:'down',on:false};
 const petOn=()=>!!(C.FOLLOW&&C.FOLLOW.when());
 function petReset(){pet.x=pet.fx=player.x;pet.y=pet.fy=player.y;pet.dir=player.dir}
 
+function someoneAt(x,y){const n=npcAt(x,y);return !!(n&&n.look)||petOn()&&pet.on&&pet.x===x&&pet.y===y}  // a person (not an object stand-in) or the follower on that tile
 function marker(X,Y,t,st){
  if(!st)return;
  if(Y+CAM.y<11){X+=11;Y=11-CAM.y}  // no room above them on the map (the top row: no camera can show a marker there): it sits beside their head and moves with them, so it never jumps while the camera scrolls
@@ -6152,7 +6153,6 @@ function update(dt,t){
  if(!dlg)live().forEach(n=>{if(n.still||n.pos||n.walk||sitting(n))return;if(t>n.turnAt){if(chatPair(n)){n.dir=n.home;n.turnAt=t+3000;return}  /* mid-conversation: no glancing around */
   const ds=['down','left','right',n.home,n.home];n.dir=ds[Math.random()*ds.length|0];n.turnAt=t+2500+Math.random()*3500}});
  $('btnA').classList.toggle('ready',!dlg&&!player.moving&&!!facing());
- {const idle=!!dlg&&(choosing()||building())&&sel<0;if($('btnA').dataset.idle!==String(idle)){$('btnA').dataset.idle=idle;$('btnA').style.opacity=idle?'.45':''}}  // a question with nothing selected: A would do nothing, so it dims
 }
 const dark=document.createElement('canvas');dark.width=cv.width;dark.height=cv.height;const dg=dark.getContext('2d');
 /* a scene can point the camera at a tile (step cam:[x,y]); it glides there, and back to the player when the step says cam:null
@@ -6213,7 +6213,8 @@ function render(t){
    if(n.sleep)for(let i=0;i<2;i++){const p=(t/900+i/2)%1,zx=X+11+Math.round(p*4),zy=Y-2-Math.round(p*10),c='#2E3550';g.globalAlpha=1-p*.7;r(zx,zy,4,1,c);r(zx+2,zy+1,1,1,c);r(zx+1,zy+2,1,1,c);r(zx,zy+3,4,1,c);g.globalAlpha=1}  // asleep: z's drifting up
    // no marker over the player standing just above, over the one you're talking to (or whoever a proxy stands for), or when nomark says so
    const talking=dlg&&(dlg.npc===n||(n.proxy&&dlg.npc===n.proxy())),off=typeof n.nomark==='function'?n.nomark():n.nomark;
-   if(!(player.x===nx&&player.y<ny&&player.y>=ny-1-Math.ceil(artLift(n.look)/TS))&&!talking&&!off){const st=status(n),al=st==='star'?starFade(n):1;if(al>0){g.globalAlpha=al;marker(X+(n.markDx||0),Y-artLift(n.look)+(n.markDy??(n.look?0:7)),t,st);g.globalAlpha=1}}}}});  // no look (a stand-in for an object: a chair, a shelf, embers): the mark sits on its own tile, not over whatever is above it
+   if(!(player.x===nx&&player.y<ny&&player.y>=ny-1-Math.ceil(artLift(n.look)/TS))&&!talking&&!off){const st=status(n),al=st==='star'?starFade(n):1;if(al>0){g.globalAlpha=al;const by=n.look&&n.markDy==null&&!n.markDx&&someoneAt(nx,ny-1);  // someone right above: the mark would sit on their face, so it goes beside this person's head (the free side)
+    by?marker(X+(someoneAt(nx+1,ny)&&!someoneAt(nx-1,ny)?-11:11),Y+13-artLift(n.look),t,st):marker(X+(n.markDx||0),Y-artLift(n.look)+(n.markDy??(n.look?0:7)),t,st);g.globalAlpha=1}}}}});  // no look (a stand-in for an object: a chair, a shelf, embers): the mark sits on its own tile, not over whatever is above it
  ghosts=ghosts.filter(gh=>{const wk=walkAt(gh,t);if(!wk)return false;const [wx,wy,wd,wf]=wk;ents.push({y:wy,f:()=>drawChar(gh.look,Math.round(wx*TS-cx),Math.round(wy*TS-cy-2),wd,wf)});return true});
  const walk=player.moving?(player.t<.5?player.step:0):0;
  if(petOn()){

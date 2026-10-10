@@ -1,7 +1,7 @@
-# 방과 후 — school walk-around Korean game
+# 점심 방송 — school walk-around Korean game (formerly 방과 후)
 
 Source lives in `src/` (`shell.html`, `chapters/chN.js`, `engine.js` — the engine is a copy of 성실호's, exodus-a); `python3 build.py`
-assembles the single-file `index.html`, published as a claude.ai artifact and on GitHub Pages (public repo Stan-Stani/banghu).
+assembles the single-file `index.html`, published as a claude.ai artifact and on GitHub Pages (public repo Stan-Stani/jeomsim-bangsong, renamed from banghu on 2026-10-10; save keys still start with `banghu-`).
 Never edit `index.html` by hand. Each chapter (교시) is a cartridge with its own save key; never change an existing key or break its saves.
 
 ## What the game is
@@ -20,7 +20,7 @@ Never edit `index.html` by hand. Each chapter (교시) is a cartridge with its o
 - Art changes (sprites, tiles, chairs): check them at 8× with `node ../walk-engine/tools/zoom.mjs spec.json out/` (see walk-engine README), not
   only in phone-sized screenshots.
 
-**Engine:** `src/engine.js` is GENERATED from the shared `../walk-engine/engine.js` (one engine for 성실호, 형제, 방과 후). Edit it there and run `walk-engine/sync.sh`. This game's settings (storage prefix, names, default player) are in `src/game.js`. `validate.mjs` fails if the copy is out of sync.
+**Engine:** `src/engine.js` is GENERATED from the shared `../walk-engine/engine.js` (one engine for 성실호, 형제, 점심 방송). Edit it there and run `walk-engine/sync.sh`. This game's settings (storage prefix, names, default player) are in `src/game.js`. `validate.mjs` fails if the copy is out of sync.
 
 **School:** every 교시 is set in the one 느티고 of `src/school.js` (운동장 + 체육관, 1층, 2층 with 음악실 and 도서관, 2학년 3반, 급식실 + 매점,
 방송실). A chapter calls `SCHOOL({open, gate, zones})` to open rooms, add its people, lines, locks and event props (`paint`); it never redraws

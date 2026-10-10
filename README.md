@@ -1,4 +1,4 @@
-# 방과 후
+# 점심 방송
 
 A walk-around Korean story game for a rusty intermediate learner (about TOPIK 3) on a phone. You are a transfer student at
 느티고, and on your first day you get pulled into the 방송부: the broadcast club has until the school festival to find five members
@@ -12,7 +12,7 @@ its own words to learn:
 | 3교시 | 비밀 사연 | 방송실 · 복도 · 도서관 · 학교 앞 · 코인 노래방 |
 | 4교시 | 축제 생방송 | 방송실 · 교무실 · 동네 상가 · 학원 · 교장실 · 축제 무대 |
 
-Play: https://stan-stani.github.io/banghu/ (built for phones; arrow keys + Z/X and M for the menu on a keyboard)
+Play: https://stan-stani.github.io/jeomsim-bangsong/ (built for phones; arrow keys + Z/X and M for the menu on a keyboard)
 
 | | | |
 |:-:|:-:|:-:|

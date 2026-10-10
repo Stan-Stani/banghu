@@ -1,4 +1,4 @@
-# 방과 후 — story bible
+# 점심 방송 — story bible
 
 Original story. Only the *word list* comes from the webtoon; no premise, characters, places or plot from it.
 Nothing here is a tutoring deal, fake dating, a top-student × delinquent pair, an elite girls' school, or a romance plot.
