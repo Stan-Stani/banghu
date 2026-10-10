@@ -80,7 +80,8 @@
  {talk:'guard'},
  {clock:26*3600e3},
  {inspect:['class',9,2],shot:'13-class-log-review'},
- {talk:'chanC'},
+ {talk:'chanH'},  // after 종례 찬 waits in the 복도 by the class door
+ {check:()=>C.NPC.mate.hide()&&C.NPC.mate2.hide()&&C.NPC.chanC.hide()&&!C.NPC.chanH.hide(),msg:'after 종례 the class has left the room (찬 in the 복도)'},
  {walkTo:['bcast',10,4],then:'14-broadcast-room'},
  {look:true,shot:'15-look'},
  {talklog:1,shot:'16a-talk-log'},
